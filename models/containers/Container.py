@@ -23,15 +23,16 @@ class Container:
         :return: True if the item was added, False otherwise.
         :rtype: bool
         """
-        if self.can_add_item():
+        if self.can_add_item(item):
             self.inventory.append(item)
             self.increase_load(item)
             return True
         return False
 
-    def can_add_item(self):
+    def can_add_item(self, item):
         """Checks if the container has enough space to add an item.
 
+        :param dict item: The item to check.
         :return: True if the container has enough space to add an item,
         False otherwise.
         :rtype: bool
