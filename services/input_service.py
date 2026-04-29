@@ -38,7 +38,8 @@ def request_items():
                     except ValueError:
                         print(INPUT_INVALID_NUM)
             else:
-                print("Invalid item. Enter an item that can be inserted into the rocket silo.")
+                print("Invalid item. Enter an item that can be inserted into "
+                      "the rocket silo")
 
     return items
 
