@@ -16,3 +16,21 @@ class RocketSilo(Container):
 
     def __init__(self):
         super().__init__(container="rocket_silo", capacity=1000)
+
+    def increase_load(self, item):
+        """
+        Increases the current load of the rocket silo using the item's weight.
+
+        :param dict item: The item to increase load weight with.
+        :return: None
+        """
+        self.load += item["weight"]
+
+    def decrease_load(self, item):
+        """
+        Decreases the current load of the rocket silo using the item's weight.
+
+        :param dict item: The item to decrease load weight with.
+        :return: None
+        """
+        self.load -= item["weight"]
