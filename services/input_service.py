@@ -13,7 +13,6 @@ def request_silo_count():
         except ValueError:
             print(INPUT_INVALID_NUM)
 
-
 def request_items():
     print("Add items to the silo. Enter 'done' once finished.")
     items = []
@@ -42,7 +41,6 @@ def request_items():
                       "the rocket silo")
 
     return items
-
 
 def get_item(item):
     transformed_item = item.lower().replace(" ", "_")
