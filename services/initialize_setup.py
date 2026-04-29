@@ -1,5 +1,3 @@
-from idlelib.pyparse import trans
-
 from data.items import ITEMS
 
 
