@@ -3,6 +3,12 @@ from data.items import ITEMS
 
 
 def request_silo_count():
+    """
+    Request from the user the number of rocket silos to use.
+
+    :return: The number of rocket silos to use.
+    :rtype: int
+    """
     while True:
         try:
             num_silos = int(input("Number of Rocket silos: "))
@@ -13,7 +19,15 @@ def request_silo_count():
         except ValueError:
             print(INPUT_INVALID_NUM)
 
+
 def request_items():
+    """
+    Request from the user a list of items and item count to be inserted into
+    the rocket silo(s). The item and count are represented in a tuple.
+
+    :return: The items and count to be inserted into the rocket silo(s).
+    :rtype: list
+    """
     print("Add items to the silo. Enter 'done' once finished.")
     items = []
     while True:
@@ -42,7 +56,18 @@ def request_items():
 
     return items
 
+
 def get_item(item):
+    """
+    Validates the item.
+
+    Transforms the item to the expected key structure in ITEMS and returns the
+    item key if it exists in ITEMS.
+
+    :param str item: The item to be validated.
+    :return: The item key if it exists in ITEMS.
+    :rtype: str
+    """
     transformed_item = item.lower().replace(" ", "_")
     if transformed_item in ITEMS:
         return transformed_item
