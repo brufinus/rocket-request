@@ -10,32 +10,52 @@ def distribute_items(num_silos: int, items: list[tuple[str, int]]) -> None:
     :param items: List of items to distribute amongst silos.
     :return: None
     """
-    # items = [("item1", 10), ("item2", 5)...]
-    expanded_items = expand_items(items)
-
-    # Order items from heaviest to lightest.
-    expanded_items.sort(reverse=True, key=lambda d: d['weight'])
-
-    # Open a new empty silo.
+    expanded_items = expand_and_sort_items(items)
     silos = [RocketSilo()]
-    
-    # For each item, find the first silo into which it can fit.
-    for item in expanded_items:
-        for silo in silos:
-            if silo.add_item(item):
-                break
-        # If the item did not fit into any silo, open a new one and add it.
-        else:
+    first_fit_silo(silos, expanded_items)
+
+    print(expanded_items)
+
+
+def first_fit_silo(silos: list[RocketSilo],
+                   items: list[dict[str, str | int]]) -> None:
+    """
+    First-fit-decreasing algorithm to distribute items into silos.
+    For each item, find the first silo into which it can fit.
+    If it did not fit into any silo, open a new one and add it.
+
+    :param silos: List of silos to search through.
+    :param items: List of items to distribute.
+    :return: None
+    """
+    for item in items:
+        if not find_open_silo(silos, item):
             new_silo = RocketSilo()
             new_silo.add_item(item)
             silos.append(new_silo)
 
 
-    print(expanded_items)
-
-def expand_items(items: list[tuple[str, int]]) -> list[dict[str, str | int]]:
+def find_open_silo(silos: list[RocketSilo],
+                   item: dict[str, str | int]) -> bool:
     """
-    Expand items into a list of item dictionaries.
+    Find the first silo into which the item can fit.
+
+    :param silos: List of silos to search through.
+    :param item: Item to add to a silo.
+    :return: Whether the item was added to a silo.
+    :rtype: bool
+    """
+    for silo in silos:
+        if silo.add_item(item):
+            return True
+    return False
+
+
+def expand_and_sort_items(
+        items: list[tuple[str, int]]) -> list[dict[str, str | int]]:
+    """
+    Expand items into a sorted list of item dictionaries.
+    Items are sorted from heaviest to lightest.
 
     :param items: List of items to expand.
     :return: Expanded list of item dictionaries.
@@ -43,7 +63,7 @@ def expand_items(items: list[tuple[str, int]]) -> list[dict[str, str | int]]:
     """
     expanded_items: list[dict[str, str | int]] = []
     for item in items:
-        # for i in range(0, item[1]):
         for _ in range(item[1]):
             expanded_items.append(ITEMS[item[0]])
+    expanded_items.sort(reverse=True, key=lambda d: d['weight'])
     return expanded_items
