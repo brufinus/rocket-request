@@ -19,12 +19,11 @@ class RocketSilo(Container):
 
     def can_add_item(self, item) -> bool:
         """
-        Checks if the container has enough space to add an item.
+        Checks if the rocket silo has enough empty weight to add an item.
         Overrides Container.can_add_item.
 
         :param dict item: The item to check.
-        :return: True if the container has enough space to add an item,
-        False otherwise.
+        :return: Whether the silo has enough empty weight to add an item.
         :rtype: bool
         """
         if self.load + item["weight"] <= self.capacity:

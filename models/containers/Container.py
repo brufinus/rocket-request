@@ -1,4 +1,7 @@
-class Container:
+from abc import ABC, abstractmethod
+
+
+class Container(ABC):
     """
     Abstract base class for containers.
 
@@ -29,19 +32,18 @@ class Container:
             return True
         return False
 
+    @abstractmethod
     def can_add_item(self, item) -> bool:
         """
         Checks if the container has enough space to add an item.
 
-        :param dict item: The item to check.
-        :return: True if the container has enough space to add an item,
-        False otherwise.
+        :param dict item: The item to insert.
+        :return: Whether the container has enough space to add an item.
         :rtype: bool
         """
-        if self.load + 1 < self.capacity:
-            return True
-        return False
+        pass
 
+    @abstractmethod
     def increase_load(self, item) -> None:
         """
         Increases the current load of the container using the given item.
@@ -49,7 +51,7 @@ class Container:
         :param dict item: The item to increase load with.
         :return: None
         """
-        self.load += 1
+        pass
 
     def remove_item(self, item) -> None:
         """
@@ -61,6 +63,7 @@ class Container:
         self.inventory.remove(item)
         self.decrease_load(item)
 
+    @abstractmethod
     def decrease_load(self, item) -> None:
         """
         Decreases the current load of the container.
@@ -68,4 +71,4 @@ class Container:
         :param dict item: The item to decrease load with.
         :return: None
         """
-        self.load -= 1
+        pass
