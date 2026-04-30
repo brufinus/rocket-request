@@ -24,10 +24,11 @@ def distribute_items(num_silos: int, items: list[tuple[str, int]]) -> None:
         for silo in silos:
             if silo.add_item(item):
                 break
-            else:
-                new_silo = RocketSilo()
-                new_silo.add_item(item)
-                silos.append(new_silo)
+        # If the item did not fit into any silo, open a new one and add it.
+        else:
+            new_silo = RocketSilo()
+            new_silo.add_item(item)
+            silos.append(new_silo)
 
 
     print(expanded_items)
