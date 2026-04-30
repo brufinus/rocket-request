@@ -35,7 +35,8 @@ def condense_items(items: list[dict[str, str | int]]) -> dict:
     """
     condensed_items = {}
     for item in items:
-        condensed_items.update({item["name"]: condensed_items.get(item["name"], 0) + 1})
+        condensed_items.update(
+            {item["name"]: condensed_items.get(item["name"], 0) + 1})
     return condensed_items
 
 
