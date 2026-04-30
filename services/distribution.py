@@ -2,7 +2,7 @@ from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 
 
-def distribute_items(num_silos, items):
+def distribute_items(num_silos, items) -> None:
     # items = [("item1", 10), ("item2", 5)...]
     expanded_items = []
     for item in items:
@@ -15,4 +15,3 @@ def distribute_items(num_silos, items):
     # for silo in silos:
 
     print(expanded_items)
-    return ""

@@ -14,12 +14,13 @@ class RocketSilo(Container):
         inventory (list): A list of items in the rocket silo.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(container="rocket_silo", capacity=1000)
 
-    def can_add_item(self, item):
+    def can_add_item(self, item) -> bool:
         """
         Checks if the container has enough space to add an item.
+        Overrides Container.can_add_item.
 
         :param dict item: The item to check.
         :return: True if the container has enough space to add an item,
@@ -30,18 +31,20 @@ class RocketSilo(Container):
             return True
         return False
 
-    def increase_load(self, item):
+    def increase_load(self, item) -> None:
         """
         Increases the current load of the rocket silo using the item's weight.
+        Overrides Container.increase_load.
 
         :param dict item: The item to increase load weight with.
         :return: None
         """
         self.load += item["weight"]
 
-    def decrease_load(self, item):
+    def decrease_load(self, item) -> None:
         """
         Decreases the current load of the rocket silo using the item's weight.
+        Overrides Container.decrease_load.
 
         :param dict item: The item to decrease load weight with.
         :return: None

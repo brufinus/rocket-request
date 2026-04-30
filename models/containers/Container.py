@@ -9,13 +9,13 @@ class Container:
         load (int): The current load of the container.
     """
 
-    def __init__(self, container, capacity):
+    def __init__(self, container, capacity) -> None:
         self.container = container
         self.capacity = capacity
         self.inventory = []
         self.load = 0
 
-    def add_item(self, item):
+    def add_item(self, item) -> bool:
         """
         Adds an item to the container.
 
@@ -29,7 +29,7 @@ class Container:
             return True
         return False
 
-    def can_add_item(self, item):
+    def can_add_item(self, item) -> bool:
         """
         Checks if the container has enough space to add an item.
 
@@ -42,7 +42,7 @@ class Container:
             return True
         return False
 
-    def increase_load(self, item):
+    def increase_load(self, item) -> None:
         """
         Increases the current load of the container using the given item.
 
@@ -51,7 +51,7 @@ class Container:
         """
         self.load += 1
 
-    def remove_item(self, item):
+    def remove_item(self, item) -> None:
         """
         Removes an item from the container.
 
@@ -61,7 +61,7 @@ class Container:
         self.inventory.remove(item)
         self.decrease_load(item)
 
-    def decrease_load(self, item):
+    def decrease_load(self, item) -> None:
         """
         Decreases the current load of the container.
 

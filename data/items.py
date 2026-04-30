@@ -1,5 +1,10 @@
-def make_item(name, stack_size, rocket_capacity):
-    """Return a dictionary of attributes with calculated weight."""
+def make_item(name, stack_size, rocket_capacity) -> dict:
+    """
+    Return a dictionary of attributes with calculated weight.
+
+    :return: Dictionary of an item's attributes.
+    :rtype: dict
+    """
     return {
         "name": name,
         "stack_size": stack_size,

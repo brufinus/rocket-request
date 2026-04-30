@@ -2,7 +2,7 @@ from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
 from data.items import ITEMS
 
 
-def request_silo_count():
+def request_silo_count() -> int:
     """
     Request from the user the number of rocket silos to use.
 
@@ -20,7 +20,7 @@ def request_silo_count():
             print(INPUT_INVALID_NUM)
 
 
-def request_items():
+def request_items() -> list:
     """
     Request from the user a list of items and item count to be inserted into
     the rocket silo(s). The item and count are represented in a tuple.
@@ -57,7 +57,7 @@ def request_items():
     return items
 
 
-def get_item(item):
+def get_item(item) -> str:
     """
     Validates the item.
 

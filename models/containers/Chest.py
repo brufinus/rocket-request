@@ -14,5 +14,5 @@ class Chest(Container):
         inventory (list): A list of items in the chest.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(container="chest", capacity=48)
