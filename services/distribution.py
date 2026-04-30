@@ -2,7 +2,7 @@ from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 
 
-def distribute_items(num_silos, items) -> None:
+def distribute_items(num_silos: int, items: list[tuple[str, int]]) -> None:
     """
     Distribute items into silos.
 

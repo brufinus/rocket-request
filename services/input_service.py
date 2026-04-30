@@ -20,16 +20,16 @@ def request_silo_count() -> int:
             print(INPUT_INVALID_NUM)
 
 
-def request_items() -> list:
+def request_items() -> list[tuple[str, int]]:
     """
     Request from the user a list of items and item count to be inserted into
     the rocket silo(s). The item and count are represented in a tuple.
 
     :return: The items and count to be inserted into the rocket silo(s).
-    :rtype: list
+    :rtype: list[tuple[str, int]]
     """
     print("Add items to the silo. Enter 'done' once finished.")
-    items = []
+    items: list[tuple[str, int]] = []
     while True:
         user_item = input("Item: ")
         if user_item.lower() == "done":
@@ -57,7 +57,7 @@ def request_items() -> list:
     return items
 
 
-def get_item(item) -> str:
+def get_item(item: str) -> str:
     """
     Validates the item.
 

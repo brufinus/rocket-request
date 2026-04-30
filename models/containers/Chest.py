@@ -17,7 +17,7 @@ class Chest(Container):
     def __init__(self) -> None:
         super().__init__(container="chest", capacity=48)
 
-    def can_add_item(self, item) -> bool:
+    def can_add_item(self, item: dict[str, str | int]) -> bool:
         """
         Checks if the chest has enough slots to add an item.
         Overrides Container.can_add_item.
@@ -31,7 +31,7 @@ class Chest(Container):
             return True
         return False
     
-    def increase_load(self, item) -> None:
+    def increase_load(self, item: dict[str, str | int]) -> None:
         """
         Increases the current load of the chest by 1 slot.
         Overrides Container.increase_load.
@@ -42,7 +42,7 @@ class Chest(Container):
         """
         self.load += 1
     
-    def decrease_load(self, item) -> None:
+    def decrease_load(self, item: dict[str, str | int]) -> None:
         """
         Decreases the current load of the chest by 1 slot.
         Overrides Container.decrease_load.
