@@ -2,19 +2,18 @@ from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 
 
-def distribute_items(num_silos: int, items: list[tuple[str, int]]) -> None:
+def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
     """
     Distribute items into silos.
 
-    :param num_silos: Maximum number of silos.
     :param items: List of items to distribute amongst silos.
-    :return: None
+    :return: List of silos with distributed items.
+    :rtype: list[RocketSilo]
     """
     expanded_items = expand_and_sort_items(items)
     silos = [RocketSilo()]
     first_fit_silo(silos, expanded_items)
-
-    print(expanded_items)
+    return silos
 
 
 def first_fit_silo(silos: list[RocketSilo],
