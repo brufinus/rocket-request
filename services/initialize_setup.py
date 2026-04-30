@@ -25,7 +25,7 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
             print(silos[silo_index].inventory)
 
 
-def condense_items(items: list[dict[str, str | int]]) -> dict:
+def condense_items(items: list[dict[str, str | int]]) -> dict[str, int]:
     """
     Condense items into name and item count.
 
@@ -33,10 +33,10 @@ def condense_items(items: list[dict[str, str | int]]) -> dict:
     :return: Condensed list of each item and their count.
     :rtype: dict
     """
-    condensed_items = {}
+    condensed_items: dict[str, int] = {}
     for item in items:
         condensed_items.update(
-            {item["name"]: condensed_items.get(item["name"], 0) + 1})
+            {str(item["name"]): condensed_items.get(str(item["name"]), 0) + 1})
     return condensed_items
 
 
