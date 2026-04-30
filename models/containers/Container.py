@@ -30,14 +30,15 @@ class Container:
         return False
 
     def can_add_item(self, item):
-        """Checks if the container has enough space to add an item.
+        """
+        Checks if the container has enough space to add an item.
 
         :param dict item: The item to check.
         :return: True if the container has enough space to add an item,
         False otherwise.
         :rtype: bool
         """
-        if self.load < self.capacity:
+        if self.load + 1 < self.capacity:
             return True
         return False
 

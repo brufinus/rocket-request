@@ -17,6 +17,19 @@ class RocketSilo(Container):
     def __init__(self):
         super().__init__(container="rocket_silo", capacity=1000)
 
+    def can_add_item(self, item):
+        """
+        Checks if the container has enough space to add an item.
+
+        :param dict item: The item to check.
+        :return: True if the container has enough space to add an item,
+        False otherwise.
+        :rtype: bool
+        """
+        if self.load + item["weight"] <= self.capacity:
+            return True
+        return False
+
     def increase_load(self, item):
         """
         Increases the current load of the rocket silo using the item's weight.

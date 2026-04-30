@@ -43,3 +43,15 @@ class TestContainer:
 
     def test_add_overweight_item_to_silo(self):
         assert self.silo.add_item({"weight": 1001}) == False
+
+    def test_add_items_until_silo_overweight(self):
+        heavy = {"weight": 350}
+        assert self.silo.add_item(heavy)
+        assert self.silo.add_item(heavy) == True
+        assert self.silo.add_item(heavy) == False
+
+    def test_add_many_light_items_to_silo(self):
+        light = {"weight": 1}
+        for i in range(1000):
+            self.silo.add_item(light)
+        assert self.silo.load == self.silo.capacity
