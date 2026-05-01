@@ -21,7 +21,7 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
         for j in range(num_silos):
             if silo_index >= len(silos):
                 break
-            print(f"\tSilo {j + 1}:")
+            print(f"\tSilo {j + 1} ({silos[silo_index].load}/{silos[silo_index].capacity} kg):")
             grouped_items = group_items(silos[silo_index].inventory)
             col_width = len(max(grouped_items, key=len))
             print(f"\t\t{"Item":<{col_width}}{"Count":>10}")
