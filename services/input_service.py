@@ -68,7 +68,7 @@ def get_item(item: str) -> str:
     :return: The item key if it exists in ITEMS.
     :rtype: str
     """
-    transformed_item = item.lower().replace(" ", "")
+    transformed_item = item.lower().replace(" ", "").replace("-", "")
     if transformed_item in ITEMS:
         return transformed_item
     return ""
