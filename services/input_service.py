@@ -4,9 +4,9 @@ from data.items import ITEMS
 
 def request_silo_count() -> int:
     """
-    Request from the user the number of rocket silos to use.
+    Request from the user the number of available rocket silos.
 
-    :return: The number of rocket silos to use.
+    :return: The number of available rocket silos.
     :rtype: int
     """
     while True:
