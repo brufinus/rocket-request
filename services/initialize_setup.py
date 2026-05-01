@@ -19,10 +19,14 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
     for i in range(cycles):
         print(f"Cycle {i + 1}:")
         for j in range(num_silos):
+            if silo_index >= len(silos):
+                break
             print(f"\tSilo {j + 1}:")
-            print(f"\t\tItem\tCount")
-            # for item in silos[silo_index].inventory:
-            print(silos[silo_index].inventory)
+            print(f"\t\tItem\t\tCount")
+            condensed_items = condense_items(silos[silo_index].inventory)
+            for item in condensed_items:
+                print(f"\t\t{item}\t\t{condensed_items[item]}")
+            silo_index += 1
 
 
 def condense_items(items: list[dict[str, str | int]]) -> dict[str, int]:
