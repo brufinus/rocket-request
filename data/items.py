@@ -15,6 +15,6 @@ def make_item(name: str, stack_size: int, rocket_capacity: int) -> dict[
 
 
 ITEMS = {
-    "transport_belt": make_item("Transport belt", 100, 100),
-    "chemical_plant": make_item("Chemical plant", 10, 10)
+    "transportbelt": make_item("Transport belt", 100, 100),
+    "chemicalplant": make_item("Chemical plant", 10, 10)
 }

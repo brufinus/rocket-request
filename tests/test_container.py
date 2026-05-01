@@ -7,7 +7,7 @@ class TestContainer:
     def setup_method(self):
         self.chest = Chest()
         self.silo = RocketSilo()
-        self.belt = ITEMS['transport_belt']
+        self.belt = ITEMS['transportbelt']
 
     def test_initialized_chest(self):
         assert self.chest.inventory == []

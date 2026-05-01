@@ -29,25 +29,25 @@ def test_calculate_launch_cycles():
     assert calculate_launch_cycles(silos, num_silos) == 1
 
 def test_group_multiple_same_items():
-    items = [ITEMS["transport_belt"] for _ in range(10)]
+    items = [ITEMS["transportbelt"] for _ in range(10)]
     grouped_items = group_items(items)
     assert len(grouped_items) == 1
-    assert grouped_items[ITEMS["transport_belt"]["name"]] == 10
+    assert grouped_items[ITEMS["transportbelt"]["name"]] == 10
 
 def test_group_multiple_single_items():
-    items = [ITEMS["transport_belt"], ITEMS["chemical_plant"]]
+    items = [ITEMS["transportbelt"], ITEMS["chemicalplant"]]
     grouped_items = group_items(items)
     assert len(grouped_items) == 2
-    assert grouped_items[ITEMS["transport_belt"]["name"]] == 1
-    assert grouped_items[ITEMS["chemical_plant"]["name"]] == 1
+    assert grouped_items[ITEMS["transportbelt"]["name"]] == 1
+    assert grouped_items[ITEMS["chemicalplant"]["name"]] == 1
 
 def test_group_multiple_different_items():
-    belts = [ITEMS["transport_belt"] for _ in range(18)]
-    plants = [ITEMS["chemical_plant"] for _ in range(7)]
+    belts = [ITEMS["transportbelt"] for _ in range(18)]
+    plants = [ITEMS["chemicalplant"] for _ in range(7)]
     foo = [{"name": "bar"} for _ in range(21)]
     items = belts + plants + foo
     grouped_items = group_items(items)
     assert len(grouped_items) == 3
-    assert grouped_items[ITEMS["transport_belt"]["name"]] == 18
-    assert grouped_items[ITEMS["chemical_plant"]["name"]] == 7
+    assert grouped_items[ITEMS["transportbelt"]["name"]] == 18
+    assert grouped_items[ITEMS["chemicalplant"]["name"]] == 7
     assert grouped_items["bar"] == 21
