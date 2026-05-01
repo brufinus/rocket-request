@@ -8,3 +8,9 @@ amongst your silos for each launch.
 
 This program uses a first-fit-decreasing algorithm to output a partition of the
 items into silos such that the sum of weight does not exceed 1000 kg.
+
+## Usage
+
+```bash
+python main.py
+```
