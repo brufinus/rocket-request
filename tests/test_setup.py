@@ -1,6 +1,6 @@
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
-from services.initialize_setup import calculate_launch_cycles, condense_items
+from services.initialize_setup import calculate_launch_cycles, group_items
 
 
 def test_calculate_launch_cycles():
@@ -28,26 +28,26 @@ def test_calculate_launch_cycles():
     num_silos = 10
     assert calculate_launch_cycles(silos, num_silos) == 1
 
-def test_condense_multiple_same_items():
+def test_group_multiple_same_items():
     items = [ITEMS["transport_belt"] for _ in range(10)]
-    condensed_items = condense_items(items)
-    assert len(condensed_items) == 1
-    assert condensed_items[ITEMS["transport_belt"]["name"]] == 10
+    grouped_items = group_items(items)
+    assert len(grouped_items) == 1
+    assert grouped_items[ITEMS["transport_belt"]["name"]] == 10
 
-def test_condense_multiple_single_items():
+def test_group_multiple_single_items():
     items = [ITEMS["transport_belt"], ITEMS["chemical_plant"]]
-    condensed_items = condense_items(items)
-    assert len(condensed_items) == 2
-    assert condensed_items[ITEMS["transport_belt"]["name"]] == 1
-    assert condensed_items[ITEMS["chemical_plant"]["name"]] == 1
+    grouped_items = group_items(items)
+    assert len(grouped_items) == 2
+    assert grouped_items[ITEMS["transport_belt"]["name"]] == 1
+    assert grouped_items[ITEMS["chemical_plant"]["name"]] == 1
 
-def test_condense_multiple_different_items():
+def test_group_multiple_different_items():
     belts = [ITEMS["transport_belt"] for _ in range(18)]
     plants = [ITEMS["chemical_plant"] for _ in range(7)]
     foo = [{"name": "bar"} for _ in range(21)]
     items = belts + plants + foo
-    condensed_items = condense_items(items)
-    assert len(condensed_items) == 3
-    assert condensed_items[ITEMS["transport_belt"]["name"]] == 18
-    assert condensed_items[ITEMS["chemical_plant"]["name"]] == 7
-    assert condensed_items["bar"] == 21
+    grouped_items = group_items(items)
+    assert len(grouped_items) == 3
+    assert grouped_items[ITEMS["transport_belt"]["name"]] == 18
+    assert grouped_items[ITEMS["chemical_plant"]["name"]] == 7
+    assert grouped_items["bar"] == 21
