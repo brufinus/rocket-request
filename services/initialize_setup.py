@@ -1,5 +1,6 @@
 import math
 
+from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 
 
@@ -21,14 +22,54 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
         for j in range(num_silos):
             if silo_index >= len(silos):
                 break
-            print(f"\tSilo {j + 1} ({silos[silo_index].load}/{silos[silo_index].capacity} kg):")
-            grouped_items = group_items(silos[silo_index].inventory)
-            col_width = len(max(grouped_items, key=len))
-            print(f"\t\t{"Item":<{col_width}}{"Count":>10}")
-            print(f"\t\t{"-" * (col_width + 10)}")
-            for item in grouped_items:
-                print(f"\t\t{item:<{col_width}}{grouped_items[item]:>10}")
+            print(f"\n\tSilo {j + 1} ({silos[silo_index].load}"
+                  f"/{silos[silo_index].capacity} kg):")
+            print_item_header()
+            print_grouped_items(group_items(silos[silo_index].inventory))
             silo_index += 1
+
+
+def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
+    """
+    Prints the distribution of items consolidated across available silos.
+
+    :param silos: List of silos with items.
+    :param num_silos: Number of available silos.
+    :return: None
+    """
+    print("\nConsolidated silo contents:")
+    silo_index = 0
+    while silo_index < num_silos:
+        print(f"\n\tSilo {silo_index + 1}:")
+        print_item_header()
+        i = silo_index
+        while i < len(silos):
+            print_grouped_items(group_items(silos[i].inventory))
+            i += num_silos
+        silo_index += 1
+
+
+def print_grouped_items(items: dict[str, int]) -> None:
+    """
+    Prints the formatted name and count for each grouped item.
+    
+    :param items: Dictionary of grouped items
+    :return: None
+    """
+    for i in items:
+        print(f"\t\t{i:<{get_col_width()}}{items[i]:>10}")
+
+
+def print_item_header() -> None:
+    """Prints the Item, Count header."""
+    col_width = get_col_width()
+    print(f"\t\t{"Item":<{col_width}}{"Count":>10}")
+    print(f"\t\t{"-" * (col_width + 10)}")
+
+
+def get_col_width() -> int:
+    """Returns a column width for output padding."""
+    return len(max(ITEMS, key=len)) + 2
 
 
 def group_items(items: list[dict[str, str | int]]) -> dict[str, int]:
