@@ -11,7 +11,7 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
     :param num_silos: Number of available silos.
     :return: None
     """
-    print(f"Total launches required: {len(silos)}")
+    print(f"\nTotal launches required: {len(silos)}")
     cycles = calculate_launch_cycles(silos, num_silos)
     print(f"Required launch cycles: {cycles}")
 
@@ -22,10 +22,12 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
             if silo_index >= len(silos):
                 break
             print(f"\tSilo {j + 1}:")
-            print(f"\t\tItem\t\tCount")
             condensed_items = condense_items(silos[silo_index].inventory)
+            col_width = len(max(condensed_items, key=len))
+            print(f"\t\t{"Item":<{col_width}}{"Count":>10}")
+            print(f"\t\t{"-" * (col_width + 10)}")
             for item in condensed_items:
-                print(f"\t\t{item}\t\t{condensed_items[item]}")
+                print(f"\t\t{item:<{col_width}}{condensed_items[item]:>10}")
             silo_index += 1
 
 
