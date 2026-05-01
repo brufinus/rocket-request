@@ -1,4 +1,5 @@
-def make_item(name: str, stack_size: int, rocket_capacity: int) -> dict[str, str | int]:
+def make_item(name: str, stack_size: int, rocket_capacity: int) -> dict[
+    str, str | int]:
     """
     Return a dictionary of attributes with calculated weight.
 
