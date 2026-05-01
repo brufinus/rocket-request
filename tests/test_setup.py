@@ -1,6 +1,8 @@
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
-from services.initialize_setup import calculate_launch_cycles, group_items
+from services.distribution import distribute_items
+from services.initialize_setup import calculate_launch_cycles, group_items, \
+    print_consolidated, print_distribution
 
 
 def test_calculate_launch_cycles():
@@ -51,3 +53,10 @@ def test_group_multiple_different_items():
     assert grouped_items[ITEMS["transportbelt"]["name"]] == 18
     assert grouped_items[ITEMS["chemicalplant"]["name"]] == 7
     assert grouped_items["bar"] == 21
+
+def test_print():
+    items = [("transportbelt", 220), ("inserter", 25), ("pipetoground", 15),
+             ("chemicalplant", 4), ("thruster", 6), ("crusher", 7)]
+    silos = distribute_items(items)
+    print_distribution(silos, 4)
+    print_consolidated(silos, 4)
