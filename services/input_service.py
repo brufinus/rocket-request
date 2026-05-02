@@ -81,7 +81,7 @@ def validate_item(item: str,
     if item in dictionary:
         return item
     for k in dictionary:
-        if item in str(dictionary[k]["keywords"]):
+        if item in dictionary[k]["keywords"]:
             return k
     return ""
 
