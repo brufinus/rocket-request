@@ -42,6 +42,12 @@ def request_items() -> list[tuple[str, int]]:
                 break
         else:
             item = validate_item(user_item, ITEMS)
+            if item == "":
+                similar_item = get_similar_item(user_item, ITEMS)
+                if len(similar_item) > 0:
+                    if input(f"Did you mean '{ITEMS[similar_item]["name"]}'? "
+                             "[y/n]: ").lower() == "y":
+                        item = similar_item
             if len(item) > 0:
                 while True:
                     try:
@@ -54,7 +60,7 @@ def request_items() -> list[tuple[str, int]]:
                     except ValueError:
                         print(INPUT_INVALID_NUM)
             else:
-                print("Invalid item. Enter an item that can be inserted into "
+                print("Enter a valid item that can be inserted into "
                       "the rocket silo")
 
     return items
@@ -79,8 +85,8 @@ def validate_item(item: str,
             return k
     return ""
 
-def get_similar_items(item: str,
-                      dictionary: dict[str, dict[str, str]]) -> str:
+def get_similar_item(item: str, dictionary: 
+                      dict[str, dict[str, str | float | list[str]]]) -> str:
     """
     Returns the key from a dictionary most similar to the given string.
     Returns an empty string if there is no match.

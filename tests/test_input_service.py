@@ -1,4 +1,4 @@
-from services.input_service import get_similar_items, transform_string, \
+from services.input_service import get_similar_item, transform_string, \
     validate_item
 
 dictionary = {
@@ -28,24 +28,24 @@ def test_transform_string():
         == "thisisaweirdstring"
 
 def test_get_similar_item():
-    assert get_similar_items("item", dictionary) == "item1"
+    assert get_similar_item("item", dictionary) == "item1"
     thisdict = {"grapple": "0.73", "orange": "0.4", "apple": "0.89"}
-    assert get_similar_items("aple", thisdict) == "apple"
+    assert get_similar_item("aple", thisdict) == "apple"
 
 def test_get_with_confidence():
     # Returns sword as it's above the confidence threshold.
     thisdict = {"sword": "0.89", "word": "1.0"}
-    assert get_similar_items("word", thisdict) == "sword"
+    assert get_similar_item("word", thisdict) == "sword"
 
 def test_no_similar_items():
-    assert get_similar_items("banana", dictionary) == ""
+    assert get_similar_item("banana", dictionary) == ""
 
 def test_get_similar_items_no_item():
-    assert get_similar_items("", dictionary) == ""
+    assert get_similar_item("", dictionary) == ""
 
 def test_get_similar_items_empty_dict():
-    assert get_similar_items("foobar", {}) == ""
+    assert get_similar_item("foobar", {}) == ""
 
 def test_get_similar_items_of_same_ratio():
     thisdict = {"bworde": "0.8", "sworde": "0.8"}
-    assert get_similar_items("word", thisdict) == "bworde"
+    assert get_similar_item("word", thisdict) == "bworde"
