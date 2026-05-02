@@ -31,7 +31,8 @@ def request_items() -> list[tuple[str, int]]:
     print("Add items to the silo. Enter 'done' once finished.")
     items: list[tuple[str, int]] = []
     while True:
-        user_item = input("Item: ")
+        user_input = input("Item: ")
+        user_item = transform_string(user_input)
         if user_item.lower() == "done":
             if len(items) == 0:
                 print("At least one item must be added to the silo.")
@@ -59,19 +60,26 @@ def request_items() -> list[tuple[str, int]]:
 
 def validate_item(item: str, dictionary: dict[str, dict[str, str | int | list[str]]]) -> str:
     """
-    Validates whether the item is in the given dictionary.
-
-    Transforms the item to the expected key structure in the given
-    dictionary and returns the key if it exists.
+    Validates whether the item is in the given
+    dictionary and returns the key if it is.
 
     :param item: The item to be validated.
     :return: The item key or an empty string.
     :rtype: str
     """
-    transformed_item = item.lower().replace(" ", "").replace("-", "")
-    if transformed_item in dictionary:
-        return transformed_item
+    if item in dictionary:
+        return item
 
     for k in dictionary:
-        if transformed_item in str(dictionary[k]["keywords"]):
+        if item in str(dictionary[k]["keywords"]):
             return k
+
+def transform_string(string: str) -> str:
+    """
+    Transforms the given string to the expected key format.
+
+    :param string: The string to be transformed.
+    :return: The transformed string.
+    :rtype: str
+    """
+    return string.lower().replace(" ", "").replace("-", "").replace("_", "")
