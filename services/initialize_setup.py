@@ -44,9 +44,11 @@ def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
         print(f"\n\tSilo {silo_index + 1}:")
         print_item_header()
         i = silo_index
+        superlist = []  # Running list of silo items
         while i < len(silos):
-            print_grouped_items(group_items(silos[i].inventory))
+            superlist += silos[i].inventory
             i += num_silos
+        print_grouped_items(group_items(superlist))
         silo_index += 1
 
 
@@ -75,16 +77,22 @@ def get_col_width() -> int:
 
 def group_items(items: list[dict[str, str | float]]) -> dict[str, int]:
     """
-    Consolidate and group together items by name and their count.
+    Consolidate and group together items by name, sorted by item id.
 
     :param items: List of items in the silo.
-    :return: Consolidated list of each item and their count.
-    :rtype: dict
+    :return: Consolidated, sorted item name and counts.
+    :rtype: dict[str, int]
     """
     grouped_items: dict[str, int] = {}
+    ids = []
     for item in items:
-        grouped_items.update(
-            {str(item["name"]): grouped_items.get(str(item["name"]), 0) + 1})
+        ids.append(item["id"])
+    ids.sort()
+    for id in ids:
+        # Get item name using id.
+        name = str([x["name"] for x in items if id == x["id"]][0])
+        # Set item or increment its count.
+        grouped_items.update({name: grouped_items.get(name, 0) + 1})
     return grouped_items
 
 
