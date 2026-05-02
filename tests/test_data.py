@@ -13,5 +13,5 @@ class TestItems:
         assert belt["weight"] == 1000 / belt["rocket_capacity"]
     
     def test_custom_weight(self):
-        items = {"testitem": make_item("Test item", 100, 21, [], 5)}
-        assert items["testitem"]["weight"] == 5
+        items = {"testitem": make_item("Test item", 100, 21, [], 5.0)}
+        assert items["testitem"]["weight"] == 5.0

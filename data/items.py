@@ -1,5 +1,4 @@
-def make_item(name: str, stack_size: int, rocket_capacity: int,
-              keywords: list[str] = [], *args: float) \
+def make_item(name: str, stack_size: int, rocket_capacity: int, *args: list[str] |float) \
                 -> dict[str, str | float | list[str]]:
     """
     Return a dictionary of attributes with calculated weight.
@@ -7,8 +6,12 @@ def make_item(name: str, stack_size: int, rocket_capacity: int,
     :return: Dictionary of an item's attributes.
     :rtype: dict[str, str | float ]
     """
-    if len(args) > 0:
-        weight = args[0]
+    keywords: list[str] = []
+    if len(args) > 0 and isinstance(args[0], list):
+        if len(args[0]) > 0:
+            keywords = args[0]
+    if len(args) > 1 and isinstance(args[1], float):
+        weight = args[1]
     else:
         weight = 1000 / rocket_capacity
     return {
@@ -16,7 +19,7 @@ def make_item(name: str, stack_size: int, rocket_capacity: int,
         "stack_size": stack_size,
         "rocket_capacity": rocket_capacity,
         "weight": weight,
-        "keywords": keywords or []
+        "keywords": keywords
     }
 
 
