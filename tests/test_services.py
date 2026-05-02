@@ -11,10 +11,10 @@ dictionary = {
     }
 }
 
-def test_get_item_by_key():
+def test_validate_item_by_key():
     assert len(validate_item("item1", dictionary)) > 0
 
-def test_get_item_by_keyword():
+def test_validate_item_by_keyword():
     assert len(validate_item("alias", dictionary)) > 0
     assert len(validate_item("foo", dictionary)) > 0
     assert len(validate_item("bar", dictionary)) > 0
