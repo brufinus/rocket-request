@@ -1,3 +1,5 @@
+from difflib import SequenceMatcher
+
 from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
 from data.items import ITEMS
 
@@ -40,6 +42,12 @@ def request_items() -> list[tuple[str, int]]:
                 break
         else:
             item = validate_item(user_item, ITEMS)
+            if item == "":
+                similar_item = get_similar_item(user_item, ITEMS)
+                if len(similar_item) > 0:
+                    if input(f"Did you mean '{ITEMS[similar_item]["name"]}'? "
+                             "[y/n]: ").lower() == "y":
+                        item = similar_item
             if len(item) > 0:
                 while True:
                     try:
@@ -52,7 +60,7 @@ def request_items() -> list[tuple[str, int]]:
                     except ValueError:
                         print(INPUT_INVALID_NUM)
             else:
-                print("Invalid item. Enter an item that can be inserted into "
+                print("Enter a valid item that can be inserted into "
                       "the rocket silo")
 
     return items
@@ -66,15 +74,40 @@ def validate_item(item: str,
     dictionary and returns the key if it is.
 
     :param item: The item to be validated.
+    :param dictionary: The dictionary to check against.
     :return: The item key or an empty string.
     :rtype: str
     """
     if item in dictionary:
         return item
     for k in dictionary:
-        if item in str(dictionary[k]["keywords"]):
+        if item in dictionary[k]["keywords"]:
             return k
     return ""
+
+def get_similar_item(item: str, dictionary: 
+                      dict[str, dict[str, str | float | list[str]]]) -> str:
+    """
+    Returns the key from a dictionary most similar to the given string.
+    Returns an empty string if there is no match.
+
+    :param item: The item to compare similarity against.
+    :param dictionary: The dictionary to check against.
+    :return: The most similar item key or an empty string.
+    :rtype: str
+    """
+    best_ratio = 0.0
+    best_key = ""
+    # If ratio is higher than confidence, immediately return the key.
+    confidence: float = 0.85
+    for k in dictionary:
+        similarity_ratio = SequenceMatcher(None, item, k).ratio()
+        if similarity_ratio > confidence:
+            return k
+        elif similarity_ratio > 0.6 and similarity_ratio > best_ratio:
+            best_ratio = similarity_ratio
+            best_key = k
+    return best_key
 
 def transform_string(string: str) -> str:
     """
