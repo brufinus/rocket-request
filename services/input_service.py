@@ -71,4 +71,7 @@ def get_item(item: str) -> str:
     transformed_item = item.lower().replace(" ", "").replace("-", "")
     if transformed_item in ITEMS:
         return transformed_item
-    return ""
+
+    for k in ITEMS:
+        if transformed_item in ITEMS[k]["keywords"]:
+            return k
