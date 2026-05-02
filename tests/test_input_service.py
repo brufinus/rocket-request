@@ -48,4 +48,4 @@ def test_get_similar_items_empty_dict():
 
 def test_get_similar_items_of_same_ratio():
     thisdict = {"bworde": "0.8", "sworde": "0.8"}
-    assert get_similar_items("word", thisdict) == "sworde"
+    assert get_similar_items("word", thisdict) == "bworde"

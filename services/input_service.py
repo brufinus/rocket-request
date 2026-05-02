@@ -90,23 +90,18 @@ def get_similar_items(item: str,
     :return: The most similar item key or an empty string.
     :rtype: str
     """
-    ratio_item_dict: dict[float, str] = {}
-    similarity_ratios: list[float] = []
-    if len(item) <=0 or len(dictionary) <= 0:
-        return ""
+    best_ratio = 0.0
+    best_key = ""
     # If ratio is higher than confidence, immediately return the key.
     confidence: float = 0.85
     for k in dictionary:
         similarity_ratio = SequenceMatcher(None, item, k).ratio()
         if similarity_ratio > confidence:
             return k
-        elif similarity_ratio > 0.6:
-            ratio_item_dict[similarity_ratio] = k
-            similarity_ratios.append(similarity_ratio)
-    if len(similarity_ratios) == 0:
-        return ""
-    similarity_ratios.sort(reverse=True)
-    return ratio_item_dict[similarity_ratios[0]]
+        elif similarity_ratio > 0.6 and similarity_ratio > best_ratio:
+            best_ratio = similarity_ratio
+            best_key = k
+    return best_key
 
 def transform_string(string: str) -> str:
     """
