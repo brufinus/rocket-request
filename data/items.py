@@ -1,16 +1,17 @@
 def make_item(name: str, stack_size: int, rocket_capacity: int,
-              keywords: list[str] = None) -> dict[str, str | int | list[str]]:
+              keywords: list[str] = []) \
+                -> dict[str, str | float | list[str]]:
     """
     Return a dictionary of attributes with calculated weight.
 
     :return: Dictionary of an item's attributes.
-    :rtype: dict[str, str | int]
+    :rtype: dict[str, str | float ]
     """
     return {
         "name": name,
         "stack_size": stack_size,
         "rocket_capacity": rocket_capacity,
-        "weight": int(1000 / rocket_capacity),
+        "weight": 1000 / rocket_capacity,
         "keywords": keywords or []
     }
 
@@ -23,8 +24,10 @@ ITEMS = {
                                  ["redcircuit"]),
     "agriculturaltower": make_item("Agricultural tower", 20, 20, ["agtower"]),
     "arithmeticcombinator": make_item("Arithmetic combinator", 50, 50),
-    "artificialjellynutsoil": make_item("Artificial jellynut soil", 100, 67),
-    "artificialyumakosoil": make_item("Artificial yumako soil", 100, 67),
+    "artificialjellynutsoil": make_item("Artificial jellynut soil", 100, 67,
+                                        ["ajs"]),
+    "artificialyumakosoil": make_item("Artificial yumako soil", 100, 67,
+                                      ["ays"]),
     "artilleryshell": make_item("Artillery shell", 1, 10),
     "artilleryturret": make_item("Artillery turret", 10, 5),
     "artillerywagon": make_item("Artillery wagon", 5, 1),
@@ -205,8 +208,10 @@ ITEMS = {
     "oilrefinery": make_item("Oil refinery", 10, 10, ["refinery"]),
     "onewayvalve": make_item("One-way valve", 10, 10000),
     "overflowvalve": make_item("Overflow valve", 10, 10000),
-    "overgrowthjellynutsoil": make_item("Overgrowth jellynut soil", 100, 14),
-    "overgrowthyumakosoil": make_item("Overgrowth yumako soil", 100, 14),
+    "overgrowthjellynutsoil": make_item("Overgrowth jellynut soil", 100, 14,
+                                        ["ojs"]),
+    "overgrowthyumakosoil": make_item("Overgrowth yumako soil", 100, 14,
+                                      ["oys"]),
     "oxideasteroidchunk": make_item("Oxide asteroid chunk", 1, 10),
     "passiveproviderchest": make_item("Passive provider chest", 50, 50,
                                       ["passivechest"]),

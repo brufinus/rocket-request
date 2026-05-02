@@ -58,7 +58,9 @@ def request_items() -> list[tuple[str, int]]:
     return items
 
 
-def validate_item(item: str, dictionary: dict[str, dict[str, str | int | list[str]]]) -> str:
+def validate_item(item: str,
+                  dictionary: dict[str, dict[str, str | float | list[str]]]) \
+                    -> str:
     """
     Validates whether the item is in the given
     dictionary and returns the key if it is.

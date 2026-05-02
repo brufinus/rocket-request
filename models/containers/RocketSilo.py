@@ -17,7 +17,7 @@ class RocketSilo(Container):
     def __init__(self) -> None:
         super().__init__(container="rocket_silo", capacity=1000)
 
-    def can_add_item(self, item: dict[str, str | int]) -> bool:
+    def can_add_item(self, item: dict[str, str | float]) -> bool:
         """
         Checks if the rocket silo has enough empty weight to add an item.
         Overrides Container.can_add_item.
@@ -26,11 +26,11 @@ class RocketSilo(Container):
         :return: Whether the silo has enough empty weight to add an item.
         :rtype: bool
         """
-        if self.load + int(item["weight"]) <= self.capacity:
+        if self.load + float(item["weight"]) <= self.capacity:
             return True
         return False
 
-    def increase_load(self, item: dict[str, str | int]) -> None:
+    def increase_load(self, item: dict[str, str | float]) -> None:
         """
         Increases the current load of the rocket silo using the item's weight.
         Overrides Container.increase_load.
@@ -38,9 +38,9 @@ class RocketSilo(Container):
         :param dict item: The item to increase load weight with.
         :return: None
         """
-        self.load += int(item["weight"])
+        self.load += float(item["weight"])
 
-    def decrease_load(self, item: dict[str, str | int]) -> None:
+    def decrease_load(self, item: dict[str, str | float]) -> None:
         """
         Decreases the current load of the rocket silo using the item's weight.
         Overrides Container.decrease_load.
@@ -48,4 +48,4 @@ class RocketSilo(Container):
         :param dict item: The item to decrease load weight with.
         :return: None
         """
-        self.load -= int(item["weight"])
+        self.load -= float(item["weight"])

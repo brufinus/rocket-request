@@ -9,16 +9,16 @@ class Container(ABC):
         container (str): The name of the container.
         capacity (int): The maximum amount the container can have.
         inventory (list): A list of items in the container.
-        load (int): The current load of the container.
+        load (float): The current load of the container.
     """
 
     def __init__(self, container: str, capacity: int) -> None:
         self.container = container
         self.capacity = capacity
-        self.inventory: list[dict[str, str | int]] = []
-        self.load: int = 0
+        self.inventory: list[dict[str, str | float]] = []
+        self.load: float = 0
 
-    def add_item(self, item: dict[str, str | int]) -> bool:
+    def add_item(self, item: dict[str, str | float]) -> bool:
         """
         Adds an item to the container.
 
@@ -33,7 +33,7 @@ class Container(ABC):
         return False
 
     @abstractmethod
-    def can_add_item(self, item: dict[str, str | int]) -> bool:
+    def can_add_item(self, item: dict[str, str | float]) -> bool:
         """
         Checks if the container has enough space to add an item.
 
@@ -44,7 +44,7 @@ class Container(ABC):
         pass
 
     @abstractmethod
-    def increase_load(self, item: dict[str, str | int]) -> None:
+    def increase_load(self, item: dict[str, str | float]) -> None:
         """
         Increases the current load of the container using the given item.
 
@@ -53,7 +53,7 @@ class Container(ABC):
         """
         pass
 
-    def remove_item(self, item: dict[str, str | int]) -> None:
+    def remove_item(self, item: dict[str, str | float]) -> None:
         """
         Removes an item from the container.
 
@@ -64,7 +64,7 @@ class Container(ABC):
         self.decrease_load(item)
 
     @abstractmethod
-    def decrease_load(self, item: dict[str, str | int]) -> None:
+    def decrease_load(self, item: dict[str, str | float]) -> None:
         """
         Decreases the current load of the container.
 

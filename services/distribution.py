@@ -17,7 +17,7 @@ def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
 
 
 def first_fit_silo(silos: list[RocketSilo],
-                   items: list[dict[str, str | int]]) -> None:
+                   items: list[dict[str, str | float]]) -> None:
     """
     First-fit-decreasing algorithm to distribute items into silos.
     For each item, find the first silo into which it can fit.
@@ -35,7 +35,7 @@ def first_fit_silo(silos: list[RocketSilo],
 
 
 def find_open_silo(silos: list[RocketSilo],
-                   item: dict[str, str | int]) -> bool:
+                   item: dict[str, str | float]) -> bool:
     """
     Find the first silo into which the item can fit.
 
@@ -51,16 +51,16 @@ def find_open_silo(silos: list[RocketSilo],
 
 
 def expand_and_sort_items(
-        items: list[tuple[str, int]]) -> list[dict[str, str | int]]:
+        items: list[tuple[str, int]]) -> list[dict[str, str | float]]:
     """
     Expand items into a sorted list of item dictionaries.
     Items are sorted from heaviest to lightest.
 
     :param items: List of items to expand.
     :return: Expanded list of item dictionaries.
-    :rtype: list[dict[str, str | int]]
+    :rtype: list[dict[str, str | float]]
     """
-    expanded_items: list[dict[str, str | int]] = []
+    expanded_items: list[dict[str, str | float]] = []
     for item in items:
         for _ in range(item[1]):
             expanded_items.append(ITEMS[item[0]])

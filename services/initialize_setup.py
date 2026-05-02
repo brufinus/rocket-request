@@ -22,7 +22,8 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
         for j in range(num_silos):
             if silo_index >= len(silos):
                 break
-            print(f"\n\tSilo {j + 1} ({silos[silo_index].load}"
+            rounded_load = "{:.1f}".format(silos[silo_index].load)
+            print(f"\n\tSilo {j + 1} ({rounded_load}"
                   f"/{silos[silo_index].capacity} kg):")
             print_item_header()
             print_grouped_items(group_items(silos[silo_index].inventory))
@@ -72,7 +73,7 @@ def get_col_width() -> int:
     return len(max(ITEMS, key=len)) + 2
 
 
-def group_items(items: list[dict[str, str | int]]) -> dict[str, int]:
+def group_items(items: list[dict[str, str | float]]) -> dict[str, int]:
     """
     Consolidate and group together items by name and their count.
 
