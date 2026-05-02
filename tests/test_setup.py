@@ -30,6 +30,10 @@ def test_calculate_launch_cycles():
     num_silos = 10
     assert calculate_launch_cycles(silos, num_silos) == 1
 
+def test_group_item():
+    grouped_items = group_items([ITEMS["pipe"]])
+    assert len(grouped_items) == 1
+
 def test_group_multiple_same_items():
     items = [ITEMS["transportbelt"] for _ in range(10)]
     grouped_items = group_items(items)
@@ -46,13 +50,17 @@ def test_group_multiple_single_items():
 def test_group_multiple_different_items():
     belts = [ITEMS["transportbelt"] for _ in range(18)]
     plants = [ITEMS["chemicalplant"] for _ in range(7)]
-    foo = [{"name": "bar"} for _ in range(21)]
+    foo = [{"name": "bar", "id": 1} for _ in range(21)]
     items = belts + plants + foo
     grouped_items = group_items(items)
     assert len(grouped_items) == 3
     assert grouped_items[ITEMS["transportbelt"]["name"]] == 18
     assert grouped_items[ITEMS["chemicalplant"]["name"]] == 7
     assert grouped_items["bar"] == 21
+
+def test_group_items_sort_by_id():
+    items = group_items([{"name": "a", "id": 3}, {"name": "b", "id": 1}, {"name": "c", "id": 2}])
+    assert items == {"b": 1, "c": 1, "a": 1}
 
 def test_print():
     items = [("transportbelt", 220), ("inserter", 25), ("pipetoground", 15),
