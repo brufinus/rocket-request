@@ -38,7 +38,7 @@ def request_items() -> list[tuple[str, int]]:
             else:
                 break
         else:
-            item = get_item(user_item)
+            item = validate_item(user_item, ITEMS)
             if len(item) > 0:
                 while True:
                     try:
@@ -57,21 +57,21 @@ def request_items() -> list[tuple[str, int]]:
     return items
 
 
-def get_item(item: str) -> str:
+def validate_item(item: str, dictionary: dict[str, dict[str, str | int | list[str]]]) -> str:
     """
-    Validates the item.
+    Validates whether the item is in the given dictionary.
 
-    Transforms the item to the expected key structure in ITEMS and returns the
-    item key if it exists in ITEMS.
+    Transforms the item to the expected key structure in the given
+    dictionary and returns the key if it exists.
 
-    :param str item: The item to be validated.
-    :return: The item key if it exists in ITEMS.
+    :param item: The item to be validated.
+    :return: The item key or an empty string.
     :rtype: str
     """
     transformed_item = item.lower().replace(" ", "").replace("-", "")
-    if transformed_item in ITEMS:
+    if transformed_item in dictionary:
         return transformed_item
 
-    for k in ITEMS:
-        if transformed_item in ITEMS[k]["keywords"]:
+    for k in dictionary:
+        if transformed_item in str(dictionary[k]["keywords"]):
             return k
