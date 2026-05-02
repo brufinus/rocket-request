@@ -83,21 +83,28 @@ def get_similar_items(item: str,
                       dictionary: dict[str, dict[str, str]]) -> str:
     """
     Returns the key from a dictionary most similar to the given string.
+    Returns an empty string if there is no match.
 
     :param item: The item to compare similarity against.
     :param dictionary: The dictionary to check against.
-    :return: The most similar item key.
+    :return: The most similar item key or an empty string.
     :rtype: str
     """
     ratio_item_dict: dict[float, str] = {}
     similarity_ratios: list[float] = []
-    # TODO: If confidence is high enough, return the item.
-    confidence: float = 0.95
+    if len(item) <=0 or len(dictionary) <= 0:
+        return ""
+    # If ratio is higher than confidence, immediately return the key.
+    confidence: float = 0.85
     for k in dictionary:
         similarity_ratio = SequenceMatcher(None, item, k).ratio()
-        if similarity_ratio > 0.6:
+        if similarity_ratio > confidence:
+            return k
+        elif similarity_ratio > 0.6:
             ratio_item_dict[similarity_ratio] = k
             similarity_ratios.append(similarity_ratio)
+    if len(similarity_ratios) == 0:
+        return ""
     similarity_ratios.sort(reverse=True)
     return ratio_item_dict[similarity_ratios[0]]
 

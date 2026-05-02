@@ -29,7 +29,23 @@ def test_transform_string():
 
 def test_get_similar_item():
     assert get_similar_items("item", dictionary) == "item1"
-    thisdict = {"grapple": "rasbora", "apple": "tetra", "orange": "cory"}
+    thisdict = {"grapple": "0.73", "orange": "0.4", "apple": "0.89"}
     assert get_similar_items("aple", thisdict) == "apple"
-    thisdict = {"lord": "", "sword": "", "bored": "", "worm": "", "wort": "", "worn": "", "ord": "", "wod": "", "wor": ""}
+
+def test_get_with_confidence():
+    # Returns sword as it's above the confidence threshold.
+    thisdict = {"sword": "0.89", "word": "1.0"}
     assert get_similar_items("word", thisdict) == "sword"
+
+def test_no_similar_items():
+    assert get_similar_items("banana", dictionary) == ""
+
+def test_get_similar_items_no_item():
+    assert get_similar_items("", dictionary) == ""
+
+def test_get_similar_items_empty_dict():
+    assert get_similar_items("foobar", {}) == ""
+
+def test_get_similar_items_of_same_ratio():
+    thisdict = {"bworde": "0.8", "sworde": "0.8"}
+    assert get_similar_items("word", thisdict) == "sworde"
