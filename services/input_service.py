@@ -1,3 +1,5 @@
+from difflib import SequenceMatcher
+
 from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
 from data.items import ITEMS
 
@@ -66,6 +68,7 @@ def validate_item(item: str,
     dictionary and returns the key if it is.
 
     :param item: The item to be validated.
+    :param dictionary: The dictionary to check against.
     :return: The item key or an empty string.
     :rtype: str
     """
@@ -75,6 +78,28 @@ def validate_item(item: str,
         if item in str(dictionary[k]["keywords"]):
             return k
     return ""
+
+def get_similar_items(item: str,
+                      dictionary: dict[str, dict[str, str]]) -> str:
+    """
+    Returns the key from a dictionary most similar to the given string.
+
+    :param item: The item to compare similarity against.
+    :param dictionary: The dictionary to check against.
+    :return: The most similar item key.
+    :rtype: str
+    """
+    ratio_item_dict: dict[float, str] = {}
+    similarity_ratios: list[float] = []
+    # TODO: If confidence is high enough, return the item.
+    confidence: float = 0.95
+    for k in dictionary:
+        similarity_ratio = SequenceMatcher(None, item, k).ratio()
+        if similarity_ratio > 0.6:
+            ratio_item_dict[similarity_ratio] = k
+            similarity_ratios.append(similarity_ratio)
+    similarity_ratios.sort(reverse=True)
+    return ratio_item_dict[similarity_ratios[0]]
 
 def transform_string(string: str) -> str:
     """

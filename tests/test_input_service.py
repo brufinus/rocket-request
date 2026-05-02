@@ -1,4 +1,5 @@
-from services.input_service import transform_string, validate_item
+from services.input_service import get_similar_items, transform_string, \
+    validate_item
 
 dictionary = {
     "item1": {
@@ -25,3 +26,10 @@ def test_invalid_item():
 def test_transform_string():
     assert transform_string("ThIS   is-A-   - weird ST rIN-g  ") \
         == "thisisaweirdstring"
+
+def test_get_similar_item():
+    assert get_similar_items("item", dictionary) == "item1"
+    thisdict = {"grapple": "rasbora", "apple": "tetra", "orange": "cory"}
+    assert get_similar_items("aple", thisdict) == "apple"
+    thisdict = {"lord": "", "sword": "", "bored": "", "worm": "", "wort": "", "worn": "", "ord": "", "wod": "", "wor": ""}
+    assert get_similar_items("word", thisdict) == "sword"
