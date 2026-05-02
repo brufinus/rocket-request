@@ -1,5 +1,5 @@
 def make_item(name: str, stack_size: int, rocket_capacity: int,
-              keywords: list[str] = []) \
+              keywords: list[str] = [], *args: float) \
                 -> dict[str, str | float | list[str]]:
     """
     Return a dictionary of attributes with calculated weight.
@@ -7,11 +7,15 @@ def make_item(name: str, stack_size: int, rocket_capacity: int,
     :return: Dictionary of an item's attributes.
     :rtype: dict[str, str | float ]
     """
+    if len(args) > 0:
+        weight = args[0]
+    else:
+        weight = 1000 / rocket_capacity
     return {
         "name": name,
         "stack_size": stack_size,
         "rocket_capacity": rocket_capacity,
-        "weight": 1000 / rocket_capacity,
+        "weight": weight,
         "keywords": keywords or []
     }
 
@@ -25,9 +29,9 @@ ITEMS = {
     "agriculturaltower": make_item("Agricultural tower", 20, 20, ["agtower"]),
     "arithmeticcombinator": make_item("Arithmetic combinator", 50, 50),
     "artificialjellynutsoil": make_item("Artificial jellynut soil", 100, 67,
-                                        ["ajs"]),
+                                        ["ajs"], 988 / 67),
     "artificialyumakosoil": make_item("Artificial yumako soil", 100, 67,
-                                      ["ays"]),
+                                      ["ays"], 988 / 67),
     "artilleryshell": make_item("Artillery shell", 1, 10),
     "artilleryturret": make_item("Artillery turret", 10, 5),
     "artillerywagon": make_item("Artillery wagon", 5, 1),
@@ -94,7 +98,7 @@ ITEMS = {
     "decidercombinator": make_item("Decider combinator", 50, 50, ["decider"]),
     "deconstructionplanner": make_item("Deconstruction planner", 1, 10000),
     "depleteduraniumfuelcell": make_item("Depleted uranium fuel cell", 50, 10),
-    "dischargedefense": make_item("Discharge defense", 20, 4),
+    "dischargedefense": make_item("Discharge defense", 20, 4, [], 933 / 4),
     "displaypanel": make_item("Display panel", 10, 10),
     "efficiencymodule": make_item("Efficiency module", 50, 50,
                                   ["efficiency1", "eff1"]),
@@ -102,7 +106,8 @@ ITEMS = {
                                    ["efficiency2", "eff2"]),
 	"efficiencymodule3": make_item("Efficiency module 3", 50, 50,
                                    ["efficiency3", "eff3"]),
-    "electricenergyinterface": make_item("Electric energy interface", 50, 10000),
+    "electricenergyinterface": make_item(
+        "Electric energy interface", 50, 10000),
     "electricengineunit": make_item("Electric engine unit", 50, 400,
                                     ["electricengine"]),
     "electricfurnace": make_item("Electric furnace", 50, 50),
@@ -115,7 +120,7 @@ ITEMS = {
     "energyshield": make_item("Energy shield", 20, 20),
     "energyshieldmk2": make_item("Energy shield MK2", 20, 10),
     "engineunit": make_item("Engine unit", 50, 400, ["engine"]),
-    "exoskeleton": make_item("Exoskeleton", 20, 12),
+    "exoskeleton": make_item("Exoskeleton", 20, 12, [], 949 / 12),
     "explosives": make_item("Explosives", 50, 500),
     "expressloader": make_item("Express loader", 50, 10000),
     "expresssplitter": make_item("Express splitter", 50, 50, ["bluesplitter"]),
@@ -209,16 +214,17 @@ ITEMS = {
     "onewayvalve": make_item("One-way valve", 10, 10000),
     "overflowvalve": make_item("Overflow valve", 10, 10000),
     "overgrowthjellynutsoil": make_item("Overgrowth jellynut soil", 100, 14,
-                                        ["ojs"]),
+                                        ["ojs"], 941 / 14),
     "overgrowthyumakosoil": make_item("Overgrowth yumako soil", 100, 14,
-                                      ["oys"]),
+                                      ["oys"], 941 / 14),
     "oxideasteroidchunk": make_item("Oxide asteroid chunk", 1, 10),
     "passiveproviderchest": make_item("Passive provider chest", 50, 50,
                                       ["passivechest"]),
     "pentapodegg": make_item("Pentapod egg", 20, 200),
     "personallaserdefense": make_item("Personal laser defense", 20, 5),
-    "personalroboport": make_item("Personal roboport", 20, 9),
-    "personalroboportmk2": make_item("Personal roboport MK2", 20, 2),
+    "personalroboport": make_item("Personal roboport", 20, 9, [], 956 / 9),
+    "personalroboportmk2": make_item("Personal roboport MK2", 20, 2, [],
+                                     747 / 2),
     "petroleumgasbarrel": make_item("Petroleum gas barrel", 10, 100),
     "piercingroundsmagazine": make_item("Piercing rounds magazine", 100, 50,
                                         ["redammo"]),

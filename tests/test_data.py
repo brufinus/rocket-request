@@ -1,4 +1,4 @@
-from data.items import ITEMS
+from data.items import ITEMS, make_item
 
 
 class TestItems:
@@ -11,3 +11,7 @@ class TestItems:
     def test_weight_calculation(self):
         belt = ITEMS["transportbelt"]
         assert belt["weight"] == 1000 / belt["rocket_capacity"]
+    
+    def test_custom_weight(self):
+        items = {"testitem": make_item("Test item", 100, 21, [], 5)}
+        assert items["testitem"]["weight"] == 5

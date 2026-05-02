@@ -55,3 +55,8 @@ class TestContainer:
         for i in range(1000):
             self.silo.add_item(light)
         assert self.silo.load == self.silo.capacity
+
+    def test_silo_load_weight(self):
+        self.silo.add_item(ITEMS["artificialyumakosoil"])
+        val = 988 / 67
+        assert self.silo.load == val
