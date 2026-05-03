@@ -1,3 +1,4 @@
+from data.constants import ITEM_WEIGHT
 from data.item import Item
 from models.containers.Container import Container
 
@@ -41,7 +42,7 @@ class RocketSilo(Container):
         :return: Whether the silo has space to add an item.
         :rtype: bool
         """
-        if self.load + float(item["weight"]) <= self.capacity:
+        if self.load + float(item[ITEM_WEIGHT]) <= self.capacity:
             return True
         return False
 
@@ -55,7 +56,7 @@ class RocketSilo(Container):
         The item to increase load weight by.
         :return: None
         """
-        self.load += float(item["weight"])
+        self.load += float(item[ITEM_WEIGHT])
 
     def decrease_load(self, item: Item) -> None:
         """
@@ -67,4 +68,4 @@ class RocketSilo(Container):
         The item to decrease load weight by.
         :return: None
         """
-        self.load -= float(item["weight"])
+        self.load -= float(item[ITEM_WEIGHT])

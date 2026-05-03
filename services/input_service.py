@@ -1,7 +1,8 @@
 from difflib import SequenceMatcher
 import re
 
-from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
+from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM, \
+    ITEM_KEYWORDS, ITEM_NAME, ITEM_ROCKET_CAPACITY
 from data.item import Item
 from data.items import ITEMS
 
@@ -50,10 +51,11 @@ def request_items() -> list[tuple[str, int]]:
             if item == "":
                 similar_item = get_similar_item(user_item, ITEMS)
                 if len(similar_item) > 0:
-                    if input(f"Did you mean '{ITEMS[similar_item]["name"]}'? "
-                             "[y/n]: ").lower() == "y":
+                    if input(f"Did you mean '{
+                        ITEMS[similar_item][ITEM_NAME]
+                        }'? [y/n]: ").lower() == "y":
                         item = similar_item
-            if len(item) > 0 and ITEMS[item]["rocket_capacity"] > 0:
+            if len(item) > 0 and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
                 while True:
                     try:
                         count = int(input("Count: "))
@@ -86,7 +88,7 @@ def search_item(search_item: str, item_data: dict[str, Item]) -> str:
     if search_item in item_data:
         return search_item
     for k in item_data:
-        if search_item in item_data[k].get("keywords", []):
+        if search_item in item_data[k].get(ITEM_KEYWORDS, []):
             return k
     return ""
 

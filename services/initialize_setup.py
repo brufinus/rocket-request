@@ -1,6 +1,7 @@
 from decimal import ROUND_HALF_UP, Decimal
 import math
 
+from data.constants import ITEM_ID, ITEM_NAME, ITEM_WEIGHT
 from data.item import Item
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
@@ -88,7 +89,7 @@ def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
         while i < len(silos):
             superlist += silos[i].inventory
             i += num_silos
-        total_weight = sum([float(x["weight"]) for x in superlist if x])
+        total_weight = sum([float(x[ITEM_WEIGHT]) for x in superlist if x])
         rounded_weight = get_formatted_load(total_weight)
         print(f"\n\tSilo {silo_index + 1} ({rounded_weight} kg):")
         print_item_header()
@@ -132,11 +133,11 @@ def group_items(items: list[Item]) -> dict[str, int]:
     grouped_items: dict[str, int] = {}
     ids = []
     for item in items:
-        ids.append(item["id"])
+        ids.append(item[ITEM_ID])
     ids.sort()
     for id in ids:
         # Get item name using id.
-        name = str([x["name"] for x in items if id == x["id"]][0])
+        name = str([x[ITEM_NAME] for x in items if id == x[ITEM_ID]][0])
         # Set item or increment its count.
         grouped_items.update({name: grouped_items.get(name, 0) + 1})
     return grouped_items

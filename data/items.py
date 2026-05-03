@@ -1,3 +1,5 @@
+from data.constants import ITEM_ID, ITEM_KEYWORDS, ITEM_NAME, \
+    ITEM_ROCKET_CAPACITY, ITEM_STACK, ITEM_WEIGHT
 from data.item import Item
 from models.containers.RocketSilo import RocketSilo
 
@@ -29,12 +31,12 @@ def make_item(name: str, stack_size: int, rocket_capacity: int,
     else:
         weight = RocketSilo.CAPACITY / rocket_capacity
     return {
-        "name": name,
-        "stack_size": stack_size,
-        "rocket_capacity": rocket_capacity,
-        "weight": weight,
-        "id": item_id,
-        "keywords": keywords
+        ITEM_NAME: name,
+        ITEM_STACK: stack_size,
+        ITEM_ROCKET_CAPACITY: rocket_capacity,
+        ITEM_WEIGHT: weight,
+        ITEM_ID: item_id,
+        ITEM_KEYWORDS: keywords
     }
 
 

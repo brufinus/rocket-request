@@ -1,3 +1,4 @@
+from data.constants import ITEM_WEIGHT
 from data.item import Item
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
@@ -69,5 +70,5 @@ def expand_and_sort_items(items: list[tuple[str, int]]) -> list[Item]:
     for item in items:
         for _ in range(item[1]):
             expanded_items.append(ITEMS[item[0]])
-    expanded_items.sort(reverse=True, key=lambda d: d['weight'])
+    expanded_items.sort(reverse=True, key=lambda d: d[ITEM_WEIGHT])
     return expanded_items
