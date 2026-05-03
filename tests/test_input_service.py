@@ -1,6 +1,5 @@
 from data.items import ITEMS
-from services.input_service import get_similar_item, transform_string, \
-    search_item
+from services.input_service import get_similar_item, is_done_adding_items, transform_string, search_item
 
 dictionary = {
     "item1": {
@@ -53,3 +52,18 @@ def test_get_similar_items_empty_dict():
 def test_get_similar_items_of_same_ratio():
     thisdict = {"bworde": "0.8", "sworde": "0.8"}
     assert get_similar_item("word", thisdict) == "bworde"
+
+def test_is_done_adding_no_items():
+    assert is_done_adding_items("done", []) == False
+
+def test_is_done_adding_with_items():
+    assert is_done_adding_items("done", [("foo", 1)]) == True
+
+def test_is_not_done_adding_no_items():
+    assert is_done_adding_items("foobar", []) == False
+
+def test_is_not_done_adding_with_items():
+    assert is_done_adding_items("foobar", [("foo", 1)]) == False
+
+def test_is_not_done_adding_with_existing_item():
+    assert is_done_adding_items("foobar", [("foobar", 1)]) == False

@@ -51,35 +51,49 @@ def request_items() -> list[tuple[str, int]]:
     while True:
         user_input = input("Item: ")
         user_item = transform_string(user_input)
-        if user_item.lower() == "done":
-            if not items:
-                print("At least one item must be added to the silo.")
-            else:
-                break
+        if is_done_adding_items(user_item, items):
+            break
+        item = search_item(user_item, ITEMS)
+        if item == "":
+            similar_item = get_similar_item(user_item, ITEMS)
+            if similar_item:
+                if input(f"Did you mean '{
+                    ITEMS[similar_item][ITEM_NAME]
+                    }'? [y/n]: ").lower() == "y":
+                    item = similar_item
+        if item and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
+            while True:
+                try:
+                    count = int(input("Count: "))
+                    if count > 0:
+                        items.append((item, count))
+                        break
+                    print(INPUT_GREATER_ZERO)
+                except ValueError:
+                    print(INPUT_INVALID_NUM)
         else:
-            item = search_item(user_item, ITEMS)
-            if item == "":
-                similar_item = get_similar_item(user_item, ITEMS)
-                if similar_item:
-                    if input(f"Did you mean '{
-                        ITEMS[similar_item][ITEM_NAME]
-                        }'? [y/n]: ").lower() == "y":
-                        item = similar_item
-            if item and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
-                while True:
-                    try:
-                        count = int(input("Count: "))
-                        if count > 0:
-                            items.append((item, count))
-                            break
-                        print(INPUT_GREATER_ZERO)
-                    except ValueError:
-                        print(INPUT_INVALID_NUM)
-            else:
-                print("Enter a valid item that can be inserted into "
-                      "the rocket silo")
+            print("Enter a valid item that can be inserted into "
+                  "the rocket silo")
 
     return items
+
+
+def is_done_adding_items(user_input: str,
+                         items: list[tuple[str, int]]) -> bool:
+    """
+    Check whether the user is done adding items.
+
+    :param str input: The user input to check.
+    :param list[tuple[str, int]] items: The list of items added so far.
+    :return: Whether the user is done adding items.
+    :rtype: bool
+    """
+    if user_input == "done":
+        if not items:
+            print("At least one item must be added to the silo.")
+            return False
+        return True
+    return False
 
 
 def search_item(item: str, item_data: dict[str, Item]) -> str:
