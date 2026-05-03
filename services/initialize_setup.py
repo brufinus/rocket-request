@@ -45,13 +45,16 @@ def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
     print("\nConsolidated silo contents:")
     silo_index = 0
     while silo_index < num_silos:
-        print(f"\n\tSilo {silo_index + 1}:")
-        print_item_header()
         i = silo_index
-        superlist = []  # Running list of silo items
+        # Running list of silo items
+        superlist: list[dict[str, str | float]] = []
         while i < len(silos):
             superlist += silos[i].inventory
             i += num_silos
+        total_weight = sum([float(x["weight"]) for x in superlist if x])
+        rounded_weight = "{:.1f}".format(total_weight)
+        print(f"\n\tSilo {silo_index + 1} ({rounded_weight} kg):")
+        print_item_header()
         print_grouped_items(group_items(superlist))
         silo_index += 1
 
