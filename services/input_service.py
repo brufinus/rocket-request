@@ -49,7 +49,7 @@ def request_items() -> list[tuple[str, int]]:
                     if input(f"Did you mean '{ITEMS[similar_item]["name"]}'? "
                              "[y/n]: ").lower() == "y":
                         item = similar_item
-            if len(item) > 0:
+            if len(item) > 0 and ITEMS[item]["rocket_capacity"] > 0:
                 while True:
                     try:
                         count = int(input("Count: "))
