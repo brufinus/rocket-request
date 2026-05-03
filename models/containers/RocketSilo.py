@@ -4,53 +4,73 @@ from models.containers.Container import Container
 class RocketSilo(Container):
     """
     A container for holding items to be launched.
+
     Has a capacity of 1000 kg which is the maximum
     weight of items that can be added to it.
 
-    Inherits from Container.
+    Subclasses Container.
 
     Attributes:
-        container (str): The name of the container.
-        capacity (int): The max weight that can be added to the silo.
-        inventory (list): A list of items in the rocket silo.
+        CAPACITY (int): The maximum weight that
+                        can be added to the silo.
     """
+
     CAPACITY: int = 1000
+    "The maximum weight that can be added to the silo."
 
     def __init__(self) -> None:
-        super().__init__(container="rocket_silo", capacity=self.CAPACITY)
-
-    def can_add_item(self, item: dict[str, str | float]) -> bool:
         """
-        Checks if the rocket silo has
-        enough empty weight to add an item.
-        Overrides Container.can_add_item.
+        Initializes a rocket silo container.
 
-        :param dict item: The item to check.
-        :return: Whether the silo is empty enough to add an item.
+        Extends Container.__init__
+        """
+        super().__init__(container="rocket_silo",
+                         capacity=self.CAPACITY)
+
+    def can_add_item(self,
+                     item: dict[str, str | int | float | list[str]]) \
+                        -> bool:
+        """
+        Check whether an item can be added to the rocket silo.
+
+        Determines whether the silo has enough remaining
+        capacity to add the item's weight.
+
+        Overrides Container.can_add_item
+
+        :param dict[str, str | int | float | list[str]] item:
+        The item to check.
+        :return: Whether the silo has space to add an item.
         :rtype: bool
         """
         if self.load + float(item["weight"]) <= self.capacity:
             return True
         return False
 
-    def increase_load(self, item: dict[str, str | float]) -> None:
+    def increase_load(self,
+                      item: dict[str, str | int | float | list[str]]) \
+                        -> None:
         """
-        Increases the current load of the
-        rocket silo using the item's weight.
-        Overrides Container.increase_load.
+        Increases the load of the rocket silo by the item's weight.
 
-        :param dict item: The item to increase load weight with.
+        Overrides Container.increase_load
+
+        :param dict[str, str | int | float | list[str]] item:
+        The item to increase load weight by.
         :return: None
         """
         self.load += float(item["weight"])
 
-    def decrease_load(self, item: dict[str, str | float]) -> None:
+    def decrease_load(self,
+                      item: dict[str, str | int | float | list[str]]) \
+                        -> None:
         """
-        Decreases the current load of the
-        rocket silo using the item's weight.
-        Overrides Container.decrease_load.
+        Decreases the load of the rocket silo by the item's weight.
 
-        :param dict item: The item to decrease load weight with.
+        Overrides Container.decrease_load
+
+        :param dict[str, str | int | float | list[str]] item:
+        The item to decrease load weight by.
         :return: None
         """
         self.load -= float(item["weight"])

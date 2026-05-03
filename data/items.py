@@ -1,13 +1,24 @@
 from models.containers.RocketSilo import RocketSilo
 
 
-def make_item(name: str, stack_size: int, rocket_capacity: int, item_id: int, *args: list[str] |float) \
-                -> dict[str, str | float | list[str]]:
+def make_item(name: str, stack_size: int, rocket_capacity: int,
+              item_id: int, *args: list[str] | float) \
+                -> dict[str, str | int | float | list[str]]:
     """
-    Return a dictionary of attributes with calculated weight.
+    Returns a dictionary of an item's attributes.
 
+    Calculates the item's weight using capacity.
+    Allows for optional arguments that
+    define keywords and or custom weight.
+
+    :param str name: The official name of the item.
+    :param int stack_size: The item's maximum stack size.
+    :param int rocket_capacity: The number of items one silo can hold.
+    :param int item_id: The unique identifier for the item.
+    :param list[str] | float *args: Optional arguments for keywords and
+    custom weight.
     :return: Dictionary of an item's attributes.
-    :rtype: dict[str, str | float ]
+    :rtype: dict[str, str | int | float | list[str]]
     """
     keywords: list[str] = []
     if len(args) > 0 and isinstance(args[0], list):

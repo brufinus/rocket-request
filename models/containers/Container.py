@@ -4,26 +4,39 @@ from abc import ABC, abstractmethod
 class Container(ABC):
     """
     Abstract base class for containers.
+    
+    A container is a storage unit that can hold items.
 
-    Attributes:
-        container (str): The name of the container.
-        capacity (int): The maximum amount the container can have.
-        inventory (list): A list of items in the container.
-        load (float): The current load of the container.
+    Public methods: add_item, can_add_item, increase_load, remove_item,
+    decrease_load
+    
+    Instance variables: container, capacity, inventory, load
     """
 
     def __init__(self, container: str, capacity: int) -> None:
+        """
+        Initializes a container with a name and capacity.
+        
+        :param str container: The name of the container.
+        :param int capacity: The maximum amount the container can have.
+        :return: None
+        """
         self.container = container
         self.capacity = capacity
-        self.inventory: list[dict[str, str | float]] = []
+        self.inventory: \
+            list[dict[str, str | int | float | list[str]]] = []
         self.load: float = 0
 
-    def add_item(self, item: dict[str, str | float]) -> bool:
+    def add_item(self,
+                 item: dict[str, str | int | float | list[str]]) \
+                    -> bool:
         """
         Adds an item to the container.
 
+        Appends the item to the inventory and increases load.
+
         :param dict item: The item to add.
-        :return: True if the item was added, False otherwise.
+        :return: Whether the item was added to the container.
         :rtype: bool
         """
         if self.can_add_item(item):
@@ -33,43 +46,28 @@ class Container(ABC):
         return False
 
     @abstractmethod
-    def can_add_item(self, item: dict[str, str | float]) -> bool:
-        """
-        Checks if the container has enough space to add an item.
-
-        :param dict item: The item to insert.
-        :return: Whether the container has enough space to add an item.
-        :rtype: bool
-        """
+    def can_add_item(self, item) -> bool:
+        """Return whether the container has space to add an item."""
         pass
 
     @abstractmethod
-    def increase_load(self, item: dict[str, str | float]) -> None:
-        """
-        Increases the current load of the
-        container using the given item.
-
-        :param dict item: The item to increase load with.
-        :return: None
-        """
+    def increase_load(self, item) -> None:
+        """Increases the load of the container with the item weight."""
         pass
 
-    def remove_item(self, item: dict[str, str | float]) -> None:
+    def remove_item(self, item) -> None:
         """
-        Removes an item from the container.
+        Removes an item from the inventory and decreases load.
 
-        :param dict item: The item to remove.
+        :param item: The item to remove.
         :return: None
         """
         self.inventory.remove(item)
         self.decrease_load(item)
 
     @abstractmethod
-    def decrease_load(self, item: dict[str, str | float]) -> None:
-        """
-        Decreases the current load of the container.
-
-        :param dict item: The item to decrease load with.
-        :return: None
-        """
+    def decrease_load(self,
+                      item: dict[str, str | int | float | list[str]]) \
+                        -> None:
+        """Subtracts the weight of the item from the container load."""
         pass
