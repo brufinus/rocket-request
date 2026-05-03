@@ -1,3 +1,4 @@
+from decimal import ROUND_HALF_UP, Decimal
 import math
 
 from data.items import ITEMS
@@ -34,10 +35,19 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
             silo_index += 1
 
 
-def print_load_visualization(load, capacity) -> None:
-    # [██░░░░░░░░]
-    # load / capacity * 10
+def get_load_visualization(load, capacity) -> str:
+    """
+    Returns a visualization of the silo load in progress bar format.
 
+    :param load: The current load of the silo.
+    :param capacity: The maximum capacity of the silo.
+    :return: Silo load visualization.
+    :rtype: str
+    """
+    fill_cnt = int(Decimal(load / capacity * 10)
+                   .quantize(Decimal(1), rounding=ROUND_HALF_UP))
+    empty_cnt = 10 - fill_cnt
+    return(f"[{"█" * fill_cnt}{"░" * empty_cnt}]")
 
 
 def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
