@@ -1,8 +1,8 @@
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 from services.distribution import distribute_items
-from services.initialize_setup import calculate_launch_cycles, group_items, \
-    print_consolidated, print_distribution
+from services.initialize_setup import calculate_launch_cycles, get_formatted_load, group_items, \
+    print_consolidated, print_distribution, get_load_visualization
 
 
 def test_calculate_launch_cycles():
@@ -68,3 +68,32 @@ def test_print():
     silos = distribute_items(items)
     print_distribution(silos, 4)
     print_consolidated(silos, 4)
+
+def test_full_load_visualization():
+    assert get_load_visualization(1000, 1000) == "[██████████]"
+
+def test_half_load_visualization():
+    assert get_load_visualization(500, 1000) == "[█████░░░░░]"
+
+def test_partial_load_visualization():
+    assert get_load_visualization(300, 1000) == "[███░░░░░░░]"
+
+def test_quarter_load_visualization():
+    assert get_load_visualization(250, 1000) == "[███░░░░░░░]"
+
+def test_mid_rounding_load_visualization():
+    assert get_load_visualization(501, 1000) == "[█████░░░░░]"
+
+def test_big_rounding_load_visualization():
+    assert get_load_visualization(774, 1000) == "[████████░░]"
+
+def test_empty_load_visualization():
+    assert get_load_visualization(0, 1000) == "[░░░░░░░░░░]"
+
+def test_get_formatted_load_whole():
+    assert get_formatted_load(100.0) == "100"
+    assert get_formatted_load(900.0) == "900"
+
+def test_get_formatted_load_decimal():
+    assert get_formatted_load(8.251) == "8.3"
+    assert get_formatted_load(100.8574) == "100.9"
