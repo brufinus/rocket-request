@@ -130,5 +130,4 @@ def transform_string(raw_string: str) -> str:
     :return: The transformed string.
     :rtype: str
     """
-    return raw_string.lower()\
-        .replace(" ", "").replace("-", "").replace("_", "")
+    return re.sub(r"[ \-_]", "", raw_string).lower()
