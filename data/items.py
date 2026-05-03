@@ -23,7 +23,7 @@ def make_item(name: str, stack_size: int, rocket_capacity: int,
     :rtype: Item
     """
     keywords: list[str] = []
-    if len(args) > 0 and isinstance(args[0], list):
+    if args and isinstance(args[0], list):
         if len(args[0]) > 0:
             keywords = args[0]
     if len(args) > 1 and isinstance(args[1], float):

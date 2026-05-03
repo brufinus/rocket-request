@@ -42,7 +42,7 @@ def request_items() -> list[tuple[str, int]]:
         user_input = input("Item: ")
         user_item = transform_string(user_input)
         if user_item.lower() == "done":
-            if len(items) == 0:
+            if not items:
                 print("At least one item must be added to the silo.")
             else:
                 break
@@ -50,12 +50,12 @@ def request_items() -> list[tuple[str, int]]:
             item = search_item(user_item, ITEMS)
             if item == "":
                 similar_item = get_similar_item(user_item, ITEMS)
-                if len(similar_item) > 0:
+                if similar_item:
                     if input(f"Did you mean '{
                         ITEMS[similar_item][ITEM_NAME]
                         }'? [y/n]: ").lower() == "y":
                         item = similar_item
-            if len(item) > 0 and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
+            if item and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
                 while True:
                     try:
                         count = int(input("Count: "))
