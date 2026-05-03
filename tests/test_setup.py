@@ -1,7 +1,7 @@
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 from services.distribution import distribute_items
-from services.initialize_setup import calculate_launch_cycles, group_items, \
+from services.initialize_setup import calculate_launch_cycles, get_formatted_load, group_items, \
     print_consolidated, print_distribution, get_load_visualization
 
 
@@ -89,3 +89,11 @@ def test_big_rounding_load_visualization():
 
 def test_empty_load_visualization():
     assert get_load_visualization(0, 1000) == "[░░░░░░░░░░]"
+
+def test_get_formatted_load_whole():
+    assert get_formatted_load(100.0) == "100"
+    assert get_formatted_load(900.0) == "900"
+
+def test_get_formatted_load_decimal():
+    assert get_formatted_load(8.251) == "8.3"
+    assert get_formatted_load(100.8574) == "100.9"
