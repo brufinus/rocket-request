@@ -18,9 +18,12 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
 
     silo_index = 0
     for i in range(cycles):
-        print(f"╔════════════════════════╗")
+        # Calculate total extra digits.
+        extra_separators = int(math.log10(i + 1) + math.log10(cycles) + 1)
+        separator = "═"
+        print(f"╔═══════════════════════{separator * extra_separators}╗")
         print(f"║      Cycle {i + 1} of {cycles}      ║")
-        print("╚════════════════════════╝")
+        print(f"╚═══════════════════════{separator * extra_separators}╝")
         for j in range(num_silos):
             if silo_index >= len(silos):
                 break
