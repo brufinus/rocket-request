@@ -14,9 +14,10 @@ class RocketSilo(Container):
         capacity (int): The max weight that can be added to the silo.
         inventory (list): A list of items in the rocket silo.
     """
+    CAPACITY: int = 1000
 
     def __init__(self) -> None:
-        super().__init__(container="rocket_silo", capacity=1000)
+        super().__init__(container="rocket_silo", capacity=self.CAPACITY)
 
     def can_add_item(self, item: dict[str, str | float]) -> bool:
         """

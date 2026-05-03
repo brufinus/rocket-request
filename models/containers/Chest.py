@@ -13,9 +13,10 @@ class Chest(Container):
         capacity (int): The maximum number of slots available.
         inventory (list): A list of items in the chest.
     """
+    CAPACITY: int = 48
 
     def __init__(self) -> None:
-        super().__init__(container="chest", capacity=48)
+        super().__init__(container="chest", capacity=self.CAPACITY)
 
     def can_add_item(self, item: dict[str, str | int]) -> bool:
         """

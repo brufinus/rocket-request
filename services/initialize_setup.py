@@ -29,7 +29,7 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
                 break
             print(f"\n\tSilo {j + 1} {get_load_visualization(
                 silos[silo_index].load,
-                RocketSilo().capacity)} ({get_formatted_load(
+                RocketSilo.CAPACITY)} ({get_formatted_load(
                     silos[silo_index].load)}"
                   f"/{silos[silo_index].capacity} kg):")
             print_item_header()

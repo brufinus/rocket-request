@@ -1,3 +1,6 @@
+from models.containers.RocketSilo import RocketSilo
+
+
 def make_item(name: str, stack_size: int, rocket_capacity: int, item_id: int, *args: list[str] |float) \
                 -> dict[str, str | float | list[str]]:
     """
@@ -13,7 +16,7 @@ def make_item(name: str, stack_size: int, rocket_capacity: int, item_id: int, *a
     if len(args) > 1 and isinstance(args[1], float):
         weight = args[1]
     else:
-        weight = 1000 / rocket_capacity
+        weight = RocketSilo.CAPACITY / rocket_capacity
     return {
         "name": name,
         "stack_size": stack_size,
