@@ -1,3 +1,5 @@
+"""Main module for the rocket silo program."""
+
 from services import input_service
 from services.distribution import distribute_items
 from services.initialize_setup import print_distribution, \

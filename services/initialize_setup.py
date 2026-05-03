@@ -1,10 +1,25 @@
+"""
+Initializes and prints the setup for item distribution across silos.
+
+Functions:
+    print_distribution: Prints the distribution of items across silos.
+    get_formatted_load: Formats the load to a string.
+    get_load_visualization: Returns a visualization of the silo load.
+    print_consolidated: Prints items consolidated across silos.
+    print_grouped_items: Prints formatted name and count for each item.
+    print_item_header: Prints the Item, Count header.
+    get_col_width: Returns a column width for output padding.
+    group_items: Consolidates and groups items together.
+    calculate_launch_cycles: Calculates the number of launch cycles.
+"""
+
 from decimal import ROUND_HALF_UP, Decimal
 import math
 
 from data.constants import ITEM_ID, ITEM_NAME, ITEM_WEIGHT
 from data.item import Item
 from data.items import ITEMS
-from models.containers.RocketSilo import RocketSilo
+from models.containers.rocketsilo import RocketSilo
 
 
 def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
@@ -69,7 +84,7 @@ def get_load_visualization(load: float, capacity: int) -> str:
     fill_cnt = int(Decimal(load / capacity * 10)
                    .quantize(Decimal(1), rounding=ROUND_HALF_UP))
     empty_cnt = 10 - fill_cnt
-    return(f"[{"█" * fill_cnt}{"░" * empty_cnt}]")
+    return f"[{"█" * fill_cnt}{"░" * empty_cnt}]"
 
 
 def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
@@ -124,20 +139,20 @@ def get_col_width() -> int:
 
 def group_items(items: list[Item]) -> dict[str, int]:
     """
-    Consolidate and group together items by name, sorted by item id.
+    Consolidates and groups together items by name, sorted by item id.
 
     :param list[Item] items: List of items.
     :return: Consolidated, sorted items and their counts.
     :rtype: dict[str, int]
     """
     grouped_items: dict[str, int] = {}
-    ids = []
+    uids = []
     for item in items:
-        ids.append(item[ITEM_ID])
-    ids.sort()
-    for id in ids:
+        uids.append(item[ITEM_ID])
+    uids.sort()
+    for uid in uids:
         # Get item name using id.
-        name = str([x[ITEM_NAME] for x in items if id == x[ITEM_ID]][0])
+        name = str([x[ITEM_NAME] for x in items if uid == x[ITEM_ID]][0])
         # Set item or increment its count.
         grouped_items.update({name: grouped_items.get(name, 0) + 1})
     return grouped_items
@@ -145,7 +160,7 @@ def group_items(items: list[Item]) -> dict[str, int]:
 
 def calculate_launch_cycles(silos: list[RocketSilo], num_silos: int) -> int:
     """
-    Calculates the number launch cycles required.
+    Calculates the number of launch cycles required.
 
     :param list[RocketSilo] silos: List of silos.
     :param int num_silos: Number of available silos.

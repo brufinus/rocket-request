@@ -1,6 +1,13 @@
+"""
+Defines the RocketSilo, which represents a container for items.
+
+Classes:
+    RocketSilo: A container for holding items to be launched.
+"""
+
 from data.constants import ITEM_WEIGHT
 from data.item import Item
-from models.containers.Container import Container
+from models.containers.container import Container
 
 
 class RocketSilo(Container):

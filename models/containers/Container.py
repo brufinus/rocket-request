@@ -1,3 +1,10 @@
+"""
+Defines the Container abstract base class.
+
+Classes:
+    Container: An abstract base class that defines container structure.
+"""
+
 from abc import ABC, abstractmethod
 
 from data.item import Item
@@ -47,12 +54,10 @@ class Container(ABC):
     @abstractmethod
     def can_add_item(self, item) -> bool:
         """Return whether the container has space to add an item."""
-        pass
 
     @abstractmethod
     def increase_load(self, item) -> None:
         """Increases the load of the container with the item weight."""
-        pass
 
     def remove_item(self, item) -> None:
         """
@@ -67,4 +72,3 @@ class Container(ABC):
     @abstractmethod
     def decrease_load(self, item: Item) -> None:
         """Subtracts the weight of the item from the container load."""
-        pass

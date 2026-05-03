@@ -1,3 +1,10 @@
+"""
+Defines the Item TypedDict, which represents the structure of an item.
+
+Classes:
+    Item: A TypedDict that defines the attributes of an item.
+"""
+
 from typing import NotRequired, Required, TypedDict
 
 

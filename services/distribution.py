@@ -1,12 +1,24 @@
+"""
+Distribution service for the rocket silo program.
+
+This module contains the logic for distributing items into silos.
+
+Functions:
+    distribute_items: Distributes items into silos.
+    first_fit_silo: Distributes items into silos using first-fit.
+    find_open_silo: Tries to add an item into the first open silo.
+    expand_and_sort_items: Expands items into a sorted list of items.
+"""
+
 from data.constants import ITEM_WEIGHT
 from data.item import Item
 from data.items import ITEMS
-from models.containers.RocketSilo import RocketSilo
+from models.containers.rocketsilo import RocketSilo
 
 
 def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
     """
-    Distribute items into silos.
+    Distributes items into silos.
 
     :param list[tuple[str, int]] items:
     List of item, count pairs to distribute amongst silos.
@@ -21,8 +33,9 @@ def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
 
 def first_fit_silo(silos: list[RocketSilo], items: list[Item]) -> None:
     """
-    Distribute items into silos using a first-fit-decreasing algorithm.
+    Distributes items into silos using a first-fit algorithm.
 
+    First-fit-decreasing:
     For each item, it finds the first silo into which it can fit.
     If it did not fit into any silo, a new one
     is created and the item is added to it.
@@ -55,7 +68,7 @@ def find_open_silo(silos: list[RocketSilo], item: Item) -> bool:
 
 def expand_and_sort_items(items: list[tuple[str, int]]) -> list[Item]:
     """
-    Expand items into a sorted list of items.
+    Expands items into a sorted list of items.
 
     Expansion involves adding each item to a list as many times as its
     count, which are both provided as a tuple pair in the input list.

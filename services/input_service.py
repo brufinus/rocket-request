@@ -1,3 +1,14 @@
+"""
+Functions for requesting and validating user input.
+
+Functions:
+    request_silo_count: Request the number of available silos.
+    request_items: Request a list of items and their counts.
+    search_item: Search for an item in the item data.
+    get_similar_item: Get the most similar item key in the item data.
+    transform_string: Transform a string to the expected key format.
+"""
+
 from difflib import SequenceMatcher
 import re
 
@@ -19,8 +30,7 @@ def request_silo_count() -> int:
             num_silos = int(input("Available rocket silos: "))
             if num_silos > 0:
                 return num_silos
-            else:
-                print(INPUT_GREATER_ZERO)
+            print(INPUT_GREATER_ZERO)
         except ValueError:
             print(INPUT_INVALID_NUM)
 
@@ -62,8 +72,7 @@ def request_items() -> list[tuple[str, int]]:
                         if count > 0:
                             items.append((item, count))
                             break
-                        else:
-                            print(INPUT_GREATER_ZERO)
+                        print(INPUT_GREATER_ZERO)
                     except ValueError:
                         print(INPUT_INVALID_NUM)
             else:
@@ -73,7 +82,7 @@ def request_items() -> list[tuple[str, int]]:
     return items
 
 
-def search_item(search_item: str, item_data: dict[str, Item]) -> str:
+def search_item(item: str, item_data: dict[str, Item]) -> str:
     """
     Searches for the item in the given item data.
 
@@ -85,10 +94,10 @@ def search_item(search_item: str, item_data: dict[str, Item]) -> str:
     :return: The item key or an empty string.
     :rtype: str
     """
-    if search_item in item_data:
-        return search_item
+    if item in item_data:
+        return item
     for k in item_data:
-        if search_item in item_data[k].get(ITEM_KEYWORDS, []):
+        if item in item_data[k].get(ITEM_KEYWORDS, []):
             return k
     return ""
 
@@ -113,7 +122,7 @@ def get_similar_item(item: str, item_data: dict[str, Item]) -> str:
         similarity_ratio = SequenceMatcher(None, item, k).ratio()
         if similarity_ratio > confidence:
             return k
-        elif similarity_ratio > threshold and similarity_ratio > best_ratio:
+        if similarity_ratio > threshold and similarity_ratio > best_ratio:
             best_ratio = similarity_ratio
             best_key = k
     return best_key

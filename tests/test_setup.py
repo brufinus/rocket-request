@@ -1,5 +1,5 @@
 from data.items import ITEMS
-from models.containers.RocketSilo import RocketSilo
+from models.containers.rocketsilo import RocketSilo
 from services.distribution import distribute_items
 from services.initialize_setup import calculate_launch_cycles, get_formatted_load, group_items, \
     print_consolidated, print_distribution, get_load_visualization
