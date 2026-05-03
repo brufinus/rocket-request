@@ -68,7 +68,8 @@ def get_load_visualization(load: float, capacity: int) -> str:
 
 def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
     """
-    Prints the distribution of items consolidated across available silos.
+    Prints the distribution of items
+    consolidated across available silos.
 
     :param silos: List of silos with items.
     :param num_silos: Number of available silos.

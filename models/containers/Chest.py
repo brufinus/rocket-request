@@ -3,8 +3,8 @@ from models.containers.Container import Container
 
 class Chest(Container):
     """
-    A standard storage container for holding items. Has a capacity of 48
-    slots which can hold full stacks of items.
+    A standard storage container for holding items.
+    Has a capacity of 48 slots which can hold full stacks of items.
 
     Inherits from Container.
 
@@ -21,7 +21,7 @@ class Chest(Container):
         """
         Checks if the chest has enough slots to add an item.
         Overrides Container.can_add_item.
-        TODO: Implement stack size checking for items that can be stacked.
+        TODO: Implement stack size checking for stackables.
 
         :param dict item: The item to insert.
         :return: Whether the chest has enough slots to add an item.
@@ -35,7 +35,7 @@ class Chest(Container):
         """
         Increases the current load of the chest by 1 slot.
         Overrides Container.increase_load.
-        TODO: Implement stack size checking for items that can be stacked.
+        TODO: Implement stack size checking for stackables.
 
         :param dict item: The item to increase load with.
         :return: None
@@ -46,7 +46,7 @@ class Chest(Container):
         """
         Decreases the current load of the chest by 1 slot.
         Overrides Container.decrease_load.
-        TODO: Implement stack size checking for items that can be stacked.
+        TODO: Implement stack size checking for stackables.
 
         :param dict item: The item to decrease load with.
         :return: None

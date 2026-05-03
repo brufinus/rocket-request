@@ -46,7 +46,8 @@ class Container(ABC):
     @abstractmethod
     def increase_load(self, item: dict[str, str | float]) -> None:
         """
-        Increases the current load of the container using the given item.
+        Increases the current load of the
+        container using the given item.
 
         :param dict item: The item to increase load with.
         :return: None

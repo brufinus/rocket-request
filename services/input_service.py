@@ -24,10 +24,11 @@ def request_silo_count() -> int:
 
 def request_items() -> list[tuple[str, int]]:
     """
-    Request from the user a list of items and item count to be inserted into
-    the rocket silo(s). The item and count are represented in a tuple.
+    Request from the user a list of items and their
+    count to be inserted into the rocket silo(s).
+    The item and count are represented in a tuple.
 
-    :return: The items and count to be inserted into the rocket silo(s).
+    :return: The items to be inserted into the rocket silo(s).
     :rtype: list[tuple[str, int]]
     """
     print("Add items to the silo. Enter 'done' once finished.")
