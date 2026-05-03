@@ -1,3 +1,4 @@
+from data.item import Item
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 
@@ -17,9 +18,7 @@ def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
     return silos
 
 
-def first_fit_silo(silos: list[RocketSilo],
-                   items: list[dict[str, str | int | float | list[str]]]) \
-                    -> None:
+def first_fit_silo(silos: list[RocketSilo], items: list[Item]) -> None:
     """
     Distribute items into silos using a first-fit-decreasing algorithm.
 
@@ -28,8 +27,7 @@ def first_fit_silo(silos: list[RocketSilo],
     is created and the item is added to it.
 
     :param list[RocketSilo] silos: List of silos to search through.
-    :param list[dict[str, str | int | float | list[str]]] items:
-    List of items to distribute.
+    :param list[Item] items: List of items to distribute.
     :return: None
     """
     for item in items:
@@ -39,13 +37,12 @@ def first_fit_silo(silos: list[RocketSilo],
             silos.append(new_silo)
 
 
-def find_open_silo(silos: list[RocketSilo],
-                   item: dict[str, str | int | float | list[str]]) -> bool:
+def find_open_silo(silos: list[RocketSilo], item: Item) -> bool:
     """
     Tries to add the item into the first silo with enough space.
 
     :param list[RocketSilo] silos: List of silos to search through.
-    :param dict[str, str | int | float | list[str]] item: Item to add.
+    :param Item item: The item to add.
     :return: Whether the item was added to a silo.
     :rtype: bool
     """
@@ -55,8 +52,7 @@ def find_open_silo(silos: list[RocketSilo],
     return False
 
 
-def expand_and_sort_items(items: list[tuple[str, int]]) \
-    -> list[dict[str, str | int | float | list[str]]]:
+def expand_and_sort_items(items: list[tuple[str, int]]) -> list[Item]:
     """
     Expand items into a sorted list of items.
 
@@ -67,9 +63,9 @@ def expand_and_sort_items(items: list[tuple[str, int]]) \
     :param list[tuple[str, int]] items:
     List of item, count pairs to expand.
     :return: Expanded list of items.
-    :rtype: list[dict[str, str | int | float | list[str]]]
+    :rtype: list[Item]
     """
-    expanded_items: list[dict[str, str | int | float | list[str]]] = []
+    expanded_items: list[Item] = []
     for item in items:
         for _ in range(item[1]):
             expanded_items.append(ITEMS[item[0]])

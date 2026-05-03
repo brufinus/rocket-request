@@ -2,6 +2,7 @@ from difflib import SequenceMatcher
 import re
 
 from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
+from data.item import Item
 from data.items import ITEMS
 
 
@@ -70,9 +71,7 @@ def request_items() -> list[tuple[str, int]]:
     return items
 
 
-def search_item(search_item: str,
-                  item_data: dict[str, dict[str, str | float | list[str]]]) \
-                    -> str:
+def search_item(search_item: str, item_data: dict[str, Item]) -> str:
     """
     Searches for the item in the given item data.
 
@@ -80,8 +79,7 @@ def search_item(search_item: str,
     for the item in the keywords for each key in the dictionary.
 
     :param str search_item: The item to be searched for.
-    :param dict[str, str | int | float | list[str]] item_data:
-    The item data to check against.
+    :param dict[str, Item] item_data: The item data to check against.
     :return: The item key or an empty string.
     :rtype: str
     """
@@ -92,16 +90,14 @@ def search_item(search_item: str,
             return k
     return ""
 
-def get_similar_item(item: str, item_data: 
-                      dict[str, dict[str, str | float | list[str]]]) -> str:
+def get_similar_item(item: str, item_data: dict[str, Item]) -> str:
     """
     Returns a key in the item data most similar to the given string.
 
     Returns an empty string if there is no match.
 
     :param str item: The item to compare similarity against.
-    :param dict[str, dict[str, str | float | list[str]]] item_data:
-    The item data to check against.
+    :param dict[str, Item] item_data: The item data to check against.
     :return: The most similar item key or an empty string.
     :rtype: str
     :var float threshold: The minimum ratio to be considered a match.

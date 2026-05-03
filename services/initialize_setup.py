@@ -1,6 +1,7 @@
 from decimal import ROUND_HALF_UP, Decimal
 import math
 
+from data.item import Item
 from data.items import ITEMS
 from models.containers.RocketSilo import RocketSilo
 
@@ -83,7 +84,7 @@ def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
     while silo_index < num_silos:
         i = silo_index
         # Running list of silo items
-        superlist: list[dict[str, str | int | float | list[str]]] = []
+        superlist: list[Item] = []
         while i < len(silos):
             superlist += silos[i].inventory
             i += num_silos
@@ -120,13 +121,11 @@ def get_col_width() -> int:
     return len(max(ITEMS, key=len)) + 2
 
 
-def group_items(items: list[dict[str, str | int | float | list[str]]]) \
-    -> dict[str, int]:
+def group_items(items: list[Item]) -> dict[str, int]:
     """
     Consolidate and group together items by name, sorted by item id.
 
-    :param list[dict[str, str | int | float | list[str]]] items:
-    List of items.
+    :param list[Item] items: List of items.
     :return: Consolidated, sorted items and their counts.
     :rtype: dict[str, int]
     """

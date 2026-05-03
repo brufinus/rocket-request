@@ -1,3 +1,4 @@
+from data.item import Item
 from models.containers.Container import Container
 
 
@@ -27,9 +28,7 @@ class RocketSilo(Container):
         super().__init__(container="rocket_silo",
                          capacity=self.CAPACITY)
 
-    def can_add_item(self,
-                     item: dict[str, str | int | float | list[str]]) \
-                        -> bool:
+    def can_add_item(self, item: Item) -> bool:
         """
         Check whether an item can be added to the rocket silo.
 
@@ -38,8 +37,7 @@ class RocketSilo(Container):
 
         Overrides Container.can_add_item
 
-        :param dict[str, str | int | float | list[str]] item:
-        The item to check.
+        :param Item item: The item to check.
         :return: Whether the silo has space to add an item.
         :rtype: bool
         """
@@ -47,29 +45,25 @@ class RocketSilo(Container):
             return True
         return False
 
-    def increase_load(self,
-                      item: dict[str, str | int | float | list[str]]) \
-                        -> None:
+    def increase_load(self, item: Item) -> None:
         """
         Increases the load of the rocket silo by the item's weight.
 
         Overrides Container.increase_load
 
-        :param dict[str, str | int | float | list[str]] item:
+        :param Item item:
         The item to increase load weight by.
         :return: None
         """
         self.load += float(item["weight"])
 
-    def decrease_load(self,
-                      item: dict[str, str | int | float | list[str]]) \
-                        -> None:
+    def decrease_load(self, item: Item) -> None:
         """
         Decreases the load of the rocket silo by the item's weight.
 
         Overrides Container.decrease_load
 
-        :param dict[str, str | int | float | list[str]] item:
+        :param Item item:
         The item to decrease load weight by.
         :return: None
         """

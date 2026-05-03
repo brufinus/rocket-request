@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from data.item import Item
+
 
 class Container(ABC):
     """
@@ -23,19 +25,16 @@ class Container(ABC):
         """
         self.container = container
         self.capacity = capacity
-        self.inventory: \
-            list[dict[str, str | int | float | list[str]]] = []
+        self.inventory: list[Item] = []
         self.load: float = 0
 
-    def add_item(self,
-                 item: dict[str, str | int | float | list[str]]) \
-                    -> bool:
+    def add_item(self, item: Item) -> bool:
         """
         Adds an item to the container.
 
         Appends the item to the inventory and increases load.
 
-        :param dict item: The item to add.
+        :param Item item: The item to add.
         :return: Whether the item was added to the container.
         :rtype: bool
         """
@@ -66,8 +65,6 @@ class Container(ABC):
         self.decrease_load(item)
 
     @abstractmethod
-    def decrease_load(self,
-                      item: dict[str, str | int | float | list[str]]) \
-                        -> None:
+    def decrease_load(self, item: Item) -> None:
         """Subtracts the weight of the item from the container load."""
         pass
