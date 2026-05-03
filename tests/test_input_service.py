@@ -1,6 +1,6 @@
 from data.items import ITEMS
 from services.input_service import get_similar_item, transform_string, \
-    validate_item
+    search_item
 
 dictionary = {
     "item1": {
@@ -13,19 +13,19 @@ dictionary = {
     }
 }
 
-def test_validate_item_by_key():
-    assert len(validate_item("item1", dictionary)) > 0
+def test_search_item_by_key():
+    assert len(search_item("item1", dictionary)) > 0
 
-def test_validate_item_by_keyword():
-    assert len(validate_item("alias", dictionary)) > 0
-    assert len(validate_item("foo", dictionary)) > 0
-    assert len(validate_item("bar", dictionary)) > 0
+def test_search_item_by_keyword():
+    assert len(search_item("alias", dictionary)) > 0
+    assert len(search_item("foo", dictionary)) > 0
+    assert len(search_item("bar", dictionary)) > 0
 
 def test_validate_correct_item_by_keyword():
-    assert validate_item("belt", ITEMS) == "transportbelt"
+    assert search_item("belt", ITEMS) == "transportbelt"
 
 def test_invalid_item():
-    assert len(validate_item("pootis", dictionary)) == 0
+    assert len(search_item("pootis", dictionary)) == 0
 
 def test_transform_string():
     assert transform_string("ThIS   is-A-   - weird ST rIN-g  ") \
