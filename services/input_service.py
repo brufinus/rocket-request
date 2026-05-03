@@ -86,7 +86,7 @@ def search_item(search_item: str, item_data: dict[str, Item]) -> str:
     if search_item in item_data:
         return search_item
     for k in item_data:
-        if search_item in item_data[k]["keywords"]:
+        if search_item in item_data[k].get("keywords", []):
             return k
     return ""
 
