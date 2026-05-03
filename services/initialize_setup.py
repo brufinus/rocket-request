@@ -28,14 +28,16 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
             if silo_index >= len(silos):
                 break
             rounded_load = "{:.1f}".format(silos[silo_index].load)
-            print(f"\n\tSilo {j + 1} ({rounded_load}"
+            print(f"\n\tSilo {j + 1} {get_load_visualization(
+                silos[silo_index].load,
+                RocketSilo().capacity)} ({rounded_load}"
                   f"/{silos[silo_index].capacity} kg):")
             print_item_header()
             print_grouped_items(group_items(silos[silo_index].inventory))
             silo_index += 1
 
 
-def get_load_visualization(load, capacity) -> str:
+def get_load_visualization(load: float, capacity: int) -> str:
     """
     Returns a visualization of the silo load in progress bar format.
 
