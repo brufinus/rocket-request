@@ -18,7 +18,9 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
 
     silo_index = 0
     for i in range(cycles):
-        print(f"Cycle {i + 1}:")
+        print(f"╔════════════════════════╗")
+        print(f"║      Cycle {i + 1} of {cycles}      ║")
+        print("╚════════════════════════╝")
         for j in range(num_silos):
             if silo_index >= len(silos):
                 break
