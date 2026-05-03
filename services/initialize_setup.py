@@ -34,6 +34,12 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
             silo_index += 1
 
 
+def print_load_visualization(load, capacity) -> None:
+    # [██░░░░░░░░]
+    # load / capacity * 10
+
+
+
 def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
     """
     Prints the distribution of items consolidated across available silos.
