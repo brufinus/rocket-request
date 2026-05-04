@@ -67,7 +67,7 @@ def get_formatted_load(load: float) -> str:
     """
     if load % 1 == 0:
         return f"{int(load)}"
-    return "{:.1f}".format(load)
+    return f"{load:.1f}"
 
 
 def get_load_visualization(load: float, capacity: int) -> str:
