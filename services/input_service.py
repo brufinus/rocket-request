@@ -11,10 +11,10 @@ Functions:
 
 import re
 
-from data.constants import ITEM_NAME, ITEM_ROCKET_CAPACITY
+from data.constants import ITEM_NAME
 from data.items import ITEMS
 from services.search import search_coordinator
-from services.validation import parse_count
+from services.validation import is_insertable, parse_count
 
 
 def request_silo_count() -> int:
@@ -61,7 +61,7 @@ def request_items() -> list[tuple[str, int]]:
             else:
                 item = search_res[0]
 
-        if item and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
+        if is_insertable(item, ITEMS):
             while True:
                 try:
                     count = parse_count(input("Count: "))
