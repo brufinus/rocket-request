@@ -4,19 +4,15 @@ Functions for requesting and validating user input.
 Functions:
     request_silo_count: Request the number of available silos.
     request_items: Request a list of items and their counts.
-    search_item: Search for an item in the item data.
     is_done_adding_items: Checks whether the user is done adding items.
-    get_similar_item: Get the most similar item key in the item data.
     transform_string: Transform a string to the expected key format.
 """
 
-from difflib import SequenceMatcher
 import re
 
-from data.constants import ITEM_KEYWORDS, ITEM_NAME, \
-    ITEM_ROCKET_CAPACITY
-from data.item import Item
+from data.constants import ITEM_NAME, ITEM_ROCKET_CAPACITY
 from data.items import ITEMS
+from services.search import search_coordinator
 from services.validation import parse_count
 
 
@@ -52,14 +48,18 @@ def request_items() -> list[tuple[str, int]]:
         user_item = transform_string(user_input)
         if is_done_adding_items(user_item, items):
             break
-        item = search_item(user_item, ITEMS)
-        if item == "":
-            similar_item = get_similar_item(user_item, ITEMS)
-            if similar_item:
+
+        search_res = search_coordinator(user_item, ITEMS)
+        item = ""
+        if search_res[0]:
+            if search_res[1]:
                 if input(f"Did you mean '{
-                    ITEMS[similar_item][ITEM_NAME]
+                    ITEMS[search_res[0]][ITEM_NAME]
                     }'? [y/n]: ").lower() == "y":
-                    item = similar_item
+                    item = search_res[0]
+            else:
+                item = search_res[0]
+
         if item and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
             while True:
                 try:
@@ -69,14 +69,12 @@ def request_items() -> list[tuple[str, int]]:
                 except ValueError as e:
                     print(e)
         else:
-            print("Enter a valid item that can be inserted into "
-                  "the rocket silo")
+            print("Enter a valid item that can be inserted into the rocket silo")
 
     return items
 
 
-def is_done_adding_items(user_input: str,
-                         items: list[tuple[str, int]]) -> bool:
+def is_done_adding_items(user_input: str, items: list[tuple[str, int]]) -> bool:
     """
     Checks whether the user is done adding items.
 
@@ -92,51 +90,6 @@ def is_done_adding_items(user_input: str,
         return True
     return False
 
-
-def search_item(item: str, item_data: dict[str, Item]) -> str:
-    """
-    Searches for the item in the given item data.
-
-    First checks if the item is a key in the dictionary. If not, checks
-    for the item in the keywords for each key in the dictionary.
-
-    :param str search_item: The item to be searched for.
-    :param dict[str, Item] item_data: The item data to check against.
-    :return: The item key or an empty string.
-    :rtype: str
-    """
-    if item in item_data:
-        return item
-    for k in item_data:
-        if item in item_data[k].get(ITEM_KEYWORDS, []):
-            return k
-    return ""
-
-def get_similar_item(item: str, item_data: dict[str, Item]) -> str:
-    """
-    Returns a key in the item data most similar to the given string.
-
-    Returns an empty string if there is no match.
-
-    :param str item: The item to compare similarity against.
-    :param dict[str, Item] item_data: The item data to check against.
-    :return: The most similar item key or an empty string.
-    :rtype: str
-    :var float threshold: The minimum ratio to be considered a match.
-    """
-    threshold: float = 0.6
-    best_ratio = 0.0
-    best_key = ""
-    # If ratio is higher than confidence, immediately return the key.
-    confidence: float = 0.85
-    for k in item_data:
-        similarity_ratio = SequenceMatcher(None, item, k).ratio()
-        if similarity_ratio > confidence:
-            return k
-        if similarity_ratio > threshold and similarity_ratio > best_ratio:
-            best_ratio = similarity_ratio
-            best_key = k
-    return best_key
 
 def transform_string(raw_string: str) -> str:
     """
