@@ -2,7 +2,7 @@
 
 # Error messages
 INPUT_GREATER_ZERO = "Enter a value greater than zero."
-INPUT_INVALID_NUM = "Invalid input. Enter a number greater than zero."
+INPUT_INVALID_NUM = f"Invalid input. {INPUT_GREATER_ZERO}"
 
 # Item attributes
 ITEM_NAME = "name"

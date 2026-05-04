@@ -3,6 +3,7 @@ Functions for requesting and validating user input.
 
 Functions:
     request_silo_count: Request the number of available silos.
+    parse_silo_count: Parses and validates the silo count.
     request_items: Request a list of items and their counts.
     search_item: Search for an item in the item data.
     is_done_adding_items: Checks whether the user is done adding items.
@@ -28,12 +29,27 @@ def request_silo_count() -> int:
     """
     while True:
         try:
-            num_silos = int(input("Available rocket silos: "))
-            if num_silos > 0:
-                return num_silos
-            print(INPUT_GREATER_ZERO)
-        except ValueError:
-            print(INPUT_INVALID_NUM)
+            return parse_silo_count(input("Available rocket silos: "))
+        except ValueError as e:
+            print(e)
+
+
+def parse_silo_count(raw_count: str) -> int:
+    """
+    Parses and validates silo count from a raw string.
+
+    :param str raw_count: The silo count.
+    :return: Parsed, validated silo count or -1 if invalid.
+    :rtype: int
+    :raises ValueError: If the value is not a positive integer.
+    """
+    try:
+        num_silos = int(raw_count)
+    except ValueError as e:
+        raise ValueError(INPUT_INVALID_NUM) from e
+    if num_silos <= 0:
+        raise ValueError(INPUT_GREATER_ZERO)
+    return num_silos
 
 
 def request_items() -> list[tuple[str, int]]:
