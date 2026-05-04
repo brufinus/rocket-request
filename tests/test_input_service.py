@@ -2,7 +2,7 @@ import pytest
 
 from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
 from data.items import ITEMS
-from services.input_service import get_similar_item, is_done_adding_items, parse_silo_count, transform_string, search_item
+from services.input_service import get_similar_item, is_done_adding_items, transform_string, search_item
 
 dictionary = {
     "item1": {

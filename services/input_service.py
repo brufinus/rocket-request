@@ -13,11 +13,11 @@ Functions:
 from difflib import SequenceMatcher
 import re
 
-from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM, \
-    ITEM_KEYWORDS, ITEM_NAME, ITEM_ROCKET_CAPACITY
+from data.constants import ITEM_KEYWORDS, ITEM_NAME, \
+    ITEM_ROCKET_CAPACITY
 from data.item import Item
 from data.items import ITEMS
-from services.validation import parse_silo_count
+from services.validation import parse_count
 
 
 def request_silo_count() -> int:
@@ -29,7 +29,7 @@ def request_silo_count() -> int:
     """
     while True:
         try:
-            return parse_silo_count(input("Available rocket silos: "))
+            return parse_count(input("Available rocket silos: "))
         except ValueError as e:
             print(e)
 
@@ -63,13 +63,11 @@ def request_items() -> list[tuple[str, int]]:
         if item and ITEMS[item][ITEM_ROCKET_CAPACITY] > 0:
             while True:
                 try:
-                    count = int(input("Count: "))
-                    if count > 0:
-                        items.append((item, count))
-                        break
-                    print(INPUT_GREATER_ZERO)
-                except ValueError:
-                    print(INPUT_INVALID_NUM)
+                    count = parse_count(input("Count: "))
+                    items.append((item, count))
+                    break
+                except ValueError as e:
+                    print(e)
         else:
             print("Enter a valid item that can be inserted into "
                   "the rocket silo")

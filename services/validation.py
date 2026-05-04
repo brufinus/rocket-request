@@ -2,26 +2,26 @@
 Services for validating input.
 
 Functions:
-    parse_silo_count: Parses and validates the silo count.
+    parse_count: Parses and validates count.
 """
 
 
 from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
 
 
-def parse_silo_count(raw_count: str) -> int:
+def parse_count(raw_count: str) -> int:
     """
-    Parses and validates silo count from a raw string.
+    Parses and validates count from a raw string.
 
-    :param str raw_count: The silo count.
-    :return: Parsed, validated silo count or -1 if invalid.
+    :param str raw_count: The raw count.
+    :return: The parsed and validated count.
     :rtype: int
     :raises ValueError: If the value is not a positive integer.
     """
     try:
-        num_silos = int(raw_count)
+        count = int(raw_count)
     except ValueError as e:
         raise ValueError(INPUT_INVALID_NUM) from e
-    if num_silos <= 0:
+    if count <= 0:
         raise ValueError(INPUT_GREATER_ZERO)
-    return num_silos
+    return count
