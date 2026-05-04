@@ -5,6 +5,7 @@ Functions:
     request_silo_count: Request the number of available silos.
     request_items: Request a list of items and their counts.
     search_item: Search for an item in the item data.
+    is_done_adding_items: Checks whether the user is done adding items.
     get_similar_item: Get the most similar item key in the item data.
     transform_string: Transform a string to the expected key format.
 """
@@ -81,7 +82,7 @@ def request_items() -> list[tuple[str, int]]:
 def is_done_adding_items(user_input: str,
                          items: list[tuple[str, int]]) -> bool:
     """
-    Check whether the user is done adding items.
+    Checks whether the user is done adding items.
 
     :param str input: The user input to check.
     :param list[tuple[str, int]] items: The list of items added so far.
