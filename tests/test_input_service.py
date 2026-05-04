@@ -1,6 +1,5 @@
 from data.items import ITEMS
-from services.input_service import get_similar_item, transform_string, \
-    validate_item
+from services.input_service import get_similar_item, is_done_adding_items, transform_string, search_item
 
 dictionary = {
     "item1": {
@@ -13,19 +12,19 @@ dictionary = {
     }
 }
 
-def test_validate_item_by_key():
-    assert len(validate_item("item1", dictionary)) > 0
+def test_search_item_by_key():
+    assert len(search_item("item1", dictionary)) > 0
 
-def test_validate_item_by_keyword():
-    assert len(validate_item("alias", dictionary)) > 0
-    assert len(validate_item("foo", dictionary)) > 0
-    assert len(validate_item("bar", dictionary)) > 0
+def test_search_item_by_keyword():
+    assert len(search_item("alias", dictionary)) > 0
+    assert len(search_item("foo", dictionary)) > 0
+    assert len(search_item("bar", dictionary)) > 0
 
 def test_validate_correct_item_by_keyword():
-    assert validate_item("belt", ITEMS) == "transportbelt"
+    assert search_item("belt", ITEMS) == "transportbelt"
 
 def test_invalid_item():
-    assert len(validate_item("pootis", dictionary)) == 0
+    assert len(search_item("pootis", dictionary)) == 0
 
 def test_transform_string():
     assert transform_string("ThIS   is-A-   - weird ST rIN-g  ") \
@@ -53,3 +52,18 @@ def test_get_similar_items_empty_dict():
 def test_get_similar_items_of_same_ratio():
     thisdict = {"bworde": "0.8", "sworde": "0.8"}
     assert get_similar_item("word", thisdict) == "bworde"
+
+def test_is_done_adding_no_items():
+    assert is_done_adding_items("done", []) == False
+
+def test_is_done_adding_with_items():
+    assert is_done_adding_items("done", [("foo", 1)]) == True
+
+def test_is_not_done_adding_no_items():
+    assert is_done_adding_items("foobar", []) == False
+
+def test_is_not_done_adding_with_items():
+    assert is_done_adding_items("foobar", [("foo", 1)]) == False
+
+def test_is_not_done_adding_with_existing_item():
+    assert is_done_adding_items("foobar", [("foobar", 1)]) == False

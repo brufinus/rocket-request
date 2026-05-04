@@ -1,6 +1,6 @@
 from data.items import ITEMS
-from models.containers.Chest import Chest
-from models.containers.RocketSilo import RocketSilo
+from models.containers.chest import Chest
+from models.containers.rocketsilo import RocketSilo
 
 
 class TestContainer:
