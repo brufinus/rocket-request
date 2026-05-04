@@ -4,6 +4,7 @@ Functions for requesting and validating user input.
 Functions:
     request_silo_count: Request the number of available silos.
     request_items: Request a list of items and their counts.
+    confirm_suggested_item: Confirms a suggested item.
     is_done_adding_items: Checks whether the user is done adding items.
     transform_string: Transform a string to the expected key format.
 """
@@ -53,10 +54,10 @@ def request_items() -> list[tuple[str, int]]:
         item = ""
         if search_res[0]:
             if search_res[1]:
-                if input(f"Did you mean '{
-                    ITEMS[search_res[0]][ITEM_NAME]
-                    }'? [y/n]: ").lower() == "y":
-                    item = search_res[0]
+                item = confirm_suggested_item(
+                    input(f"Did you mean '{ITEMS[search_res[0]][ITEM_NAME]}'? [y/n]: "),
+                    search_res[0],
+                )
             else:
                 item = search_res[0]
 
@@ -72,6 +73,20 @@ def request_items() -> list[tuple[str, int]]:
             print("Enter a valid item that can be inserted into the rocket silo")
 
     return items
+
+
+def confirm_suggested_item(input_str: str, item: str) -> str:
+    """
+    Confirms whether to accept the suggested item.
+
+    :param str input_str: The user input.
+    :param str item: The suggested item.
+    :return: The accepted suggestion or an empty string.
+    :rtype: str
+    """
+    if transform_string(input_str) == "y":
+        return item
+    return ""
 
 
 def is_done_adding_items(user_input: str, items: list[tuple[str, int]]) -> bool:
