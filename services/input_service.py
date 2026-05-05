@@ -1,5 +1,5 @@
 """
-Functions for requesting and validating user input.
+Service for requesting user input.
 
 Functions:
     request_silo_count: Request the number of available silos.

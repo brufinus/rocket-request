@@ -6,10 +6,9 @@ from services.initialize_setup import (
     calculate_launch_cycles,
     get_formatted_load,
     group_items,
-    print_consolidated,
-    print_distribution,
     get_load_visualization,
 )
+from services.output_service import print_consolidated, print_distribution
 
 
 def test_calculate_launch_cycles():

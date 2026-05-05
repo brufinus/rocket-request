@@ -2,8 +2,7 @@
 
 from services import input_service
 from services.distribution import distribute_items
-from services.initialize_setup import print_distribution, \
-    print_consolidated
+from services.output_service import print_consolidated, print_distribution
 
 
 def main() -> None:
