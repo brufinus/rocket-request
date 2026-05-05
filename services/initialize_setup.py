@@ -4,7 +4,7 @@ Initializes the setup of distributed items.
 Functions:
     build_distribution: Builds silo item distribution data.
     build_consolidated_invs: Builds consolidated inventory data.
-    build_consolidated_loads: Builds consolidated weight data.
+    build_consolidated_load: Builds consolidated weight data.
     get_consolidated_slots: Consolidates slots across cycles.
     group_items: Consolidates and groups items together.
     calculate_launch_cycles: Calculates the number of launch cycles.

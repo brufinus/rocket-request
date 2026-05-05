@@ -1,13 +1,22 @@
+from hypothesis import given, strategies as st
+
 from data.items import ITEMS
 from models.containers.rocketsilo import RocketSilo
 from services.distribution import distribute_items
 from services.helper import get_formatted_float
 from services.initialize_setup import (
+    build_consolidated_invs,
+    build_consolidated_load,
     build_distribution,
     calculate_launch_cycles,
+    get_consolidated_slots,
     group_items,
 )
-from services.output_service import get_load_visualization, print_consolidated, print_distribution
+from services.output_service import (
+    get_load_visualization,
+    print_consolidated,
+    print_distribution,
+)
 
 
 def test_calculate_launch_cycles():
@@ -189,3 +198,28 @@ def test_build_distribution_less_silos_than_available():
 
 def test_build_distribution_empty():
     assert build_distribution([], 3) == []
+
+
+@given(st.integers(1, 1000), st.integers(1, 1000))
+def test_build_consolidated_load(n, s):
+    silos = []
+    for val in n, s:
+        silo = RocketSilo()
+        silo.load = val
+        silos.append(silo)
+    assert build_consolidated_load(silos, 1) == [f"{n + s}"]
+
+
+def test_build_consolidated_invs():
+    silos = []
+    for val in [ITEMS["pipe"]], [ITEMS["pipe"]], [ITEMS["car"]]:
+        silo = RocketSilo()
+        silo.inventory = val
+        silos.append(silo)
+    assert build_consolidated_invs(silos, 1) == [{"Car": 1, "Pipe": 2}]
+
+
+@given(st.integers(1, 10000), st.integers())
+def test_get_consolidated_slots(n, s):
+    silos = [RocketSilo() for _ in range(n)]
+    assert len(get_consolidated_slots(silos, 1)) == 1
