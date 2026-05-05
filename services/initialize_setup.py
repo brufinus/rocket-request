@@ -10,6 +10,9 @@ Functions:
     get_formatted_load: Formats the load to a string.
     get_load_visualization: Returns a visualization of the silo load.
     print_consolidated: Prints items consolidated across silos.
+    build_consolidated_invs: Builds consolidated inventory data.
+    build_consolidated_loads: Builds consolidated weight data.
+    get_consolidated_slots: Consolidates slots across cycles.
     print_grouped_items: Prints formatted name and count for each item.
     print_item_header: Prints the Item, Count header.
     get_col_width: Returns a column width for output padding.
@@ -20,7 +23,7 @@ Functions:
 from decimal import ROUND_HALF_UP, Decimal
 import math
 
-from data.constants import ITEM_ID, ITEM_NAME, ITEM_WEIGHT
+from data.constants import ITEM_ID, ITEM_NAME
 from data.item import Item
 from data.items import ITEMS
 from models.containers.rocketsilo import RocketSilo
@@ -42,8 +45,10 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
     silo_index = 0
     for cycle_index, cycle in enumerate(cycles):
         print_cycle_header(cycle_index + 1, num_cycles)
-        for inv_num, silo_inv in enumerate(cycle):
-            print_silo_header(inv_num + 1, silos[silo_index].load, RocketSilo.CAPACITY)
+        for inv_index, silo_inv in enumerate(cycle):
+            print_silo_header(
+                inv_index + 1, silos[silo_index].load, RocketSilo.CAPACITY
+            )
             print_item_header()
             print_grouped_items(silo_inv)
             silo_index += 1
@@ -158,27 +163,93 @@ def get_load_visualization(load: float, capacity: int) -> str:
 
 def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
     """
-    Prints the distribution of items consolidated across silos.
+    Prints the distribution of silo inventories consolidated across cycles.
 
     :param list[RocketSilo] silos: List of silos.
     :param int num_silos: Number of available silos.
     :return: None
     """
     print("\nConsolidated silo contents:")
-    silo_index = 0
-    while silo_index < num_silos:
-        i = silo_index
-        # Running list of silo items
-        superlist: list[Item] = []
-        while i < len(silos):
-            superlist += silos[i].inventory
-            i += num_silos
-        total_weight = sum(float(x[ITEM_WEIGHT]) for x in superlist if x)
-        rounded_weight = get_formatted_load(total_weight)
-        print(f"\n\tSilo {silo_index + 1} ({rounded_weight} kg):")
+    c_silo_invs = build_consolidated_invs(silos, num_silos)
+    c_silo_loads = build_consolidated_load(silos, num_silos)
+    for inv_index, inv in enumerate(c_silo_invs):
+        print(f"\n\tSilo {inv_index + 1} ({c_silo_loads[inv_index]} kg):")
         print_item_header()
-        print_grouped_items(group_items(superlist))
+        print_grouped_items(inv)
+
+
+def build_consolidated_load(silos: list[RocketSilo], num_silos: int) -> list[str]:
+    """
+    Builds data of silo load, consolidated across cycles.
+
+    Consolidates the load of each silo slot, which is limited by
+    the number of physically available silos, across cycles.
+
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
+    :return: A consolidated list of silo loads in each cycle.
+    :rtype: list[str]
+    """
+    slots = get_consolidated_slots(silos, num_silos)
+    consolidated_weights: list[str] = []
+    for slot in slots:
+        superweight = 0.0
+        for silo in slot:
+            superweight += silo.load
+        consolidated_weights.append(get_formatted_load(superweight))
+    return consolidated_weights
+
+
+def build_consolidated_invs(
+    silos: list[RocketSilo], num_silos: int
+) -> list[dict[str, int]]:
+    """
+    Builds data of silo item distribution, consolidated across cycles.
+
+    Consolidates the inventory of each silo slot, which is limited by
+    the number of physically available silos, across cycles.
+
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
+    :return: A consolidated list of silo inventories in each cycle.
+    :rtype: list[dict[str, int]]
+    """
+    slots = get_consolidated_slots(silos, num_silos)
+    consolidated_invs: list[dict[str, int]] = []
+    for slot in slots:
+        superlist = []
+        for silo in slot:
+            superlist += silo.inventory
+        consolidated_invs.append(group_items(superlist))
+    return consolidated_invs
+
+
+def get_consolidated_slots(
+    silos: list[RocketSilo], num_silos: int
+) -> list[list[RocketSilo]]:
+    """
+    Consolidates the slots of each physical silo across cycles.
+
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos:
+    The number physical silos available to the user.
+    :return: A list of consolidated silo slots across cycles.
+    :rtype: list[list[RocketSilo]]
+    """
+    consolidated_slots: list[list[RocketSilo]] = []
+    silo_index = 0
+    # Loop through physical silos.
+    while silo_index < num_silos:
+        # Running list of silos.
+        superlist: list[RocketSilo] = []
+        i = silo_index
+        # Loop through silo slots across cycles.
+        while i < len(silos):
+            superlist.append(silos[i])
+            i += num_silos
+        consolidated_slots.append(superlist)
         silo_index += 1
+    return consolidated_slots
 
 
 def print_grouped_items(items: dict[str, int]) -> None:
