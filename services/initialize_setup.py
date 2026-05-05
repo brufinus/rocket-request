@@ -1,140 +1,123 @@
 """
-Initializes and prints the setup for item distribution across silos.
+Initializes the setup of distributed items.
 
 Functions:
-    print_distribution: Prints the distribution of items across silos.
-    get_formatted_load: Formats the load to a string.
-    get_load_visualization: Returns a visualization of the silo load.
-    print_consolidated: Prints items consolidated across silos.
-    print_grouped_items: Prints formatted name and count for each item.
-    print_item_header: Prints the Item, Count header.
-    get_col_width: Returns a column width for output padding.
+    build_distribution: Builds silo item distribution data.
+    build_consolidated_invs: Builds consolidated inventory data.
+    build_consolidated_loads: Builds consolidated weight data.
+    get_consolidated_slots: Consolidates slots across cycles.
     group_items: Consolidates and groups items together.
     calculate_launch_cycles: Calculates the number of launch cycles.
 """
 
-from decimal import ROUND_HALF_UP, Decimal
 import math
 
-from data.constants import ITEM_ID, ITEM_NAME, ITEM_WEIGHT
+from data.constants import ITEM_ID, ITEM_NAME
 from data.item import Item
-from data.items import ITEMS
 from models.containers.rocketsilo import RocketSilo
+from services.helper import get_formatted_float
 
 
-def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
+def build_distribution(
+    silos: list[RocketSilo], num_silos: int
+) -> list[list[dict[str, int]]]:
     """
-    Prints the distribution of items across available silos.
+    Builds data of silo item distribution across cycles.
 
-    :param list[RocketSilo] silos: List of silos.
-    :param int num_silos: Number of available silos.
-    :return: None
+    Groups silos per cycle, grouping items within each silo, and
+    returns a list of cycles containing a list of silo inventories.
+
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
+    :return: A list of silo inventories in each cycle.
+    :rtype: list[list[dict[str, int]]]
     """
-    print(f"\nTotal launches required: {len(silos)}")
-    cycles = calculate_launch_cycles(silos, num_silos)
-    print(f"Required launch cycles: {cycles}")
-
+    num_cycles = calculate_launch_cycles(silos, num_silos)
+    cycles = []
     silo_index = 0
-    for i in range(cycles):
-        # Calculate total extra digits.
-        separators = "═" * int(math.log10(i + 1) + math.log10(cycles) + 1)
-        print(f"╔═══════════════════════{separators}╗")
-        print(f"║      Cycle {i + 1} of {cycles}      ║")
-        print(f"╚═══════════════════════{separators}╝")
-        for j in range(num_silos):
+    for _ in range(num_cycles):
+        cycle = []
+        for _ in range(num_silos):
             if silo_index >= len(silos):
                 break
-            print(f"\n\tSilo {j + 1} {get_load_visualization(
-                silos[silo_index].load,
-                RocketSilo.CAPACITY)} ({get_formatted_load(
-                    silos[silo_index].load)}"
-                  f"/{silos[silo_index].capacity} kg):")
-            print_item_header()
-            print_grouped_items(group_items(silos[silo_index].inventory))
+            cycle.append(group_items(silos[silo_index].inventory))
             silo_index += 1
+        cycles.append(cycle)
+    return cycles
 
 
-def get_formatted_load(load: float) -> str:
+def build_consolidated_load(silos: list[RocketSilo], num_silos: int) -> list[str]:
     """
-    Formats the load to a string.
+    Builds data of silo load, consolidated across cycles.
 
-    This method rounds the loadto the first decimal place
-    or to the whole number if there are no decimals.
+    Consolidates the load of each silo slot, which is limited by
+    the number of physically available silos, across cycles.
 
-    :param float load: The load to format.
-    :return: The formatted load.
-    :rtype: str
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
+    :return: A consolidated list of silo loads in each cycle.
+    :rtype: list[str]
     """
-    if load % 1 == 0:
-        return f"{int(load)}"
-    return f"{load:.1f}"
+    slots = get_consolidated_slots(silos, num_silos)
+    consolidated_weights: list[str] = []
+    for slot in slots:
+        superweight = 0.0
+        for silo in slot:
+            superweight += silo.load
+        consolidated_weights.append(get_formatted_float(superweight))
+    return consolidated_weights
 
 
-def get_load_visualization(load: float, capacity: int) -> str:
+def build_consolidated_invs(
+    silos: list[RocketSilo], num_silos: int
+) -> list[dict[str, int]]:
     """
-    Returns a visualization of the silo load in progress bar format.
+    Builds data of silo item distribution, consolidated across cycles.
 
-    Example: [█████░░░░░] for 50% load.
+    Consolidates the inventory of each silo slot, which is limited by
+    the number of physically available silos, across cycles.
 
-    :param float load: The current load of the silo.
-    :param int capacity: The maximum capacity of the silo.
-    :return: Silo load visualization.
-    :rtype: str
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
+    :return: A consolidated list of silo inventories in each cycle.
+    :rtype: list[dict[str, int]]
     """
-    fill_cnt = int(Decimal(load / capacity * 10)
-                   .quantize(Decimal(1), rounding=ROUND_HALF_UP))
-    empty_cnt = 10 - fill_cnt
-    return f"[{"█" * fill_cnt}{"░" * empty_cnt}]"
+    slots = get_consolidated_slots(silos, num_silos)
+    consolidated_invs: list[dict[str, int]] = []
+    for slot in slots:
+        superlist = []
+        for silo in slot:
+            superlist += silo.inventory
+        consolidated_invs.append(group_items(superlist))
+    return consolidated_invs
 
 
-def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
+def get_consolidated_slots(
+    silos: list[RocketSilo], num_silos: int
+) -> list[list[RocketSilo]]:
     """
-    Prints the distribution of items consolidated across silos.
+    Consolidates the slots of each physical silo across cycles.
 
-    :param list[RocketSilo] silos: List of silos.
-    :param int num_silos: Number of available silos.
-    :return: None
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos:
+    The number physical silos available to the user.
+    :return: A list of consolidated silo slots across cycles.
+    :rtype: list[list[RocketSilo]]
     """
-    print("\nConsolidated silo contents:")
+    consolidated_slots: list[list[RocketSilo]] = []
     silo_index = 0
+    # Loop through physical silos.
     while silo_index < num_silos:
+        # Running list of silos.
+        superlist: list[RocketSilo] = []
         i = silo_index
-        # Running list of silo items
-        superlist: list[Item] = []
+        # Loop through silo slots across cycles.
         while i < len(silos):
-            superlist += silos[i].inventory
+            superlist.append(silos[i])
             i += num_silos
-        total_weight = sum(float(x[ITEM_WEIGHT]) for x in superlist if x)
-        rounded_weight = get_formatted_load(total_weight)
-        print(f"\n\tSilo {silo_index + 1} ({rounded_weight} kg):")
-        print_item_header()
-        print_grouped_items(group_items(superlist))
+        consolidated_slots.append(superlist)
         silo_index += 1
-
-
-def print_grouped_items(items: dict[str, int]) -> None:
-    """
-    Prints the formatted name and count for each grouped item.
-
-    Expects a dictionary of item names and counts.
-    
-    :param dict[str, int] items: Grouped item names and counts.
-    :return: None
-    """
-    for i in items:
-        print(f"\t\t{i:<{get_col_width()}}{items[i]:>10}")
-
-
-def print_item_header() -> None:
-    """Prints the Item, Count header."""
-    col_width = get_col_width()
-    print(f"\t\t{"Item":<{col_width}}{"Count":>10}")
-    print(f"\t\t{"-" * (col_width + 10)}")
-
-
-def get_col_width() -> int:
-    """Returns a column width for output padding."""
-    return len(max(ITEMS, key=len)) + 2
+    return consolidated_slots
 
 
 def group_items(items: list[Item]) -> dict[str, int]:

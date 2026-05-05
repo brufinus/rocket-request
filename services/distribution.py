@@ -4,7 +4,7 @@ Distribution service for the rocket silo program.
 This module contains the logic for distributing items into silos.
 
 Functions:
-    distribute_items: Distributes items into silos.
+    distribute_items: Coordinates distribution of items into silos.
     first_fit_silo: Distributes items into silos using first-fit.
     find_open_silo: Tries to add an item into the first open silo.
     expand_and_sort_items: Expands items into a sorted list of items.
@@ -18,7 +18,11 @@ from models.containers.rocketsilo import RocketSilo
 
 def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
     """
-    Distributes items into silos.
+    Coordinates the distribution of items into silos.
+
+    Items are first expanded into individual units and sorted.
+    Then, a first-fit-decreasing algorithm is used to distribute items
+    into RocketSilos.
 
     :param list[tuple[str, int]] items:
     List of item, count pairs to distribute amongst silos.
