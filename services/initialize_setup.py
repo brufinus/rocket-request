@@ -3,6 +3,10 @@ Initializes and prints the setup for item distribution across silos.
 
 Functions:
     print_distribution: Prints the distribution of items across silos.
+    build_distribution: Builds silo item distribution data.
+    print_distribution_info: Prints distribution logistic info.
+    print_cycle_header: Prints cycle header separator.
+    print_silo_header: Prints silo header information.
     get_formatted_load: Formats the load to a string.
     get_load_visualization: Returns a visualization of the silo load.
     print_consolidated: Prints items consolidated across silos.
@@ -26,32 +30,96 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
     """
     Prints the distribution of items across available silos.
 
-    :param list[RocketSilo] silos: List of silos.
-    :param int num_silos: Number of available silos.
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
     :return: None
     """
-    print(f"\nTotal launches required: {len(silos)}")
-    cycles = calculate_launch_cycles(silos, num_silos)
-    print(f"Required launch cycles: {cycles}")
+    cycles = build_distribution(silos, num_silos)
+    num_cycles = len(cycles)
+    print_distribution_info(len(silos), num_cycles)
 
+    # Keeps track of the current silo across all cycles.
     silo_index = 0
-    for i in range(cycles):
-        # Calculate total extra digits.
-        separators = "═" * int(math.log10(i + 1) + math.log10(cycles) + 1)
-        print(f"╔═══════════════════════{separators}╗")
-        print(f"║      Cycle {i + 1} of {cycles}      ║")
-        print(f"╚═══════════════════════{separators}╝")
-        for j in range(num_silos):
+    for cycle_index, cycle in enumerate(cycles):
+        print_cycle_header(cycle_index + 1, num_cycles)
+        for inv_num, silo_inv in enumerate(cycle):
+            print_silo_header(inv_num + 1, silos[silo_index].load, RocketSilo.CAPACITY)
+            print_item_header()
+            print_grouped_items(silo_inv)
+            silo_index += 1
+
+
+def print_distribution_info(num_launches: int, num_cycles: int) -> None:
+    """
+    Prints information about the distribution logistics.
+
+    The number of launches is equivalent
+    to the number of available silos.
+
+    :param int num_launches: Total number of required launches.
+    :param int num_cycles: Total number of required cycles.
+    :return: None
+    """
+    print(f"\nTotal launches required: {num_launches}")
+    print(f"Required launch cycles: {num_cycles}")
+
+
+def print_cycle_header(current_cycle: int, num_cycles: int) -> None:
+    """
+    Prints a cycle header to separate cycles.
+
+    :param int current_cycle: The current cycle number.
+    :param int num_cycles: The total number of cycles.
+    :return: None
+    """
+    # Calculates total extra digits and adds that many separators.
+    separators = "═" * int(math.log10(current_cycle) + math.log10(num_cycles) + 1)
+    print(f"╔═══════════════════════{separators}╗")
+    print(f"║      Cycle {current_cycle} of {num_cycles}      ║")
+    print(f"╚═══════════════════════{separators}╝")
+
+
+def print_silo_header(silo_num: int, load: float, capacity: int) -> None:
+    """
+    Prints a silo information header with the given inputs.
+
+    Intended to be printed for each silo in a cycle.
+
+    :param int silo_num: The current silo number in a cycle.
+    :param float load: The load of the silo in a cycle.
+    :param int capacity: The capacity of a silo.
+    :return: None
+    """
+    print(f"\n\tSilo {silo_num} {get_load_visualization(
+        load, capacity)} ({get_formatted_load(load)}/{capacity} kg):")
+
+
+def build_distribution(
+    silos: list[RocketSilo], num_silos: int
+) -> list[list[dict[str, int]]]:
+    """
+    Builds data of silo item distribution across cycles.
+
+    Groups silos per cycle, grouping items within each silo, and
+    returns a list of cycles containing a list of silo inventories.
+
+    :param list[RocketSilo] silos: List of silos with distributed items.
+    :param int num_silos: The number of silos available to the user.
+    :return: A list of silo inventories in each cycle.
+    :rtype: list[list[dict[str, int]]]
+    """
+    num_cycles = calculate_launch_cycles(silos, num_silos)
+    cycles = []
+    silo_index = 0
+    for _ in range(num_cycles):
+        cycle = []
+        for _ in range(num_silos):
             if silo_index >= len(silos):
                 break
-            print(f"\n\tSilo {j + 1} {get_load_visualization(
-                silos[silo_index].load,
-                RocketSilo.CAPACITY)} ({get_formatted_load(
-                    silos[silo_index].load)}"
-                  f"/{silos[silo_index].capacity} kg):")
-            print_item_header()
-            print_grouped_items(group_items(silos[silo_index].inventory))
+            cycle.append(group_items(silos[silo_index].inventory))
             silo_index += 1
+        cycles.append(cycle)
+    return cycles
 
 
 def get_formatted_load(load: float) -> str:
@@ -81,8 +149,9 @@ def get_load_visualization(load: float, capacity: int) -> str:
     :return: Silo load visualization.
     :rtype: str
     """
-    fill_cnt = int(Decimal(load / capacity * 10)
-                   .quantize(Decimal(1), rounding=ROUND_HALF_UP))
+    fill_cnt = int(
+        Decimal(load / capacity * 10).quantize(Decimal(1), rounding=ROUND_HALF_UP)
+    )
     empty_cnt = 10 - fill_cnt
     return f"[{"█" * fill_cnt}{"░" * empty_cnt}]"
 
@@ -117,7 +186,7 @@ def print_grouped_items(items: dict[str, int]) -> None:
     Prints the formatted name and count for each grouped item.
 
     Expects a dictionary of item names and counts.
-    
+
     :param dict[str, int] items: Grouped item names and counts.
     :return: None
     """
