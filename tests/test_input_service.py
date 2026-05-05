@@ -2,7 +2,8 @@ import pytest
 
 from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
 from data.items import ITEMS
-from services.input_service import confirm_suggested_item, is_done_adding_items, transform_string
+from services.helper import transform_string
+from services.input_service import confirm_suggested_item, is_done_adding_items
 
 
 def test_transform_string():

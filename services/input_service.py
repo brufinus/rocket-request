@@ -6,13 +6,11 @@ Functions:
     request_items: Request a list of items and their counts.
     confirm_suggested_item: Confirms a suggested item.
     is_done_adding_items: Checks whether the user is done adding items.
-    transform_string: Transform a string to the expected key format.
 """
-
-import re
 
 from data.constants import ITEM_NAME
 from data.items import ITEMS
+from services.helper import transform_string
 from services.search import search_coordinator
 from services.validation import is_insertable, parse_count
 
@@ -104,16 +102,3 @@ def is_done_adding_items(user_input: str, items: list[tuple[str, int]]) -> bool:
             return False
         return True
     return False
-
-
-def transform_string(raw_string: str) -> str:
-    """
-    Transforms the given string to the expected key format.
-
-    Expected key format is the format of the keys in the item data.
-
-    :param str raw_string: The string to be transformed.
-    :return: The transformed string.
-    :rtype: str
-    """
-    return re.sub(r"[ \-_]", "", raw_string).lower()

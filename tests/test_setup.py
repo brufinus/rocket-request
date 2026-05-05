@@ -1,14 +1,13 @@
 from data.items import ITEMS
 from models.containers.rocketsilo import RocketSilo
 from services.distribution import distribute_items
+from services.helper import get_formatted_float
 from services.initialize_setup import (
     build_distribution,
     calculate_launch_cycles,
-    get_formatted_load,
     group_items,
-    get_load_visualization,
 )
-from services.output_service import print_consolidated, print_distribution
+from services.output_service import get_load_visualization, print_consolidated, print_distribution
 
 
 def test_calculate_launch_cycles():
@@ -142,14 +141,14 @@ def test_empty_load_visualization():
     assert get_load_visualization(0, 1000) == "[░░░░░░░░░░]"
 
 
-def test_get_formatted_load_whole():
-    assert get_formatted_load(100.0) == "100"
-    assert get_formatted_load(900.0) == "900"
+def test_get_formatted_float_whole():
+    assert get_formatted_float(100.0) == "100"
+    assert get_formatted_float(900.0) == "900"
 
 
-def test_get_formatted_load_decimal():
-    assert get_formatted_load(8.251) == "8.3"
-    assert get_formatted_load(100.8574) == "100.9"
+def test_get_formatted_float_decimal():
+    assert get_formatted_float(8.251) == "8.3"
+    assert get_formatted_float(100.8574) == "100.9"
 
 
 def test_build_distribution_one_cycle():

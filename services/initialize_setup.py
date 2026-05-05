@@ -3,23 +3,19 @@ Initializes the setup of distributed items.
 
 Functions:
     build_distribution: Builds silo item distribution data.
-    get_formatted_load: Formats the load to a string.
-    get_load_visualization: Returns a visualization of the silo load.
     build_consolidated_invs: Builds consolidated inventory data.
     build_consolidated_loads: Builds consolidated weight data.
     get_consolidated_slots: Consolidates slots across cycles.
-    get_col_width: Returns a column width for output padding.
     group_items: Consolidates and groups items together.
     calculate_launch_cycles: Calculates the number of launch cycles.
 """
 
-from decimal import ROUND_HALF_UP, Decimal
 import math
 
 from data.constants import ITEM_ID, ITEM_NAME
 from data.item import Item
-from data.items import ITEMS
 from models.containers.rocketsilo import RocketSilo
+from services.helper import get_formatted_float
 
 
 def build_distribution(
@@ -50,40 +46,6 @@ def build_distribution(
     return cycles
 
 
-def get_formatted_load(load: float) -> str:
-    """
-    Formats the load to a string.
-
-    This method rounds the loadto the first decimal place
-    or to the whole number if there are no decimals.
-
-    :param float load: The load to format.
-    :return: The formatted load.
-    :rtype: str
-    """
-    if load % 1 == 0:
-        return f"{int(load)}"
-    return f"{load:.1f}"
-
-
-def get_load_visualization(load: float, capacity: int) -> str:
-    """
-    Returns a visualization of the silo load in progress bar format.
-
-    Example: [█████░░░░░] for 50% load.
-
-    :param float load: The current load of the silo.
-    :param int capacity: The maximum capacity of the silo.
-    :return: Silo load visualization.
-    :rtype: str
-    """
-    fill_cnt = int(
-        Decimal(load / capacity * 10).quantize(Decimal(1), rounding=ROUND_HALF_UP)
-    )
-    empty_cnt = 10 - fill_cnt
-    return f"[{"█" * fill_cnt}{"░" * empty_cnt}]"
-
-
 def build_consolidated_load(silos: list[RocketSilo], num_silos: int) -> list[str]:
     """
     Builds data of silo load, consolidated across cycles.
@@ -102,7 +64,7 @@ def build_consolidated_load(silos: list[RocketSilo], num_silos: int) -> list[str
         superweight = 0.0
         for silo in slot:
             superweight += silo.load
-        consolidated_weights.append(get_formatted_load(superweight))
+        consolidated_weights.append(get_formatted_float(superweight))
     return consolidated_weights
 
 
@@ -156,11 +118,6 @@ def get_consolidated_slots(
         consolidated_slots.append(superlist)
         silo_index += 1
     return consolidated_slots
-
-
-def get_col_width() -> int:
-    """Returns a column width for output padding."""
-    return len(max(ITEMS, key=len)) + 2
 
 
 def group_items(items: list[Item]) -> dict[str, int]:

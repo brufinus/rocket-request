@@ -2,6 +2,7 @@
 Service for outputting data from the program.
 
 Functions:
+    get_load_visualization: Returns a visualization of the silo load.
     print_consolidated: Prints items consolidated across silos.
     print_cycle_header: Prints cycle header separator.
     print_distribution: Prints the distribution of items across silos.
@@ -11,16 +12,15 @@ Functions:
     print_silo_header: Prints silo header information.
 """
 
+from decimal import ROUND_HALF_UP, Decimal
 import math
 
 from models.containers.rocketsilo import RocketSilo
+from services.helper import get_col_width, get_formatted_float
 from services.initialize_setup import (
     build_consolidated_invs,
     build_consolidated_load,
     build_distribution,
-    get_col_width,
-    get_formatted_load,
-    get_load_visualization,
 )
 
 
@@ -54,6 +54,24 @@ def print_cycle_header(current_cycle: int, num_cycles: int) -> None:
     print(f"╚═══════════════════════{separators}╝")
 
 
+def get_load_visualization(load: float, capacity: int) -> str:
+    """
+    Returns a visualization of the silo load in progress bar format.
+
+    Example: [█████░░░░░] for 50% load.
+
+    :param float load: The current load of the silo.
+    :param int capacity: The maximum capacity of the silo.
+    :return: Silo load visualization.
+    :rtype: str
+    """
+    fill_cnt = int(
+        Decimal(load / capacity * 10).quantize(Decimal(1), rounding=ROUND_HALF_UP)
+    )
+    empty_cnt = 10 - fill_cnt
+    return f"[{"█" * fill_cnt}{"░" * empty_cnt}]"
+
+
 def print_silo_header(silo_num: int, load: float, capacity: int) -> None:
     """
     Prints a silo information header with the given inputs.
@@ -66,7 +84,7 @@ def print_silo_header(silo_num: int, load: float, capacity: int) -> None:
     :return: None
     """
     print(f"\n\tSilo {silo_num} {get_load_visualization(
-        load, capacity)} ({get_formatted_load(load)}/{capacity} kg):")
+        load, capacity)} ({get_formatted_float(load)}/{capacity} kg):")
 
 
 def print_grouped_items(items: dict[str, int]) -> None:
