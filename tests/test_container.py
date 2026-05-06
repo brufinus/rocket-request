@@ -16,6 +16,11 @@ class TestContainer:
         self.chest.add_item(self.belt)
         assert self.chest.inventory == [self.belt]
 
+    def test_cannot_add_item_to_chest(self):
+        self.chest.load = 48
+        assert self.chest.add_item(self.belt) == False
+        assert self.chest.inventory == []
+
     def test_remove_item_from_chest(self):
         self.chest.add_item(self.belt)
         self.chest.remove_item(self.belt)
