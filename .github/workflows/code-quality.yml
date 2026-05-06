@@ -7,6 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Run tests
         steps:
+            - uses: actions/checkout@v6
             - id: test-setup
               uses: ./.github/actions/python-setup
             - name: Run pytest
@@ -16,6 +17,9 @@ jobs:
         runs-on: ubuntu-latest
         name: Run linter
         steps:
+            - uses: actions/checkout@v6
+            - id: lint-setup
+              uses: ./.github/actions/python-setup
             - name: Run pylint
               run: pylint $(git ls-files '*.py')
 
@@ -23,6 +27,9 @@ jobs:
         runs-on: ubuntu-latest
         name: Run coverage
         steps:
+            - uses: actions/checkout@v6
+            - id: coverage-setup
+              uses: ./.github/actions/python-setup
             - name: Run coverage.py
               run: |
                   coverage run -m pytest
