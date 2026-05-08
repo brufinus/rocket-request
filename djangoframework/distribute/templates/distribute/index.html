@@ -1,0 +1,66 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'distribute/style.css' %}">
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Rocket Request</title>
+    <meta name="author" content="brufinus" />
+    <meta name="description" content="Automatic item distribution across Rocket Silos in Factorio." />
+</head>
+
+<body>
+    <header>
+        <img src="#" alt="Insert Logo Here" />
+        <h1>Rocket Request</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="https://github.com/brufinus/rocket-request">GitHub</a></li>
+            <li><button>Toggle Dark Mode</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <form action="{% url 'distribute:results' %}" method="post">
+                {% csrf_token %}
+                <h2>Item Selection</h2>
+                <p>
+                    <label for="num_silos">Number of available silos:</label>
+                    <input type="number" name="num_silos" id="num_silos" required />
+                </p>
+                <!-- <fieldset>
+                    <legend>Add items to distribute</legend>
+                    <p>
+                        <label for="item">Item:</label>
+                        <input type="item" name="item" id="item" required />
+                    </p>
+                    <p>
+                        <label for="count">Count:</label>
+                        <input type="number" name="count" id="count" required />
+                    </p>
+                    <p>
+                        <button type="button">Add Item</button>
+                    </p>
+                </fieldset> -->
+                <p>
+                    <button>Distribute</button>
+                </p>
+            </form>
+        </section>
+
+        <aside>
+            <p>Added items:</p>
+        </aside>
+    </main>
+    <footer>
+        <p>GitHub: <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
+    </footer>
+</body>
+
+</html>

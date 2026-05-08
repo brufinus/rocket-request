@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Distribution Results</title>
+</head>
+
+<body>
+    <header>
+        <img src="#" alt="Insert Logo Here" />
+        <h1>Rocket Request</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="https://github.com/brufinus/rocket-request">GitHub</a></li>
+            <li><button>Toggle Dark Mode</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <p>There are {{ num_silos }} silos available.</p>
+        </section>
+        <a href="{% url 'distribute:index' %}">Return</a>
+    </main>
+    <footer>
+        <p>GitHub: <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
+    </footer>
+</body>
+
+</html>
