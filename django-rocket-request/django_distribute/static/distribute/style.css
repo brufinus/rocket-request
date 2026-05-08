@@ -1,3 +1,22 @@
-li a {
-    color: green
+ul {
+    display: flex;
+    list-style: none;
+    border: 1px solid black;
+}
+
+li {
+    margin: 5px;
+}
+
+.links-list a {
+  background-color: rgb(179 57 81);
+  color: white;
+  text-decoration: none;
+  padding: 1em 2em;
+  display: inline-block;
+}
+
+.links-list a:hover {
+  background-color: rgb(66 28 40);
+  color: white;
 }
