@@ -39,8 +39,8 @@
                             <input type="text" name="user-item" id="user-item-input" required />
                         </p>
                         <p>
-                            <label for="count">Count:</label>
-                            <input type="number" name="count" id="count" required />
+                            <label for="user-count-input">Count:</label>
+                            <input type="number" name="user-count" id="user-count-input" required />
                         </p>
                         <p>
                             <button type="submit">Add Item</button>
@@ -59,15 +59,22 @@
                 </form>
             </section>
             <aside>
-                <p>Added items:</p>
-                <!-- <ul> -->
-                    <ul id="item-list"></ul>
-                    <!-- {% for item in items %}
-                    <li>{{ item }}</li>
-                    {% endfor %} -->
-                <!-- </ul> -->
+                <h3>Added Items</h3>
+                <div class="added-items-container">
+                    <p>Item</p>
+                    <p>Count</p>
+                    <ul id="item-list">
+                        {% for item in items %}
+                        <li id="item">{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    <ul id="count-list">
+                        {% for count in counts %}
+                        <li id="count">{{ count }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </aside>
-            <div id="responseItem" />
         </article>
 
     </main>
@@ -76,23 +83,24 @@
     </footer>
 
     <script>
-        // Ajax setup for form submission
         $(document).ready(function () {
-            $('#item-collection-form').on('submit', function (event) {
+            $("#item-collection-form").on("submit", function (event) {
                 event.preventDefault();
 
                 $.ajax({
-                    url: "{% url 'distribute:collection' %}",  // The URL of the Django view that handles the request
-                    type: 'POST',
+                    url: "{% url 'distribute:collection' %}",
+                    type: "POST",
                     data: {
-                        'user-item': $('#user-item-input').val(),
-                        'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                        "user-item": $("#user-item-input").val(),
+                        "user-count": $("#user-count-input").val(),
+                        "csrfmiddlewaretoken": "{{ csrf_token }}"
                     },
                     success: function (response) {
-                        // $('#responseItem').text(response.item);  // Update the page dynamically
-                        $('#item-list').empty();
-                        response.items.forEach(function(item) {
-                            $('#item-list').append('<li>' + item + '</li>');
+                        $("#item-list").empty();
+                        $("#count-list").empty();
+                        response.items.forEach(function (item) {
+                            $("#item-list").append("<li>" + item[0] + "</li>");
+                            $("#count-list").append("<li>" + item[1] + "</li>");
                         });
                     }
                 });

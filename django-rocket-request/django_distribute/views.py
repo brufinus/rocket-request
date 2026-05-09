@@ -4,12 +4,19 @@ from django.shortcuts import render
 
 def index(request):
     """Main page for the application."""
-    request.session.set_test_cookie() 
+    request.session.set_test_cookie()
 
     items = request.session.get("items", [])
     request.session["items"] = items
+    item_names = []
+    item_counts = []
+    for item in items:
+        item_names.append(item[0])
+        item_counts.append(item[1])
 
-    return render(request, "distribute/index.html")
+    return render(
+        request, "distribute/index.html", {"items": item_names, "counts": item_counts}
+    )
 
 
 def item_collection(request):
@@ -21,8 +28,9 @@ def item_collection(request):
             print("Please enable cookies and try again.")
 
         item_name = request.POST.get("user-item")
+        item_count = request.POST.get("user-count")
         items = request.session.get("items", [])
-        items.append(item_name)
+        items.append((item_name, item_count))
         request.session["items"] = items
         return JsonResponse({"items": items})
     return JsonResponse({"items": "Invalid request"})

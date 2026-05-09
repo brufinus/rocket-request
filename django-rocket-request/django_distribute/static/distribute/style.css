@@ -1,12 +1,12 @@
 /* Navigation bar */
 .nav-bar ul {
-    display: flex;
-    list-style: none;
-    border: 1px solid black;
+  display: flex;
+  list-style: none;
+  border: 1px solid black;
 }
 
 .nav-bar li {
-    margin: 5px;
+  margin: 5px;
 }
 
 .nav-bar a {
@@ -24,5 +24,33 @@
 
 /* Main article */
 article {
-    display: flex;
+  display: flex;
+}
+
+/* Side bar */
+aside {
+  border: 1px solid black;
+  padding: 1em 1em;
+}
+
+.added-items-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 0.2em;
+  border: 1px solid black;
+}
+
+aside ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#item-list {
+  text-align: left;
+}
+
+#count-list {
+  text-align: right;
 }
