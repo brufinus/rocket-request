@@ -1,87 +1,50 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'distribute/style.css' %}">
-
-<!DOCTYPE html>
-<html lang="en-US">
-
-<head>
-    <meta charset="utf-8" />
-    <title>Rocket Request</title>
-    <meta name="author" content="brufinus" />
-    <meta name="description" content="Automatic item distribution across Rocket Silos in Factorio." />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-
-<body>
-    <header>
-        <img src="#" alt="Insert Logo Here" />
-        <h1>Rocket Request</h1>
-    </header>
-
-    <nav class="nav-bar">
-        <ul class="links-list">
-            <li><a href="#">Home</a></li>
-            <li><a href="https://github.com/brufinus/rocket-request">GitHub</a></li>
-            <li><button>Toggle Dark Mode</button></li>
-        </ul>
-    </nav>
-
-    <main>
-        <article>
-            <section>
-                <h2>Setup</h2>
-                <form id="item-collection-form" method="post">
-                    {% csrf_token %}
-                    <fieldset>
-                        <legend>Add items to distribute</legend>
-                        <p>
-                            <label for="user-item-input">Item:</label>
-                            <input type="text" name="user-item" id="user-item-input" required />
-                        </p>
-                        <p>
-                            <label for="user-count-input">Count:</label>
-                            <input type="number" name="user-count" id="user-count-input" required />
-                        </p>
-                        <p>
-                            <button type="submit">Add Item</button>
-                        </p>
-                    </fieldset>
-                </form>
-                <form action="{% url 'distribute:results' %}" method="post">
-                    {% csrf_token %}
+{% extends "distribute/base.html" %}
+{% block content %}
+    <article>
+        <section>
+            <h2>Setup</h2>
+            <form id="item-collection-form" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Add items to distribute</legend>
                     <p>
-                        <label for="num_silos">Number of available silos:</label>
-                        <input type="number" name="num_silos" id="num_silos" required />
+                        <label for="user-item-input">Item:</label>
+                        <input type="text" name="user-item" id="user-item-input" required />
                     </p>
                     <p>
-                        <button>Distribute</button>
+                        <label for="user-count-input">Count:</label>
+                        <input type="number" name="user-count" id="user-count-input" required />
                     </p>
-                </form>
-            </section>
-            <aside>
-                <h3>Added Items</h3>
-                <div class="added-items-container">
-                    <p>Item</p>
-                    <p>Count</p>
-                    <ul id="item-list">
-                        {% for item in items %}
-                        <li id="item">{{ item }}</li>
-                        {% endfor %}
-                    </ul>
-                    <ul id="count-list">
-                        {% for count in counts %}
-                        <li id="count">{{ count }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </aside>
-        </article>
-
-    </main>
-    <footer>
-        <p>GitHub: <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
-    </footer>
-
+                    <p>
+                        <button type="submit">Add Item</button>
+                    </p>
+                </fieldset>
+            </form>
+            <form action="{% url 'distribute:results' %}" method="post">
+                {% csrf_token %}
+                <p>
+                    <label for="num_silos">Number of available silos:</label>
+                    <input type="number" name="num_silos" id="num_silos" required />
+                </p>
+                <p>
+                    <button>Distribute</button>
+                </p>
+            </form>
+        </section>
+        <aside>
+            <h3>Added Items</h3>
+            <div class="added-items-container">
+                <p>Item</p>
+                <p>Count</p>
+                <ul id="item-list">
+                    {% for item in items %}<li id="item">{{ item }}</li>{% endfor %}
+                </ul>
+                <ul id="count-list">
+                    {% for count in counts %}<li id="count">{{ count }}</li>{% endfor %}
+                </ul>
+            </div>
+        </aside>
+    </article>
     <script>
         $(document).ready(function () {
             $("#item-collection-form").on("submit", function (event) {
@@ -107,6 +70,4 @@
             });
         });
     </script>
-</body>
-
-</html>
+{% endblock content %}
