@@ -9,6 +9,7 @@
     <title>Rocket Request</title>
     <meta name="author" content="brufinus" />
     <meta name="description" content="Automatic item distribution across Rocket Silos in Factorio." />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <h1>Rocket Request</h1>
     </header>
 
-    <nav>
+    <nav class="nav-bar">
         <ul class="links-list">
             <li><a href="#">Home</a></li>
             <li><a href="https://github.com/brufinus/rocket-request">GitHub</a></li>
@@ -26,41 +27,78 @@
     </nav>
 
     <main>
-        <section>
-            <form action="{% url 'distribute:results' %}" method="post">
-                {% csrf_token %}
-                <h2>Item Selection</h2>
-                <p>
-                    <label for="num_silos">Number of available silos:</label>
-                    <input type="number" name="num_silos" id="num_silos" required />
-                </p>
-                <!-- <fieldset>
-                    <legend>Add items to distribute</legend>
+        <article>
+            <section>
+                <h2>Setup</h2>
+                <form id="item-collection-form" method="post">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>Add items to distribute</legend>
+                        <p>
+                            <label for="user-item-input">Item:</label>
+                            <input type="text" name="user-item" id="user-item-input" required />
+                        </p>
+                        <p>
+                            <label for="count">Count:</label>
+                            <input type="number" name="count" id="count" required />
+                        </p>
+                        <p>
+                            <button type="submit">Add Item</button>
+                        </p>
+                    </fieldset>
+                </form>
+                <form action="{% url 'distribute:results' %}" method="post">
+                    {% csrf_token %}
                     <p>
-                        <label for="item">Item:</label>
-                        <input type="item" name="item" id="item" required />
+                        <label for="num_silos">Number of available silos:</label>
+                        <input type="number" name="num_silos" id="num_silos" required />
                     </p>
                     <p>
-                        <label for="count">Count:</label>
-                        <input type="number" name="count" id="count" required />
+                        <button>Distribute</button>
                     </p>
-                    <p>
-                        <button type="button">Add Item</button>
-                    </p>
-                </fieldset> -->
-                <p>
-                    <button>Distribute</button>
-                </p>
-            </form>
-        </section>
+                </form>
+            </section>
+            <aside>
+                <p>Added items:</p>
+                <!-- <ul> -->
+                    <ul id="item-list"></ul>
+                    <!-- {% for item in items %}
+                    <li>{{ item }}</li>
+                    {% endfor %} -->
+                <!-- </ul> -->
+            </aside>
+            <div id="responseItem" />
+        </article>
 
-        <aside>
-            <p>Added items:</p>
-        </aside>
     </main>
     <footer>
         <p>GitHub: <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
     </footer>
+
+    <script>
+        // Ajax setup for form submission
+        $(document).ready(function () {
+            $('#item-collection-form').on('submit', function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: "{% url 'distribute:collection' %}",  // The URL of the Django view that handles the request
+                    type: 'POST',
+                    data: {
+                        'user-item': $('#user-item-input').val(),
+                        'csrfmiddlewaretoken': '{{ csrf_token }}' // CSRF token for security
+                    },
+                    success: function (response) {
+                        // $('#responseItem').text(response.item);  // Update the page dynamically
+                        $('#item-list').empty();
+                        response.items.forEach(function(item) {
+                            $('#item-list').append('<li>' + item + '</li>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
