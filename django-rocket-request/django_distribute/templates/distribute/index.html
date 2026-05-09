@@ -1,4 +1,6 @@
 {% extends "distribute/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static "distribute/style.css" %}" />
 {% block content %}
     <article>
         <section>
@@ -7,10 +9,15 @@
                 {% csrf_token %}
                 <fieldset>
                     <legend>Add items to distribute</legend>
-                    <p>
+                    <div id="item-search">
                         <label for="user-item-input">Item:</label>
-                        <input type="text" name="user-item" id="user-item-input" required />
-                    </p>
+                        <input type="text" list="suggestions" name="user-item" id="user-item-input" required />
+                        <datalist id="suggestions">
+                            {% for suggestion in suggestions %}
+                                <option value="{{ suggestion }}">{{ suggestion }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
                     <p>
                         <label for="user-count-input">Count:</label>
                         <input type="number" name="user-count" id="user-count-input" required />

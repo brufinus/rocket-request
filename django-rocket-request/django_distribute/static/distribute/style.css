@@ -27,6 +27,13 @@ article {
   display: flex;
 }
 
+/* Item search */
+#item-search {
+  position: relative;
+  max-width: 300px;
+  margin: auto;
+}
+
 /* Side bar */
 aside {
   border: 1px solid black;

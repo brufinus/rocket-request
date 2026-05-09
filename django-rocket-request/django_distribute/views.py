@@ -15,7 +15,7 @@ def index(request):
         item_counts.append(item[1])
 
     return render(
-        request, "distribute/index.html", {"items": item_names, "counts": item_counts}
+        request, "distribute/index.html", {"items": item_names, "counts": item_counts, "suggestions": ["Python", "Java", "Go"]}
     )
 
 
