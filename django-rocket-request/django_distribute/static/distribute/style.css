@@ -1,14 +1,15 @@
-ul {
+/* Navigation bar */
+.nav-bar ul {
     display: flex;
     list-style: none;
     border: 1px solid black;
 }
 
-li {
+.nav-bar li {
     margin: 5px;
 }
 
-.links-list a {
+.nav-bar a {
   background-color: rgb(179 57 81);
   color: white;
   text-decoration: none;
@@ -16,7 +17,12 @@ li {
   display: inline-block;
 }
 
-.links-list a:hover {
+.nav-bar a:hover {
   background-color: rgb(66 28 40);
   color: white;
+}
+
+/* Main article */
+article {
+    display: flex;
 }
