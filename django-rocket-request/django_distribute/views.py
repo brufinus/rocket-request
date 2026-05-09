@@ -42,4 +42,8 @@ def results(request):
     except KeyError:
         return render(request, "distribute/index.html", None)
     else:
-        return render(request, "distribute/results.html", {"num_silos": num_silos})
+        return render(
+            request,
+            "distribute/results.html",
+            {"num_silos": num_silos, "num_launches": 6, "num_cycles": 2},
+        )

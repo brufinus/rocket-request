@@ -1,7 +1,16 @@
 {% extends "distribute/base.html" %}
 {% block content %}
     <section>
-        <p>There are {{ num_silos }} silos available.</p>
+        <h2>Summary</h2>
+        <p>Available silos: {{ num_silos }}</p>
+        <p>Required launches: {{ num_launches }}</p>
+        <p>Required launch cycles: {{ num_cycles }}</p>
+    </section>
+    <section>
+        <h2>Per-Cycle Distribution</h2>
+    </section>
+    <section>
+        <h2>Per-Silo Distribution</h2>
     </section>
     <a href="{% url 'distribute:index' %}">Return</a>
 {% endblock content %}
