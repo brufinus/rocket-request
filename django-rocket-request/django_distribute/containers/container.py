@@ -7,7 +7,7 @@ Classes:
 
 from abc import ABC, abstractmethod
 
-from data.item import Item
+from django_distribute.data.item import Item
 
 
 class Container(ABC):

@@ -5,8 +5,8 @@ Classes:
     Chest: A standard storage container for holding items.
 """
 
-from data.item import Item
-from models.containers.container import Container
+from django_distribute.data.item import Item
+from django_distribute.containers.container import Container
 
 
 class Chest(Container):

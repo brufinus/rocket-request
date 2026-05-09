@@ -15,9 +15,9 @@ Functions:
 from decimal import ROUND_HALF_UP, Decimal
 import math
 
-from models.containers.rocketsilo import RocketSilo
-from services.helper import get_col_width, get_formatted_float
-from services.initialize_setup import (
+from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.services.helper import get_col_width, get_formatted_float
+from django_distribute.services.initialize_setup import (
     build_consolidated_invs,
     build_consolidated_load,
     build_distribution,

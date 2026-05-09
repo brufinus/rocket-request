@@ -1,8 +1,8 @@
 from hypothesis import given, strategies as st
 import pytest
 
-from services.helper import transform_string
-from services.input_service import *
+from django_distribute.services.helper import transform_string
+from django_distribute.services.input_service import *
 
 
 def test_transform_string():

@@ -8,11 +8,11 @@ Functions:
     is_done_adding_items: Checks whether the user is done adding items.
 """
 
-from data.constants import ITEM_NAME
-from data.items import ITEMS
-from services.helper import transform_string
-from services.search import search_coordinator
-from services.validation import is_insertable, parse_count
+from django_distribute.data.constants import ITEM_NAME
+from django_distribute.data.items import ITEMS
+from django_distribute.services.helper import transform_string
+from django_distribute.services.search import search_coordinator
+from django_distribute.services.validation import is_insertable, parse_count
 
 
 def request_silo_count() -> int:

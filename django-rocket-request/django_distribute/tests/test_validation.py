@@ -1,8 +1,8 @@
 import pytest
 
-from data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
-from data.items import ITEMS
-from services.validation import is_insertable, parse_count
+from django_distribute.data.constants import INPUT_GREATER_ZERO, INPUT_INVALID_NUM
+from django_distribute.data.items import ITEMS
+from django_distribute.services.validation import is_insertable, parse_count
 
 
 def test_parse_count():

@@ -1,5 +1,5 @@
-from data.items import ITEMS
-from services.search import search_coordinator, search_item, search_similar_item
+from django_distribute.data.items import ITEMS
+from django_distribute.services.search import search_coordinator, search_item, search_similar_item
 
 dictionary = {
     "item1": {"name": "Item Name", "keywords": ["alias"]},

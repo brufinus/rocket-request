@@ -10,7 +10,7 @@ Functions:
 
 import re
 
-from data.items import ITEMS
+from django_distribute.data.items import ITEMS
 
 
 def get_formatted_float(raw_float: float) -> str:

@@ -10,10 +10,10 @@ Functions:
     expand_and_sort_items: Expands items into a sorted list of items.
 """
 
-from data.constants import ITEM_WEIGHT
-from data.item import Item
-from data.items import ITEMS
-from models.containers.rocketsilo import RocketSilo
+from django_distribute.data.constants import ITEM_WEIGHT
+from django_distribute.data.item import Item
+from django_distribute.data.items import ITEMS
+from django_distribute.containers.rocketsilo import RocketSilo
 
 
 def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:

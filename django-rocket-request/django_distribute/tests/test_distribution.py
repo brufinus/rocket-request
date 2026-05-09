@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock
 
-from models.containers.rocketsilo import RocketSilo
-from services.distribution import expand_and_sort_items, find_open_silo, \
+from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.services.distribution import expand_and_sort_items, find_open_silo, \
     first_fit_silo
 
 

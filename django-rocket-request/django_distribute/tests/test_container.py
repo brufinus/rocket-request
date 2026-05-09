@@ -1,6 +1,6 @@
-from data.items import ITEMS
-from models.containers.chest import Chest
-from models.containers.rocketsilo import RocketSilo
+from django_distribute.data.items import ITEMS
+from django_distribute.containers.chest import Chest
+from django_distribute.containers.rocketsilo import RocketSilo
 
 
 class TestContainer:

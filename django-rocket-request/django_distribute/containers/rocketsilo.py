@@ -5,9 +5,9 @@ Classes:
     RocketSilo: A container for holding items to be launched.
 """
 
-from data.constants import ITEM_WEIGHT
-from data.item import Item
-from models.containers.container import Container
+from django_distribute.data.constants import ITEM_WEIGHT
+from django_distribute.data.item import Item
+from django_distribute.containers.container import Container
 
 
 class RocketSilo(Container):

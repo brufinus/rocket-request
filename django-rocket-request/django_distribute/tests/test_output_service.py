@@ -1,6 +1,6 @@
-from data.constants import ITEM_WEIGHT
-from data.items import ITEMS
-from services.output_service import *
+from django_distribute.data.constants import ITEM_WEIGHT
+from django_distribute.data.items import ITEMS
+from django_distribute.services.output_service import *
 
 
 def test_print_consolidated(capsys):

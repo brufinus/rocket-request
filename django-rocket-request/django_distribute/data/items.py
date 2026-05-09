@@ -1,7 +1,13 @@
-from data.constants import ITEM_ID, ITEM_KEYWORDS, ITEM_NAME, \
-    ITEM_ROCKET_CAPACITY, ITEM_STACK, ITEM_WEIGHT
-from data.item import Item
-from models.containers.rocketsilo import RocketSilo
+from django_distribute.data.constants import (
+    ITEM_ID,
+    ITEM_KEYWORDS,
+    ITEM_NAME,
+    ITEM_ROCKET_CAPACITY,
+    ITEM_STACK,
+    ITEM_WEIGHT
+)
+from django_distribute.data.item import Item
+from django_distribute.containers.rocketsilo import RocketSilo
 
 
 def make_item(name: str, stack_size: int, rocket_capacity: int,

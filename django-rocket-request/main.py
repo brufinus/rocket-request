@@ -1,8 +1,8 @@
 """Main module for the rocket silo program."""
 
-from services import input_service
-from services.distribution import distribute_items
-from services.output_service import print_consolidated, print_distribution
+from django_distribute.services import input_service
+from django_distribute.services.distribution import distribute_items
+from django_distribute.services.output_service import print_consolidated, print_distribution
 
 
 def main() -> None:

@@ -1,10 +1,10 @@
 from hypothesis import given, strategies as st
 
-from data.items import ITEMS
-from models.containers.rocketsilo import RocketSilo
-from services.distribution import distribute_items
-from services.helper import get_formatted_float
-from services.initialize_setup import (
+from django_distribute.data.items import ITEMS
+from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.services.distribution import distribute_items
+from django_distribute.services.helper import get_formatted_float
+from django_distribute.services.initialize_setup import (
     build_consolidated_invs,
     build_consolidated_load,
     build_distribution,
@@ -12,7 +12,7 @@ from services.initialize_setup import (
     get_consolidated_slots,
     group_items,
 )
-from services.output_service import (
+from django_distribute.services.output_service import (
     get_load_visualization,
     print_consolidated,
     print_distribution,

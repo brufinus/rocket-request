@@ -9,8 +9,8 @@ Functions
 
 from difflib import SequenceMatcher
 
-from data.constants import ITEM_KEYWORDS
-from data.item import Item
+from django_distribute.data.constants import ITEM_KEYWORDS
+from django_distribute.data.item import Item
 
 
 def search_coordinator(

@@ -12,10 +12,10 @@ Functions:
 
 import math
 
-from data.constants import ITEM_ID, ITEM_NAME
-from data.item import Item
-from models.containers.rocketsilo import RocketSilo
-from services.helper import get_formatted_float
+from django_distribute.data.constants import ITEM_ID, ITEM_NAME
+from django_distribute.data.item import Item
+from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.services.helper import get_formatted_float
 
 
 def build_distribution(
