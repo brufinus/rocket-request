@@ -1,38 +1,43 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'distribute/style.css' %}" />
-
 <!DOCTYPE html>
 <html lang="en-US">
-
-<head>
-    <meta charset="utf-8" />
-    <title>Rocket Request</title>
-    <meta name="author" content="brufinus" />
-    <meta name="description" content="Automatic item distribution across Rocket Silos in Factorio." />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-
-<body>
-    <header>
-        <img src="#" alt="Insert Logo Here" />
-        <h1>Rocket Request</h1>
-    </header>
-
-    <nav class="nav-bar">
-        <ul class="links-list">
-            <li><a href="#">Home</a></li>
-            <li><a href="https://github.com/brufinus/rocket-request">GitHub</a></li>
-            <li><button>Toggle Dark Mode</button></li>
-        </ul>
-    </nav>
-
-    <main>
-        {% block content %}{% endblock content %}
-    </main>
-
-    <footer>
-        <p>GitHub: <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
-    </footer>
-</body>
-
+    <head>
+        <meta charset="utf-8" />
+        <title>Rocket Request</title>
+        <meta name="author" content="brufinus" />
+        <meta name="description"
+              content="Automatic item distribution across Rocket Silos in Factorio." />
+        <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+                integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
+                crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <img src="#" alt="Insert Logo Here" />
+            <h1>Rocket Request</h1>
+        </header>
+        <nav class="nav-bar">
+            <ul class="links-list">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="https://github.com/brufinus/rocket-request">GitHub</a>
+                </li>
+                <li>
+                    <button>Toggle Dark Mode</button>
+                </li>
+            </ul>
+        </nav>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer>
+            <p>
+                GitHub: <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a>
+            </p>
+        </footer>
+    </body>
 </html>

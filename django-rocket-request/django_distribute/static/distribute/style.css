@@ -40,7 +40,7 @@ aside {
   padding: 1em 1em;
 }
 
-.added-items-container {
+#added-items-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
@@ -60,4 +60,9 @@ aside ul {
 
 #count-list {
   text-align: right;
+}
+
+#remove-button {
+  padding: 0;
+  border: none;
 }

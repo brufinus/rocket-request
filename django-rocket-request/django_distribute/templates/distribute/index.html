@@ -1,11 +1,12 @@
 {% extends "distribute/base.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static "distribute/style.css" %}" />
 {% block content %}
-    <article>
+    <article data-remove-url="{% url "distribute:remove" %}">
         <section>
             <h2>Setup</h2>
-            <form id="item-collection-form" method="post" data-collection-url="{% url "distribute:collection" %}">
+            <form id="item-collection-form"
+                  method="post"
+                  data-collection-url="{% url "distribute:collection" %}">
                 {% csrf_token %}
                 <fieldset>
                     <legend>Add items to distribute</legend>
@@ -38,7 +39,7 @@
                     </p>
                 </fieldset>
             </form>
-            <form action="{% url 'distribute:results' %}" method="post">
+            <form action="{% url "distribute:results" %}" method="post">
                 {% csrf_token %}
                 <p>
                     <label for="num_silos">Number of available silos:</label>
@@ -56,18 +57,25 @@
         </section>
         <aside>
             <h3>Added Items</h3>
-            <div class="added-items-container">
+            <div id="added-items-container">
                 <p>Item</p>
                 <p>Count</p>
                 <ul id="item-list">
-                    {% for item,count in itemlist.items %}<li id="item">{{ item }}</li>{% endfor %}
+                    {% for item_name, count in itemlist.items %}<li id="item-name">{{ item_name }}</li>{% endfor %}
                 </ul>
                 <ul id="count-list">
-                    {% for item,count in itemlist.items %}<li id="count">{{ count }}</li>{% endfor %}
+                    {% for item_name, count in itemlist.items %}
+                        <li id="count">
+                            {{ count }}
+                            <button id="remove-button" data-item-name="{{ item_name }}">Remove</button>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </aside>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="{% static "distribute/utils.js" %}"></script>
     <script src="{% static "distribute/collection.js" %}"></script>
+    <script src="{% static "distribute/remove.js" %}"></script>
 {% endblock content %}
