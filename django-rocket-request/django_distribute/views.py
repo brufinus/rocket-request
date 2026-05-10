@@ -9,12 +9,12 @@ def index(request):
     request.session.set_test_cookie()
 
     itemlist = request.session.get("itemlist", {})
-    request.session["itemlist"] = itemlist
+    request.session["itemlist"] = dict(sorted(itemlist.items()))
 
     return render(
         request,
         "distribute/index.html",
-        {"itemlist": itemlist, "suggestions": ITEMS},
+        {"itemlist": request.session["itemlist"], "suggestions": ITEMS},
     )
 
 
@@ -43,8 +43,8 @@ def item_collection(request):
         if item_name in itemlist:
             item_count += int(itemlist[item_name])
         itemlist.update({item_name: item_count})
-        request.session["itemlist"] = itemlist
-        return JsonResponse({"itemlist": itemlist})
+        request.session["itemlist"] = dict(sorted(itemlist.items()))
+        return JsonResponse({"itemlist": request.session["itemlist"]})
     return HttpResponseBadRequest()
 
 
