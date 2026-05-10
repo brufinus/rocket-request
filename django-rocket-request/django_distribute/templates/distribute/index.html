@@ -67,7 +67,7 @@
                     },
                     success: function (response) {
                         $("#search-error").empty();
-                        if (response.items == "Invalid request") {
+                        if (response.items == "Invalid item") {
                             $("#search-error").append("Invalid item");
                             $("#user-item-input").val("");
                             $("#user-item-input").focus();

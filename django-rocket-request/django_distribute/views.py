@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render
 from django_distribute.data.items import ITEMS
 from django_distribute.services.search import search_coordinator
@@ -36,13 +36,13 @@ def item_collection(request):
         if search_res[0]:
             item_name = search_res[0]
         else:
-            return JsonResponse({"items": "Invalid request"})
+            return JsonResponse({"items": "Invalid item"})
         item_count = request.POST.get("user-count")
         items = request.session.get("items", [])
         items.append((item_name, item_count))
         request.session["items"] = items
         return JsonResponse({"items": items})
-    return JsonResponse({"items": "Invalid request"})
+    return HttpResponseBadRequest()
 
 
 def results(request):
