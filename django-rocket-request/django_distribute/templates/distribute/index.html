@@ -17,6 +17,7 @@
                                 <option value="{{ suggestion }}">{{ suggestion }}</option>
                             {% endfor %}
                         </datalist>
+                        <div id="search-error"></div>
                     </div>
                     <p>
                         <label for="user-count-input">Count:</label>
@@ -56,7 +57,6 @@
         $(document).ready(function () {
             $("#item-collection-form").on("submit", function (event) {
                 event.preventDefault();
-
                 $.ajax({
                     url: "{% url 'distribute:collection' %}",
                     type: "POST",
@@ -66,12 +66,22 @@
                         "csrfmiddlewaretoken": "{{ csrf_token }}"
                     },
                     success: function (response) {
-                        $("#item-list").empty();
-                        $("#count-list").empty();
-                        response.items.forEach(function (item) {
-                            $("#item-list").append("<li>" + item[0] + "</li>");
-                            $("#count-list").append("<li>" + item[1] + "</li>");
-                        });
+                        $("#search-error").empty();
+                        if (response.items == "Invalid request") {
+                            $("#search-error").append("Invalid item");
+                            $("#user-item-input").val("");
+                            $("#user-item-input").focus();
+                        }
+                        else {
+                            $("#item-list").empty();
+                            $("#count-list").empty();
+                            response.items.forEach(function (item) {
+                                $("#item-list").append("<li>" + item[0] + "</li>");
+                                $("#count-list").append("<li>" + item[1] + "</li>");
+                            });
+                            $("#user-item-input").val("");
+                            $("#user-item-input").focus();
+                        }
                     }
                 });
             });

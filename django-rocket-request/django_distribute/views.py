@@ -1,5 +1,7 @@
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django_distribute.data.items import ITEMS
+from django_distribute.services.search import search_coordinator
 
 
 def index(request):
@@ -15,7 +17,9 @@ def index(request):
         item_counts.append(item[1])
 
     return render(
-        request, "distribute/index.html", {"items": item_names, "counts": item_counts, "suggestions": ["Python", "Java", "Go"]}
+        request,
+        "distribute/index.html",
+        {"items": item_names, "counts": item_counts, "suggestions": ITEMS},
     )
 
 
@@ -25,9 +29,14 @@ def item_collection(request):
             request.session.delete_test_cookie()
             print("Cookie test!")
         else:
+            # TODO: Handle missing cookie
             print("Please enable cookies and try again.")
 
-        item_name = request.POST.get("user-item")
+        search_res = search_coordinator(request.POST.get("user-item"), ITEMS)
+        if search_res[0]:
+            item_name = search_res[0]
+        else:
+            return JsonResponse({"items": "Invalid request"})
         item_count = request.POST.get("user-count")
         items = request.session.get("items", [])
         items.append((item_name, item_count))
