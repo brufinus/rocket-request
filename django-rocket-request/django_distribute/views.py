@@ -72,8 +72,15 @@ def results(request):
     """Renders the results page with the distributed data."""
     try:
         num_silos = request.POST["num_silos"]
+        itemlist: dict = request.session.get("itemlist", {})
+        if len(itemlist) <= 0:
+            return render(
+                request,
+                "distribute/index.html",
+                {"distribute_error": "Please add items to distribute."},
+            )
     except KeyError:
-        return render(request, "distribute/index.html", None)
+        return HttpResponseBadRequest()
     return render(
         request,
         "distribute/results.html",

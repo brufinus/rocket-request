@@ -16,6 +16,7 @@ $(document).ready(function () {
       },
       success: function (response) {
         $("#search-error").empty();
+        $("#distribute-error").empty();
         if (response.itemlist == "Invalid item") {
           $("#search-error").append("Invalid item");
           $("#user-item-input").val("");

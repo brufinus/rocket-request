@@ -18,7 +18,8 @@
                                id="user-item-input"
                                placeholder="Start typing..."
                                required
-                               maxlength="35" />
+                               maxlength="35" 
+                               autofocus />
                         <datalist id="suggestions">
                             {% for suggestion in suggestions %}<option value="{{ suggestion }}">{{ suggestion }}</option>{% endfor %}
                         </datalist>
@@ -39,7 +40,7 @@
                     </p>
                 </fieldset>
             </form>
-            <form action="{% url "distribute:results" %}" method="post">
+            <form id="distribute-form" action="{% url "distribute:results" %}" method="post">
                 {% csrf_token %}
                 <p>
                     <label for="num_silos">Number of available silos:</label>
@@ -52,6 +53,7 @@
                 </p>
                 <p>
                     <button>Distribute</button>
+                    <div id="distribute-error">{{ distribute_error }}</div>
                 </p>
             </form>
         </section>
