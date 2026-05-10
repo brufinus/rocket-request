@@ -8,18 +8,13 @@ def index(request):
     """Main page for the application."""
     request.session.set_test_cookie()
 
-    items = request.session.get("items", [])
-    request.session["items"] = items
-    item_names = []
-    item_counts = []
-    for item in items:
-        item_names.append(item[0])
-        item_counts.append(item[1])
+    itemlist = request.session.get("itemlist", {})
+    request.session["itemlist"] = itemlist
 
     return render(
         request,
         "distribute/index.html",
-        {"items": item_names, "counts": item_counts, "suggestions": ITEMS},
+        {"itemlist": itemlist, "suggestions": ITEMS},
     )
 
 
@@ -38,16 +33,18 @@ def item_collection(request):
         if search_res[0]:
             item_name = search_res[0]
         else:
-            return JsonResponse({"items": "Invalid item"})
+            return JsonResponse({"itemlist": "Invalid item"})
 
-        item_count = request.POST.get("user-count")
-        if item_count <= 0:
-            return JsonResponse({"items": "Invalid count"})
+        item_count: int = int(request.POST.get("user-count"))
+        if int(item_count) <= 0:
+            return JsonResponse({"itemlist": "Invalid count"})
 
-        items = request.session.get("items", [])
-        items.append((item_name, item_count))
-        request.session["items"] = items
-        return JsonResponse({"items": items})
+        itemlist: dict[str, int] = request.session.get("itemlist", {})
+        if item_name in itemlist:
+            item_count += int(itemlist[item_name])
+        itemlist.update({item_name: item_count})
+        request.session["itemlist"] = itemlist
+        return JsonResponse({"itemlist": itemlist})
     return HttpResponseBadRequest()
 
 
