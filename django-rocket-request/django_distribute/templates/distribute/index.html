@@ -5,7 +5,7 @@
     <article>
         <section>
             <h2>Setup</h2>
-            <form id="item-collection-form" method="post">
+            <form id="item-collection-form" method="post" data-collection-url="{% url "distribute:collection" %}">
                 {% csrf_token %}
                 <fieldset>
                     <legend>Add items to distribute</legend>
@@ -68,43 +68,6 @@
             </div>
         </aside>
     </article>
-    <script>
-        $(document).ready(function () {
-            $("#item-collection-form").on("submit", function (event) {
-                event.preventDefault();
-                $.ajax({
-                    url: "{% url 'distribute:collection' %}",
-                    type: "POST",
-                    data: {
-                        "user-item": $("#user-item-input").val(),
-                        "user-count": $("#user-count-input").val(),
-                        "csrfmiddlewaretoken": "{{ csrf_token }}"
-                    },
-                    success: function (response) {
-                        $("#search-error").empty();
-                        if (response.itemlist == "Invalid item") {
-                            $("#search-error").append("Invalid item");
-                            $("#user-item-input").val("");
-                            $("#user-item-input").focus();
-                        }
-                        if (response.itemlist == "Invalid count") {
-                            $("#count-error").append("Invalid count");
-                            $("#user-count-input").val("");
-                            $("#user-count-input").focus();
-                        }
-                        else {
-                            $("#item-list").empty();
-                            $("#count-list").empty();
-                            for (var itemName in response.itemlist) {
-                                $("#item-list").append("<li>" + itemName + "</li>");
-                                $("#count-list").append("<li>" + response.itemlist[itemName] + "</li>");
-                            }
-                            $("#user-item-input").val("");
-                            $("#user-item-input").focus();
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="{% static "distribute/collection.js" %}"></script>
 {% endblock content %}
