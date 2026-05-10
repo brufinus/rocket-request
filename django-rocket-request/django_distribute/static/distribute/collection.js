@@ -21,8 +21,7 @@ $(document).ready(function () {
           $("#search-error").append("Invalid item");
           $("#user-item-input").val("");
           $("#user-item-input").focus();
-        }
-        if (response.itemlist == "Invalid count") {
+        } else if (response.itemlist == "Invalid count") {
           $("#count-error").append("Invalid count");
           $("#user-count-input").val("");
           $("#user-count-input").focus();
