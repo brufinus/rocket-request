@@ -5,8 +5,8 @@ Classes:
     Chest: A standard storage container for holding items.
 """
 
-from django_distribute.data.item import Item
 from django_distribute.containers.container import Container
+from django_distribute.data.item import Item
 
 
 class Chest(Container):
@@ -22,6 +22,7 @@ class Chest(Container):
         capacity (int): The maximum number of slots available.
         inventory (list): A list of items in the chest.
     """
+
     CAPACITY: int = 48
 
     def __init__(self) -> None:

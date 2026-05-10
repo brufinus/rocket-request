@@ -12,10 +12,11 @@ Functions:
     print_silo_header: Prints silo header information.
 """
 
-from decimal import ROUND_HALF_UP, Decimal
 import math
+from decimal import ROUND_HALF_UP, Decimal
 
 from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.data.item import Item
 from django_distribute.services.helper import get_col_width, get_formatted_float
 from django_distribute.services.initialize_setup import (
     build_consolidated_invs,
@@ -107,15 +108,18 @@ def print_item_header() -> None:
     print(f"\t\t{"-" * (col_width + 10)}")
 
 
-def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
+def print_distribution(
+    silos: list[RocketSilo], num_silos: int, item_data: dict[str, Item]
+) -> None:
     """
     Prints the distribution of items across available silos.
 
     :param list[RocketSilo] silos: List of silos with distributed items.
     :param int num_silos: The number of silos available to the user.
+    :param dict[str, Item] item_data: Item data to query.
     :return: None
     """
-    cycles = build_distribution(silos, num_silos)
+    cycles = build_distribution(silos, num_silos, item_data)
     num_cycles = len(cycles)
     print_distribution_info(len(silos), num_cycles)
 
@@ -132,16 +136,19 @@ def print_distribution(silos: list[RocketSilo], num_silos: int) -> None:
             silo_index += 1
 
 
-def print_consolidated(silos: list[RocketSilo], num_silos: int) -> None:
+def print_consolidated(
+    silos: list[RocketSilo], num_silos: int, item_data: dict[str, Item]
+) -> None:
     """
     Prints the distribution of silo inventories consolidated across cycles.
 
     :param list[RocketSilo] silos: List of silos.
     :param int num_silos: Number of available silos.
+    :param dict[str, Item] item_data: Item data to query.
     :return: None
     """
     print("\nConsolidated silo contents:")
-    c_silo_invs = build_consolidated_invs(silos, num_silos)
+    c_silo_invs = build_consolidated_invs(silos, num_silos, item_data)
     c_silo_loads = build_consolidated_load(silos, num_silos)
     for inv_index, inv in enumerate(c_silo_invs):
         print(f"\n\tSilo {inv_index + 1} ({c_silo_loads[inv_index]} kg):")

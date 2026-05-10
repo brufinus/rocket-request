@@ -5,7 +5,6 @@ INPUT_GREATER_ZERO = "Enter a value greater than zero."
 INPUT_INVALID_NUM = f"Invalid input. {INPUT_GREATER_ZERO}"
 
 # Item attributes
-ITEM_NAME = "name"
 ITEM_STACK = "stack_size"
 ITEM_ROCKET_CAPACITY = "rocket_capacity"
 ITEM_WEIGHT = "weight"

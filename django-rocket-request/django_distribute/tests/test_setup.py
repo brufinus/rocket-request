@@ -1,7 +1,8 @@
-from hypothesis import given, strategies as st
+from hypothesis import given
+from hypothesis import strategies as st
 
-from django_distribute.data.items import ITEMS
 from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.data.items import ITEMS, make_item
 from django_distribute.services.distribution import distribute_items
 from django_distribute.services.helper import get_formatted_float
 from django_distribute.services.initialize_setup import (
@@ -46,47 +47,48 @@ def test_calculate_launch_cycles():
 
 
 def test_group_item():
-    grouped_items = group_items([ITEMS["pipe"]])
+    grouped_items = group_items([ITEMS["Pipe"]], ITEMS)
     assert len(grouped_items) == 1
 
 
 def test_group_multiple_same_items():
-    items = [ITEMS["transportbelt"] for _ in range(10)]
-    grouped_items = group_items(items)
+    items = [ITEMS["Transport belt"] for _ in range(10)]
+    grouped_items = group_items(items, ITEMS)
     assert len(grouped_items) == 1
-    assert grouped_items[ITEMS["transportbelt"]["name"]] == 10
+    assert grouped_items["Transport belt"] == 10
 
 
 def test_group_multiple_single_items():
-    items = [ITEMS["transportbelt"], ITEMS["chemicalplant"]]
-    grouped_items = group_items(items)
+    items = [ITEMS["Transport belt"], ITEMS["Chemical plant"]]
+    grouped_items = group_items(items, ITEMS)
     assert len(grouped_items) == 2
-    assert grouped_items[ITEMS["transportbelt"]["name"]] == 1
-    assert grouped_items[ITEMS["chemicalplant"]["name"]] == 1
+    assert grouped_items["Transport belt"] == 1
+    assert grouped_items["Chemical plant"] == 1
 
 
 def test_group_multiple_different_items():
-    belts = [ITEMS["transportbelt"] for _ in range(18)]
-    plants = [ITEMS["chemicalplant"] for _ in range(7)]
-    foo = [{"name": "bar", "id": 1} for _ in range(21)]
-    items = belts + plants + foo
-    grouped_items = group_items(items)
+    belts = [ITEMS["Transport belt"] for _ in range(18)]
+    plants = [ITEMS["Chemical plant"] for _ in range(7)]
+    pipes = [ITEMS["Pipe"] for _ in range(21)]
+    items = belts + plants + pipes
+    grouped_items = group_items(items, ITEMS)
     assert len(grouped_items) == 3
-    assert grouped_items[ITEMS["transportbelt"]["name"]] == 18
-    assert grouped_items[ITEMS["chemicalplant"]["name"]] == 7
-    assert grouped_items["bar"] == 21
+    assert grouped_items["Transport belt"] == 18
+    assert grouped_items["Chemical plant"] == 7
+    assert grouped_items["Pipe"] == 21
 
 
 def test_group_items_sort_by_id():
     items = group_items(
-        [{"name": "a", "id": 3}, {"name": "b", "id": 1}, {"name": "c", "id": 2}]
+        [make_item(1, 1, 3), make_item(1, 1, 1), make_item(1, 1, 2)],
+        {"a": make_item(1, 1, 3), "b": make_item(1, 1, 1), "c": make_item(1, 1, 2)},
     )
     assert items == {"b": 1, "c": 1, "a": 1}
 
 
 # def test_print():
-#     items = [("transportbelt", 220), ("inserter", 25), ("pipetoground", 15),
-#              ("chemicalplant", 4), ("thruster", 6), ("crusher", 7)]
+#     items = [("Transport belt", 220), ("inserter", 25), ("pipetoground", 15),
+#              ("Chemical plant", 4), ("Thruster", 6), ("Crusher", 7)]
 #     silos = distribute_items(items)
 #     print_distribution(silos, 4)
 #     print_consolidated(silos, 4)
@@ -95,31 +97,12 @@ def test_group_items_sort_by_id():
 def test_print_full_setup():
     # Run with -s flag.
     items = [
-        ("transportbelt", 194),
-        ("inserter", 42),
-        ("pipe", 36),
-        ("efficiencymodule2", 32),
-        ("efficiencymodule", 24),
-        ("undergroundbelt", 18),
-        ("longhandedinserter", 17),
-        ("gunturret", 14),
-        ("solarpanel", 12),
-        ("electricfurnace", 10),
-        ("accumulator", 9),
-        ("chemicalplant", 8),
-        ("asteroidcollector", 8),
-        ("fastinserter", 7),
-        ("splitter", 6),
-        ("fastundergroundbelt", 4),
-        ("pipetoground", 4),
-        ("crusher", 4),
-        ("storagetank", 3),
-        ("thruster", 3),
-        ("assemblingmachine2", 2),
-        ("uraniumroundsmagazine", 100),
+        ("Transport belt", 194),
+        ("Inserter", 42),
+        ("Pipe", 36),
     ]
     silos = distribute_items(items)
-    print_distribution(silos, 8)
+    print_distribution(silos, 2, ITEMS)
 
 
 def test_full_load_visualization():
@@ -162,21 +145,23 @@ def test_get_formatted_float_decimal():
 
 def test_build_distribution_one_cycle():
     silos = [RocketSilo(), RocketSilo()]
-    silos[0].add_item(ITEMS["nuclearreactor"])
-    silos[1].add_item(ITEMS["thruster"])
-    assert build_distribution(silos, 2) == [[{"Nuclear reactor": 1}, {"Thruster": 1}]]
+    silos[0].add_item(ITEMS["Nuclear reactor"])
+    silos[1].add_item(ITEMS["Thruster"])
+    assert build_distribution(silos, 2, ITEMS) == [
+        [{"Nuclear reactor": 1}, {"Thruster": 1}]
+    ]
 
 
 def test_build_distribution_more_silos_than_available():
     # Multiple cycles
     silos = [RocketSilo(), RocketSilo(), RocketSilo()]
-    silos[0].add_item(ITEMS["nuclearreactor"])
-    silos[1].add_item(ITEMS["thruster"])
+    silos[0].add_item(ITEMS["Nuclear reactor"])
+    silos[1].add_item(ITEMS["Thruster"])
     for _ in range(8):
-        silos[1].add_item(ITEMS["crusher"])
+        silos[1].add_item(ITEMS["Crusher"])
     for _ in range(2):
-        silos[2].add_item(ITEMS["thruster"])
-    assert build_distribution(silos, 2) == [
+        silos[2].add_item(ITEMS["Thruster"])
+    assert build_distribution(silos, 2, ITEMS) == [
         [{"Nuclear reactor": 1}, {"Crusher": 8, "Thruster": 1}],
         [{"Thruster": 2}],
     ]
@@ -185,19 +170,19 @@ def test_build_distribution_more_silos_than_available():
 def test_build_distribution_less_silos_than_available():
     # Only one cycle
     silos = [RocketSilo(), RocketSilo(), RocketSilo()]
-    silos[0].add_item(ITEMS["nuclearreactor"])
-    silos[1].add_item(ITEMS["thruster"])
+    silos[0].add_item(ITEMS["Nuclear reactor"])
+    silos[1].add_item(ITEMS["Thruster"])
     for _ in range(8):
-        silos[1].add_item(ITEMS["crusher"])
+        silos[1].add_item(ITEMS["Crusher"])
     for _ in range(2):
-        silos[2].add_item(ITEMS["thruster"])
-    assert build_distribution(silos, 10) == [
+        silos[2].add_item(ITEMS["Thruster"])
+    assert build_distribution(silos, 10, ITEMS) == [
         [{"Nuclear reactor": 1}, {"Crusher": 8, "Thruster": 1}, {"Thruster": 2}]
     ]
 
 
 def test_build_distribution_empty():
-    assert build_distribution([], 3) == []
+    assert build_distribution([], 3, ITEMS) == []
 
 
 @given(st.integers(1, 1000), st.integers(1, 1000))
@@ -212,11 +197,11 @@ def test_build_consolidated_load(n, s):
 
 def test_build_consolidated_invs():
     silos = []
-    for val in [ITEMS["pipe"]], [ITEMS["pipe"]], [ITEMS["car"]]:
+    for val in [ITEMS["Pipe"]], [ITEMS["Pipe"]], [ITEMS["Car"]]:
         silo = RocketSilo()
         silo.inventory = val
         silos.append(silo)
-    assert build_consolidated_invs(silos, 1) == [{"Car": 1, "Pipe": 2}]
+    assert build_consolidated_invs(silos, 1, ITEMS) == [{"Car": 1, "Pipe": 2}]
 
 
 @given(st.integers(1, 10000), st.integers())

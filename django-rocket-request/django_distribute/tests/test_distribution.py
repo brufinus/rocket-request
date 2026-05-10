@@ -1,8 +1,11 @@
 from unittest.mock import MagicMock
 
 from django_distribute.containers.rocketsilo import RocketSilo
-from django_distribute.services.distribution import expand_and_sort_items, find_open_silo, \
-    first_fit_silo
+from django_distribute.services.distribution import (
+    expand_and_sort_items,
+    find_open_silo,
+    first_fit_silo,
+)
 
 
 def mock_silo(add_item_return):
@@ -12,24 +15,22 @@ def mock_silo(add_item_return):
 
 
 class TestDistribution:
-    item = {
-        "name": "Item",
-        "weight": 1
-    }
+    item = {"name": "Item", "weight": 1}
 
     def test_item_expansion(self):
-        items = [("transportbelt", 2), ("chemicalplant", 3)]
+        items = [("Transport belt", 2), ("Chemical plant", 3)]
         expanded_items = expand_and_sort_items(items)
         assert len(expanded_items) == 5
 
     def test_item_sorting(self):
-        items = [("transportbelt", 1), ("chemicalplant", 1)]
+        items = [("Transport belt", 1), ("Chemical plant", 1)]
         expanded_items = expand_and_sort_items(items)
-        assert expanded_items[0]['weight'] >= expanded_items[1]['weight']
-        items_reversed = [("chemicalplant", 1), ("transportbelt", 1)]
+        assert expanded_items[0]["weight"] >= expanded_items[1]["weight"]
+        items_reversed = [("Chemical plant", 1), ("Transport belt", 1)]
         expanded_items_reversed = expand_and_sort_items(items_reversed)
-        assert (expanded_items_reversed[0]['weight'] >=
-                expanded_items_reversed[1]['weight'])
+        assert (
+            expanded_items_reversed[0]["weight"] >= expanded_items_reversed[1]["weight"]
+        )
 
     def test_find_open_silo_when_item_fits(self):
         silo = mock_silo(True)

@@ -13,19 +13,19 @@ from django_distribute.data.item import Item
 class Container(ABC):
     """
     Abstract base class for containers.
-    
+
     A container is a storage unit that can hold items.
 
     Public methods: add_item, can_add_item, increase_load, remove_item,
     decrease_load
-    
+
     Instance variables: container, capacity, inventory, load
     """
 
     def __init__(self, container: str, capacity: int) -> None:
         """
         Initializes a container with a name and capacity.
-        
+
         :param str container: The name of the container.
         :param int capacity: The maximum amount the container can have.
         :return: None

@@ -7,7 +7,6 @@ Functions:
     transform_string: Transform a string to the expected key format.
 """
 
-
 import re
 
 from django_distribute.data.items import ITEMS
@@ -34,7 +33,7 @@ def get_col_width() -> int:
     Returns a column width for output padding.
 
     Determined using the longest key from item data.
-    
+
     :param dict[str, Item] item_data: The item data to use.
     :return: The column width.
     :rtype: int

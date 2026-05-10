@@ -1,13 +1,13 @@
-from django_distribute.data.items import ITEMS
 from django_distribute.containers.chest import Chest
 from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.data.items import ITEMS
 
 
 class TestContainer:
     def setup_method(self):
         self.chest = Chest()
         self.silo = RocketSilo()
-        self.belt = ITEMS['transportbelt']
+        self.belt = ITEMS["Transport belt"]
 
     def test_initialized_chest(self):
         assert self.chest.inventory == []
@@ -42,7 +42,7 @@ class TestContainer:
 
     def test_silo_load(self):
         self.silo.add_item(self.belt)
-        assert self.silo.load == self.belt['weight']
+        assert self.silo.load == self.belt["weight"]
         self.silo.remove_item(self.belt)
         assert self.silo.load == 0
 
@@ -62,6 +62,6 @@ class TestContainer:
         assert self.silo.load == self.silo.capacity
 
     def test_silo_load_weight(self):
-        self.silo.add_item(ITEMS["artificialyumakosoil"])
+        self.silo.add_item(ITEMS["Artificial yumako soil"])
         val = 988 / 67
         assert self.silo.load == val

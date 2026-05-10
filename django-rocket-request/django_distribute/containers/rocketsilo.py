@@ -5,9 +5,9 @@ Classes:
     RocketSilo: A container for holding items to be launched.
 """
 
+from django_distribute.containers.container import Container
 from django_distribute.data.constants import ITEM_WEIGHT
 from django_distribute.data.item import Item
-from django_distribute.containers.container import Container
 
 
 class RocketSilo(Container):
@@ -33,8 +33,7 @@ class RocketSilo(Container):
 
         Extends Container.__init__
         """
-        super().__init__(container="rocket_silo",
-                         capacity=self.CAPACITY)
+        super().__init__(container="rocket_silo", capacity=self.CAPACITY)
 
     def can_add_item(self, item: Item) -> bool:
         """

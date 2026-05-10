@@ -24,11 +24,11 @@ def test_parse_count_invalid_int():
 
 
 def test_is_valid_item():
-    assert is_insertable("yumako", ITEMS) == True
+    assert is_insertable("Yumako", ITEMS) == True
 
 
 def test_is_invalid_item():
-    assert is_insertable("atomicbomb", ITEMS) == False
+    assert is_insertable("Atomic bomb", ITEMS) == False
 
 
 def test_is_valid_item_empty():

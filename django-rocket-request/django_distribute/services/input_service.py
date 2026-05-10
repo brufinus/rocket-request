@@ -8,7 +8,6 @@ Functions:
     is_done_adding_items: Checks whether the user is done adding items.
 """
 
-from django_distribute.data.constants import ITEM_NAME
 from django_distribute.data.items import ITEMS
 from django_distribute.services.helper import transform_string
 from django_distribute.services.search import search_coordinator
@@ -44,16 +43,15 @@ def request_items() -> list[tuple[str, int]]:
     items: list[tuple[str, int]] = []
     while True:
         user_input = input("Item: ")
-        user_item = transform_string(user_input)
-        if is_done_adding_items(user_item, items):
+        if is_done_adding_items(user_input, items):
             break
 
-        search_res = search_coordinator(user_item, ITEMS)
+        search_res = search_coordinator(user_input, ITEMS)
         item = ""
         if search_res[0]:
             if search_res[1]:
                 item = confirm_suggested_item(
-                    input(f"Did you mean '{ITEMS[search_res[0]][ITEM_NAME]}'? [y/n]: "),
+                    input(f"Did you mean '{search_res[0]}'? [y/n]: "),
                     search_res[0],
                 )
             else:

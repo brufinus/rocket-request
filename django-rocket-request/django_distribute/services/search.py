@@ -11,6 +11,7 @@ from difflib import SequenceMatcher
 
 from django_distribute.data.constants import ITEM_KEYWORDS
 from django_distribute.data.item import Item
+from django_distribute.services.helper import transform_string
 
 
 def search_coordinator(
@@ -51,8 +52,12 @@ def search_item(item: str, item_data: dict[str, Item]) -> str:
     """
     if item in item_data:
         return item
+    transformed_item = transform_string(item)
     for k in item_data:
-        if item in item_data[k].get(ITEM_KEYWORDS, []):
+        transformed_key = transform_string(k)
+        if transformed_key == transformed_item:
+            return k
+        if transformed_item in item_data[k].get(ITEM_KEYWORDS, []):
             return k
     return ""
 

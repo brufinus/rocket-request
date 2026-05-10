@@ -1,5 +1,6 @@
-from hypothesis import given, strategies as st
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from django_distribute.services.helper import transform_string
 from django_distribute.services.input_service import *
@@ -70,7 +71,7 @@ def test_request_items():
             "0",
             "-1",
             "100",
-            "atomicbomb",
+            "Atomic bomb",
             "yummako",
             "y",
             "15",
@@ -78,4 +79,4 @@ def test_request_items():
         ]
     )
     pytest.MonkeyPatch().setattr("builtins.input", lambda _: next(inputs))
-    assert request_items() == [("transportbelt", 1), ("pipe", 100), ("yumako", 15)]
+    assert request_items() == [("Transport belt", 1), ("Pipe", 100), ("Yumako", 15)]

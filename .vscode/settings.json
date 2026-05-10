@@ -1,6 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "tests"
+        "django-rocket-request/django_distribute/tests"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,

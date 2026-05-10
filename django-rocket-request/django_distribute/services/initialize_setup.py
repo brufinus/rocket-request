@@ -12,14 +12,14 @@ Functions:
 
 import math
 
-from django_distribute.data.constants import ITEM_ID, ITEM_NAME
-from django_distribute.data.item import Item
 from django_distribute.containers.rocketsilo import RocketSilo
+from django_distribute.data.constants import ITEM_ID
+from django_distribute.data.item import Item
 from django_distribute.services.helper import get_formatted_float
 
 
 def build_distribution(
-    silos: list[RocketSilo], num_silos: int
+    silos: list[RocketSilo], num_silos: int, item_data: dict[str, Item]
 ) -> list[list[dict[str, int]]]:
     """
     Builds data of silo item distribution across cycles.
@@ -29,6 +29,7 @@ def build_distribution(
 
     :param list[RocketSilo] silos: List of silos with distributed items.
     :param int num_silos: The number of silos available to the user.
+    :param dict[str, Item] item_data: Item data to query.
     :return: A list of silo inventories in each cycle.
     :rtype: list[list[dict[str, int]]]
     """
@@ -40,7 +41,7 @@ def build_distribution(
         for _ in range(num_silos):
             if silo_index >= len(silos):
                 break
-            cycle.append(group_items(silos[silo_index].inventory))
+            cycle.append(group_items(silos[silo_index].inventory, item_data))
             silo_index += 1
         cycles.append(cycle)
     return cycles
@@ -69,7 +70,7 @@ def build_consolidated_load(silos: list[RocketSilo], num_silos: int) -> list[str
 
 
 def build_consolidated_invs(
-    silos: list[RocketSilo], num_silos: int
+    silos: list[RocketSilo], num_silos: int, item_data: dict[str, Item]
 ) -> list[dict[str, int]]:
     """
     Builds data of silo item distribution, consolidated across cycles.
@@ -79,6 +80,7 @@ def build_consolidated_invs(
 
     :param list[RocketSilo] silos: List of silos with distributed items.
     :param int num_silos: The number of silos available to the user.
+    :param dict[str, Item] item_data: Item data to query.
     :return: A consolidated list of silo inventories in each cycle.
     :rtype: list[dict[str, int]]
     """
@@ -88,7 +90,7 @@ def build_consolidated_invs(
         superlist = []
         for silo in slot:
             superlist += silo.inventory
-        consolidated_invs.append(group_items(superlist))
+        consolidated_invs.append(group_items(superlist, item_data))
     return consolidated_invs
 
 
@@ -120,22 +122,23 @@ def get_consolidated_slots(
     return consolidated_slots
 
 
-def group_items(items: list[Item]) -> dict[str, int]:
+def group_items(items: list[Item], item_data: dict[str, Item]) -> dict[str, int]:
     """
     Consolidates and groups together items by name, sorted by item id.
 
     :param list[Item] items: List of items.
+    :param dict[str, Item] item_data: Item data to query.
     :return: Consolidated, sorted items and their counts.
     :rtype: dict[str, int]
     """
     grouped_items: dict[str, int] = {}
-    uids = []
+    uids: list[int] = []
     for item in items:
         uids.append(item[ITEM_ID])
     uids.sort()
     for uid in uids:
         # Get item name using id.
-        name = str([x[ITEM_NAME] for x in items if uid == x[ITEM_ID]][0])
+        name: str = [x for x in item_data if uid == item_data[x][ITEM_ID]][0]
         # Set item or increment its count.
         grouped_items.update({name: grouped_items.get(name, 0) + 1})
     return grouped_items

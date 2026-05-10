@@ -5,6 +5,6 @@ from django_distribute.services.output_service import *
 
 def test_print_consolidated(capsys):
     silo = RocketSilo()
-    silo.inventory = [ITEMS["yumako"]]
-    silo.load = ITEMS["yumako"][ITEM_WEIGHT]
-    print_consolidated([silo, silo], 1)
+    silo.inventory = [ITEMS["Yumako"]]
+    silo.load = ITEMS["Yumako"][ITEM_WEIGHT]
+    print_consolidated([silo, silo], 1, ITEMS)

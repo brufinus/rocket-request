@@ -1,9 +1,13 @@
 from django_distribute.data.items import ITEMS
-from django_distribute.services.search import search_coordinator, search_item, search_similar_item
+from django_distribute.services.search import (
+    search_coordinator,
+    search_item,
+    search_similar_item,
+)
 
 dictionary = {
-    "item1": {"name": "Item Name", "keywords": ["alias"]},
-    "somelongitemname": {"name": "Hello, World!", "keywords": ["foo", "bar"]},
+    "item1": {"keywords": ["alias"]},
+    "somelongitemname": {"keywords": ["foo", "bar"]},
 }
 
 
@@ -18,7 +22,7 @@ def test_search_item_by_keyword():
 
 
 def test_validate_correct_item_by_keyword():
-    assert search_item("belt", ITEMS) == "transportbelt"
+    assert search_item("belt", ITEMS) == "Transport belt"
 
 
 def test_invalid_item():
