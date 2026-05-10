@@ -22,6 +22,7 @@
                     <p>
                         <label for="user-count-input">Count:</label>
                         <input type="number" name="user-count" id="user-count-input" required min=1 max=100000 />
+                        <div id="count-error"></div>
                     </p>
                     <p>
                         <button type="submit">Add Item</button>
@@ -71,6 +72,11 @@
                             $("#search-error").append("Invalid item");
                             $("#user-item-input").val("");
                             $("#user-item-input").focus();
+                        }
+                        if (response.items == "Invalid count") {
+                            $("#count-error").append("Invalid count");
+                            $("#user-count-input").val("");
+                            $("#user-count-input").focus();
                         }
                         else {
                             $("#item-list").empty();

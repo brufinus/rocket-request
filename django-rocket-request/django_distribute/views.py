@@ -32,12 +32,18 @@ def item_collection(request):
             # TODO: Handle missing cookie
             print("Please enable cookies and try again.")
 
+        # Item validation
         search_res = search_coordinator(request.POST.get("user-item"), ITEMS)
+        # TODO: Confirmation on similar result.
         if search_res[0]:
             item_name = search_res[0]
         else:
             return JsonResponse({"items": "Invalid item"})
+
         item_count = request.POST.get("user-count")
+        if item_count <= 0:
+            return JsonResponse({"items": "Invalid count"})
+
         items = request.session.get("items", [])
         items.append((item_name, item_count))
         request.session["items"] = items
