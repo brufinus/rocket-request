@@ -11,7 +11,7 @@
                     <legend>Add items to distribute</legend>
                     <div id="item-search">
                         <label for="user-item-input">Item:</label>
-                        <input type="text" list="suggestions" name="user-item" id="user-item-input" required />
+                        <input type="text" list="suggestions" name="user-item" id="user-item-input" placeholder="Start typing..." required maxlength="35" />
                         <datalist id="suggestions">
                             {% for suggestion in suggestions %}
                                 <option value="{{ suggestion }}">{{ suggestion }}</option>
@@ -21,7 +21,7 @@
                     </div>
                     <p>
                         <label for="user-count-input">Count:</label>
-                        <input type="number" name="user-count" id="user-count-input" required />
+                        <input type="number" name="user-count" id="user-count-input" required min=1 max=100000 />
                     </p>
                     <p>
                         <button type="submit">Add Item</button>
@@ -32,7 +32,7 @@
                 {% csrf_token %}
                 <p>
                     <label for="num_silos">Number of available silos:</label>
-                    <input type="number" name="num_silos" id="num_silos" required />
+                    <input type="number" name="num_silos" id="num_silos" required min=1 max=100000 />
                 </p>
                 <p>
                     <button>Distribute</button>
