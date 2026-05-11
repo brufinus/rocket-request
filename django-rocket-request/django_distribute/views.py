@@ -4,6 +4,7 @@ from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonRespon
 from django.shortcuts import render
 from django.urls import reverse
 
+from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
 from django_distribute.services.distribution import distribute_items
 from django_distribute.services.initialize_setup import (
@@ -22,7 +23,7 @@ def index(request):
     request.session["itemlist"] = dict(sorted(itemlist.items()))
     table_headers = ("Item", "Count")
     if not itemlist:
-        table_headers = ("No items have been added.", "")
+        table_headers = (Errors.NO_ITEMS_ADDED, "")
 
     distribute_error = request.session.pop("distribute_error", "")
 
@@ -90,7 +91,7 @@ def distributable(request):
     """Checks whether the session is valid for distribution."""
     itemlist: dict = request.session.get("itemlist", {})
     if len(itemlist) <= 0:
-        request.session["distribute_error"] = "Please add items to distribute."
+        request.session["distribute_error"] = Errors.ADD_ITEMS_DISTRIBUTE
         return HttpResponseRedirect(reverse("distribute:index"))
     try:
         num_silos = request.POST["num_silos"]
