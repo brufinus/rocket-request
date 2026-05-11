@@ -4,9 +4,10 @@ from django.urls import reverse
 
 # Create your tests here.
 class IndexViewTests(TestCase):
-    def test_index(self):
+    def test_no_items(self):
         response = self.client.get(reverse("distribute:index"))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "No items have been added.")
 
 
 class ResultsViewTests(TestCase):
