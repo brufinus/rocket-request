@@ -1,7 +1,8 @@
 """Views for the distribute app."""
 
-from django.http import HttpResponseBadRequest, JsonResponse
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django_distribute.data.items import ITEMS
 from django_distribute.services.search import search_coordinator
 
@@ -13,10 +14,16 @@ def index(request):
     itemlist = request.session.get("itemlist", {})
     request.session["itemlist"] = dict(sorted(itemlist.items()))
 
+    distribute_error = request.session.pop("distribute_error", None)
+
     return render(
         request,
         "distribute/index.html",
-        {"itemlist": request.session["itemlist"], "suggestions": ITEMS},
+        {
+            "itemlist": request.session["itemlist"],
+            "suggestions": ITEMS,
+            "distribute_error": distribute_error,
+        },
     )
 
 
@@ -68,19 +75,23 @@ def remove(request):
     return HttpResponseBadRequest()
 
 
-def results(request):
-    """Renders the results page with the distributed data."""
+def distribute(request):
+    """Runs distribution logic and saves results to session."""
     try:
         num_silos = request.POST["num_silos"]
         itemlist: dict = request.session.get("itemlist", {})
         if len(itemlist) <= 0:
-            return render(
-                request,
-                "distribute/index.html",
-                {"distribute_error": "Please add items to distribute."},
-            )
+            request.session["distribute_error"] = "Please add items to distribute."
+            return HttpResponseRedirect(reverse("distribute:index"))
     except KeyError:
         return HttpResponseBadRequest()
+    request.session["num_silos"] = num_silos
+    return HttpResponseRedirect(reverse("distribute:results"))
+
+
+def results(request):
+    """Renders the results page with the distributed data."""
+    num_silos = request.session.pop("num_silos", None)
     return render(
         request,
         "distribute/results.html",
