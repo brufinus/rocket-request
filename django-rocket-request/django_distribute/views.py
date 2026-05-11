@@ -4,6 +4,8 @@ from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonRespon
 from django.shortcuts import render
 from django.urls import reverse
 from django_distribute.data.items import ITEMS
+from django_distribute.services.distribution import distribute_items
+from django_distribute.services.initialize_setup import build_distribution
 from django_distribute.services.search import search_coordinator
 
 
@@ -91,11 +93,23 @@ def distributable(request):
 
 def results(request):
     """Renders the results page with the distributed data."""
-    num_silos = request.session.pop("num_silos", None)
+    # Pop session keys if wanting to reset values after distribution.
+    num_silos: int = int(request.session.get("num_silos", None))
     if num_silos is None:
         return HttpResponseRedirect(reverse("distribute:index"))
+
+    silos = distribute_items(request.session.get("itemlist", None))
+    if silos is None:
+        return HttpResponseRedirect(reverse("distribute:index"))
+    cycles = build_distribution(silos, num_silos, ITEMS)
+    print(cycles)
     return render(
         request,
         "distribute/results.html",
-        {"num_silos": num_silos},
+        {
+            "num_silos": num_silos,
+            "num_launches": len(silos),
+            "num_cycles": len(cycles),
+            "cycles": cycles,
+        },
     )

@@ -8,6 +8,15 @@
     </section>
     <section>
         <h2>Per-Cycle Distribution</h2>
+        {% for cycle in cycles %}
+            <h3>Cycle {{ forloop.counter }} of {{ forloop.length }}</h3>
+            {% for silo_inv in cycle %}
+                <h4>Silo {{ forloop.counter }}</h4>
+                <ul>
+                    {% for item_name, item_count in silo_inv.items %}<li>{{ item_name }}: {{ item_count }}</li>{% endfor %}
+                </ul>
+            {% endfor %}
+        {% endfor %}
     </section>
     <section>
         <h2>Per-Silo Distribution</h2>
