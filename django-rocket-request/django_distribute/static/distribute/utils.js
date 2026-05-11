@@ -3,16 +3,17 @@
  * @param {object} itemList The list of items to render.
  */
 function renderItemList(itemList) {
-  $("#item-list").empty();
+  $("#itemlist").empty();
   $("#count-list").empty();
   for (var itemName in itemList) {
-    $("#item-list").append("<li>" + itemName + "</li>");
-    $("#count-list").append(
-      "<li>" +
-        itemList[itemName] +
-        "<button id='remove-button' data-item-name=\"" +
+    $("#itemlist").append(
+      "<tr><td scope='row'>" +
         itemName +
-        '">Remove</button></li>',
+        "</td><td>" +
+        itemList[itemName] +
+        "</td><td><button id='remove-button' data-item-name=" +
+        itemName +
+        ">Remove</button></td></tr>",
     );
   }
   $("#user-item-input").val("");

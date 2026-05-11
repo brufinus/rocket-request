@@ -18,7 +18,7 @@
                                id="user-item-input"
                                placeholder="Start typing..."
                                required
-                               maxlength="35" 
+                               maxlength="35"
                                autofocus />
                         <datalist id="suggestions">
                             {% for suggestion in suggestions %}<option value="{{ suggestion }}">{{ suggestion }}</option>{% endfor %}
@@ -40,7 +40,9 @@
                     </p>
                 </fieldset>
             </form>
-            <form id="distribute-form" action="{% url "distribute:distributable" %}" method="post">
+            <form id="distribute-form"
+                  action="{% url "distribute:distributable" %}"
+                  method="post">
                 {% csrf_token %}
                 <p>
                     <label for="num_silos">Number of available silos:</label>
@@ -59,21 +61,25 @@
         </section>
         <aside>
             <h3>Added Items</h3>
-            <div id="added-items-container">
-                <p>Item</p>
-                <p>Count</p>
-                <ul id="item-list">
-                    {% for item_name, count in itemlist.items %}<li id="item-name">{{ item_name }}</li>{% endfor %}
-                </ul>
-                <ul id="count-list">
-                    {% for item_name, count in itemlist.items %}
-                        <li id="count">
-                            {{ count }}
-                            <button id="remove-button" data-item-name="{{ item_name }}">Remove</button>
-                        </li>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Count</th>
+                    </tr>
+                </thead>
+                <tbody id="itemlist">
+                    {% for item_name, item_count in itemlist.items %}
+                        <tr id="item-list">
+                            <td scope="row">{{ item_name }}</td>
+                            <td>{{ item_count }}</td>
+                            <td>
+                                <button id="remove-button" data-item-name="{{ item_name }}">Remove</button>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </ul>
-            </div>
+                </tbody>
+            </table>
         </aside>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
