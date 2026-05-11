@@ -19,6 +19,7 @@
                                placeholder="Start typing..."
                                required
                                maxlength="35" 
+                               pattern="[a-zA-Z0-9_ \(\)\-\.]+"
                                autofocus />
                         <datalist id="suggestions">
                             {% for suggestion in suggestions %}<option value="{{ suggestion }}">{{ suggestion }}</option>{% endfor %}
