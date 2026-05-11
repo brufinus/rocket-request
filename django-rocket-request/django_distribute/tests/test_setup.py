@@ -96,11 +96,7 @@ def test_group_items_sort_by_id():
 
 def test_print_full_setup():
     # Run with -s flag.
-    items = [
-        ("Transport belt", 194),
-        ("Inserter", 42),
-        ("Pipe", 36),
-    ]
+    items = {"Transport belt": 194, "Inserter": 42, "Pipe": 36}
     silos = distribute_items(items)
     print_distribution(silos, 2, ITEMS)
 

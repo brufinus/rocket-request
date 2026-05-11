@@ -16,7 +16,7 @@ from django_distribute.data.item import Item
 from django_distribute.data.items import ITEMS
 
 
-def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
+def distribute_items(items: dict[str, int]) -> list[RocketSilo]:
     """
     Coordinates the distribution of items into silos.
 
@@ -24,8 +24,8 @@ def distribute_items(items: list[tuple[str, int]]) -> list[RocketSilo]:
     Then, a first-fit-decreasing algorithm is used to distribute items
     into RocketSilos.
 
-    :param list[tuple[str, int]] items:
-    List of item, count pairs to distribute amongst silos.
+    :param dict[str, int] items:
+    Item name and count pairs to distribute.
     :return: List of silos with distributed items.
     :rtype: list[RocketSilo]
     """
@@ -70,7 +70,7 @@ def find_open_silo(silos: list[RocketSilo], item: Item) -> bool:
     return False
 
 
-def expand_and_sort_items(items: list[tuple[str, int]]) -> list[Item]:
+def expand_and_sort_items(items: dict[str, int]) -> list[Item]:
     """
     Expands items into a sorted list of items.
 
@@ -78,14 +78,14 @@ def expand_and_sort_items(items: list[tuple[str, int]]) -> list[Item]:
     count, which are both provided as a tuple pair in the input list.
     Items are are then sorted from heaviest to lightest.
 
-    :param list[tuple[str, int]] items:
-    List of item, count pairs to expand.
+    :param dict[str, int] items:
+    Item name and count pairs to distribute.
     :return: Expanded list of items.
     :rtype: list[Item]
     """
     expanded_items: list[Item] = []
     for item in items:
-        for _ in range(item[1]):
-            expanded_items.append(ITEMS[item[0]])
+        for _ in range(items[item]):
+            expanded_items.append(ITEMS[item])
     expanded_items.sort(reverse=True, key=lambda d: d[ITEM_WEIGHT])
     return expanded_items

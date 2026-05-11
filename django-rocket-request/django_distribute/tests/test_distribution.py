@@ -18,15 +18,15 @@ class TestDistribution:
     item = {"name": "Item", "weight": 1}
 
     def test_item_expansion(self):
-        items = [("Transport belt", 2), ("Chemical plant", 3)]
+        items = {"Transport belt": 2, "Chemical plant": 3}
         expanded_items = expand_and_sort_items(items)
         assert len(expanded_items) == 5
 
     def test_item_sorting(self):
-        items = [("Transport belt", 1), ("Chemical plant", 1)]
+        items = {"Transport belt": 1, "Chemical plant": 1}
         expanded_items = expand_and_sort_items(items)
         assert expanded_items[0]["weight"] >= expanded_items[1]["weight"]
-        items_reversed = [("Chemical plant", 1), ("Transport belt", 1)]
+        items_reversed = {"Chemical plant": 1, "Transport belt": 1}
         expanded_items_reversed = expand_and_sort_items(items_reversed)
         assert (
             expanded_items_reversed[0]["weight"] >= expanded_items_reversed[1]["weight"]
