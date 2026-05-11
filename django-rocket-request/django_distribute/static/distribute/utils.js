@@ -4,7 +4,6 @@
  */
 function renderItemList(itemList) {
   $("#itemlist").empty();
-  $("#count-list").empty();
   for (var itemName in itemList) {
     $("#itemlist").append(
       "<tr><td scope='row'>" +
