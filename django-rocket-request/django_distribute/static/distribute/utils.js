@@ -10,9 +10,9 @@ function renderItemList(itemList) {
         itemName +
         "</td><td>" +
         itemList[itemName] +
-        "</td><td><button id='remove-button' data-item-name=" +
+        "</td><td><button id='remove-button' data-item-name='" +
         itemName +
-        ">Remove</button></td></tr>",
+        "'>Remove</button></td></tr>",
     );
   }
   $("#user-item-input").val("");
