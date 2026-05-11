@@ -20,6 +20,9 @@ def index(request):
 
     itemlist = request.session.get("itemlist", {})
     request.session["itemlist"] = dict(sorted(itemlist.items()))
+    table_headers = ("Item", "Count")
+    if not itemlist:
+        table_headers = ("No items have been added.", "")
 
     distribute_error = request.session.pop("distribute_error", "")
 
@@ -27,9 +30,10 @@ def index(request):
         request,
         "distribute/index.html",
         {
+            "distribute_error": distribute_error,
             "itemlist": request.session["itemlist"],
             "suggestions": ITEMS,
-            "distribute_error": distribute_error,
+            "table_headers": table_headers,
         },
     )
 
