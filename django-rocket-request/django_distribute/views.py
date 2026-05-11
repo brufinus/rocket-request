@@ -75,14 +75,14 @@ def remove(request):
     return HttpResponseBadRequest()
 
 
-def distribute(request):
-    """Runs distribution logic and saves results to session."""
+def distributable(request):
+    """Checks whether the session is valid for distribution."""
+    itemlist: dict = request.session.get("itemlist", {})
+    if len(itemlist) <= 0:
+        request.session["distribute_error"] = "Please add items to distribute."
+        return HttpResponseRedirect(reverse("distribute:index"))
     try:
         num_silos = request.POST["num_silos"]
-        itemlist: dict = request.session.get("itemlist", {})
-        if len(itemlist) <= 0:
-            request.session["distribute_error"] = "Please add items to distribute."
-            return HttpResponseRedirect(reverse("distribute:index"))
     except KeyError:
         return HttpResponseBadRequest()
     request.session["num_silos"] = num_silos
@@ -92,8 +92,10 @@ def distribute(request):
 def results(request):
     """Renders the results page with the distributed data."""
     num_silos = request.session.pop("num_silos", None)
+    if num_silos is None:
+        return HttpResponseRedirect(reverse("distribute:index"))
     return render(
         request,
         "distribute/results.html",
-        {"num_silos": num_silos, "num_launches": 6, "num_cycles": 2},
+        {"num_silos": num_silos},
     )

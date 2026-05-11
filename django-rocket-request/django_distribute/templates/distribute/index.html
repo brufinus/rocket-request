@@ -40,7 +40,7 @@
                     </p>
                 </fieldset>
             </form>
-            <form id="distribute-form" action="{% url "distribute:distribute" %}" method="post">
+            <form id="distribute-form" action="{% url "distribute:distributable" %}" method="post">
                 {% csrf_token %}
                 <p>
                     <label for="num_silos">Number of available silos:</label>
