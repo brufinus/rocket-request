@@ -3,9 +3,14 @@
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+
 from django_distribute.data.items import ITEMS
 from django_distribute.services.distribution import distribute_items
-from django_distribute.services.initialize_setup import build_distribution
+from django_distribute.services.initialize_setup import (
+    build_consolidated_invs,
+    build_consolidated_load,
+    build_distribution,
+)
 from django_distribute.services.search import search_coordinator
 
 
@@ -102,7 +107,11 @@ def results(request):
     if silos is None:
         return HttpResponseRedirect(reverse("distribute:index"))
     cycles = build_distribution(silos, num_silos, ITEMS)
-    print(cycles)
+
+    c_silo_invs = build_consolidated_invs(silos, num_silos, ITEMS)
+    c_silo_loads = build_consolidated_load(silos, num_silos)
+    consolidated = zip(c_silo_invs, c_silo_loads)
+
     return render(
         request,
         "distribute/results.html",
@@ -111,5 +120,6 @@ def results(request):
             "num_launches": len(silos),
             "num_cycles": len(cycles),
             "cycles": cycles,
+            "consolidated": consolidated,
         },
     )

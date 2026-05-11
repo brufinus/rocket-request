@@ -20,6 +20,12 @@
     </section>
     <section>
         <h2>Per-Silo Distribution</h2>
+        {% for inv, load in consolidated %}
+            <h3>Silo {{ forloop.counter }} ({{ load }} kg)</h3>
+            <ul>
+                {% for item_name, item_count in inv.items %}<li>{{ item_name }}: {{ item_count }}</li>{% endfor %}
+            </ul>
+        {% endfor %}
     </section>
     <a href="{% url 'distribute:index' %}">Return</a>
 {% endblock content %}
