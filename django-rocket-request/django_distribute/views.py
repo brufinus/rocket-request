@@ -21,7 +21,7 @@ def index(request):
     itemlist = request.session.get("itemlist", {})
     request.session["itemlist"] = dict(sorted(itemlist.items()))
 
-    distribute_error = request.session.pop("distribute_error", None)
+    distribute_error = request.session.pop("distribute_error", "")
 
     return render(
         request,
