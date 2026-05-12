@@ -1,8 +1,8 @@
 """Display, request, and session tests on views."""
 
-from django.http import HttpResponseBadRequest
 from django.test import TestCase
 from django.urls import reverse
+
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
 
@@ -16,6 +16,11 @@ class IndexViewTests(TestCase):
         response = self.client.get(reverse("distribute:index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, Errors.NO_ITEMS_ADDED)
+        self.assertContains(
+            response,
+            '<th id="item-th" scope="col">' + Errors.NO_ITEMS_ADDED + "</th>",
+            html=True,
+        )
         self.assertNotContains(
             response, '<th id="item-th" scope="col">Item</th>', html=True
         )
@@ -62,6 +67,11 @@ class IndexViewTests(TestCase):
         response = self.client.get(reverse("distribute:index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, Errors.ADD_ITEMS_DISTRIBUTE)
+        self.assertContains(
+            response,
+            '<div id="distribute-error">' + Errors.ADD_ITEMS_DISTRIBUTE + "</div>",
+            html=True,
+        )
         self.assertNotIn("distribute_error", self.client.session)
 
     def test_suggestions_list(self):
@@ -125,9 +135,95 @@ class ItemCollectionViewTests(TestCase):
 
 class RemoveViewTests(TestCase):
     def test_remove_item(self):
-        response = self.client.post(reverse("distribute:remove"))
+        """
+        The posted item is removed from the itemlist
+        and is not in the returned JSON.
+        """
+        session = self.client.session
+        session["itemlist"] = {"Foo": 12, "Bar": 7}
+        session.save()
+        response = self.client.post(reverse("distribute:remove"), {"user-item": "Foo"})
+        self.assertNotIn("Foo", self.client.session)
+        self.assertEqual(response.json()["itemlist"]["Bar"], 7)
+
+    def test_remove_nonexistant_item(self):
+        """
+        Itemlist should be unchanged on removal of nonexistant item.
+        """
+        session = self.client.session
+        session["itemlist"] = {"Foo": 12, "Bar": 7}
+        session.save()
+        response = self.client.post(reverse("distribute:remove"), {"user-item": "Asdf"})
+        itemlist = response.json()["itemlist"]
+        self.assertEqual(itemlist["Foo"], 12)
+        self.assertEqual(itemlist["Bar"], 7)
+        self.assertEqual(2, len(itemlist))
+
+    def test_remove_rejects_get(self):
+        response = self.client.get(reverse("distribute:remove"))
+        self.assertEqual(response.status_code, 400)
+
+
+class DistributableViewTests(TestCase):
+    def test_redirect_on_no_items(self):
+        """
+        Test redirect back to index with an error on an empty itemlist.
+        """
+        response = self.client.get(reverse("distribute:distributable"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
+        self.assertContains(response, Errors.ADD_ITEMS_DISTRIBUTE)
+
+    def test_distributable_missing_num_silos(self):
+        """Return bad request on post if num_silos is missing."""
+        session = self.client.session
+        session["itemlist"] = {"Foo": 12, "Bar": 7}
+        session.save()
+        response = self.client.post(reverse("distribute:distributable"))
+        self.assertEqual(response.status_code, 400)
+
+    def test_distributable_flow(self):
+        """
+        POST valid num_silos with itemlist present, assert
+        redirect to results and session stores num_silos.
+        """
+        session = self.client.session
+        session["itemlist"] = {"Transport belt": 100, "Pipe": 20}
+        session.save()
+        response = self.client.post(
+            reverse("distribute:distributable"), {"num_silos": 4}, follow=True
+        )
+        self.assertRedirects(response, reverse("distribute:results"))
+        self.assertEqual(self.client.session["num_silos"], "4")
 
 
 class ResultsViewTests(TestCase):
-    def test_results(self):
-        self.assertEqual(1, 1)
+    def test_redirect_on_missing_num_silos(self):
+        session = self.client.session
+        session["itemlist"] = {"Transport belt": 100}
+        session.save()
+        response = self.client.get(reverse("distribute:results"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
+
+    def test_redirect_on_missing_itemlist(self):
+        session = self.client.session
+        session["num_silos"] = 1
+        session.save()
+        response = self.client.get(reverse("distribute:results"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
+
+    def test_results_renders_distribution_summary_when_valid_session(self):
+        """
+        With valid itemlist and num_silos, assert the results page
+        contains num_launches, num_cycles, and distribution output.
+        """
+        session = self.client.session
+        session["itemlist"] = {"Transport belt": 80, "Chemical plant": 6, "Thruster": 4}
+        session["num_silos"] = 2
+        session.save()
+        response = self.client.get(reverse("distribute:results"))
+        self.assertContains(response, "Available silos: 2")
+        self.assertContains(response, "Required launches: 3")
+        self.assertContains(response, "Required launch cycles: 2")
+        self.assertContains(response, '<td scope="row">Chemical plant</td>', html=True)
+        self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
+        self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
