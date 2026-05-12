@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+        <script>
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.classList.add("dark-theme");
+        }
+        </script>
         <meta charset="utf-8" />
         <title>Rocket Request</title>
         <meta name="author" content="brufinus" />
@@ -26,7 +31,7 @@
                     <a href="https://github.com/brufinus/rocket-request">GitHub</a>
                 </li>
                 <li>
-                    <button>Toggle Dark Mode</button>
+                    <button id="theme-toggle">Toggle Theme</button>
                 </li>
             </ul>
         </nav>
@@ -39,4 +44,5 @@
             <p><a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
         </footer>
     </body>
+    <script src="{% static "distribute/theme.js" %}"></script>
 </html>
