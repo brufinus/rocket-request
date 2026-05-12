@@ -17,8 +17,6 @@ from django_distribute.services.search import search_coordinator
 
 def index(request):
     """Main page for the application."""
-    request.session.set_test_cookie()
-
     itemlist = request.session.get("itemlist", {})
     request.session["itemlist"] = dict(sorted(itemlist.items()))
     table_headers = ("Item", "Count")
@@ -47,13 +45,6 @@ def item_collection(request):
     Updates the item count if it already exists in the list.
     """
     if request.method == "POST":
-        if request.session.test_cookie_worked():
-            request.session.delete_test_cookie()
-            print("Cookie test!")
-        else:
-            # TODO: Handle missing cookie
-            print("Please enable cookies and try again.")
-
         # Item validation
         search_res = search_coordinator(request.POST.get("user-item"), ITEMS)
         # TODO: Confirmation on similar result.
