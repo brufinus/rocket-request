@@ -104,8 +104,8 @@ def distributable(request):
 def results(request):
     """Renders the results page with the distributed data."""
     # Pop session keys if wanting to reset values after distribution.
-    num_silos: int = int(request.session.get("num_silos", None))
-    if num_silos is None:
+    num_silos: int = int(request.session.get("num_silos", -1))
+    if num_silos <= 0:
         return HttpResponseRedirect(reverse("distribute:index"))
 
     silos = distribute_items(request.session.get("itemlist", None))
