@@ -87,19 +87,35 @@ html.dark-theme body {
 /* Main article */
 article {
   display: flex;
+  background-color: #313031;
+  border: 2px outset #363536;
+  margin: 40px;
+  width: fit-content;
+}
+
+/* Setup section */
+section {
+  margin-left: 5%;
 }
 
 /* Item search */
+legend {
+  float: left;
+  width: 100%;
+}
+
 #item-search {
   position: relative;
   max-width: 300px;
   margin: auto;
 }
 
-/* Side bar */
+/* Side bar - Itemlist */
 aside {
   border: 1px solid black;
   padding: 1em 1em;
+  margin-left: 5%;
+  min-width: fit-content;
 }
 
 #added-items-container {
@@ -114,6 +130,10 @@ aside ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.added-item {
+  white-space: nowrap;
 }
 
 #item-list {

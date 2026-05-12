@@ -8,7 +8,7 @@ function renderItemList(itemList) {
   $("#itemlist").empty();
   for (var itemName in itemList) {
     $("#itemlist").append(
-      "<tr><td scope='row'>" +
+      "<tr><td class='added-item' scope='row'>" +
         itemName +
         "</td><td>" +
         itemList[itemName] +
