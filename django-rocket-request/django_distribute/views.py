@@ -108,9 +108,10 @@ def results(request):
     if num_silos <= 0:
         return HttpResponseRedirect(reverse("distribute:index"))
 
-    silos = distribute_items(request.session.get("itemlist", None))
-    if silos is None:
+    itemlist: dict[str, int] = request.session.get("itemlist", None)
+    if itemlist is None:
         return HttpResponseRedirect(reverse("distribute:index"))
+    silos = distribute_items(itemlist)
     cycles = build_distribution(silos, num_silos, ITEMS)
 
     c_silo_invs = build_consolidated_invs(silos, num_silos, ITEMS)
