@@ -85,7 +85,7 @@ def distributable(request):
         request.session["distribute_error"] = Errors.ADD_ITEMS_DISTRIBUTE
         return HttpResponseRedirect(reverse("distribute:index"))
     try:
-        num_silos = request.POST["num_silos"]
+        num_silos = request.POST["num-silos"]
     except KeyError:
         return HttpResponseBadRequest()
     request.session["num_silos"] = num_silos

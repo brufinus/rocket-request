@@ -190,7 +190,7 @@ class DistributableViewTests(TestCase):
         session["itemlist"] = {"Transport belt": 100, "Pipe": 20}
         session.save()
         response = self.client.post(
-            reverse("distribute:distributable"), {"num_silos": 4}, follow=True
+            reverse("distribute:distributable"), {"num-silos": 4}, follow=True
         )
         self.assertRedirects(response, reverse("distribute:results"))
         self.assertEqual(self.client.session["num_silos"], "4")
