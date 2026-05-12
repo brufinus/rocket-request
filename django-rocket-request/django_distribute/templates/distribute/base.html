@@ -16,6 +16,10 @@
         <script src="https://code.jquery.com/jquery-4.0.0.min.js"
                 integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
                 crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+              rel="stylesheet">
     </head>
     <body>
         <header>
@@ -25,23 +29,34 @@
         <nav class="nav-bar">
             <ul class="links-list">
                 <li>
-                    <a href="#">Home</a>
+                    <a class="nav-bar-item" href="#">
+                        <div class="text-button">Home</div>
+                    </a>
                 </li>
                 <li>
-                    <a href="https://github.com/brufinus/rocket-request">GitHub</a>
-                </li>
-                <li>
-                    <button id="theme-toggle">Toggle Theme</button>
+                    <a class="nav-bar-item"
+                       href="https://github.com/brufinus/rocket-request">
+                        <div class="text-button">GitHub</div>
+                    </a>
                 </li>
             </ul>
+            <div id="theme-toggle-container">
+                <div class="nav-bar-item" id="theme-toggle">
+                    <div class="text-button">Toggle Theme</div>
+                </div>
+            </div>
         </nav>
         <main>
             {% block content %}
             {% endblock content %}
         </main>
         <footer>
-            <p><a href="mailto:brufinus@duck.com">brufinus@duck.com</a></p>
-            <p><a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a></p>
+            <p>
+                <a href="mailto:brufinus@duck.com">brufinus@duck.com</a>
+            </p>
+            <p>
+                <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a>
+            </p>
         </footer>
     </body>
     <script src="{% static "distribute/theme.js" %}"></script>
