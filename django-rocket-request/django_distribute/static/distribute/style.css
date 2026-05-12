@@ -96,12 +96,29 @@ article {
 /* Setup section */
 section {
   margin-left: 5%;
+  min-width: 350px;
 }
 
 /* Item search */
+#item-collection-form {
+  background-color: #242324;
+  padding: 2px 1px;
+}
+
+fieldset {
+  background-color: #313031;
+  border: 6px solid #403f40;
+}
+
 legend {
+  background-color: #242324;
+  border: 2px outset #1b1a1a;
   float: left;
   width: 100%;
+  padding: 8px 0;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  margin-left: -7px;
 }
 
 #item-search {
@@ -112,10 +129,9 @@ legend {
 
 /* Side bar - Itemlist */
 aside {
-  border: 1px solid black;
   padding: 1em 1em;
   margin-left: 5%;
-  min-width: fit-content;
+  min-width: 350px;
 }
 
 #added-items-container {
