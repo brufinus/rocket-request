@@ -12,9 +12,9 @@ function renderItemList(itemList) {
         itemName +
         "</td><td>" +
         itemList[itemName] +
-        "</td><td><button id='remove-button' data-item-name='" +
+        '</td><td class="remove-data"><button id="remove-button" style="font-size:24px" data-item-name="' +
         itemName +
-        "'>Remove</button></td></tr>",
+        '"><i class="fa fa-trash-o"></i></button></td></tr>',
     );
   }
   $("#user-item-input").val("");

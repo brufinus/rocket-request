@@ -1,5 +1,9 @@
 {% extends "distribute/base.html" %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock head %}
 {% block content %}
     <article data-remove-url="{% url "distribute:remove" %}">
         <section>
@@ -8,7 +12,7 @@
                   method="post"
                   data-collection-url="{% url "distribute:collection" %}">
                 {% csrf_token %}
-                <div id="input-set">
+                <div class="display-panel">
                     <h3>Add items to distribute</h3>
                     <div id="input-grid">
                         <label for="user-item-input">Item:</label>
@@ -61,26 +65,36 @@
             </form>
         </section>
         <aside>
-            <h2>Added Items</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th id="item-th" scope="col">{{ table_headers.0 }}</th>
-                        <th id="count-th" scope="col">{{ table_headers.1 }}</th>
-                    </tr>
-                </thead>
-                <tbody id="itemlist">
-                    {% for item_name, item_count in itemlist.items %}
-                        <tr id="item-list">
-                            <td class="added-item" scope="row">{{ item_name }}</td>
-                            <td>{{ item_count }}</td>
-                            <td>
-                                <button id="remove-button" data-item-name="{{ item_name }}">Remove</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h2 id="item-header">Added Items</h2>
+            <div id="panel-border">
+                <div class="display-panel">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th id="item-th" scope="col">{{ table_headers.0 }}</th>
+                                <th id="count-th" scope="col">{{ table_headers.1 }}</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemlist">
+                            {% for item_name, item_count in itemlist.items %}
+                                <tr id="item-list">
+                                    <td class="added-item" scope="row">{{ item_name }}</td>
+                                    <td>{{ item_count }}</td>
+                                    <td class="remove-data">
+                                        <button id="remove-button"
+                                                class="text-button"
+                                                style="font-size:24px"
+                                                data-item-name="{{ item_name }}">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </aside>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>

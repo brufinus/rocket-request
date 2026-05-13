@@ -1,3 +1,9 @@
+/* Common */
+.display-panel {
+  background-color: #313031;
+  border: 6px solid #403f40;
+}
+
 /* Body */
 html body {
   background-color: #8e8e8e;
@@ -110,11 +116,6 @@ section {
   padding: 2px 2px;
 }
 
-#input-set {
-  background-color: #313031;
-  border: 6px solid #403f40;
-}
-
 h3 {
   margin-top: auto;
   background-color: #242324;
@@ -150,7 +151,7 @@ h3 {
   background-color: #a8eeac;
   border: 1px outset #55d45e;
   color: rgb(29, 28, 29);
-  box-shadow: 0 0 10px #55d45e
+  box-shadow: 0 0 10px #55d45e;
 }
 
 .confirm-button:active {
@@ -191,33 +192,76 @@ input:focus {
 /* Side bar - Itemlist */
 aside {
   padding: 1em 1em;
-  margin-left: 5%;
+  margin-top: -34px;
   min-width: 350px;
 }
 
-#added-items-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  padding: 0.2em;
-  border: 1px solid black;
+#panel-border {
+  background-color: #242324;
+  padding: 2px 2px;
 }
 
-aside ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+#item-header {
+  margin-bottom: 6px;
+}
+
+thead tr {
+  background-color: #242324;
+  border: 2px outset #1b1a1a;
+}
+
+thead th {
+  padding: 8px 10px;
+}
+
+.display-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+table td {
+  color: white;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    -1px 0px 0 #000,
+    1px 0px 0 #000,
+    0px -1px 0 #000,
+    0px 1px 0 #000;
+  padding-left: 10px;
 }
 
 .added-item {
   white-space: nowrap;
 }
 
-#item-list {
-  text-align: left;
+#remove-button {
+  padding: 1px 4px;
+  border: 1px outset #972725;
+  color: rgb(29, 28, 29);
+  background-color: #fe5a5a;
 }
 
-#remove-button {
-  padding: 0;
-  border: none;
+#remove-button:hover {
+  background-color: #ffafaf;
+  border: 1px outset #d97575;
+  color: rgb(29, 28, 29);
+  box-shadow: 0 0 10px #d97575;
+}
+
+#remove-button:active {
+  background-color: #fca8a8;
+  border: 1px outset #8b2b2a;
+  color: rgb(28, 28, 28);
+  box-shadow: 0 0 0;
+}
+
+.remove-data:active .text-button {
+  top: 2px;
 }
