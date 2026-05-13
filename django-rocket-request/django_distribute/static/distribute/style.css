@@ -113,7 +113,7 @@ fieldset {
 legend {
   background-color: #242324;
   border: 2px outset #1b1a1a;
-  float: left;
+  display: table;
   width: 100%;
   padding: 8px 0;
   padding-left: 10px;
