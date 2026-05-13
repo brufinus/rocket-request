@@ -317,3 +317,13 @@ footer {
   margin-left: auto;
   padding-right: 8px;
 }
+
+/* Results page */
+#summary {
+  margin-top: 20px;
+  width: 20%;
+}
+
+.table-fit {
+  margin-left: 0;
+}

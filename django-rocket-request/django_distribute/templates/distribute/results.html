@@ -1,10 +1,32 @@
 {% extends "distribute/base.html" %}
 {% block content %}
     <section>
-        <h2>Summary</h2>
-        <p>Available silos: {{ num_silos }}</p>
-        <p>Required launches: {{ num_launches }}</p>
-        <p>Required launch cycles: {{ num_cycles }}</p>
+        <div id="summary">
+        <div class="display-panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Summary</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Available silos</td>
+                    <td>{{ num_silos }}</td>
+                </tr>
+                <tr>
+                    <td>Required launches</td>
+                    <td>{{ num_launches }}</td>
+                </tr>
+                <tr>
+                    <td>Required launch cycles</td>
+                    <td>{{ num_cycles }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        </div>
     </section>
     <section>
         <h2>Per-Cycle Distribution</h2>
