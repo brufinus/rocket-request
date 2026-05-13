@@ -53,12 +53,36 @@
             {% endblock content %}
         </main>
         <footer>
-            <p>
-                <a href="mailto:brufinus@duck.com">brufinus@duck.com</a>
-            </p>
-            <p>
-                <a href="https://github.com/brufinus/rocket-request">brufinus/rocket-request</a>
-            </p>
+            <div class="logo-link-box">
+                <a href="mailto:brufinus@duck.com"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <img class="logo"
+                         src="{% static "distribute/images/mail_24dp.svg" %}"
+                         alt="Email icon"
+                         width="24"
+                         height="24" />
+                </a>
+                <a href="mailto:brufinus@duck.com"
+                   target="_blank"
+                   rel="noopener noreferrer">brufinus@duck.com</a>
+            </div>
+            <div class="change-info">Updated: 2026/5/13</div>
+            <div class="logo-link-box">
+                <a href="https://github.com/brufinus/rocket-request"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <img class="logo"
+                         src="{% static "distribute/images/gh_invertocat_black_clearspace.svg" %}"
+                         alt="GitHub Invertocat Logo"
+                         width="128"
+                         height="128" />
+                </a>
+                <a href="https://github.com/brufinus/rocket-request"
+                   target="_blank"
+                   rel="noopener noreferrer">brufinus/rocket-request</a>
+            </div>
+            <div class="change-info">RocketRequest v0.0.1</div>
         </footer>
     </body>
     <script src="{% static "distribute/theme.js" %}"></script>
