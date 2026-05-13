@@ -8,8 +8,8 @@
                   method="post"
                   data-collection-url="{% url "distribute:collection" %}">
                 {% csrf_token %}
-                <fieldset>
-                    <legend>Add items to distribute</legend>
+                <div id="input-set">
+                    <h3>Add items to distribute</h3>
                     <div id="input-grid">
                         <label for="user-item-input">Item:</label>
                         <input type="text"
@@ -37,7 +37,7 @@
                     <p>
                         <button type="submit">Add Item</button>
                     </p>
-                </fieldset>
+                </div>
             </form>
             <form id="distribute-form"
                   action="{% url "distribute:distributable" %}"
