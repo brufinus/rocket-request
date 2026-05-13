@@ -126,10 +126,51 @@ h3 {
   grid-template-columns: 60px 1fr;
   max-width: 300px;
   margin: auto;
+  row-gap: 10px;
+}
+
+#add-item-button {
+  margin-left: 10px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  color: rgb(29, 28, 29);
+  background-color: #5eb663;
+  border: 1px outset #39763c;
+}
+
+#add-item-button:hover {
+  background-color: #a8eeac;
+  border: 1px outset #55d45e;
+  color: rgb(29, 28, 29);
+  box-shadow: 0 0 10px #55d45e
+}
+
+#add-item-button:active {
+  background-color: #cfdf93;
+  border: 1px outset #9fa76c;
+  color: rgb(28, 28, 28);
+  box-shadow: 0 0 0;
+  top: 2px;
+}
+
+#add-item-button:active .text-button {
+  top: 0.2px;
 }
 
 #search-error {
   grid-column: 2;
+}
+
+input {
+  background-color: #9a9a9a;
+}
+
+input:focus {
+  background-color: #f4e3c4;
+}
+
+#user-count-input {
+  max-width: 80px;
 }
 
 /* Side bar - Itemlist */

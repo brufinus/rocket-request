@@ -26,17 +26,19 @@
                         </datalist>
                         <div id="search-error"></div>
                         <label for="user-count-input">Count:</label>
-                        <input type="number"
-                               name="user-count"
-                               id="user-count-input"
-                               required
-                               min="1"
-                               max="100000" />
+                        <div>
+                            <input type="number"
+                                   name="user-count"
+                                   id="user-count-input"
+                                   required
+                                   min="1"
+                                   max="100000" />
+                            <button id="add-item-button" type="submit">
+                                <div class="text-button">✔</div>
+                            </button>
+                        </div>
                         <div id="count-error"></div>
                     </div>
-                    <p>
-                        <button type="submit">Add Item</button>
-                    </p>
                 </div>
             </form>
             <form id="distribute-form"
