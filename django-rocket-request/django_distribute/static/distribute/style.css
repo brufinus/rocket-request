@@ -133,19 +133,22 @@ h3 {
   margin-left: 10px;
   height: 100%;
   aspect-ratio: 1 / 1;
+}
+
+.confirm-button {
   color: rgb(29, 28, 29);
   background-color: #5eb663;
   border: 1px outset #39763c;
 }
 
-#add-item-button:hover {
+.confirm-button:hover {
   background-color: #a8eeac;
   border: 1px outset #55d45e;
   color: rgb(29, 28, 29);
   box-shadow: 0 0 10px #55d45e
 }
 
-#add-item-button:active {
+.confirm-button:active {
   background-color: #cfdf93;
   border: 1px outset #9fa76c;
   color: rgb(28, 28, 28);
@@ -153,7 +156,7 @@ h3 {
   top: 2px;
 }
 
-#add-item-button:active .text-button {
+.confirm-button:active .text-button {
   top: 0.2px;
 }
 
@@ -171,6 +174,13 @@ input:focus {
 
 #user-count-input {
   max-width: 80px;
+}
+
+#distribute-button {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  width: 100px;
 }
 
 /* Side bar - Itemlist */
