@@ -230,6 +230,11 @@ thead th {
   font-style: normal;
 }
 
+tbody tr {
+  background-color: var(--panel-bg-color);
+  border: 2px outset var(--panel-border-color);
+}
+
 table td {
   color: white;
   text-shadow:
