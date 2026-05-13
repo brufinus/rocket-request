@@ -121,10 +121,15 @@ legend {
   margin-left: -7px;
 }
 
-#item-search {
-  position: relative;
+#input-grid {
+  display: grid;
+  grid-template-columns: 60px 1fr;
   max-width: 300px;
   margin: auto;
+}
+
+#search-error {
+  grid-column: 2;
 }
 
 /* Side bar - Itemlist */
