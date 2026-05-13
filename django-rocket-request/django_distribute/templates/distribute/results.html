@@ -2,78 +2,96 @@
 {% block content %}
     <section>
         <div id="summary">
-        <div class="display-panel">
-        <table>
-            <thead>
-                <tr>
-                    <th>Summary</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Available silos</td>
-                    <td>{{ num_silos }}</td>
-                </tr>
-                <tr>
-                    <td>Required launches</td>
-                    <td>{{ num_launches }}</td>
-                </tr>
-                <tr>
-                    <td>Required launch cycles</td>
-                    <td>{{ num_cycles }}</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-        </div>
-    </section>
-    <section>
-        <h2>Per-Cycle Distribution</h2>
-        {% for cycle in cycles %}
-            <h3>Cycle {{ forloop.counter }} of {{ forloop.length }}</h3>
-            {% for silo_inv in cycle %}
-                <h4>Silo {{ forloop.counter }}</h4>
+            <div class="display-panel">
                 <table>
                     <thead>
                         <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Count</th>
+                            <th>Summary</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item_name, item_count in silo_inv.items %}
-                            <tr>
-                                <td scope="row">{{ item_name }}</td>
-                                <td>{{ item_count }}</td>
-                            </tr>
-                        {% endfor %}
+                        <tr>
+                            <td>Available silos</td>
+                            <td>{{ num_silos }}</td>
+                        </tr>
+                        <tr>
+                            <td>Required launches</td>
+                            <td>{{ num_launches }}</td>
+                        </tr>
+                        <tr>
+                            <td>Required launch cycles</td>
+                            <td>{{ num_cycles }}</td>
+                        </tr>
                     </tbody>
                 </table>
-            {% endfor %}
-        {% endfor %}
+            </div>
+        </div>
     </section>
-    <section>
-        <h2>Per-Silo Distribution</h2>
-        {% for inv, load in consolidated %}
-            <h3>Silo {{ forloop.counter }} ({{ load }} kg)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Count</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item_name, item_count in inv.items %}
-                        <tr>
-                            <td scope="row">{{ item_name }}</td>
-                            <td>{{ item_count }}</td>
-                        </tr>
+    <div id="per-distributions">
+        <section class="distribute-results">
+            <h2>Per-Cycle Distribution</h2>
+            {% for cycle in cycles %}
+                <h3>Cycle {{ forloop.counter }} of {{ forloop.length }}</h3>
+                <div class="results-section-container">
+                    {% for silo_inv in cycle %}
+                        <h4>Silo {{ forloop.counter }}</h4>
+                        <div class="item-results-container">
+                            <div class="display-panel">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="table-cell-item" scope="col">Item</th>
+                                            <th scope="col">Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item_name, item_count in silo_inv.items %}
+                                            <tr>
+                                                <td scope="row">{{ item_name }}</td>
+                                                <td>{{ item_count }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     {% endfor %}
-                </tbody>
-            </table>
-        {% endfor %}
-    </section>
-    <a href="{% url 'distribute:index' %}">Return</a>
+                </div>
+            {% endfor %}
+        </section>
+        <section class="distribute-results">
+            <h2>Per-Silo Distribution</h2>
+            {% for inv, load in consolidated %}
+                <h3>Silo {{ forloop.counter }} ({{ load }} kg)</h3>
+                <div class="results-section-container">
+                    <div class="item-results-container">
+                        <div class="display-panel">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="table-cell-item" scope="col">Item</th>
+                                        <th scope="col">Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item_name, item_count in inv.items %}
+                                        <tr>
+                                            <td scope="row">{{ item_name }}</td>
+                                            <td>{{ item_count }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+    <div id="return">
+        <a class="cancel-button" href="{% url 'distribute:index' %}">
+            <div class="text-button">Return</div>
+        </a>
+    </div>
 {% endblock content %}
