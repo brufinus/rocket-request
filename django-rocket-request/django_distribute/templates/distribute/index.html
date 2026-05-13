@@ -1,16 +1,20 @@
 {% extends "distribute/base.html" %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock head %}
 {% block content %}
     <article data-remove-url="{% url "distribute:remove" %}">
         <section>
-            <h2>Setup</h2>
+            <h2 id="setup">Setup</h2>
             <form id="item-collection-form"
                   method="post"
                   data-collection-url="{% url "distribute:collection" %}">
                 {% csrf_token %}
-                <fieldset>
-                    <legend>Add items to distribute</legend>
-                    <div id="item-search">
+                <div class="display-panel">
+                    <h3>Add items to distribute</h3>
+                    <div id="input-grid">
                         <label for="user-item-input">Item:</label>
                         <input type="text"
                                list="suggestions"
@@ -18,28 +22,28 @@
                                id="user-item-input"
                                placeholder="Start typing..."
                                required
-                               maxlength="35" 
+                               maxlength="35"
                                pattern="[a-zA-Z0-9_ \(\)\-\.]+"
                                autofocus />
                         <datalist id="suggestions">
                             {% for suggestion in suggestions %}<option value="{{ suggestion }}">{{ suggestion }}</option>{% endfor %}
                         </datalist>
                         <div id="search-error"></div>
-                    </div>
-                    <p>
                         <label for="user-count-input">Count:</label>
-                        <input type="number"
-                               name="user-count"
-                               id="user-count-input"
-                               required
-                               min="1"
-                               max="100000" />
+                        <div>
+                            <input type="number"
+                                   name="user-count"
+                                   id="user-count-input"
+                                   required
+                                   min="1"
+                                   max="100000" />
+                            <button id="add-item-button" class="confirm-button" type="submit">
+                                <div class="text-button">✔</div>
+                            </button>
+                        </div>
                         <div id="count-error"></div>
-                    </p>
-                    <p>
-                        <button type="submit">Add Item</button>
-                    </p>
-                </fieldset>
+                    </div>
+                </div>
             </form>
             <form id="distribute-form"
                   action="{% url "distribute:distributable" %}"
@@ -52,35 +56,45 @@
                            id="num-silos"
                            required
                            min="1"
-                           max="100000" />
+                           max="100" />
                 </p>
                 <p>
-                    <button>Distribute</button>
+                    <button id="distribute-button" class="confirm-button">Distribute</button>
                     <div id="distribute-error">{{ distribute_error }}</div>
                 </p>
             </form>
         </section>
         <aside>
-            <h3>Added Items</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th id="item-th" scope="col">{{ table_headers.0 }}</th>
-                        <th id="count-th" scope="col">{{ table_headers.1 }}</th>
-                    </tr>
-                </thead>
-                <tbody id="itemlist">
-                    {% for item_name, item_count in itemlist.items %}
-                        <tr id="item-list">
-                            <td scope="row">{{ item_name }}</td>
-                            <td>{{ item_count }}</td>
-                            <td>
-                                <button id="remove-button" data-item-name="{{ item_name }}">Remove</button>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h2 id="item-header">Added Items</h2>
+            <div id="panel-border">
+                <div class="display-panel">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th id="item-th" scope="col">{{ table_headers.0 }}</th>
+                                <th id="count-th" scope="col">{{ table_headers.1 }}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemlist">
+                            {% for item_name, item_count in itemlist.items %}
+                                <tr>
+                                    <td class="remove-data">
+                                        <button id="remove-button"
+                                                class="text-button"
+                                                style="font-size:24px"
+                                                data-item-name="{{ item_name }}">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                    </td>
+                                    <td class="added-item" scope="row">{{ item_name }}</td>
+                                    <td>{{ item_count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </aside>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
