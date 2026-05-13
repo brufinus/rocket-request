@@ -8,13 +8,15 @@ function renderItemList(itemList) {
   $("#itemlist").empty();
   for (var itemName in itemList) {
     $("#itemlist").append(
-      "<tr><td class='added-item' scope='row'>" +
+      "<tr>" +
+        '<td class="remove-data"><button id="remove-button" style="font-size:24px" data-item-name="' +
+        itemName +
+        '"><i class="fa fa-trash-o"></i></button></td>' +
+        "<td class='added-item' scope='row'>" +
         itemName +
         "</td><td>" +
         itemList[itemName] +
-        '</td><td class="remove-data"><button id="remove-button" style="font-size:24px" data-item-name="' +
-        itemName +
-        '"><i class="fa fa-trash-o"></i></button></td></tr>',
+        "</td></tr>",
     );
   }
   $("#user-item-input").val("");
