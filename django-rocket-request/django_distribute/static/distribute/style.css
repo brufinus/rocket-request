@@ -12,6 +12,8 @@
   --cancel-box-shadow: 0 0 10px #d97575;
   --button-text-color: rgb(29, 28, 29);
   --button-text-color-pressed: rgb(28, 28, 28);
+  --link-color: rgb(117, 218, 251);
+  --link-color-hover: #9ad1ea;
 }
 
 /* Common */
@@ -305,14 +307,17 @@ footer {
   flex-wrap: wrap;
   display: flex;
   align-items: center;
-  /* max-height: 20px; */
   font-size: 16px;
   gap: 4px;
   padding: 2px 8px;
 }
 
 .logo-link-box a {
-  color: rgb(117, 218, 251);
+  color: var(--link-color);
+}
+
+.logo-link-box a:hover {
+  color: var(--link-color-hover);
 }
 
 .logo {
@@ -392,4 +397,24 @@ h4 {
   border: var(--cancel-border-color-active);
   color: var(--button-text-color-pressed);
   box-shadow: 0 0 0;
+}
+
+/* Contact page */
+#contact {
+  background-color: var(--panel-bg-color);
+  border: var(--panel-border);
+  margin: 8px auto 8px auto;
+  padding-left: 16px;
+}
+
+#contact-body p {
+  color: white;
+}
+
+#contact a {
+  color: var(--link-color);
+}
+
+#contact a:hover {
+  color: var(--link-color-hover);
 }

@@ -120,3 +120,8 @@ def results(request):
             "consolidated": consolidated,
         },
     )
+
+
+def contact(request):
+    """Renders the contact page."""
+    return render(request, "distribute/contact.html")

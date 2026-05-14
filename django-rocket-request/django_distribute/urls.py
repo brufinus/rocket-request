@@ -9,4 +9,5 @@ urlpatterns = [
     path("api/remove/", views.remove, name="remove"),
     path("api/distributable/", views.distributable, name="distributable"),
     path("results/", views.results, name="results"),
+    path("contact/", views.contact, name="contact"),
 ]
