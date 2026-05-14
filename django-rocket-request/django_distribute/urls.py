@@ -10,4 +10,5 @@ urlpatterns = [
     path("api/distributable/", views.distributable, name="distributable"),
     path("results/", views.results, name="results"),
     path("contact/", views.contact, name="contact"),
+    path("about/", views.about, name="about"),
 ]

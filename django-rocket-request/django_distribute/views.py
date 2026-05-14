@@ -123,5 +123,9 @@ def results(request):
 
 
 def contact(request):
-    """Renders the contact page."""
+    """Renders the Contact page."""
     return render(request, "distribute/contact.html")
+
+def about(request):
+    """Renders the About page."""
+    return render(request, "distribute/about.html")
