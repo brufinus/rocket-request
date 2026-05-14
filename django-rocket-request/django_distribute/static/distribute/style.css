@@ -22,25 +22,6 @@
   border: 6px solid #403f40;
 }
 
-.info-section {
-  background-color: var(--panel-bg-color);
-  border: var(--panel-border);
-  margin: 8px auto 8px auto;
-  padding-left: 16px;
-}
-
-.info-div p {
-  color: white
-}
-
-.info-div a {
-  color: var(--link-color);
-}
-
-.info-div a:hover {
-  color: var(--link-color-hover);
-}
-
 /* Body */
 html body {
   background-color: #8e8e8e;
@@ -416,4 +397,38 @@ h4 {
   border: var(--cancel-border-color-active);
   color: var(--button-text-color-pressed);
   box-shadow: 0 0 0;
+}
+
+/* Contact & About pages */
+.info-section {
+  background-color: var(--panel-bg-color);
+  border: var(--panel-border);
+  margin: 8px auto 8px auto;
+  padding-left: 16px;
+}
+
+.info-div p {
+  color: white
+}
+
+.info-div a {
+  color: var(--link-color);
+}
+
+.info-div a:hover {
+  color: var(--link-color-hover);
+}
+
+.info-panel {
+  background-color: #403f40;
+  border: 2px outset #656362;
+  padding: 12px;
+  width: 60%;
+}
+
+.info-panel-short {
+  background-color: #403f40;
+  border: 2px outset #656362;
+  padding: 12px;
+  width: 40%;
 }
