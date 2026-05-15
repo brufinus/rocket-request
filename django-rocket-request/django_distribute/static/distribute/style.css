@@ -370,6 +370,8 @@ html.light-theme .logo-link-box a {
 }
 
 .logo-link-box a {
+  display: flex;
+  align-items: center;
   color: var(--link-color);
 }
 
