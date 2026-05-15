@@ -22,7 +22,6 @@ function renderItemList(itemList) {
   $("#user-item-input").val("");
   $("#user-item-input").focus();
 
-  console.log(Object.keys(itemList).length);
   if (Object.keys(itemList).length == 0) {
     $("#item-th").text("No items have been added.");
   } else {

@@ -83,18 +83,18 @@ html.light-theme .nav-bar {
   font-style: normal;
 }
 
-.nav-bar-item:hover {
+.nav-bar-item:hover, html.light-theme #theme-toggle:hover {
   background-color: #e39827;
   border: 2px outset #db9225;
 }
 
-.nav-bar-item:active {
+.nav-bar-item:active, html.light-theme #theme-toggle:active {
   background-color: #f1be64;
   border: 2px outset #60451c;
   color: var(--button-text-color-pressed);
 }
 
-.nav-bar-item-context {
+.nav-bar-item-context, html.light-theme #theme-toggle {
   background-color: var(--active-color);
   border: 2px outset #5b5857;
   color: #ffe6c0;
