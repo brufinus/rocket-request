@@ -215,3 +215,13 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         assert (
             self.selenium.find_element(By.XPATH, "/html/body/main/section/div/p[3]")
         ).text == "Have any other inquiries or comments? Send me an email."
+
+    def test_about_page(self):
+        """Test elements on the about page."""
+        self.selenium.get(f"{self.live_server_url}/distribute/about")
+        assert (
+            self.selenium.find_element(By.XPATH, "/html/body/main/section/h1")
+        ).text == "About"
+        assert (
+            self.selenium.find_element(By.XPATH, "/html/body/main/section/div/h2[1]")
+        ).text == "Why?"
