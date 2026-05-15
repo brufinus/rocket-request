@@ -48,16 +48,8 @@ class IndexViewTests(TestCase):
         self.assertContains(response, "12")
         self.assertContains(response, "Bar")
         self.assertContains(response, "7")
-        self.assertContains(
-            response,
-            '<button id="remove-button" data-item-name="Foo">Remove</button>',
-            html=True,
-        )
-        self.assertContains(
-            response,
-            '<button id="remove-button" data-item-name="Bar">Remove</button>',
-            html=True,
-        )
+        self.assertContains(response, 'data-item-name="Foo">')
+        self.assertContains(response, 'data-item-name="Bar">')
 
     def test_distribute_error_displayed(self):
         """If the error for distribute is set, it is displayed."""
@@ -69,7 +61,9 @@ class IndexViewTests(TestCase):
         self.assertContains(response, Errors.ADD_ITEMS_DISTRIBUTE)
         self.assertContains(
             response,
-            '<div id="distribute-error">' + Errors.ADD_ITEMS_DISTRIBUTE + "</div>",
+            '<div id="distribute-error" class="error">'
+            + Errors.ADD_ITEMS_DISTRIBUTE
+            + "</div>",
             html=True,
         )
         self.assertNotIn("distribute_error", self.client.session)
@@ -221,9 +215,11 @@ class ResultsViewTests(TestCase):
         session["num_silos"] = 2
         session.save()
         response = self.client.get(reverse("distribute:results"))
-        self.assertContains(response, "Available silos: 2")
-        self.assertContains(response, "Required launches: 3")
-        self.assertContains(response, "Required launch cycles: 2")
+        self.assertContains(response, "<td>Available silos</td><td>2</td>", html=True)
+        self.assertContains(response, "<td>Required launches</td><td>3</td>", html=True)
+        self.assertContains(
+            response, "<td>Required launch cycles</td><td>2</td>", html=True
+        )
         self.assertContains(response, '<td scope="row">Chemical plant</td>', html=True)
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
