@@ -311,10 +311,15 @@ html.light-theme table td {
 }
 
 #remove-button {
-  padding: 1px 4px;
-  color: var(--button-text-color);
   background-color: var(--cancel-bg-color);
   border: var(--cancel-border);
+  align-items: center;
+}
+
+.trash-icon {
+  object-fit: contain;
+  height: .8em;
+  width: auto;
 }
 
 #remove-button:hover {

@@ -1,8 +1,6 @@
 {% extends "distribute/base.html" %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock head %}
 {% block content %}
     <article data-remove-url="{% url "distribute:remove" %}">
@@ -84,7 +82,11 @@
                                                 class="text-button"
                                                 style="font-size:24px"
                                                 data-item-name="{{ item_name }}">
-                                            <i class="fa fa-trash-o"></i>
+                                            <img class="trash-icon"
+                                                 src="{% static "distribute/images/trash.png" %}"
+                                                 alt="Trash can"
+                                                 width="32"
+                                                 height="32" />
                                         </button>
                                     </td>
                                     <td class="added-item" scope="row">{{ item_name }}</td>
