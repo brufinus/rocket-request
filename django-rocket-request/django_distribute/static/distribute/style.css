@@ -376,6 +376,11 @@ html.light-theme .logo-link-box a {
   object-fit: contain;
   height: 2em;
   width: auto;
+  filter: brightness(80%);
+}
+
+html.light-theme .logo {
+
   filter: brightness(0%);
 }
 
