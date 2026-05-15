@@ -85,7 +85,7 @@ html.dark-theme body {
 .nav-bar-item-context {
   background-color: var(--active-color);
   border: 2px outset #5b5857;
-  color: #ffe6c0
+  color: #ffe6c0;
 }
 
 .text-button {
@@ -387,27 +387,32 @@ h4 {
   font-style: normal;
 }
 
-#return {
+.return {
   background-color: var(--cancel-bg-color);
   border: var(--cancel-border);
-  width: fit-content;
+  width: 50px;
   margin: 12px;
   padding-left: 8px;
   padding-right: 8px;
+  text-align: center;
 }
 
-#return:hover {
+.return:hover {
   background-color: var(--cancel-bg-color-hover);
   border: var(--cancel-border-hover);
   color: var(--button-text-color);
   box-shadow: var(--cancel-box-shadow);
 }
 
-#return:active {
+.return:active {
   background-color: var(--cancel-bg-color-active);
   border: var(--cancel-border-color-active);
   color: var(--button-text-color-pressed);
   box-shadow: 0 0 0;
+}
+
+#cancel-container {
+  display: flex;
 }
 
 /* Contact & About pages */
@@ -419,7 +424,7 @@ h4 {
 }
 
 .info-div p {
-  color: white
+  color: white;
 }
 
 .info-div a {

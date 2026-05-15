@@ -89,9 +89,16 @@
             {% endfor %}
         </section>
     </div>
-    <div id="return">
-        <a class="cancel-button" href="{% url 'distribute:index' %}">
-            <div class="text-button">Return</div>
-        </a>
+    <div id="cancel-container">
+        <div class="return">
+            <a class="cancel-button" href="{% url 'distribute:index' %}">
+                <div class="text-button">Return</div>
+            </a>
+        </div>
+        <div class="return">
+            <a class="cancel-button" href="{% url 'distribute:reset' %}">
+                <div class="text-button">Reset</div>
+            </a>
+        </div>
     </div>
 {% endblock content %}

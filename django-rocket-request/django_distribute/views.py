@@ -14,12 +14,14 @@ from django_distribute.services.initialize_setup import (
 )
 from django_distribute.services.search import search_coordinator
 
+table_item_count = ("Item", "Count")
+
 
 def index(request):
     """Main page for the application."""
     itemlist = request.session.get("itemlist", {})
     request.session["itemlist"] = dict(sorted(itemlist.items()))
-    table_headers = ("Item", "Count")
+    table_headers = table_item_count
     if not itemlist:
         table_headers = (Errors.NO_ITEMS_ADDED, "")
 
@@ -126,6 +128,13 @@ def contact(request):
     """Renders the Contact page."""
     return render(request, "distribute/contact.html")
 
+
 def about(request):
     """Renders the About page."""
     return render(request, "distribute/about.html")
+
+
+def reset(request):
+    """Resets the itemlist and redirects back to index."""
+    request.session["itemlist"] = {}
+    return HttpResponseRedirect(reverse("distribute:index"))
