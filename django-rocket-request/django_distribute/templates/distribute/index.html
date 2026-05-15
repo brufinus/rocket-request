@@ -28,7 +28,7 @@
                         <datalist id="suggestions">
                             {% for suggestion in suggestions %}<option value="{{ suggestion }}">{{ suggestion }}</option>{% endfor %}
                         </datalist>
-                        <div id="search-error"></div>
+                        <div class="error" id="search-error"></div>
                         <label for="user-count-input">Count:</label>
                         <div>
                             <input type="number"
@@ -41,7 +41,7 @@
                                 <div class="text-button">✔</div>
                             </button>
                         </div>
-                        <div id="count-error"></div>
+                        <div class="error" id="count-error"></div>
                     </div>
                 </div>
             </form>
@@ -60,7 +60,7 @@
                 </p>
                 <p>
                     <button id="distribute-button" class="confirm-button">Distribute</button>
-                    <div id="distribute-error">{{ distribute_error }}</div>
+                    <div class="error" id="distribute-error">{{ distribute_error }}</div>
                 </p>
             </form>
         </section>

@@ -191,6 +191,10 @@ h3 {
   top: 0.2px;
 }
 
+.error {
+  color: #fe5a5a;
+}
+
 #search-error {
   grid-column: 2;
 }
