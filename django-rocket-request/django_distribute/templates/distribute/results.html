@@ -63,29 +63,31 @@
         <section class="distribute-results">
             <h2>Per-Silo Distribution</h2>
             {% for inv, load in consolidated %}
-                <h3>Silo {{ forloop.counter }} ({{ load }} kg)</h3>
-                <div class="results-section-container">
-                    <div class="item-results-container">
-                        <div class="display-panel">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="table-cell-item" scope="col">Item</th>
-                                        <th scope="col">Count</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for item_name, item_count in inv.items %}
+                {% if inv %}
+                    <h3>Silo {{ forloop.counter }} ({{ load }} kg)</h3>
+                    <div class="results-section-container">
+                        <div class="item-results-container">
+                            <div class="display-panel">
+                                <table>
+                                    <thead>
                                         <tr>
-                                            <td scope="row">{{ item_name }}</td>
-                                            <td>{{ item_count }}</td>
+                                            <th class="table-cell-item" scope="col">Item</th>
+                                            <th scope="col">Count</th>
                                         </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {% for item_name, item_count in inv.items %}
+                                            <tr>
+                                                <td scope="row">{{ item_name }}</td>
+                                                <td>{{ item_count }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </section>
     </div>
