@@ -127,6 +127,7 @@ class SeleniumViewTests(StaticLiveServerTestCase):
             By.XPATH, "/html/body/main/article/section/form[2]/p[2]/button"
         ).click()
 
+        # Summary
         assert (
             self.selenium.find_element(
                 By.XPATH, "/html/body/main/section/div/div/table/tbody/tr[1]/td[1]"
@@ -163,6 +164,44 @@ class SeleniumViewTests(StaticLiveServerTestCase):
             ).text
             == "2"
         )
+
+        # Per-cycle
+        assert (
+            self.selenium.find_element(
+                By.XPATH, "/html/body/main/div[1]/section[1]/h3[2]"
+            )
+        ).text == "Cycle 2 of 2"
+        assert (
+            self.selenium.find_element(
+                By.XPATH,
+                "/html/body/main/div[1]/section[1]/div[2]/div/div/table/tbody/tr/td[1]",
+            )
+        ).text == "Transport belt"
+        assert (
+            self.selenium.find_element(
+                By.XPATH,
+                "/html/body/main/div[1]/section[1]/div[2]/div/div/table/tbody/tr/td[2]",
+            )
+        ).text == "25"
+
+        # Per-silo
+        assert (
+            self.selenium.find_element(
+                By.XPATH, "/html/body/main/div[1]/section[2]/h3[2]"
+            )
+        ).text == "Silo 2 (1000 kg)"
+        assert (
+            self.selenium.find_element(
+                By.XPATH,
+                "/html/body/main/div[1]/section[2]/div[1]/div/div/table/tbody/tr[3]/td[1]",
+            )
+        ).text == "Thruster"
+        assert (
+            self.selenium.find_element(
+                By.XPATH,
+                "/html/body/main/div[1]/section[2]/div[1]/div/div/table/tbody/tr[3]/td[2]",
+            )
+        ).text == "4"
 
     def test_contact_page(self):
         """Test elements on the contact page."""
