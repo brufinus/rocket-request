@@ -225,3 +225,9 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         assert (
             self.selenium.find_element(By.XPATH, "/html/body/main/section/div/h2[1]")
         ).text == "Why?"
+    
+    def test_toggle_theme(self):
+        """Tests the toggle theme button."""
+        self.selenium.get(f"{self.live_server_url}/distribute/")
+        self.selenium.find_element(By.ID, "theme-toggle").click()
+    
