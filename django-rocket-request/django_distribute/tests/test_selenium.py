@@ -18,7 +18,8 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def test_flow(self):
+    def test_items_and_get_results(self):
+        """Test the add/remove item flow and get results."""
         wait = WebDriverWait(self.selenium, 2)
 
         self.selenium.get(f"{self.live_server_url}/distribute/")
@@ -30,7 +31,6 @@ class SeleniumViewTests(StaticLiveServerTestCase):
             By.XPATH,
             "/html/body/main/article/section/form[1]/div/div/div[2]/button/div",
         ).click()
-        # wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/main/article/section/form[1]/div/div/div[2]/button/div")))
         self.selenium.find_element(By.NAME, "user-item").send_keys("chemplant")
         self.selenium.find_element(By.NAME, "user-count").clear()
         self.selenium.find_element(By.NAME, "user-count").send_keys("6")
@@ -163,3 +163,16 @@ class SeleniumViewTests(StaticLiveServerTestCase):
             ).text
             == "2"
         )
+
+    def test_contact_page(self):
+        """Test elements on the contact page."""
+        self.selenium.get(f"{self.live_server_url}/distribute/contact")
+        assert (
+            self.selenium.find_element(By.XPATH, "/html/body/main/section/h1")
+        ).text == "Contact me"
+        assert (
+            self.selenium.find_element(By.XPATH, "/html/body/main/section/div/h2[1]")
+        ).text == "Feedback"
+        assert (
+            self.selenium.find_element(By.XPATH, "/html/body/main/section/div/p[3]")
+        ).text == "Have any other inquiries or comments? Send me an email."
