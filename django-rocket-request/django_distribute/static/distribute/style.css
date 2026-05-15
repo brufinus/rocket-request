@@ -14,12 +14,13 @@
   --button-text-color-pressed: rgb(28, 28, 28);
   --link-color: rgb(117, 218, 251);
   --link-color-hover: #9ad1ea;
+  --active-color: #403f40;
 }
 
 /* Common */
 .display-panel {
   background-color: var(--panel-bg-color);
-  border: 6px solid #403f40;
+  border: 6px solid var(--active-color);
 }
 
 /* Body */
@@ -79,6 +80,12 @@ html.dark-theme body {
   background-color: #f1be64;
   border: 2px outset #60451c;
   color: var(--button-text-color-pressed);
+}
+
+.nav-bar-item-context {
+  background-color: var(--active-color);
+  border: 2px outset #5b5857;
+  color: #ffe6c0
 }
 
 .text-button {
@@ -420,14 +427,14 @@ h4 {
 }
 
 .info-panel {
-  background-color: #403f40;
+  background-color: var(--active-color);
   border: 2px outset #656362;
   padding: 12px;
   width: 60%;
 }
 
 .info-panel-short {
-  background-color: #403f40;
+  background-color: var(--active-color);
   border: 2px outset #656362;
   padding: 12px;
   width: 40%;
