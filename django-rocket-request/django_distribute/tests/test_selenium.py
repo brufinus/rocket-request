@@ -231,3 +231,14 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         self.selenium.get(f"{self.live_server_url}/distribute/")
         self.selenium.find_element(By.ID, "theme-toggle").click()
     
+    def test_navigation(self):
+        """Tests navigation between pages using the nav bar."""
+        self.selenium.get(f"{self.live_server_url}/distribute/")
+        self.selenium.find_element(By.CSS_SELECTOR, ".nav-bar-item-context > div:nth-child(1)").click()
+        assert self.selenium.current_url == f"{self.live_server_url}/distribute/"
+        self.selenium.find_element(By.CSS_SELECTOR, ".links-list > li:nth-child(2) > a:nth-child(1) > div:nth-child(1)").click()
+        assert self.selenium.current_url == f"{self.live_server_url}/distribute/contact/"
+        self.selenium.find_element(By.CSS_SELECTOR, ".links-list > li:nth-child(3) > a:nth-child(1)").click()
+        assert self.selenium.current_url == f"{self.live_server_url}/distribute/about/"
+        self.selenium.find_element(By.CSS_SELECTOR, ".links-list > li:nth-child(1) > a:nth-child(1)").click()
+        assert self.selenium.current_url == f"{self.live_server_url}/distribute/"
