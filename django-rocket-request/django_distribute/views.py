@@ -102,7 +102,7 @@ def results(request):
         return HttpResponseRedirect(reverse("distribute:index"))
 
     itemlist: dict[str, int] = request.session.get("itemlist", None)
-    if itemlist is None:
+    if itemlist is None or not itemlist:
         return HttpResponseRedirect(reverse("distribute:index"))
     silos = distribute_items(itemlist)
     cycles = build_distribution(silos, num_silos, ITEMS)
