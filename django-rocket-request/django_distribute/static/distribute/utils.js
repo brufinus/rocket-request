@@ -11,7 +11,7 @@ function renderItemList(itemList) {
       "<tr>" +
         '<td class="remove-data"><button id="remove-button" style="font-size:24px" data-item-name="' +
         itemName +
-        '"><img class="trash-icon" src="/static/distribute/images/trash.png" alt="Trash can" width="32" height="32" /></button></td>' +
+        '"><img class="trash-icon" src="/static/distribute/images/trash.png" alt="Remove" width="32" height="32" /></button></td>' +
         "<td class='added-item' scope='row'>" +
         itemName +
         "</td><td>" +
