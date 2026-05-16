@@ -1,5 +1,7 @@
 """URL patterns for the Distribute app."""
 
+# pylint: disable=invalid-name
+
 from django.urls import path
 
 from . import views
