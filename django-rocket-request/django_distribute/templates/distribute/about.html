@@ -1,0 +1,34 @@
+{% extends "distribute/base.html" %}
+{% load static %}
+{% block content %}
+    <section class="info-section">
+        <h1>About</h1>
+        <div class="info-div">
+            <p class="info-panel">
+                Rocket Request is a utility tool for the factory automation game,
+                <a href="https://factorio.com" target="_blank" rel="noopener noreferrer">Factorio</a>.
+                <br>
+                It shows you how to distribute items across your rocket silos, minimizing the number of required launches.
+                <br>
+                A <a href="https://en.wikipedia.org/wiki/First-fit-decreasing_bin_packing"
+    target="_blank"
+    rel="noopener noreferrer">first-fit-decreasing</a> algorithm is utilized to calculate this distribution.
+            </p>
+            <h2>Why?</h2>
+            <p class="info-panel">
+                When auto-requesting to a space platform, silos always fill up to capacity with a single item, leading to wasteful launches.
+                <br>
+                Of course, this is not a concern in a game where resources are nearly unlimited; however, wasting resources bothers me.
+                <br>
+                So instead, I wasted my time to create a program, and then I turned it into a web application for fun.
+            </p>
+            <h2>Source</h2>
+            <p class="info-panel">
+                If you would like to check out or contribute to the source code, it is available on GitHub at
+                <a href="https://github.com/brufinus/rocket-request"
+                   target="_blank"
+                   rel="noopener noreferrer">brufinus/rocket-request</a>.
+            </p>
+        </div>
+    </section>
+{% endblock content %}

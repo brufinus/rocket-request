@@ -1,6 +1,8 @@
 name: Test Code Quality
 
-on: [ push ]
+on:
+  push:
+    branches: [main]
 
 jobs:
     test:
