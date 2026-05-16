@@ -53,3 +53,12 @@ class TestSearch(TestCase):
 
     def test_search_coordinator_no_matches(self):
         self.assertEqual(search_coordinator("foobar", ITEMS), ("", False))
+
+    def test_search_coordinator_similar(self):
+        self.assertEqual(
+            search_coordinator("electonic crcut", ITEMS), ("Electronic circuit", True)
+        )
+
+    def test_search_coordinator_match(self):
+        item_name = "Advanced circuit"
+        self.assertEqual(search_coordinator(item_name, ITEMS), (item_name, False))
