@@ -1,2 +1,2 @@
 [run]
-omit = manage.py,*/rocketrequest/*
+omit = manage.py,test_selenium.py,*/rocketrequest/*
