@@ -223,3 +223,13 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, '<td scope="row">Chemical plant</td>', html=True)
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
+
+class ContactViewTests(TestCase):
+    def test_render_contact_page(self):
+        """Test that elements can be found on the contact page."""
+        response = self.client.get(reverse("distribute:contact"))
+        self.assertContains(response, "Contact me")
+        self.assertContains(response, "Issues")
+        self.assertContains(response, "Feedback")
+        self.assertContains(response, "Email")
+        self.assertContains(response, "Find a bug or incorrect data?")
