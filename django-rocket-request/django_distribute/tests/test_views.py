@@ -247,3 +247,25 @@ class AboutViewTests(TestCase):
             response,
             "If you would like to check out or contribute to the source code, it is available on GitHub",
         )
+
+class ResetViewTests(TestCase):
+    def test_itemlist_reset(self):
+        """Itemlist is cleared on reset."""
+        session = self.client.session
+        session["itemlist"] = {"Transport belt": 80, "Chemical plant": 6, "Thruster": 4}
+        session.save()
+        self.client.get(reverse("distribute:reset"))
+        self.assertEqual(self.client.session["itemlist"], {})
+
+    def test_itemlist_reset_empty(self):
+        """Empty itemlist is cleared on reset."""
+        session = self.client.session
+        session["itemlist"] = {}
+        session.save()
+        self.client.get(reverse("distribute:reset"))
+        self.assertEqual(self.client.session["itemlist"], {})
+
+    def test_no_itemlist_reset(self):
+        """If there is no itemlist, an empty one is set."""
+        self.client.get(reverse("distribute:reset"))
+        self.assertEqual(self.client.session["itemlist"], {})
