@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@tag("slow")
+@tag("slow", "selenium")
 class SeleniumViewTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls) -> None:

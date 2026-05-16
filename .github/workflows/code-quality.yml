@@ -1,20 +1,10 @@
 name: Test Code Quality
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        name: Run tests
-        steps:
-            - uses: actions/checkout@v6
-            - id: test-setup
-              uses: ./.github/actions/python-setup
-            - name: Run pytest
-              run: pytest
-
     lint:
         runs-on: ubuntu-latest
         name: Run linter
@@ -23,16 +13,24 @@ jobs:
             - id: lint-setup
               uses: ./.github/actions/python-setup
             - name: Run pylint
-              run: pylint $(git ls-files '*.py')
+              run: |
+                cd django-rocket-request
+                pylint .
 
-    coverage:
+    tests-and-coverage:
         runs-on: ubuntu-latest
-        name: Run coverage
+        name: Tests and coverage
         steps:
             - uses: actions/checkout@v6
             - id: coverage-setup
               uses: ./.github/actions/python-setup
-            - name: Run coverage.py
+            - name: Run Django tests and coverage
               run: |
-                  coverage run -m pytest
+                  cd django-rocket-request
+                  coverage run --source='.' manage.py test --exclude-tag selenium django_distribute
                   coverage report -m
+                  coverage html
+            - uses: actions/upload-artifact@v7
+              with:
+                name: coverage
+                path: django-rocket-request/htmlcov
