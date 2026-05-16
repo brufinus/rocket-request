@@ -1,7 +1,9 @@
 """Display, request, and session tests on views."""
 
-from django.test import TestCase
 from django.urls import reverse
+from hypothesis import given
+from hypothesis import strategies as st
+from hypothesis.extra.django import TestCase
 
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
@@ -28,13 +30,14 @@ class IndexViewTests(TestCase):
             response, '<th id="count-th" scope="col">Count</th>', html=True
         )
 
-    def test_elements_displayed_with_items(self):
+    @given(st.integers(), st.integers())
+    def test_elements_displayed_with_items(self, n1, n2):
         """
         When the session contains items, the item names, counts,
         table headers, and remove buttons are displayed.
         """
         session = self.client.session
-        session["itemlist"] = {"Foo": 12, "Bar": 7}
+        session["itemlist"] = {"Foo": n1, "Bar": n2}
         session.save()
         response = self.client.get(reverse("distribute:index"))
         self.assertEqual(response.status_code, 200)
@@ -45,9 +48,9 @@ class IndexViewTests(TestCase):
             response, '<th id="count-th" scope="col">Count</th>', html=True
         )
         self.assertContains(response, "Foo")
-        self.assertContains(response, "12")
+        self.assertContains(response, f"{n1}")
         self.assertContains(response, "Bar")
-        self.assertContains(response, "7")
+        self.assertContains(response, f"{n2}")
         self.assertContains(response, 'data-item-name="Foo">')
         self.assertContains(response, 'data-item-name="Bar">')
 
@@ -78,36 +81,40 @@ class IndexViewTests(TestCase):
 
 
 class ItemCollectionViewTests(TestCase):
-    def test_valid_item_collection(self):
+    @given(st.integers(min_value=1))
+    def test_valid_item_collection(self, n):
         response = self.client.post(
             reverse("distribute:collection"),
-            {"user-item": "Transport belt", "user-count": 20},
+            {"user-item": "Transport belt", "user-count": n},
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["itemlist"]["Transport belt"], 20)
+        self.assertEqual(response.json()["itemlist"]["Transport belt"], n)
 
-    def test_item_collection_on_existing_item(self):
+    @given(st.integers(min_value=1), st.integers(min_value=1))
+    def test_item_collection_on_existing_item(self, n1, n2):
         """Item count is incremented on an additional add."""
         self.client.post(
             reverse("distribute:collection"),
-            {"user-item": "Transport belt", "user-count": 20},
+            {"user-item": "Transport belt", "user-count": n1},
         )
         response = self.client.post(
             reverse("distribute:collection"),
-            {"user-item": "Transport belt", "user-count": 7},
+            {"user-item": "Transport belt", "user-count": n2},
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()["itemlist"]["Transport belt"], 27)
+        self.assertEqual(response.json()["itemlist"]["Transport belt"], n1 + n2)
 
-    def test_response_on_invalid_item(self):
+    @given(st.integers(min_value=1))
+    def test_response_on_invalid_item(self, n):
         response = self.client.post(
             reverse("distribute:collection"),
-            {"user-item": "Foobar", "user-count": 1},
+            {"user-item": "Foobar", "user-count": n},
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["itemlist"], "Invalid item")
 
-    def test_response_on_invalid_count(self):
+    @given(st.integers(max_value=-1))
+    def test_response_on_invalid_count(self, n):
         response = self.client.post(
             reverse("distribute:collection"),
             {"user-item": "Transport belt", "user-count": 0},
@@ -117,7 +124,7 @@ class ItemCollectionViewTests(TestCase):
 
         response = self.client.post(
             reverse("distribute:collection"),
-            {"user-item": "Transport belt", "user-count": -1},
+            {"user-item": "Transport belt", "user-count": n},
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["itemlist"], "Invalid count")
@@ -128,21 +135,22 @@ class ItemCollectionViewTests(TestCase):
 
 
 class RemoveViewTests(TestCase):
-    def test_remove_item(self):
+    @given(st.integers(min_value=1), st.integers(min_value=1))
+    def test_remove_item(self, n1, n2):
         """
         The posted item is removed from the itemlist
         and is not in the returned JSON.
         """
         session = self.client.session
-        session["itemlist"] = {"Foo": 12, "Bar": 7}
+        session["itemlist"] = {"Foo": n1, "Bar": n2}
         session.save()
         response = self.client.post(reverse("distribute:remove"), {"user-item": "Foo"})
         self.assertNotIn("Foo", self.client.session)
-        self.assertEqual(response.json()["itemlist"]["Bar"], 7)
+        self.assertEqual(response.json()["itemlist"]["Bar"], n2)
 
-    def test_remove_nonexistant_item(self):
+    def test_remove_nonexistent_item(self):
         """
-        Itemlist should be unchanged on removal of nonexistant item.
+        Itemlist should be unchanged on removal of nonexistent item.
         """
         session = self.client.session
         session["itemlist"] = {"Foo": 12, "Bar": 7}
@@ -175,19 +183,24 @@ class DistributableViewTests(TestCase):
         response = self.client.post(reverse("distribute:distributable"))
         self.assertEqual(response.status_code, 400)
 
-    def test_distributable_flow(self):
+    @given(
+        st.integers(min_value=1, max_value=1000),
+        st.integers(min_value=1, max_value=1000),
+        st.integers(min_value=1, max_value=100),
+    )
+    def test_distributable_flow(self, n1, n2, n3):
         """
         POST valid num_silos with itemlist present, assert
         redirect to results and session stores num_silos.
         """
         session = self.client.session
-        session["itemlist"] = {"Transport belt": 100, "Pipe": 20}
+        session["itemlist"] = {"Transport belt": n1, "Pipe": n2}
         session.save()
         response = self.client.post(
-            reverse("distribute:distributable"), {"num-silos": 4}, follow=True
+            reverse("distribute:distributable"), {"num-silos": n3}, follow=True
         )
         self.assertRedirects(response, reverse("distribute:results"))
-        self.assertEqual(self.client.session["num_silos"], "4")
+        self.assertEqual(self.client.session["num_silos"], f"{n3}")
 
 
 class ResultsViewTests(TestCase):
@@ -247,6 +260,7 @@ class AboutViewTests(TestCase):
             response,
             "If you would like to check out or contribute to the source code, it is available on GitHub",
         )
+
 
 class ResetViewTests(TestCase):
     def test_itemlist_reset(self):
