@@ -224,8 +224,9 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
 
+
 class ContactViewTests(TestCase):
-    def test_render_contact_page(self):
+    def test_contact_page(self):
         """Test that elements can be found on the contact page."""
         response = self.client.get(reverse("distribute:contact"))
         self.assertContains(response, "Contact me")
@@ -233,3 +234,16 @@ class ContactViewTests(TestCase):
         self.assertContains(response, "Feedback")
         self.assertContains(response, "Email")
         self.assertContains(response, "Find a bug or incorrect data?")
+
+
+class AboutViewTests(TestCase):
+    def test_about_page(self):
+        """Test that elements can be found on the about page."""
+        response = self.client.get(reverse("distribute:about"))
+        self.assertContains(response, "About")
+        self.assertContains(response, "Why?")
+        self.assertContains(response, "Source")
+        self.assertContains(
+            response,
+            "If you would like to check out or contribute to the source code, it is available on GitHub",
+        )
