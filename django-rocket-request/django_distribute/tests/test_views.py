@@ -1,7 +1,11 @@
 """Display, request, and session tests on views."""
 
+import cProfile
+import pstats
+
+from django.test import tag
 from django.urls import reverse
-from hypothesis import given
+from hypothesis import given, settings
 from hypothesis import strategies as st
 from hypothesis.extra.django import TestCase
 
@@ -201,6 +205,24 @@ class DistributableViewTests(TestCase):
         )
         self.assertRedirects(response, reverse("distribute:results"))
         self.assertEqual(self.client.session["num_silos"], f"{n3}")
+
+    @tag("slow", "profile")
+    def test_profile_distribution(self):
+        """Collects cProfile statistics."""
+        n1 = 10000
+        n2 = 10000
+        n3 = 2
+        session = self.client.session
+        session["itemlist"] = {"Transport belt": n1, "Chemical plant": n2}
+        session.save()
+        with cProfile.Profile() as profile:
+            self.client.post(
+                reverse("distribute:distributable"), {"num-silos": n3}, follow=True
+            )
+        results = pstats.Stats(profile)
+        results.sort_stats(pstats.SortKey.TIME)
+        results.print_stats()
+        results.dump_stats("results.prof")
 
 
 class ResultsViewTests(TestCase):
