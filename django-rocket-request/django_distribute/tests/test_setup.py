@@ -15,10 +15,6 @@ from django_distribute.services.initialize_setup import (
     get_consolidated_slots,
     group_items,
 )
-from django_distribute.services.output_service import (
-    get_load_visualization,
-    print_distribution,
-)
 
 
 class TestSetup(TestCase):
@@ -81,40 +77,6 @@ class TestSetup(TestCase):
             {"a": make_item(1, 1, 3), "b": make_item(1, 1, 1), "c": make_item(1, 1, 2)},
         )
         self.assertEqual(items, {"b": 1, "c": 1, "a": 1})
-
-    # def test_print(self):
-    #     items = [("Transport belt", 220), ("inserter", 25), ("pipetoground", 15),
-    #              ("Chemical plant", 4), ("Thruster", 6), ("Crusher", 7)]
-    #     silos = distribute_items(items)
-    #     print_distribution(silos, 4)
-    #     print_consolidated(silos, 4)
-
-    def test_print_full_setup(self):
-        # Run with -s flag.
-        items = {"Transport belt": 194, "Inserter": 42, "Pipe": 36}
-        silos = distribute_items(items)
-        print_distribution(silos, 2, ITEMS)
-
-    def test_full_load_visualization(self):
-        self.assertEqual(get_load_visualization(1000, 1000), "[██████████]")
-
-    def test_half_load_visualization(self):
-        self.assertEqual(get_load_visualization(500, 1000), "[█████░░░░░]")
-
-    def test_partial_load_visualization(self):
-        self.assertEqual(get_load_visualization(300, 1000), "[███░░░░░░░]")
-
-    def test_quarter_load_visualization(self):
-        self.assertEqual(get_load_visualization(250, 1000), "[███░░░░░░░]")
-
-    def test_mid_rounding_load_visualization(self):
-        self.assertEqual(get_load_visualization(501, 1000), "[█████░░░░░]")
-
-    def test_big_rounding_load_visualization(self):
-        self.assertEqual(get_load_visualization(774, 1000), "[████████░░]")
-
-    def test_empty_load_visualization(self):
-        self.assertEqual(get_load_visualization(0, 1000), "[░░░░░░░░░░]")
 
     def test_get_formatted_float_whole(self):
         self.assertEqual(get_formatted_float(100.0), "100")

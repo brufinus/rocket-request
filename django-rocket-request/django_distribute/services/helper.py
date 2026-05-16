@@ -9,8 +9,6 @@ Functions:
 
 import re
 
-from django_distribute.data.items import ITEMS
-
 
 def get_formatted_float(raw_float: float) -> str:
     """
@@ -26,19 +24,6 @@ def get_formatted_float(raw_float: float) -> str:
     if raw_float % 1 == 0:
         return f"{int(raw_float)}"
     return f"{raw_float:.1f}"
-
-
-def get_col_width() -> int:
-    """
-    Returns a column width for output padding.
-
-    Determined using the longest key from item data.
-
-    :param dict[str, Item] item_data: The item data to use.
-    :return: The column width.
-    :rtype: int
-    """
-    return len(max(ITEMS, key=len)) + 2
 
 
 def transform_string(raw_string: str) -> str:
