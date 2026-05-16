@@ -1,4 +1,5 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.test import tag
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -6,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+@tag("slow", "selenium")
 class SeleniumViewTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls) -> None:

@@ -1,67 +1,79 @@
+from unittest import TestCase
+
 from django_distribute.containers.chest import Chest
 from django_distribute.containers.rocketsilo import RocketSilo
 from django_distribute.data.items import ITEMS
 
 
-class TestContainer:
-    def setup_method(self):
+class TestChestContainer(TestCase):
+    def setUp(self) -> None:
         self.chest = Chest()
-        self.silo = RocketSilo()
         self.belt = ITEMS["Transport belt"]
 
     def test_initialized_chest(self):
-        assert self.chest.inventory == []
+        self.assertFalse(self.chest.inventory, [])
 
     def test_add_item_to_chest(self):
         self.chest.add_item(self.belt)
-        assert self.chest.inventory == [self.belt]
+        self.assertEqual(self.chest.inventory, [self.belt])
 
     def test_cannot_add_item_to_chest(self):
         self.chest.load = 48
-        assert self.chest.add_item(self.belt) == False
-        assert self.chest.inventory == []
+        res = self.chest.add_item(self.belt)
+        self.assertFalse(res)
+        self.assertFalse(self.chest.inventory)
 
     def test_remove_item_from_chest(self):
         self.chest.add_item(self.belt)
         self.chest.remove_item(self.belt)
-        assert self.chest.inventory == []
+        self.assertFalse(self.chest.inventory)
+
+
+class TestSiloContainer(TestCase):
+    def setUp(self) -> None:
+        self.silo = RocketSilo()
+        self.belt = ITEMS["Transport belt"]
 
     def test_initialized_silo(self):
-        assert self.silo.inventory == []
-        assert self.silo.capacity == 1000
-        assert self.silo.load == 0
+        self.assertFalse(self.silo.inventory)
+        self.assertEqual(self.silo.capacity, 1000)
+        self.assertFalse(self.silo.load)
 
     def test_add_item_to_silo(self):
         self.silo.add_item(self.belt)
-        assert self.silo.inventory == [self.belt]
+        self.assertEqual(self.silo.inventory, [self.belt])
 
     def test_remove_item_from_silo(self):
         self.silo.add_item(self.belt)
         self.silo.remove_item(self.belt)
-        assert self.silo.inventory == []
+        self.assertFalse(self.silo.inventory)
 
     def test_silo_load(self):
         self.silo.add_item(self.belt)
-        assert self.silo.load == self.belt["weight"]
+        self.assertEqual(self.silo.load, self.belt["weight"])
         self.silo.remove_item(self.belt)
-        assert self.silo.load == 0
+        self.assertFalse(self.silo.load)
 
     def test_add_overweight_item_to_silo(self):
-        assert self.silo.add_item({"weight": 1001}) == False
+        self.assertFalse(
+            self.silo.add_item(
+                {"weight": 1001, "stack_size": 1, "id": 1, "rocket_capacity": 1}
+            )
+        )
 
     def test_add_items_until_silo_overweight(self):
         heavy = {"weight": 350}
-        assert self.silo.add_item(heavy)
-        assert self.silo.add_item(heavy) == True
-        assert self.silo.add_item(heavy) == False
+        self.assertTrue(self.silo.add_item(heavy))
+        self.assertTrue(self.silo.add_item(heavy))
+        self.assertFalse(self.silo.add_item(heavy))
 
     def test_add_many_light_items_to_silo(self):
         light = {"weight": 1}
-        for i in range(1000):
+        for _ in range(1000):
             self.silo.add_item(light)
-        assert self.silo.load == self.silo.capacity
+        self.assertEqual(self.silo.load, self.silo.capacity)
 
     def test_silo_load_weight(self):
         self.silo.add_item(ITEMS["Artificial yumako soil"])
         val = 988 / 67
-        assert self.silo.load == val
+        self.assertEqual(self.silo.load, val)

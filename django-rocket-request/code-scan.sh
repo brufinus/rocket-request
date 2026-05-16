@@ -1,7 +1,7 @@
 #!/bin/bash
 # Runs code scanning tools on Python files in the index and working tree.
 
-pylint $(git ls-files '*.py')
-coverage run -m pytest
+pylint .
+coverage run --source='.' manage.py test django_distribute
 coverage report -m
 coverage html
