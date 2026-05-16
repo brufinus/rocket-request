@@ -62,3 +62,6 @@ class TestSearch(TestCase):
     def test_search_coordinator_match(self):
         item_name = "Advanced circuit"
         self.assertEqual(search_coordinator(item_name, ITEMS), (item_name, False))
+    
+    def test_search_transformed_item(self):
+        self.assertEqual(search_item("transportbelt", ITEMS), "Transport belt")
