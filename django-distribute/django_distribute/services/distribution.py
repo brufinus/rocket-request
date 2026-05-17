@@ -31,43 +31,28 @@ def distribute_items(items: dict[str, int]) -> list[RocketSilo]:
     """
     expanded_items = expand_and_sort_items(items)
     silos = [RocketSilo()]
-    first_fit_silo(silos, expanded_items)
+    for item in expanded_items:
+        first_fit_silo(silos, item)
     return silos
 
 
-def first_fit_silo(silos: list[RocketSilo], items: list[Item]) -> None:
+def first_fit_silo(silos: list[RocketSilo], item: Item) -> None:
     """
-    Distributes items into silos using a first-fit algorithm.
+    Runs a first-fit algorithm to insert the item into a silo.
 
-    First-fit-decreasing:
-    For each item, it finds the first silo into which it can fit.
-    If it did not fit into any silo, a new one
-    is created and the item is added to it.
-
-    :param list[RocketSilo] silos: List of silos to search through.
-    :param list[Item] items: List of items to distribute.
-    :return: None
-    """
-    for item in items:
-        if not find_open_silo(silos, item):
-            new_silo = RocketSilo()
-            new_silo.add_item(item)
-            silos.append(new_silo)
-
-
-def find_open_silo(silos: list[RocketSilo], item: Item) -> bool:
-    """
     Tries to add the item into the first silo with enough space.
+    If there are no open silos, it is added to a new one.
 
     :param list[RocketSilo] silos: List of silos to search through.
     :param Item item: The item to add.
-    :return: Whether the item was added to a silo.
-    :rtype: bool
+    :return: None
     """
     for silo in silos:
-        if silo.load < 1000.0 and silo.add_item(item):
-            return True
-    return False
+        if silo.load < RocketSilo.CAPACITY and silo.add_item(item):
+            return
+    new_silo = RocketSilo()
+    new_silo.add_item(item)
+    silos.append(new_silo)
 
 
 def expand_and_sort_items(items: dict[str, int]) -> list[Item]:
