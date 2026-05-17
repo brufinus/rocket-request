@@ -1,7 +1,8 @@
 #!/bin/bash
-# Runs code scanning tools on Python files in the index and working tree.
+# Runs local code scanning tools on the app.
 
-pylint .
-coverage run --source='.' manage.py test django_distribute
+pylint --ignore tests .
+
+coverage run runtests.py
 coverage report -m
 coverage html
