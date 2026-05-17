@@ -10,7 +10,7 @@ dependencies = [
 ]
 description = "A Django app to show you how to distribute items amongst rocket silos in Factorio."
 readme = "README.rst"
-license = "BSD-3-Clause"
+license = "MIT"
 requires-python = ">= 3.12"
 authors = [
     {name = "Bernard Rufinus", email = "brufinus@duck.com"},

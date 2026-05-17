@@ -1,8 +1,8 @@
 =================
-django-rocket-request
+django-distribute
 =================
 
-django-rocket-request is a Django app that shows you how to
+django-distribute is a Django app that shows you how to
 distribute a set of items amongst rocket silos in Factorio.
 
 Detailed documentation is in the "docs" directory.
