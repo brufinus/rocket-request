@@ -1,5 +1,7 @@
 """Views for the distribute app."""
 
+from importlib.metadata import version as get_version
+
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -35,6 +37,7 @@ def index(request):
             "itemlist": request.session["itemlist"],
             "suggestions": ITEMS,
             "table_headers": table_headers,
+            "version": get_version("django-distribute"),
         },
     )
 
@@ -119,18 +122,25 @@ def results(request):
             "num_cycles": len(cycles),
             "cycles": cycles,
             "consolidated": consolidated,
+            "version": get_version("django-distribute"),
         },
     )
 
 
 def contact(request):
     """Renders the Contact page."""
-    return render(request, "distribute/contact.html")
+    return render(
+        request,
+        "distribute/contact.html",
+        {"version": get_version("django-distribute")},
+    )
 
 
 def about(request):
     """Renders the About page."""
-    return render(request, "distribute/about.html")
+    return render(
+        request, "distribute/about.html", {"version": get_version("django-distribute")}
+    )
 
 
 def reset(request):

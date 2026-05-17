@@ -2,15 +2,15 @@
 
 import cProfile
 import pstats
+from importlib.metadata import version as get_version
 
 from django.test import tag
 from django.urls import reverse
-from hypothesis import given, settings
-from hypothesis import strategies as st
-from hypothesis.extra.django import TestCase
-
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
+from hypothesis import given
+from hypothesis import strategies as st
+from hypothesis.extra.django import TestCase
 
 
 class IndexViewTests(TestCase):
@@ -82,6 +82,11 @@ class IndexViewTests(TestCase):
             self.assertContains(
                 response, f'<option value="{item_name}">{item_name}</option>'
             )
+
+    def test_footer_version(self):
+        """Version in the footer is set correctly."""
+        response = self.client.get(reverse("distribute:index"))
+        self.assertContains(response, get_version("django-distribute"))
 
 
 class ItemCollectionViewTests(TestCase):
@@ -258,6 +263,7 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, '<td scope="row">Chemical plant</td>', html=True)
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
+        self.assertContains(response, get_version("django-distribute"))
 
 
 class ContactViewTests(TestCase):
@@ -269,6 +275,11 @@ class ContactViewTests(TestCase):
         self.assertContains(response, "Feedback")
         self.assertContains(response, "Email")
         self.assertContains(response, "Find a bug or incorrect data?")
+
+    def test_footer_version(self):
+        """Version in the footer is set correctly."""
+        response = self.client.get(reverse("distribute:contact"))
+        self.assertContains(response, get_version("django-distribute"))
 
 
 class AboutViewTests(TestCase):
@@ -282,6 +293,11 @@ class AboutViewTests(TestCase):
             response,
             "If you would like to check out or contribute to the source code, it is available on GitHub",
         )
+
+    def test_footer_version(self):
+        """Version in the footer is set correctly."""
+        response = self.client.get(reverse("distribute:about"))
+        self.assertContains(response, get_version("django-distribute"))
 
 
 class ResetViewTests(TestCase):

@@ -1,10 +1,12 @@
+from importlib.metadata import version as get_version
+
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import tag
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 @tag("slow", "selenium")
@@ -123,6 +125,13 @@ class SeleniumViewTests(StaticLiveServerTestCase):
             == "85"
         )
 
+        assert (
+            self.selenium.find_element(
+                By.CSS_SELECTOR, "div.change-info:nth-child(4)"
+            ).text
+            == f"Rocket Request v{get_version("django-distribute")}"
+        )
+
         # Distribute and check results.
         self.selenium.find_element(By.NAME, "num-silos").send_keys("2")
         self.selenium.find_element(
@@ -205,6 +214,13 @@ class SeleniumViewTests(StaticLiveServerTestCase):
             )
         ).text == "4"
 
+        assert (
+            self.selenium.find_element(
+                By.CSS_SELECTOR, "div.change-info:nth-child(4)"
+            ).text
+            == f"Rocket Request v{get_version("django-distribute")}"
+        )
+
     def test_contact_page(self):
         """Test elements on the contact page."""
         self.selenium.get(f"{self.live_server_url}/distribute/contact")
@@ -217,6 +233,12 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         assert (
             self.selenium.find_element(By.XPATH, "/html/body/main/section/div/p[3]")
         ).text == "Have any other inquiries or comments? Send me an email."
+        assert (
+            self.selenium.find_element(
+                By.CSS_SELECTOR, "div.change-info:nth-child(4)"
+            ).text
+            == f"Rocket Request v{get_version("django-distribute")}"
+        )
 
     def test_about_page(self):
         """Test elements on the about page."""
@@ -227,20 +249,37 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         assert (
             self.selenium.find_element(By.XPATH, "/html/body/main/section/div/h2[1]")
         ).text == "Why?"
-    
+        assert (
+            self.selenium.find_element(
+                By.CSS_SELECTOR, "div.change-info:nth-child(4)"
+            ).text
+            == f"Rocket Request v{get_version("django-distribute")}"
+        )
+
     def test_toggle_theme(self):
         """Tests the toggle theme button."""
         self.selenium.get(f"{self.live_server_url}/distribute/")
         self.selenium.find_element(By.ID, "theme-toggle").click()
-    
+
     def test_navigation(self):
         """Tests navigation between pages using the nav bar."""
         self.selenium.get(f"{self.live_server_url}/distribute/")
-        self.selenium.find_element(By.CSS_SELECTOR, ".nav-bar-item-context > div:nth-child(1)").click()
+        self.selenium.find_element(
+            By.CSS_SELECTOR, ".nav-bar-item-context > div:nth-child(1)"
+        ).click()
         assert self.selenium.current_url == f"{self.live_server_url}/distribute/"
-        self.selenium.find_element(By.CSS_SELECTOR, ".links-list > li:nth-child(2) > a:nth-child(1) > div:nth-child(1)").click()
-        assert self.selenium.current_url == f"{self.live_server_url}/distribute/contact/"
-        self.selenium.find_element(By.CSS_SELECTOR, ".links-list > li:nth-child(3) > a:nth-child(1)").click()
+        self.selenium.find_element(
+            By.CSS_SELECTOR,
+            ".links-list > li:nth-child(2) > a:nth-child(1) > div:nth-child(1)",
+        ).click()
+        assert (
+            self.selenium.current_url == f"{self.live_server_url}/distribute/contact/"
+        )
+        self.selenium.find_element(
+            By.CSS_SELECTOR, ".links-list > li:nth-child(3) > a:nth-child(1)"
+        ).click()
         assert self.selenium.current_url == f"{self.live_server_url}/distribute/about/"
-        self.selenium.find_element(By.CSS_SELECTOR, ".links-list > li:nth-child(1) > a:nth-child(1)").click()
+        self.selenium.find_element(
+            By.CSS_SELECTOR, ".links-list > li:nth-child(1) > a:nth-child(1)"
+        ).click()
         assert self.selenium.current_url == f"{self.live_server_url}/distribute/"
