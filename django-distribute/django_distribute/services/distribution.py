@@ -65,7 +65,7 @@ def find_open_silo(silos: list[RocketSilo], item: Item) -> bool:
     :rtype: bool
     """
     for silo in silos:
-        if silo.add_item(item):
+        if silo.load < 1000.0 and silo.add_item(item):
             return True
     return False
 
