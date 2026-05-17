@@ -14,16 +14,15 @@ items into silos such that the sum of each silo's weight does not exceed 1000 kg
 
 - Python>=3.12
 
-### Local Server
+### Run Local Server
 
 Optional: [Create and activate a virtual environment](https://docs.python.org/3/library/venv.html)
 
 1. Clone or download the repository.
-2. Access the `django-rocket-request` directory: `cd django-rocket-request`
-3. Install requirements: `pip install -r requirements.txt`
-4. Run migrations: `python manage.py migrate`
-5. Run the development server: `python manage.py runserver`
-6. Access the web app at http://localhost:8000/distribute.
+2. Install requirements: `pip install -r django-distribute/requirements.txt`
+3. Run migrations: `python django-rocket-request/manage.py migrate`
+4. Build and install django_distribute and run the development server: `./run.sh`
+5. Access the web app at http://localhost:8000/distribute.
 
 ![Rocket Request main page](/.github/static/rocket-request-home.png)
 

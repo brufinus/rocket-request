@@ -17,8 +17,8 @@ jobs:
               uses: ./.github/actions/python-setup
             - name: Run pylint
               run: |
-                cd django-rocket-request
-                pylint .
+                cd django-distribute
+                pylint --ignore tests .
 
     tests-and-coverage:
         runs-on: ${{ matrix.os }}
@@ -33,11 +33,11 @@ jobs:
               uses: ./.github/actions/python-setup
             - name: Run Django tests and coverage
               run: |
-                  cd django-rocket-request
-                  coverage run --source='.' manage.py test --exclude-tag selenium django_distribute
+                  cd django-distribute
+                  coverage run runtests.py --exclude-tag selenium
                   coverage report -m
                   coverage html
             - uses: actions/upload-artifact@v7
               with:
                 name: coverage
-                path: django-rocket-request/htmlcov
+                path: django-distribute/htmlcov

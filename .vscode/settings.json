@@ -1,8 +1,4 @@
 {
-    "python.testing.pytestArgs": [
-        "django-rocket-request/django_distribute/tests"
-    ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
     "djlint.showInstallError": false
 }
