@@ -62,6 +62,8 @@ def first_fit_silo(silos: list[RocketSilo], item: Item, start: int) -> int:
     new_silo = RocketSilo()
     new_silo.add_item(item)
     silos.append(new_silo)
+    if item[ITEM_WEIGHT] == RocketSilo.CAPACITY:
+        start += 1
     return start
 
 
