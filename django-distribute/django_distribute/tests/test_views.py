@@ -214,8 +214,8 @@ class DistributableViewTests(TestCase):
     @tag("slow", "profile")
     def test_profile_distribution(self):
         """Collects cProfile statistics."""
-        n1 = 10000
-        n2 = 10000
+        n1 = 100000
+        n2 = 100000
         n3 = 2
         session = self.client.session
         session["itemlist"] = {"Transport belt": n1, "Chemical plant": n2}

@@ -31,28 +31,38 @@ def distribute_items(items: dict[str, int]) -> list[RocketSilo]:
     """
     expanded_items = expand_and_sort_items(items)
     silos = [RocketSilo()]
+    start = 0
     for item in expanded_items:
-        first_fit_silo(silos, item)
+        start = first_fit_silo(silos, item, start)
     return silos
 
 
-def first_fit_silo(silos: list[RocketSilo], item: Item) -> None:
+def first_fit_silo(silos: list[RocketSilo], item: Item, start: int) -> int:
     """
     Runs a first-fit algorithm to insert the item into a silo.
 
     Tries to add the item into the first silo with enough space.
     If there are no open silos, it is added to a new one.
 
+    The start variable is an index of the silos list, such that all
+    silos before that index are already at full capacity.
+
     :param list[RocketSilo] silos: List of silos to search through.
     :param Item item: The item to add.
-    :return: None
+    :param int start: The index of the silos list to
+    start checking whether the item can be added.
+    :return: The new starting index.
+    :rtype: int
     """
-    for silo in silos:
-        if silo.load < RocketSilo.CAPACITY and silo.add_item(item):
-            return
+    for i in range(start, len(silos)):
+        if silos[i].load < RocketSilo.CAPACITY and silos[i].add_item(item):
+            if i == start and silos[i].load == RocketSilo.CAPACITY:
+                start += 1
+            return start
     new_silo = RocketSilo()
     new_silo.add_item(item)
     silos.append(new_silo)
+    return start
 
 
 def expand_and_sort_items(items: dict[str, int]) -> list[Item]:
