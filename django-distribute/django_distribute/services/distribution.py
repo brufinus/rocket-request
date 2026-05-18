@@ -31,43 +31,40 @@ def distribute_items(items: dict[str, int]) -> list[RocketSilo]:
     """
     expanded_items = expand_and_sort_items(items)
     silos = [RocketSilo()]
-    first_fit_silo(silos, expanded_items)
+    start = 0
+    for item in expanded_items:
+        start = first_fit_silo(silos, item, start)
     return silos
 
 
-def first_fit_silo(silos: list[RocketSilo], items: list[Item]) -> None:
+def first_fit_silo(silos: list[RocketSilo], item: Item, start: int) -> int:
     """
-    Distributes items into silos using a first-fit algorithm.
+    Runs a first-fit algorithm to insert the item into a silo.
 
-    First-fit-decreasing:
-    For each item, it finds the first silo into which it can fit.
-    If it did not fit into any silo, a new one
-    is created and the item is added to it.
-
-    :param list[RocketSilo] silos: List of silos to search through.
-    :param list[Item] items: List of items to distribute.
-    :return: None
-    """
-    for item in items:
-        if not find_open_silo(silos, item):
-            new_silo = RocketSilo()
-            new_silo.add_item(item)
-            silos.append(new_silo)
-
-
-def find_open_silo(silos: list[RocketSilo], item: Item) -> bool:
-    """
     Tries to add the item into the first silo with enough space.
+    If there are no open silos, it is added to a new one.
+
+    The start variable is an index of the silos list, such that all
+    silos before that index are already at full capacity.
 
     :param list[RocketSilo] silos: List of silos to search through.
     :param Item item: The item to add.
-    :return: Whether the item was added to a silo.
-    :rtype: bool
+    :param int start: The index of the silos list to
+    start checking whether the item can be added.
+    :return: The new starting index.
+    :rtype: int
     """
-    for silo in silos:
-        if silo.add_item(item):
-            return True
-    return False
+    for i in range(start, len(silos)):
+        if silos[i].load < RocketSilo.CAPACITY and silos[i].add_item(item):
+            if i == start and silos[i].load == RocketSilo.CAPACITY:
+                start += 1
+            return start
+    new_silo = RocketSilo()
+    new_silo.add_item(item)
+    silos.append(new_silo)
+    if item[ITEM_WEIGHT] == RocketSilo.CAPACITY:
+        start += 1
+    return start
 
 
 def expand_and_sort_items(items: dict[str, int]) -> list[Item]:

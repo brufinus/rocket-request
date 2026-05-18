@@ -5,7 +5,6 @@ from django_distribute.containers.rocketsilo import RocketSilo
 from django_distribute.data.items import ITEMS, make_item
 from django_distribute.services.distribution import (
     expand_and_sort_items,
-    find_open_silo,
     first_fit_silo,
 )
 
@@ -43,38 +42,43 @@ class TestDistribution(TestCase):
     def test_find_open_silo_when_item_fits(self):
         """An item is added when there is space."""
         silo = mock_silo(True)
-        self.assertTrue(find_open_silo([silo], self.item))
+        first_fit_silo([silo], self.item, 0)
+        silo.add_item.assert_called_once_with(self.item)
 
     def test_find_open_silo_when_item_not_fits(self):
         """No item is added when there is no space."""
         silos = [mock_silo(False), mock_silo(False), mock_silo(False)]
-        self.assertFalse(find_open_silo(silos, self.item))
+        first_fit_silo(silos, self.item, 0)
+        silos[0].add_item.assert_called_once_with(self.item)
+        silos[1].add_item.assert_called_once_with(self.item)
+        silos[2].add_item.assert_called_once_with(self.item)
 
     def test_find_first_open_silo(self):
         """The item is added to the first open silo."""
         silos = [mock_silo(False), mock_silo(True), mock_silo(True)]
-        self.assertTrue(find_open_silo(silos, self.item))
+        first_fit_silo(silos, self.item, 0)
         silos[1].add_item.assert_called_once_with(self.item)
         silos[2].add_item.assert_not_called()
 
     def test_first_fit_silo_when_item_fits(self):
         """The item fits into the silo."""
         silos = [mock_silo(True)]
-        first_fit_silo(silos, [self.item])
+        first_fit_silo(silos, self.item, 0)
         silos[0].add_item.assert_called_once_with(self.item)
         self.assertEqual(len(silos), 1)
 
     def test_first_fit_silo_when_item_not_fits(self):
         """The item does not fit into any silo, so new one is opened."""
         silos = [mock_silo(False)]
-        first_fit_silo(silos, [self.item])
+        first_fit_silo(silos, self.item, 0)
         self.assertEqual(len(silos), 2)
 
     def test_items_fill_first_existing_silo(self):
         """Existing silos are filled first."""
         silos = [RocketSilo(), mock_silo(True)]
         items = [self.item, self.item]
-        first_fit_silo(silos, items)
+        for item in items:
+            first_fit_silo(silos, item, 0)
         self.assertEqual(len(silos), 2)
         self.assertEqual(silos[0].load, 20.0)
         silos[1].add_item.assert_not_called()
@@ -84,7 +88,8 @@ class TestDistribution(TestCase):
         silos = [RocketSilo(), mock_silo(True)]
         item = {"weight": 350}
         items = [item, item, item]
-        first_fit_silo(silos, items)
+        for item in items:
+            first_fit_silo(silos, item, 0)
         self.assertEqual(len(silos), 2)
         self.assertEqual(silos[0].load, 700)
         silos[1].add_item.assert_called_once_with(item)
@@ -93,5 +98,14 @@ class TestDistribution(TestCase):
         """Items fill existing silos before creating a new one."""
         silos = [mock_silo(False), RocketSilo()]
         items = [{"name": "Item", "weight": 1000}, self.item]
-        first_fit_silo(silos, items)
+        for item in items:
+            first_fit_silo(silos, item, 0)
         self.assertEqual(len(silos), 3)
+    
+    def test_first_fit_with_index(self):
+        """Try to add the item to silos starting at the start index."""
+        silos = [mock_silo(True), mock_silo(False), mock_silo(True)]
+        first_fit_silo(silos, self.item, 1)
+        silos[0].add_item.assert_not_called()
+        silos[1].add_item.assert_called_once_with(self.item)
+        silos[2].add_item.assert_called_once_with(self.item)

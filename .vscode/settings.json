@@ -1,4 +1,12 @@
 {
-    "python.testing.unittestEnabled": false,
-    "djlint.showInstallError": false
+    "python.testing.unittestEnabled": true,
+    "djlint.showInstallError": false,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./django-distribute/django_distribute",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false
 }

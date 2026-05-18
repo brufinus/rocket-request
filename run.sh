@@ -22,20 +22,28 @@
 # Date: 2026/05/17
 # =============================================================
 
+APPDIR="django-distribute"
+PROJDIR="django-rocket-request"
+
+function clean {
+    rm $APPDIR/dist/*
+}
+
 function build {
-    python -m build django-distribute
+    clean
+    python -m build $APPDIR
 }
 
 function install {
-    pip install django-distribute/dist/django_distribute-*.tar.gz
+    pip install $APPDIR/dist/django_distribute-*.tar.gz
 }
 
 function migrate {
-    python django-rocket-request/manage.py migrate
+    python $PROJDIR/manage.py migrate
 }
 
 function runServer {
-    python django-rocket-request/manage.py runserver
+    python $PROJDIR/manage.py runserver
 }
 
 function printUsage {
