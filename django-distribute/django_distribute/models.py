@@ -7,6 +7,7 @@ class Item(models.Model):
     stack_size = models.IntegerField()
     rocket_capacity = models.IntegerField()
     weight = models.FloatField()
+    slug_name = models.SlugField(max_length=30, unique=True, null=True)
 
     def __str__(self) -> str:
         return self.name

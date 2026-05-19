@@ -39,7 +39,9 @@ function install {
 }
 
 function migrate {
+    python $PROJDIR/manage.py makemigrations
     python $PROJDIR/manage.py migrate
+    python $PROJDIR/manage.py loaddata items
 }
 
 function runServer {

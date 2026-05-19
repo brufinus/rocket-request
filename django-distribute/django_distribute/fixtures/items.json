@@ -1,0 +1,3320 @@
+[
+  {
+    "model": "distribute.item",
+    "pk": 80,
+    "fields": {
+      "name": "Accumulator",
+      "name_slug": "accumulator",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 45,
+    "fields": {
+      "name": "Active provider chest",
+      "name_slug": "activeproviderchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 156,
+    "fields": {
+      "name": "Advanced circuit",
+      "name_slug": "advancedcircuit",
+      "stack_size": 200,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 97,
+    "fields": {
+      "name": "Agricultural tower",
+      "name_slug": "agriculturaltower",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 52,
+    "fields": {
+      "name": "Arithmetic combinator",
+      "name_slug": "arithmeticcombinator",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 67,
+    "fields": {
+      "name": "Artificial jellynut soil",
+      "name_slug": "artificialjellynutsoil",
+      "stack_size": 100,
+      "rocket_capacity": 67,
+      "weight": 14.746268656716419
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 65,
+    "fields": {
+      "name": "Artificial yumako soil",
+      "name_slug": "artificialyumakosoil",
+      "stack_size": 100,
+      "rocket_capacity": 67,
+      "weight": 14.746268656716419
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 225,
+    "fields": {
+      "name": "Artillery shell",
+      "name_slug": "artilleryshell",
+      "stack_size": 1,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 269,
+    "fields": {
+      "name": "Artillery turret",
+      "name_slug": "artilleryturret",
+      "stack_size": 10,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 39,
+    "fields": {
+      "name": "Artillery wagon",
+      "name_slug": "artillerywagon",
+      "stack_size": 5,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 100,
+    "fields": {
+      "name": "Assembling machine 1",
+      "name_slug": "assemblingmachine1",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 101,
+    "fields": {
+      "name": "Assembling machine 2",
+      "name_slug": "assemblingmachine2",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 102,
+    "fields": {
+      "name": "Assembling machine 3",
+      "name_slug": "assemblingmachine3",
+      "stack_size": 50,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 200,
+    "fields": {
+      "name": "Asteroid collector",
+      "name_slug": "asteroidcollector",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 228,
+    "fields": {
+      "name": "Atomic bomb",
+      "name_slug": "atomicbomb",
+      "stack_size": 10,
+      "rocket_capacity": -1,
+      "weight": -1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 154,
+    "fields": {
+      "name": "Barrel",
+      "name_slug": "barrel",
+      "stack_size": 10,
+      "rocket_capacity": 200,
+      "weight": 5.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 139,
+    "fields": {
+      "name": "Battery",
+      "name_slug": "battery",
+      "stack_size": 200,
+      "rocket_capacity": 400,
+      "weight": 2.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 73,
+    "fields": {
+      "name": "Blueprint",
+      "name_slug": "blueprint",
+      "stack_size": 1,
+      "rocket_capacity": 10000,
+      "weight": 0.1
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 76,
+    "fields": {
+      "name": "Blueprint book",
+      "name_slug": "blueprintbook",
+      "stack_size": 1,
+      "rocket_capacity": 10000,
+      "weight": 0.1
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 249,
+    "fields": {
+      "name": "Personal battery",
+      "name_slug": "personalbattery",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 250,
+    "fields": {
+      "name": "Personal battery MK2",
+      "name_slug": "personalbatterymk2",
+      "stack_size": 20,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 251,
+    "fields": {
+      "name": "Personal battery MK3",
+      "name_slug": "personalbatterymk3",
+      "stack_size": 20,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 112,
+    "fields": {
+      "name": "Beacon",
+      "name_slug": "beacon",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 252,
+    "fields": {
+      "name": "Belt immunity equipment",
+      "name_slug": "beltimmunityequipment",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 25,
+    "fields": {
+      "name": "Big electric pole",
+      "name_slug": "bigelectricpole",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 89,
+    "fields": {
+      "name": "Big mining drill",
+      "name_slug": "bigminingdrill",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 98,
+    "fields": {
+      "name": "Biochamber",
+      "name_slug": "biochamber",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 185,
+    "fields": {
+      "name": "Bioflux",
+      "name_slug": "bioflux",
+      "stack_size": 100,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 108,
+    "fields": {
+      "name": "Biolab",
+      "name_slug": "biolab",
+      "stack_size": 5,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 189,
+    "fields": {
+      "name": "Biter egg",
+      "name_slug": "biteregg",
+      "stack_size": 100,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 77,
+    "fields": {
+      "name": "Boiler",
+      "name_slug": "boiler",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 48,
+    "fields": {
+      "name": "Buffer chest",
+      "name_slug": "bufferchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 21,
+    "fields": {
+      "name": "Bulk inserter",
+      "name_slug": "bulkinserter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 17,
+    "fields": {
+      "name": "Burner inserter",
+      "name_slug": "burnerinserter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 87,
+    "fields": {
+      "name": "Burner mining drill",
+      "name_slug": "burnerminingdrill",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 168,
+    "fields": {
+      "name": "Calcite",
+      "name_slug": "calcite",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 221,
+    "fields": {
+      "name": "Cannon shell",
+      "name_slug": "cannonshell",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 222,
+    "fields": {
+      "name": "Explosive cannon shell",
+      "name_slug": "explosivecannonshell",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 223,
+    "fields": {
+      "name": "Uranium cannon shell",
+      "name_slug": "uraniumcannonshell",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 224,
+    "fields": {
+      "name": "Explosive uranium cannon shell",
+      "name_slug": "explosiveuraniumcannonshell",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 99,
+    "fields": {
+      "name": "Captive biter spawner",
+      "name_slug": "captivebiterspawner",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 40,
+    "fields": {
+      "name": "Car",
+      "name_slug": "car",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 141,
+    "fields": {
+      "name": "Carbon",
+      "name_slug": "carbon",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 188,
+    "fields": {
+      "name": "Carbon fiber",
+      "name_slug": "carbonfiber",
+      "stack_size": 100,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 205,
+    "fields": {
+      "name": "Carbonic asteroid chunk",
+      "name_slug": "carbonicasteroidchunk",
+      "stack_size": 1,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 199,
+    "fields": {
+      "name": "Cargo bay",
+      "name_slug": "cargobay",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 197,
+    "fields": {
+      "name": "Cargo landing pad",
+      "name_slug": "cargolandingpad",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 37,
+    "fields": {
+      "name": "Cargo wagon",
+      "name_slug": "cargowagon",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 105,
+    "fields": {
+      "name": "Centrifuge",
+      "name_slug": "centrifuge",
+      "stack_size": 50,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 104,
+    "fields": {
+      "name": "Chemical plant",
+      "name_slug": "chemicalplant",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 71,
+    "fields": {
+      "name": "Cliff explosives",
+      "name_slug": "cliffexplosives",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 126,
+    "fields": {
+      "name": "Coal",
+      "name_slug": "coal",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 213,
+    "fields": {
+      "name": "Combat shotgun",
+      "name_slug": "combatshotgun",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 60,
+    "fields": {
+      "name": "Concrete",
+      "name_slug": "concrete",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 55,
+    "fields": {
+      "name": "Constant combinator",
+      "name_slug": "constantcombinator",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 44,
+    "fields": {
+      "name": "Construction robot",
+      "name_slug": "constructionrobot",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 182,
+    "fields": {
+      "name": "Copper bacteria",
+      "name_slug": "copperbacteria",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 153,
+    "fields": {
+      "name": "Copper cable",
+      "name_slug": "coppercable",
+      "stack_size": 200,
+      "rocket_capacity": 4000,
+      "weight": 0.25
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 129,
+    "fields": {
+      "name": "Copper ore",
+      "name_slug": "copperore",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 134,
+    "fields": {
+      "name": "Copper plate",
+      "name_slug": "copperplate",
+      "stack_size": 100,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 143,
+    "fields": {
+      "name": "Crude oil barrel",
+      "name_slug": "crudeoilbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 201,
+    "fields": {
+      "name": "Crusher",
+      "name_slug": "crusher",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 273,
+    "fields": {
+      "name": "Cryogenic plant",
+      "name_slug": "cryogenicplant",
+      "stack_size": 20,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 53,
+    "fields": {
+      "name": "Decider combinator",
+      "name_slug": "decidercombinator",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 74,
+    "fields": {
+      "name": "Deconstruction planner",
+      "name_slug": "deconstructionplanner",
+      "stack_size": 1,
+      "rocket_capacity": 10000,
+      "weight": 0.1
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 166,
+    "fields": {
+      "name": "Depleted uranium fuel cell",
+      "name_slug": "depleteduraniumfuelcell",
+      "stack_size": 50,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 261,
+    "fields": {
+      "name": "Discharge defense",
+      "name_slug": "dischargedefense",
+      "stack_size": 20,
+      "rocket_capacity": 4,
+      "weight": 233.25
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 58,
+    "fields": {
+      "name": "Display panel",
+      "name_slug": "displaypanel",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 116,
+    "fields": {
+      "name": "Efficiency module",
+      "name_slug": "efficiencymodule",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 117,
+    "fields": {
+      "name": "Efficiency module 2",
+      "name_slug": "efficiencymodule2",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 118,
+    "fields": {
+      "name": "Efficiency module 3",
+      "name_slug": "efficiencymodule3",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 159,
+    "fields": {
+      "name": "Electric engine unit",
+      "name_slug": "electricengineunit",
+      "stack_size": 50,
+      "rocket_capacity": 400,
+      "weight": 2.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 94,
+    "fields": {
+      "name": "Electric furnace",
+      "name_slug": "electricfurnace",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 88,
+    "fields": {
+      "name": "Electric mining drill",
+      "name_slug": "electricminingdrill",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 106,
+    "fields": {
+      "name": "Electromagnetic plant",
+      "name_slug": "electromagneticplant",
+      "stack_size": 20,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 155,
+    "fields": {
+      "name": "Electronic circuit",
+      "name_slug": "electroniccircuit",
+      "stack_size": 200,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 258,
+    "fields": {
+      "name": "Energy shield",
+      "name_slug": "energyshield",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 259,
+    "fields": {
+      "name": "Energy shield MK2",
+      "name_slug": "energyshieldmk2",
+      "stack_size": 20,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 158,
+    "fields": {
+      "name": "Engine unit",
+      "name_slug": "engineunit",
+      "stack_size": 50,
+      "rocket_capacity": 400,
+      "weight": 2.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 253,
+    "fields": {
+      "name": "Exoskeleton",
+      "name_slug": "exoskeleton",
+      "stack_size": 20,
+      "rocket_capacity": 12,
+      "weight": 79.08333333333333
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 140,
+    "fields": {
+      "name": "Explosives",
+      "name_slug": "explosives",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 15,
+    "fields": {
+      "name": "Express splitter",
+      "name_slug": "expresssplitter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 7,
+    "fields": {
+      "name": "Express transport belt",
+      "name_slug": "expresstransportbelt",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 11,
+    "fields": {
+      "name": "Express underground belt",
+      "name_slug": "expressundergroundbelt",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 20,
+    "fields": {
+      "name": "Fast inserter",
+      "name_slug": "fastinserter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 14,
+    "fields": {
+      "name": "Fast splitter",
+      "name_slug": "fastsplitter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 6,
+    "fields": {
+      "name": "Fast transport belt",
+      "name_slug": "fasttransportbelt",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 10,
+    "fields": {
+      "name": "Fast underground belt",
+      "name_slug": "fastundergroundbelt",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 247,
+    "fields": {
+      "name": "Portable fission reactor",
+      "name_slug": "portablefissionreactor",
+      "stack_size": 20,
+      "rocket_capacity": 4,
+      "weight": 250.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 216,
+    "fields": {
+      "name": "Firearm magazine",
+      "name_slug": "firearmmagazine",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 215,
+    "fields": {
+      "name": "Flamethrower",
+      "name_slug": "flamethrower",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 230,
+    "fields": {
+      "name": "Flamethrower ammo",
+      "name_slug": "flamethrowerammo",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 268,
+    "fields": {
+      "name": "Flamethrower turret",
+      "name_slug": "flamethrowerturret",
+      "stack_size": 50,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 38,
+    "fields": {
+      "name": "Fluid wagon",
+      "name_slug": "fluidwagon",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 150,
+    "fields": {
+      "name": "Fluoroketone (Cold) barrel",
+      "name_slug": "fluoroketone(cold)barrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 149,
+    "fields": {
+      "name": "Fluoroketone (Hot) barrel",
+      "name_slug": "fluoroketone(hot)barrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 160,
+    "fields": {
+      "name": "Flying robot frame",
+      "name_slug": "flyingrobotframe",
+      "stack_size": 50,
+      "rocket_capacity": 150,
+      "weight": 6.666666666666667
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 70,
+    "fields": {
+      "name": "Foundation",
+      "name_slug": "foundation",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 95,
+    "fields": {
+      "name": "Foundry",
+      "name_slug": "foundry",
+      "stack_size": 20,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 86,
+    "fields": {
+      "name": "Fusion generator",
+      "name_slug": "fusiongenerator",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 195,
+    "fields": {
+      "name": "Fusion power cell",
+      "name_slug": "fusionpowercell",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 85,
+    "fields": {
+      "name": "Fusion reactor",
+      "name_slug": "fusionreactor",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 248,
+    "fields": {
+      "name": "Portable fusion reactor",
+      "name_slug": "portablefusionreactor",
+      "stack_size": 20,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 263,
+    "fields": {
+      "name": "Gate",
+      "name_slug": "gate",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 233,
+    "fields": {
+      "name": "Grenade",
+      "name_slug": "grenade",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 234,
+    "fields": {
+      "name": "Cluster grenade",
+      "name_slug": "clustergrenade",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 235,
+    "fields": {
+      "name": "Poison capsule",
+      "name_slug": "poisoncapsule",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 236,
+    "fields": {
+      "name": "Slowdown capsule",
+      "name_slug": "slowdowncapsule",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 237,
+    "fields": {
+      "name": "Defender capsule",
+      "name_slug": "defendercapsule",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 238,
+    "fields": {
+      "name": "Distractor capsule",
+      "name_slug": "distractorcapsule",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 239,
+    "fields": {
+      "name": "Destroyer capsule",
+      "name_slug": "destroyercapsule",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 266,
+    "fields": {
+      "name": "Gun turret",
+      "name_slug": "gunturret",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 61,
+    "fields": {
+      "name": "Hazard concrete",
+      "name_slug": "hazardconcrete",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 83,
+    "fields": {
+      "name": "Heat exchanger",
+      "name_slug": "heatexchanger",
+      "stack_size": 50,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 82,
+    "fields": {
+      "name": "Heat pipe",
+      "name_slug": "heatpipe",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 111,
+    "fields": {
+      "name": "Heating tower",
+      "name_slug": "heatingtower",
+      "stack_size": 20,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 146,
+    "fields": {
+      "name": "Heavy oil barrel",
+      "name_slug": "heavyoilbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 173,
+    "fields": {
+      "name": "Holmium ore",
+      "name_slug": "holmiumore",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 174,
+    "fields": {
+      "name": "Holmium plate",
+      "name_slug": "holmiumplate",
+      "stack_size": 100,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 132,
+    "fields": {
+      "name": "Ice",
+      "name_slug": "ice",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 69,
+    "fields": {
+      "name": "Ice platform",
+      "name_slug": "iceplatform",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 18,
+    "fields": {
+      "name": "Inserter",
+      "name_slug": "inserter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 181,
+    "fields": {
+      "name": "Iron bacteria",
+      "name_slug": "ironbacteria",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 2,
+    "fields": {
+      "name": "Iron chest",
+      "name_slug": "ironchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 151,
+    "fields": {
+      "name": "Iron gear wheel",
+      "name_slug": "irongearwheel",
+      "stack_size": 100,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 128,
+    "fields": {
+      "name": "Iron ore",
+      "name_slug": "ironore",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 133,
+    "fields": {
+      "name": "Iron plate",
+      "name_slug": "ironplate",
+      "stack_size": 100,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 152,
+    "fields": {
+      "name": "Iron stick",
+      "name_slug": "ironstick",
+      "stack_size": 100,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 187,
+    "fields": {
+      "name": "Jelly",
+      "name_slug": "jelly",
+      "stack_size": 100,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 180,
+    "fields": {
+      "name": "Jellynut",
+      "name_slug": "jellynut",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 178,
+    "fields": {
+      "name": "Jellynut seed",
+      "name_slug": "jellynutseed",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 107,
+    "fields": {
+      "name": "Lab",
+      "name_slug": "lab",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 265,
+    "fields": {
+      "name": "Land mine",
+      "name_slug": "landmine",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 64,
+    "fields": {
+      "name": "Landfill",
+      "name_slug": "landfill",
+      "stack_size": 100,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 267,
+    "fields": {
+      "name": "Laser turret",
+      "name_slug": "laserturret",
+      "stack_size": 50,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 145,
+    "fields": {
+      "name": "Light oil barrel",
+      "name_slug": "lightoilbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 110,
+    "fields": {
+      "name": "Lightning collector",
+      "name_slug": "lightningcollector",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 109,
+    "fields": {
+      "name": "Lightning rod",
+      "name_slug": "lightningrod",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 192,
+    "fields": {
+      "name": "Lithium",
+      "name_slug": "lithium",
+      "stack_size": 50,
+      "rocket_capacity": 250,
+      "weight": 4.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 193,
+    "fields": {
+      "name": "Lithium plate",
+      "name_slug": "lithiumplate",
+      "stack_size": 100,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 36,
+    "fields": {
+      "name": "Locomotive",
+      "name_slug": "locomotive",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 43,
+    "fields": {
+      "name": "Logistic robot",
+      "name_slug": "logisticrobot",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 19,
+    "fields": {
+      "name": "Long-handed inserter",
+      "name_slug": "longhandedinserter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 161,
+    "fields": {
+      "name": "Low density structure",
+      "name_slug": "lowdensitystructure",
+      "stack_size": 50,
+      "rocket_capacity": 200,
+      "weight": 5.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 147,
+    "fields": {
+      "name": "Lubricant barrel",
+      "name_slug": "lubricantbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 24,
+    "fields": {
+      "name": "Medium electric pole",
+      "name_slug": "mediumelectricpole",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 204,
+    "fields": {
+      "name": "Metallic asteroid chunk",
+      "name_slug": "metallicasteroidchunk",
+      "stack_size": 1,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 256,
+    "fields": {
+      "name": "Nightvision",
+      "name_slug": "nightvision",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 167,
+    "fields": {
+      "name": "Nuclear fuel",
+      "name_slug": "nuclearfuel",
+      "stack_size": 50,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 81,
+    "fields": {
+      "name": "Nuclear reactor",
+      "name_slug": "nuclearreactor",
+      "stack_size": 10,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 184,
+    "fields": {
+      "name": "Nutrients",
+      "name_slug": "nutrients",
+      "stack_size": 100,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 90,
+    "fields": {
+      "name": "Offshore pump",
+      "name_slug": "offshorepump",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 103,
+    "fields": {
+      "name": "Oil refinery",
+      "name_slug": "oilrefinery",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 68,
+    "fields": {
+      "name": "Overgrowth jellynut soil",
+      "name_slug": "overgrowthjellynutsoil",
+      "stack_size": 100,
+      "rocket_capacity": 14,
+      "weight": 67.21428571428571
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 66,
+    "fields": {
+      "name": "Overgrowth yumako soil",
+      "name_slug": "overgrowthyumakosoil",
+      "stack_size": 100,
+      "rocket_capacity": 14,
+      "weight": 67.21428571428571
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 206,
+    "fields": {
+      "name": "Oxide asteroid chunk",
+      "name_slug": "oxideasteroidchunk",
+      "stack_size": 1,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 46,
+    "fields": {
+      "name": "Passive provider chest",
+      "name_slug": "passiveproviderchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 190,
+    "fields": {
+      "name": "Pentapod egg",
+      "name_slug": "pentapodegg",
+      "stack_size": 20,
+      "rocket_capacity": 200,
+      "weight": 5.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 260,
+    "fields": {
+      "name": "Personal laser defense",
+      "name_slug": "personallaserdefense",
+      "stack_size": 20,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 254,
+    "fields": {
+      "name": "Personal roboport",
+      "name_slug": "personalroboport",
+      "stack_size": 20,
+      "rocket_capacity": 9,
+      "weight": 106.22222222222223
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 255,
+    "fields": {
+      "name": "Personal roboport MK2",
+      "name_slug": "personalroboportmk2",
+      "stack_size": 20,
+      "rocket_capacity": 2,
+      "weight": 373.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 144,
+    "fields": {
+      "name": "Petroleum gas barrel",
+      "name_slug": "petroleumgasbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 217,
+    "fields": {
+      "name": "Piercing rounds magazine",
+      "name_slug": "piercingroundsmagazine",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 220,
+    "fields": {
+      "name": "Piercing shotgun shells",
+      "name_slug": "piercingshotgunshells",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 27,
+    "fields": {
+      "name": "Pipe",
+      "name_slug": "pipe",
+      "stack_size": 100,
+      "rocket_capacity": 200,
+      "weight": 5.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 208,
+    "fields": {
+      "name": "Pistol",
+      "name_slug": "pistol",
+      "stack_size": 5,
+      "rocket_capacity": 10000,
+      "weight": 0.1
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 28,
+    "fields": {
+      "name": "Pipe to ground",
+      "name_slug": "pipetoground",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 137,
+    "fields": {
+      "name": "Plastic bar",
+      "name_slug": "plasticbar",
+      "stack_size": 100,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 56,
+    "fields": {
+      "name": "Power switch",
+      "name_slug": "powerswitch",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 157,
+    "fields": {
+      "name": "Processing unit",
+      "name_slug": "processingunit",
+      "stack_size": 100,
+      "rocket_capacity": 300,
+      "weight": 3.3333333333333335
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 119,
+    "fields": {
+      "name": "Productivity module",
+      "name_slug": "productivitymodule",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 120,
+    "fields": {
+      "name": "Productivity module 2",
+      "name_slug": "productivitymodule2",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 121,
+    "fields": {
+      "name": "Productivity module 3",
+      "name_slug": "productivitymodule3",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 57,
+    "fields": {
+      "name": "Programmable speaker",
+      "name_slug": "programmablespeaker",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 207,
+    "fields": {
+      "name": "Promethium asteroid chunk",
+      "name_slug": "promethiumasteroidchunk",
+      "stack_size": 1,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 29,
+    "fields": {
+      "name": "Pump",
+      "name_slug": "pump",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 91,
+    "fields": {
+      "name": "Pumpjack",
+      "name_slug": "pumpjack",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 122,
+    "fields": {
+      "name": "Quality module",
+      "name_slug": "qualitymodule",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 123,
+    "fields": {
+      "name": "Quality module 2",
+      "name_slug": "qualitymodule2",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 124,
+    "fields": {
+      "name": "Quality module 3",
+      "name_slug": "qualitymodule3",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 194,
+    "fields": {
+      "name": "Quantum processor",
+      "name_slug": "quantumprocessor",
+      "stack_size": 100,
+      "rocket_capacity": 200,
+      "weight": 5.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 264,
+    "fields": {
+      "name": "Radar",
+      "name_slug": "radar",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 30,
+    "fields": {
+      "name": "Rail",
+      "name_slug": "rail",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 35,
+    "fields": {
+      "name": "Rail chain signal",
+      "name_slug": "railchainsignal",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 31,
+    "fields": {
+      "name": "Rail ramp",
+      "name_slug": "railramp",
+      "stack_size": 10,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 34,
+    "fields": {
+      "name": "Rail signal",
+      "name_slug": "railsignal",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 32,
+    "fields": {
+      "name": "Rail support",
+      "name_slug": "railsupport",
+      "stack_size": 20,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 210,
+    "fields": {
+      "name": "Railgun",
+      "name_slug": "railgun",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 231,
+    "fields": {
+      "name": "Railgun ammo",
+      "name_slug": "railgunammo",
+      "stack_size": 10,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 272,
+    "fields": {
+      "name": "Railgun turret",
+      "name_slug": "railgunturret",
+      "stack_size": 10,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 131,
+    "fields": {
+      "name": "Raw fish",
+      "name_slug": "rawfish",
+      "stack_size": 100,
+      "rocket_capacity": 300,
+      "weight": 3.3333333333333335
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 96,
+    "fields": {
+      "name": "Recycler",
+      "name_slug": "recycler",
+      "stack_size": 20,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 62,
+    "fields": {
+      "name": "Refined concrete",
+      "name_slug": "refinedconcrete",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 63,
+    "fields": {
+      "name": "Refined hazard concrete",
+      "name_slug": "refinedhazardconcrete",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 72,
+    "fields": {
+      "name": "Repair pack",
+      "name_slug": "repairpack",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 49,
+    "fields": {
+      "name": "Requester chest",
+      "name_slug": "requesterchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 50,
+    "fields": {
+      "name": "Roboport",
+      "name_slug": "roboport",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 226,
+    "fields": {
+      "name": "Rocket",
+      "name_slug": "rocket",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 227,
+    "fields": {
+      "name": "Explosive rocket",
+      "name_slug": "explosiverocket",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 229,
+    "fields": {
+      "name": "Capture bot rocket",
+      "name_slug": "capturebotrocket",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 162,
+    "fields": {
+      "name": "Rocket fuel",
+      "name_slug": "rocketfuel",
+      "stack_size": 20,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 214,
+    "fields": {
+      "name": "Rocket launcher",
+      "name_slug": "rocketlauncher",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 270,
+    "fields": {
+      "name": "Rocket turret",
+      "name_slug": "rocketturret",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 196,
+    "fields": {
+      "name": "Science",
+      "name_slug": "science",
+      "stack_size": 200,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 172,
+    "fields": {
+      "name": "Scrap",
+      "name_slug": "scrap",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 54,
+    "fields": {
+      "name": "Selector combinator",
+      "name_slug": "selectorcombinator",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 212,
+    "fields": {
+      "name": "Shotgun",
+      "name_slug": "shotgun",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 219,
+    "fields": {
+      "name": "Shotgun shells",
+      "name_slug": "shotgunshells",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 23,
+    "fields": {
+      "name": "Small electric pole",
+      "name_slug": "smallelectricpole",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 51,
+    "fields": {
+      "name": "Small lamp",
+      "name_slug": "smalllamp",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 79,
+    "fields": {
+      "name": "Solar panel",
+      "name_slug": "solarpanel",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 246,
+    "fields": {
+      "name": "Portable solar panel",
+      "name_slug": "portablesolarpanel",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 136,
+    "fields": {
+      "name": "Solid fuel",
+      "name_slug": "solidfuel",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 198,
+    "fields": {
+      "name": "Space platform foundation",
+      "name_slug": "spaceplatformfoundation",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 203,
+    "fields": {
+      "name": "Space platform starter pack",
+      "name_slug": "spaceplatformstarterpack",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 113,
+    "fields": {
+      "name": "Speed module",
+      "name_slug": "speedmodule",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 114,
+    "fields": {
+      "name": "Speed module 2",
+      "name_slug": "speedmodule2",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 115,
+    "fields": {
+      "name": "Speed module 3",
+      "name_slug": "speedmodule3",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 42,
+    "fields": {
+      "name": "Spidertron",
+      "name_slug": "spidertron",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 13,
+    "fields": {
+      "name": "Splitter",
+      "name_slug": "splitter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 183,
+    "fields": {
+      "name": "Spoilage",
+      "name_slug": "spoilage",
+      "stack_size": 200,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 22,
+    "fields": {
+      "name": "Stack inserter",
+      "name_slug": "stackinserter",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 78,
+    "fields": {
+      "name": "Steam engine",
+      "name_slug": "steamengine",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 84,
+    "fields": {
+      "name": "Steam turbine",
+      "name_slug": "steamturbine",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 3,
+    "fields": {
+      "name": "Steel chest",
+      "name_slug": "steelchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 93,
+    "fields": {
+      "name": "Steel furnace",
+      "name_slug": "steelfurnace",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 135,
+    "fields": {
+      "name": "Steel plate",
+      "name_slug": "steelplate",
+      "stack_size": 100,
+      "rocket_capacity": 400,
+      "weight": 2.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 127,
+    "fields": {
+      "name": "Stone",
+      "name_slug": "stone",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 59,
+    "fields": {
+      "name": "Stone brick",
+      "name_slug": "stonebrick",
+      "stack_size": 100,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 92,
+    "fields": {
+      "name": "Stone furnace",
+      "name_slug": "stonefurnace",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 262,
+    "fields": {
+      "name": "Stone wall",
+      "name_slug": "stonewall",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 47,
+    "fields": {
+      "name": "Storage chest",
+      "name_slug": "storagechest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 4,
+    "fields": {
+      "name": "Storage tank",
+      "name_slug": "storagetank",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 209,
+    "fields": {
+      "name": "Submachine gun",
+      "name_slug": "submachinegun",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 26,
+    "fields": {
+      "name": "Substation",
+      "name_slug": "substation",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 138,
+    "fields": {
+      "name": "Sulfur",
+      "name_slug": "sulfur",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 148,
+    "fields": {
+      "name": "Sulfuric acid barrel",
+      "name_slug": "sulfuricacidbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 176,
+    "fields": {
+      "name": "Supercapacitor",
+      "name_slug": "supercapacitor",
+      "stack_size": 100,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 175,
+    "fields": {
+      "name": "Superconductor",
+      "name_slug": "superconductor",
+      "stack_size": 200,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 41,
+    "fields": {
+      "name": "Tank",
+      "name_slug": "tank",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 232,
+    "fields": {
+      "name": "Tesla ammo",
+      "name_slug": "teslaammo",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 211,
+    "fields": {
+      "name": "Tesla gun",
+      "name_slug": "teslagun",
+      "stack_size": 5,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 271,
+    "fields": {
+      "name": "Tesla turret",
+      "name_slug": "teslaturret",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 202,
+    "fields": {
+      "name": "Thruster",
+      "name_slug": "thruster",
+      "stack_size": 10,
+      "rocket_capacity": 5,
+      "weight": 200.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 257,
+    "fields": {
+      "name": "Toolbelt equipment",
+      "name_slug": "toolbeltequipment",
+      "stack_size": 20,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 33,
+    "fields": {
+      "name": "Train stop",
+      "name_slug": "trainstop",
+      "stack_size": 10,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 5,
+    "fields": {
+      "name": "Transport belt",
+      "name_slug": "transportbelt",
+      "stack_size": 100,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 191,
+    "fields": {
+      "name": "Tree seed",
+      "name_slug": "treeseed",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 170,
+    "fields": {
+      "name": "Tungsten carbide",
+      "name_slug": "tungstencarbide",
+      "stack_size": 50,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 169,
+    "fields": {
+      "name": "Tungsten ore",
+      "name_slug": "tungstenore",
+      "stack_size": 50,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 171,
+    "fields": {
+      "name": "Tungsten plate",
+      "name_slug": "tungstenplate",
+      "stack_size": 50,
+      "rocket_capacity": 250,
+      "weight": 4.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 16,
+    "fields": {
+      "name": "Turbo splitter",
+      "name_slug": "turbosplitter",
+      "stack_size": 50,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 8,
+    "fields": {
+      "name": "Turbo transport belt",
+      "name_slug": "turbotransportbelt",
+      "stack_size": 100,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 12,
+    "fields": {
+      "name": "Turbo underground belt",
+      "name_slug": "turboundergroundbelt",
+      "stack_size": 50,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 9,
+    "fields": {
+      "name": "Underground belt",
+      "name_slug": "undergroundbelt",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 75,
+    "fields": {
+      "name": "Upgrade planner",
+      "name_slug": "upgradeplanner",
+      "stack_size": 1,
+      "rocket_capacity": 10000,
+      "weight": 0.1
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 163,
+    "fields": {
+      "name": "Uranium 235",
+      "name_slug": "uranium235",
+      "stack_size": 100,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 164,
+    "fields": {
+      "name": "Uranium 238",
+      "name_slug": "uranium238",
+      "stack_size": 100,
+      "rocket_capacity": 20,
+      "weight": 50.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 165,
+    "fields": {
+      "name": "Uranium fuel cell",
+      "name_slug": "uraniumfuelcell",
+      "stack_size": 50,
+      "rocket_capacity": 10,
+      "weight": 100.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 130,
+    "fields": {
+      "name": "Uranium ore",
+      "name_slug": "uraniumore",
+      "stack_size": 50,
+      "rocket_capacity": 200,
+      "weight": 5.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 218,
+    "fields": {
+      "name": "Uranium rounds magazine",
+      "name_slug": "uraniumroundsmagazine",
+      "stack_size": 100,
+      "rocket_capacity": 25,
+      "weight": 40.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 142,
+    "fields": {
+      "name": "Water barrel",
+      "name_slug": "waterbarrel",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 125,
+    "fields": {
+      "name": "Wood",
+      "name_slug": "wood",
+      "stack_size": 100,
+      "rocket_capacity": 500,
+      "weight": 2.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 1,
+    "fields": {
+      "name": "Wooden chest",
+      "name_slug": "woodenchest",
+      "stack_size": 50,
+      "rocket_capacity": 50,
+      "weight": 20.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 179,
+    "fields": {
+      "name": "Yumako",
+      "name_slug": "yumako",
+      "stack_size": 50,
+      "rocket_capacity": 1000,
+      "weight": 1.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 186,
+    "fields": {
+      "name": "Yumako mash",
+      "name_slug": "yumakomash",
+      "stack_size": 100,
+      "rocket_capacity": 2000,
+      "weight": 0.5
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 177,
+    "fields": {
+      "name": "Yumako seed",
+      "name_slug": "yumakoseed",
+      "stack_size": 10,
+      "rocket_capacity": 100,
+      "weight": 10.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 240,
+    "fields": {
+      "name": "Light armor",
+      "name_slug": "lightarmor",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 241,
+    "fields": {
+      "name": "Heavy armor",
+      "name_slug": "heavyarmor",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 242,
+    "fields": {
+      "name": "Modular armor",
+      "name_slug": "modulararmor",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 243,
+    "fields": {
+      "name": "Power armor",
+      "name_slug": "powerarmor",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 244,
+    "fields": {
+      "name": "Power armor MK2",
+      "name_slug": "powerarmormk2",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.item",
+    "pk": 245,
+    "fields": {
+      "name": "Mech armor",
+      "name_slug": "mecharmor",
+      "stack_size": 1,
+      "rocket_capacity": 1,
+      "weight": 1000.0
+    }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 1,
+    "fields": { "item": 45, "keyword": "activeprovider" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 2,
+    "fields": { "item": 156, "keyword": "redcircuit" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 3,
+    "fields": { "item": 97, "keyword": "agtower" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 4,
+    "fields": { "item": 67, "keyword": "ajs" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 5,
+    "fields": { "item": 65, "keyword": "ays" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 6,
+    "fields": { "item": 100, "keyword": "a1" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 7,
+    "fields": { "item": 101, "keyword": "a2" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 8,
+    "fields": { "item": 102, "keyword": "a3" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 9,
+    "fields": { "item": 200, "keyword": "collector" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 10,
+    "fields": { "item": 25, "keyword": "bigpole" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 11,
+    "fields": { "item": 89, "keyword": "bigdrill" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 12,
+    "fields": { "item": 21, "keyword": "bulk" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 13,
+    "fields": { "item": 197, "keyword": "landingpad" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 14,
+    "fields": { "item": 104, "keyword": "chemplant" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 15,
+    "fields": { "item": 44, "keyword": "bot" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 16,
+    "fields": { "item": 153, "keyword": "cable" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 17,
+    "fields": { "item": 134, "keyword": "copper" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 18,
+    "fields": { "item": 273, "keyword": "cryoplant" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 19,
+    "fields": { "item": 53, "keyword": "decider" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 20,
+    "fields": { "item": 116, "keyword": "efficiency1" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 21,
+    "fields": { "item": 116, "keyword": "eff1" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 22,
+    "fields": { "item": 117, "keyword": "efficiency2" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 23,
+    "fields": { "item": 117, "keyword": "eff2" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 24,
+    "fields": { "item": 118, "keyword": "efficiency3" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 25,
+    "fields": { "item": 118, "keyword": "eff3" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 26,
+    "fields": { "item": 159, "keyword": "electricengine" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 27,
+    "fields": { "item": 94, "keyword": "efurnace" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 28,
+    "fields": { "item": 88, "keyword": "drill" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 29,
+    "fields": { "item": 106, "keyword": "emplant" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 30,
+    "fields": { "item": 158, "keyword": "engine" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 31,
+    "fields": { "item": 15, "keyword": "bluesplitter" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 32,
+    "fields": { "item": 7, "keyword": "bluebelt" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 33,
+    "fields": { "item": 11, "keyword": "blueunderground" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 34,
+    "fields": { "item": 20, "keyword": "blueinserter" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 35,
+    "fields": { "item": 14, "keyword": "redsplitter" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 36,
+    "fields": { "item": 6, "keyword": "redbelt" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 37,
+    "fields": { "item": 10, "keyword": "redunderground" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 38,
+    "fields": { "item": 216, "keyword": "yellowammo" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 39,
+    "fields": { "item": 160, "keyword": "frf" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 40,
+    "fields": { "item": 266, "keyword": "turret" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 41,
+    "fields": { "item": 151, "keyword": "gear" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 42,
+    "fields": { "item": 152, "keyword": "stick" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 43,
+    "fields": { "item": 133, "keyword": "iron" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 44,
+    "fields": { "item": 19, "keyword": "longinserter" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 45,
+    "fields": { "item": 19, "keyword": "redinserter" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 46,
+    "fields": { "item": 103, "keyword": "refinery" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 47,
+    "fields": { "item": 217, "keyword": "redammo" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 48,
+    "fields": { "item": 28, "keyword": "undergroundpipe" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 49,
+    "fields": { "item": 157, "keyword": "bluecircuit" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 50,
+    "fields": { "item": 119, "keyword": "prod1" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 51,
+    "fields": { "item": 120, "keyword": "prod2" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 52,
+    "fields": { "item": 121, "keyword": "prod3" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 53,
+    "fields": { "item": 23, "keyword": "woodpole" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 54,
+    "fields": { "item": 79, "keyword": "panel" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 55,
+    "fields": { "item": 198, "keyword": "foundation" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 56,
+    "fields": { "item": 113, "keyword": "speed1" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 57,
+    "fields": { "item": 114, "keyword": "speed2" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 58,
+    "fields": { "item": 115, "keyword": "speed3" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 59,
+    "fields": { "item": 5, "keyword": "belt" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 60,
+    "fields": { "item": 16, "keyword": "greensplitter" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 61,
+    "fields": { "item": 8, "keyword": "greenbelt" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 62,
+    "fields": { "item": 12, "keyword": "greenunderground" }
+  },
+  {
+    "model": "distribute.keywords",
+    "pk": 63,
+    "fields": { "item": 218, "keyword": "uraniumammo" }
+  }
+]
