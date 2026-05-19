@@ -90,6 +90,8 @@ class IndexViewTests(TestCase):
 
 
 class ItemCollectionViewTests(TestCase):
+    fixtures = ["items"]
+
     @given(st.integers(min_value=1))
     def test_valid_item_collection(self, n):
         response = self.client.post(

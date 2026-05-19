@@ -51,7 +51,7 @@ def item_collection(request):
     """
     if request.method == "POST":
         # Item validation
-        search_res = search_coordinator(request.POST.get("user-item"), ITEMS)
+        search_res = search_coordinator(request.POST.get("user-item"))
         if search_res[0]:
             item_name = search_res[0]
         else:

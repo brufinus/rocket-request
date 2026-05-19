@@ -61,6 +61,7 @@ def runtests():
                     },
                 },
             ],
+            MIGRATION_MODULES={"distribute": None},
         )
 
     django.setup()

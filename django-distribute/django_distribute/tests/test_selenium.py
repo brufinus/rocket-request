@@ -11,6 +11,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 @tag("slow", "selenium")
 class SeleniumViewTests(StaticLiveServerTestCase):
+    fixtures = ["items"]
+
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
