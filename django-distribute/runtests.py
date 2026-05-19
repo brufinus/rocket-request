@@ -2,6 +2,7 @@
 """Runs tests for django_distribute."""
 
 # pylint: disable=invalid-name
+# pylint: disable=django-not-configured
 
 import argparse
 import sys

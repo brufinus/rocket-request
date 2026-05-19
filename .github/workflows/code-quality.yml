@@ -20,7 +20,7 @@ jobs:
               uses: ./.github/actions/python-setup
             - name: Run pylint
               run: |
-                pylint --ignore tests .
+                pylint --load-plugins=pylint_django --ignore tests .
 
     tests-and-coverage:
         runs-on: ${{ matrix.os }}

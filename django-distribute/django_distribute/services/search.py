@@ -9,7 +9,6 @@ Functions
 
 from difflib import SequenceMatcher
 
-from django_distribute.data.constants import ITEM_KEYWORDS
 from django_distribute.models import Item
 from django_distribute.services.helper import transform_string
 

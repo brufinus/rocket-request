@@ -1,6 +1,11 @@
+"""Models to represent in-game items."""
+
 from django.db import models
 
+
 class Item(models.Model):
+    """Model for item data."""
+
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
     stack_size = models.IntegerField()
@@ -13,6 +18,8 @@ class Item(models.Model):
 
 
 class Keywords(models.Model):
+    """Relational model for item keywords."""
+
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=30, unique=True)
 
