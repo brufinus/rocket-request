@@ -213,24 +213,6 @@ class DistributableViewTests(TestCase):
         self.assertRedirects(response, reverse("distribute:results"))
         self.assertEqual(self.client.session["num_silos"], f"{n3}")
 
-    @tag("slow", "profile")
-    def test_profile_distribution(self):
-        """Collects cProfile statistics."""
-        n1 = 100000
-        n2 = 100000
-        n3 = 2
-        session = self.client.session
-        session["itemlist"] = {"Transport belt": n1, "Chemical plant": n2}
-        session.save()
-        with cProfile.Profile() as profile:
-            self.client.post(
-                reverse("distribute:distributable"), {"num-silos": n3}, follow=True
-            )
-        results = pstats.Stats(profile)
-        results.sort_stats(pstats.SortKey.TIME)
-        results.print_stats()
-        results.dump_stats("results.prof")
-
 
 class ResultsViewTests(TestCase):
     def test_redirect_on_missing_num_silos(self):
@@ -323,3 +305,32 @@ class ResetViewTests(TestCase):
         """If there is no itemlist, an empty one is set."""
         self.client.get(reverse("distribute:reset"))
         self.assertEqual(self.client.session["itemlist"], {})
+
+
+class ViewProfileTests(TestCase):
+    fixtures = ["items"]
+
+    @tag("slow", "profile")
+    def test_profile_distribution(self):
+        """Collects cProfile statistics."""
+        n1 = 100000
+        n2 = 100000
+        n3 = 2
+
+        with cProfile.Profile() as profile:
+            self.client.post(
+                reverse("distribute:collection"),
+                {"user-item": "Transport belt", "user-count": n1},
+            )
+            self.client.post(
+                reverse("distribute:collection"),
+                {"user-item": "Chemical plant", "user-count": n2},
+            )
+
+            self.client.post(
+                reverse("distribute:distributable"), {"num-silos": n3}, follow=True
+            )
+        results = pstats.Stats(profile)
+        results.sort_stats(pstats.SortKey.TIME)
+        results.print_stats()
+        results.dump_stats("results.prof")
