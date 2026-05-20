@@ -101,7 +101,7 @@ class TestDistribution(TestCase):
         for item in items:
             first_fit_silo(silos, item, 0)
         self.assertEqual(len(silos), 3)
-    
+
     def test_first_fit_with_index(self):
         """Try to add the item to silos starting at the start index."""
         silos = [mock_silo(True), mock_silo(False), mock_silo(True)]
@@ -109,3 +109,11 @@ class TestDistribution(TestCase):
         silos[0].add_item.assert_not_called()
         silos[1].add_item.assert_called_once_with(self.item)
         silos[2].add_item.assert_called_once_with(self.item)
+
+    def test_first_fit_on_max_weight_item(self):
+        """Increase starting index on adding a max-weight item to a new silo."""
+        item = make_item(1, 1, 1)
+        silos = [mock_silo(False)]
+        idx = first_fit_silo(silos, item, 0)
+        silos[0].add_item.assert_called_once_with(item)
+        self.assertEqual(idx, 1)
