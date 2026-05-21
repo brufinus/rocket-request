@@ -15,6 +15,12 @@ import math
 from django_distribute.containers.rocketsilo import RocketSilo
 from django_distribute.data.constants import ITEM_ID
 from django_distribute.data.item import Item
+from django_distribute.services.blueprint import (
+    generate_book,
+    generate_bp_from_json,
+    generate_chest,
+    generate_item,
+)
 from django_distribute.services.helper import get_formatted_float
 
 
@@ -154,3 +160,21 @@ def calculate_launch_cycles(silos: list[RocketSilo], num_silos: int) -> int:
     :rtype: int
     """
     return math.ceil(len(silos) / num_silos)
+
+
+def build_consolidated_blueprint(invs: list[dict[str, int]]) -> str:
+    """
+    Builds a blueprint string for consolidated inventory contents.
+
+    :param list[dict[str, int]] invs: Consolidated inventories.
+    :return: Blueprint string.
+    :rtype: str
+    """
+    chests = []
+    for silo_index, inv in enumerate(invs):
+        items = []
+        for inv_index, item_name in enumerate(inv):
+            item_name_slug = item_name.lower().replace(" ", "-")
+            items.append(generate_item(inv_index + 1, item_name_slug, inv[item_name]))
+        chests.append(generate_chest(silo_index + 1, items))
+    return generate_bp_from_json(generate_book(chests))

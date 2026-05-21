@@ -10,6 +10,7 @@ from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
 from django_distribute.services.distribution import distribute_items
 from django_distribute.services.initialize_setup import (
+    build_consolidated_blueprint,
     build_consolidated_invs,
     build_consolidated_load,
     build_distribution,
@@ -123,6 +124,7 @@ def results(request):
             "cycles": cycles,
             "consolidated": consolidated,
             "version": get_version("django-distribute"),
+            "blueprint": build_consolidated_blueprint(c_silo_invs),
         },
     )
 
