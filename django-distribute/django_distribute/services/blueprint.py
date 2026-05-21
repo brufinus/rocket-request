@@ -16,7 +16,7 @@ def generate_bp_from_json(json_obj: object) -> str:
     :return: The blueprint string.
     :rtype: str
     """
-    json_str = json.dumps(json_obj).replace(" ", "")
+    json_str = json.dumps(json_obj).replace(" ", "").replace("@", " ")
     json_bytes = json_str.encode("utf-8")
     json_compressed = zlib.compress(json_bytes, 9)
     return (b"0" + base64.b64encode(json_compressed)).decode("utf-8")
@@ -30,10 +30,19 @@ def generate_book(chests: list) -> object:
     :returns: JSON-represented blueprint book.
     :rtype: object
     """
+    description = (
+        "Blueprints@generated@by@Rocket@Request.@Each@chest@corresponds@to@a@silo."
+    )
     return {
         "blueprint_book": {
             "blueprints": chests,
+            "description": description,
+            "icons": [
+                {"index": 1, "signal": {"name": "rocket-silo"}},
+                {"index": 2, "signal": {"name": "requester-chest"}},
+            ],
             "item": "blueprint-book",
+            "label": "Silo@Item@Requests",
             "active_index": 0,
             "version": 562949958205441,
         }
@@ -56,7 +65,7 @@ def generate_chest(silo_num: int, items: list) -> object:
                 {
                     "entity_number": 1,
                     "name": "requester-chest",
-                    "position": {"x": -95.5, "y": -198.5},
+                    "position": {"x": 0.0, "y": 0.0},
                     "request_filters": {
                         "sections": [{"index": 1, "filters": items}],
                         "trash_not_requested": True,
