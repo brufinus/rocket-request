@@ -30,6 +30,18 @@ classifiers = [
 [project.urls]
 Homepage = "https://www.example.com/"
 
+[project.optional-dependencies]
+dev = [
+    "build~=1.5.0",
+    "coverage~=7.13.5",
+    "djLint~=1.36.4",
+    "hypothesis~=6.152.4",
+    "pylint~=4.0.5",
+    "pytest~=9.0.3",
+    "selenium~=4.43.0",
+    "setuptools~=82.0.1",
+]
+
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
 build_command = "pip install build && python -m build --sdist --wheel ."
