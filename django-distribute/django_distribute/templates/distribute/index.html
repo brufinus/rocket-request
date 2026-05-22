@@ -97,7 +97,9 @@
                 </div>
             </div>
         </aside>
-        <form id="blueprint-form" method="post">
+        <form id="blueprint-form"
+              action="{% url "distribute:import" %}"
+              method="post">
             {% csrf_token %}
             <h2 id="setup">Import Items From Blueprint</h2>
             <textarea name="blueprint-input"
@@ -118,10 +120,12 @@
                     <div class="text-button">Import</div>
                 </button>
             </div>
+            <div class="error" id="import-error">{{ import_error }}</div>
         </form>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <script src="{% static "distribute/utils.js" %}"></script>
     <script src="{% static "distribute/collection.js" %}"></script>
     <script src="{% static "distribute/remove.js" %}"></script>
+    <script src="{% static "distribute/submit.js" %}"></script>
 {% endblock content %}

@@ -13,6 +13,9 @@ import base64
 import json
 import zlib
 
+from django_distribute.data.item import Item
+from django_distribute.services.helper import transform_string
+
 
 def generate_bp_from_json(json_obj: object) -> str:
     """
@@ -120,3 +123,28 @@ def convert_blueprint(blueprint: str) -> object:
     decomp_bp = zlib.decompress(decoded_bp)
     json_str = decomp_bp.decode("utf-8")
     return json.loads(json_str)
+
+
+def extract_items_from_json(json_rep: object, item_data: dict[str, Item]) -> list[Item]:
+    """
+    Extracts all Item entities from a JSON blueprint representation.
+
+    :param object json_rep: The JSON representation of a blueprint.
+    :return: Items extracted from the JSON.
+    :rtype: list[Item]
+    """
+    itemlist = []
+    for entity in json_rep["blueprint"]["entities"]:
+        if entity["name"] == "space-platform-hub":
+            pass
+        elif entity["name"] == "long-handed-inserter":
+            itemlist.append(item_data["Long-handed inserter"])
+        else:
+            key = entity["name"].replace("-", " ").capitalize()
+            item = item_data.get(key)
+            if item:
+                itemlist.append(item)
+            # TODO: Deal with invalid item
+            else:
+                print(key)
+    return itemlist

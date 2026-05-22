@@ -19,3 +19,4 @@ class Errors(StrEnum):
 
     NO_ITEMS_ADDED = "No items have been added."
     ADD_ITEMS_DISTRIBUTE = "Please add items to distribute."
+    IMPORT_ERROR = "Import failed due to invalid blueprint string."
