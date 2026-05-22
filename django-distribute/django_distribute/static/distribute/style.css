@@ -177,11 +177,16 @@ html.light-theme h3 {
 }
 
 #input-grid {
+  font-family: var(--font-family);
   display: grid;
   grid-template-columns: 60px 1fr;
   max-width: 300px;
   margin: auto;
   row-gap: 10px;
+}
+
+input[type=text], input[type=number] {
+  font-family: var(--font-family);
 }
 
 #add-item-button {
@@ -364,6 +369,10 @@ html.light-theme table td {
 
 #import-button {
   margin-left: auto;
+}
+
+textarea {
+  font-family: var(--font-family);
 }
 
 /* Footer */
