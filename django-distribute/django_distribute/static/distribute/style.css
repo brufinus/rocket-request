@@ -227,7 +227,7 @@ input {
   background-color: var(--input-bg-color);
 }
 
-input:focus {
+input:focus, textarea:focus {
   background-color: #f0dab4;
 }
 
@@ -344,6 +344,28 @@ html.light-theme table td {
   top: 2px;
 }
 
+#blueprint-form {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+}
+
+#blueprint-input {
+  padding-bottom: 240px;
+  overflow: scroll;
+  overflow-wrap: break-word;
+}
+
+#paste-import {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#import-button {
+  margin-left: auto;
+}
+
 /* Footer */
 footer {
   background-color: var(--panel-bg-color);
@@ -429,7 +451,7 @@ html.light-theme #blueprints {
   margin-bottom: -4px;
 }
 
-#blueprints p {
+.blueprint-box {
   font-size: small;
   padding: 2px 4px;
   overflow: scroll;
@@ -441,8 +463,9 @@ html.light-theme #blueprints {
   max-height: 100px;
 }
 
-#copy-button {
+#copy-button, #paste-button, #import-button {
   width: 100px;
+  height: 30px;
 }
 
 html.light-theme #copy-button {
