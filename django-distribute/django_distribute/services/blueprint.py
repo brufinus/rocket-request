@@ -1,4 +1,13 @@
-"""Functions to generate blueprint strings from JSON representations."""
+"""
+Service for managing blueprint strings and their JSON representations.
+
+Functions:
+    generate_bp_from_json: Generates blueprint string from JSON.
+    generate_book: Generates blueprint book JSON representation.
+    generate_chest: Generates requester chest JSON representation.
+    generate_item: Generates item JSON representation.
+    convert_blueprint: Converts blueprints to JSON representation.
+"""
 
 import base64
 import json
