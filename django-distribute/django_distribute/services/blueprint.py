@@ -97,3 +97,17 @@ def generate_item(index: int, name: str, count: int) -> object:
         "comparator": "=",
         "count": count,
     }
+
+
+def convert_blueprint(blueprint: str) -> object:
+    """
+    Converts a blueprint string to its JSON object representation.
+
+    :param str blueprint: The blueprint string to convert.
+    :return: JSON-represented blueprint.
+    :rtype: object
+    """
+    decoded_bp = base64.b64decode(blueprint[1:])
+    decomp_bp = zlib.decompress(decoded_bp)
+    json_str = decomp_bp.decode("utf-8")
+    return json.loads(json_str)
