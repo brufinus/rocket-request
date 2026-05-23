@@ -10,11 +10,12 @@ Functions:
 """
 
 import base64
+import binascii
 import json
 import zlib
 
 from django_distribute.data.item import Item
-from django_distribute.services.helper import transform_string
+from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
 
 
 def generate_bp_from_json(json_obj: object) -> str:
@@ -118,11 +119,22 @@ def convert_blueprint(blueprint: str) -> object:
     :param str blueprint: The blueprint string to convert.
     :return: JSON-represented blueprint.
     :rtype: object
+    :raises InvalidBlueprintException: If the given blueprint string is
+    invalid or cannot be converted.
     """
-    decoded_bp = base64.b64decode(blueprint[1:])
-    decomp_bp = zlib.decompress(decoded_bp)
+    try:
+        decoded_bp = base64.b64decode(blueprint[1:], validate=True)
+    except binascii.Error as e:
+        raise InvalidBlueprintException("Failed to decode blueprint") from e
+    try:
+        decomp_bp = zlib.decompress(decoded_bp)
+    except zlib.error as e:
+        raise InvalidBlueprintException("Failed to decompress blueprint") from e
     json_str = decomp_bp.decode("utf-8")
-    return json.loads(json_str)
+    json_obj = json.loads(json_str)
+    if not isinstance(json_obj, dict) or not json_obj.get("blueprint"):
+        raise InvalidBlueprintException("Blueprint validation failure")
+    return json_obj
 
 
 def extract_items_from_json(json_rep: object, item_data: dict[str, Item]) -> list[Item]:
@@ -132,6 +144,8 @@ def extract_items_from_json(json_rep: object, item_data: dict[str, Item]) -> lis
     :param object json_rep: The JSON representation of a blueprint.
     :return: Items extracted from the JSON.
     :rtype: list[Item]
+    :raises InvalidItemException:
+    If the JSON contains an invalid item.
     """
     itemlist = []
     for entity in json_rep["blueprint"]["entities"]:
@@ -144,7 +158,6 @@ def extract_items_from_json(json_rep: object, item_data: dict[str, Item]) -> lis
             item = item_data.get(key)
             if item:
                 itemlist.append(item)
-            # TODO: Deal with invalid item
             else:
-                print(key)
+                raise InvalidItemException(key)
     return itemlist
