@@ -8,6 +8,7 @@ from django.urls import reverse
 
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
+from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
 from django_distribute.services.blueprint import (
     convert_blueprint,
     extract_items_from_json,
@@ -165,10 +166,16 @@ def import_blueprint(request):
         if blueprint:
             try:
                 json_rep = convert_blueprint(blueprint)
-            except:
+            except InvalidBlueprintException:
                 request.session["import_error"] = Errors.IMPORT_ERROR
                 return HttpResponseRedirect(reverse("distribute:index"))
-            items = extract_items_from_json(json_rep, ITEMS)
+            try:
+                items = extract_items_from_json(json_rep, ITEMS)
+            except InvalidItemException as e:
+                request.session["import_error"] = (
+                    f"{Errors.INVALID_ITEM}{e.item}"
+                )
+                return HttpResponseRedirect(reverse("distribute:index"))
             itemlist = request.session.get("itemlist", {})
             itemlist = group_items(items, ITEMS)
             request.session["itemlist"] = dict(sorted(itemlist.items()))
