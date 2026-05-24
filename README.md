@@ -53,6 +53,6 @@ Next, use [run.sh](#use-runsh) or follow the [manual](#manual) steps to run the 
 Follow these steps to get set up for development with an editable install.
 
 1. [Create and activate a virtual environment](https://docs.python.org/3/library/venv.html): `python -m venv .venv && source .venv/Scripts/activate`
-2. Editable install: `pip install -r ./django-distribute/requirements-edit.txt`
+2. Editable install: `pip install -e django-distribute[dev]`
 3. Make and perform migrations: `python migrate.py`
 4. Run the dev server: `python runapp.py`
