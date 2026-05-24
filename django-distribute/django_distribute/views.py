@@ -83,7 +83,10 @@ def item_collection(request):
         else:
             return JsonResponse({"itemlist": "Invalid item"})
 
-        item_count: int = int(request.POST.get("user-count"))
+        try:
+            item_count: int = int(request.POST.get("user-count"))
+        except ValueError:
+            return JsonResponse({"itemlist": "Invalid count"})
         if int(item_count) <= 0:
             return JsonResponse({"itemlist": "Invalid count"})
 
@@ -134,7 +137,11 @@ def results(request):
     Consolidated data is built and passed to the results template, which
     iterates over and displays the data in a consumable way.
     """
-    num_silos: int = int(request.session.get("num_silos", -1))
+    num_silos = 0
+    try:
+        num_silos: int = int(request.session.get("num_silos", -1))
+    except ValueError:
+        HttpResponseRedirect(reverse("distribute:index"))
     if num_silos <= 0:
         return HttpResponseRedirect(reverse("distribute:index"))
 

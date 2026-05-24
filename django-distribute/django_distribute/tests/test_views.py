@@ -143,6 +143,14 @@ class ItemCollectionViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["itemlist"], "Invalid count")
 
+    def test_response_on_count_value_error(self):
+        response = self.client.post(
+            reverse("distribute:collection"),
+            {"user-item": "Transport belt", "user-count": "Foobar"},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["itemlist"], "Invalid count")
+
     def test_item_collection_rejects_get(self):
         response = self.client.get(reverse("distribute:collection"))
         self.assertEqual(response.status_code, 400)
@@ -254,6 +262,14 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
         self.assertContains(response, get_version("django-distribute"))
+
+    def test_redirect_on_invalid_num_silos(self):
+        """Redirects back to index if the number of silos is not an integer."""
+        session = self.client.session
+        session["num_silos"] = "Foobar"
+        session.save()
+        response = self.client.get(reverse("distribute:results"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
 
 
 @tag("views")
