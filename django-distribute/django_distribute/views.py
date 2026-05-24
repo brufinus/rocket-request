@@ -8,11 +8,18 @@ from django.urls import reverse
 
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
+from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
+from django_distribute.services.blueprint import (
+    convert_blueprint,
+    extract_items_from_json,
+)
 from django_distribute.services.distribution import distribute_items
 from django_distribute.services.initialize_setup import (
+    build_consolidated_blueprint,
     build_consolidated_invs,
     build_consolidated_load,
     build_distribution,
+    group_items,
 )
 from django_distribute.services.search import search_coordinator
 
@@ -28,12 +35,14 @@ def index(request):
         table_headers = (Errors.NO_ITEMS_ADDED, "")
 
     distribute_error = request.session.pop("distribute_error", "")
+    import_error = request.session.pop("import_error", "")
 
     return render(
         request,
         "distribute/index.html",
         {
             "distribute_error": distribute_error,
+            "import_error": import_error,
             "itemlist": request.session["itemlist"],
             "suggestions": ITEMS,
             "table_headers": table_headers,
@@ -123,6 +132,7 @@ def results(request):
             "cycles": cycles,
             "consolidated": consolidated,
             "version": get_version("django-distribute"),
+            "blueprint": build_consolidated_blueprint(c_silo_invs),
         },
     )
 
@@ -147,3 +157,27 @@ def reset(request):
     """Resets the itemlist and redirects back to index."""
     request.session["itemlist"] = {}
     return HttpResponseRedirect(reverse("distribute:index"))
+
+
+def import_blueprint(request):
+    """Imports items from a given blueprint string."""
+    if request.method == "POST":
+        blueprint = request.POST.get("blueprint-input")
+        if blueprint:
+            try:
+                json_rep = convert_blueprint(blueprint)
+            except InvalidBlueprintException:
+                request.session["import_error"] = Errors.IMPORT_ERROR
+                return HttpResponseRedirect(reverse("distribute:index"))
+            try:
+                items = extract_items_from_json(json_rep, ITEMS)
+            except InvalidItemException as e:
+                request.session["import_error"] = (
+                    f"{Errors.INVALID_ITEM}{e.item}"
+                )
+                return HttpResponseRedirect(reverse("distribute:index"))
+            itemlist = request.session.get("itemlist", {})
+            itemlist = group_items(items, ITEMS)
+            request.session["itemlist"] = dict(sorted(itemlist.items()))
+        return HttpResponseRedirect(reverse("distribute:index"))
+    return HttpResponseBadRequest()

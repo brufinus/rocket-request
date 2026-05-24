@@ -3,16 +3,20 @@
 import cProfile
 import pstats
 from importlib.metadata import version as get_version
+from unittest.mock import Mock, patch
 
 from django.test import tag
 from django.urls import reverse
-from django_distribute.data.constants import Errors
-from django_distribute.data.items import ITEMS
 from hypothesis import given
 from hypothesis import strategies as st
 from hypothesis.extra.django import TestCase
 
+from django_distribute.data.constants import Errors
+from django_distribute.data.items import ITEMS
+from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
 
+
+@tag("views")
 class IndexViewTests(TestCase):
     def test_itemlist_no_items(self):
         """
@@ -89,6 +93,7 @@ class IndexViewTests(TestCase):
         self.assertContains(response, get_version("django-distribute"))
 
 
+@tag("views")
 class ItemCollectionViewTests(TestCase):
     @given(st.integers(min_value=1))
     def test_valid_item_collection(self, n):
@@ -143,6 +148,7 @@ class ItemCollectionViewTests(TestCase):
         self.assertEqual(response.status_code, 400)
 
 
+@tag("views")
 class RemoveViewTests(TestCase):
     @given(st.integers(min_value=1), st.integers(min_value=1))
     def test_remove_item(self, n1, n2):
@@ -175,6 +181,7 @@ class RemoveViewTests(TestCase):
         self.assertEqual(response.status_code, 400)
 
 
+@tag("views")
 class DistributableViewTests(TestCase):
     def test_redirect_on_no_items(self):
         """
@@ -212,6 +219,7 @@ class DistributableViewTests(TestCase):
         self.assertEqual(self.client.session["num_silos"], f"{n3}")
 
 
+@tag("views")
 class ResultsViewTests(TestCase):
     def test_redirect_on_missing_num_silos(self):
         session = self.client.session
@@ -248,6 +256,7 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, get_version("django-distribute"))
 
 
+@tag("views")
 class ContactViewTests(TestCase):
     def test_contact_page(self):
         """Test that elements can be found on the contact page."""
@@ -264,6 +273,7 @@ class ContactViewTests(TestCase):
         self.assertContains(response, get_version("django-distribute"))
 
 
+@tag("views")
 class AboutViewTests(TestCase):
     def test_about_page(self):
         """Test that elements can be found on the about page."""
@@ -282,6 +292,7 @@ class AboutViewTests(TestCase):
         self.assertContains(response, get_version("django-distribute"))
 
 
+@tag("views")
 class ResetViewTests(TestCase):
     def test_itemlist_reset(self):
         """Itemlist is cleared on reset."""
@@ -330,3 +341,63 @@ class ViewProfileTests(TestCase):
         results.sort_stats(pstats.SortKey.TIME)
         results.print_stats()
         results.dump_stats("results.prof")
+
+
+@tag("views")
+class ImportBlueprintViewTests(TestCase):
+    valid_bp = "0eNqrVkrKKU0tKMrMK1GyqlZKzSvJLMlMLVayiq5WykvMTVWyUiopSswrLsgvKtFNSs0pUaqNra0FACAuE/s="
+
+    def test_import_blueprint_get(self):
+        """Sending import a get request will return a bad response."""
+        response = self.client.get(reverse("distribute:import"))
+        self.assertEqual(response.status_code, 400)
+
+    def test_import_blueprint(self):
+        """Importing a blueprint sets the itemlist."""
+        response = self.client.post(
+            reverse("distribute:import"),
+            {"blueprint-input": self.valid_bp},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session["itemlist"], {"Transport belt": 1})
+
+    @patch(
+        "django_distribute.views.extract_items_from_json",
+        side_effect=InvalidItemException("Foobar"),
+    )
+    def test_import_invalid_item(self, mock):
+        """Invalid item sets the item import error."""
+        response = self.client.post(
+            reverse("distribute:import"),
+            {"blueprint-input": self.valid_bp},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            self.client.session["import_error"], f"{Errors.INVALID_ITEM}Foobar"
+        )
+
+    @patch(
+        "django_distribute.views.convert_blueprint",
+        side_effect=InvalidBlueprintException("Foobar"),
+    )
+    def test_import_invalid_blueprint(self, mock):
+        """Invalid import sets the import error."""
+        response = self.client.post(
+            reverse("distribute:import"),
+            {"blueprint-input": self.valid_bp},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session["import_error"], Errors.IMPORT_ERROR)
+
+    def test_import_empty(self):
+        """Empty import does not affect the existing itemlist."""
+        session = self.client.session
+        item = {"Transport belt": 1}
+        session["itemlist"] = item
+        session.save()
+        response = self.client.post(
+            reverse("distribute:import"),
+            {"blueprint-input": ""},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session["itemlist"], item)

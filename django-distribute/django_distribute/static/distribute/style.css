@@ -18,6 +18,7 @@
   --light-body-bg-color: #8e8e8e;
   --light-panel-bg-color: #6e6e6e;
   --light-panel-border-color: #666666;
+  --input-bg-color: #828282;
 }
 
 /* Common */
@@ -83,18 +84,21 @@ html.light-theme .nav-bar {
   font-style: normal;
 }
 
-.nav-bar-item:hover, html.light-theme #theme-toggle:hover {
+.nav-bar-item:hover,
+html.light-theme #theme-toggle:hover {
   background-color: #e39827;
   border: 2px outset #db9225;
 }
 
-.nav-bar-item:active, html.light-theme #theme-toggle:active {
+.nav-bar-item:active,
+html.light-theme #theme-toggle:active {
   background-color: #f1be64;
   border: 2px outset #60451c;
   color: var(--button-text-color-pressed);
 }
 
-.nav-bar-item-context, html.light-theme #theme-toggle {
+.nav-bar-item-context,
+html.light-theme #theme-toggle {
   background-color: var(--active-color);
   border: 2px outset #5b5857;
   color: #ffe6c0;
@@ -173,11 +177,16 @@ html.light-theme h3 {
 }
 
 #input-grid {
+  font-family: var(--font-family);
   display: grid;
   grid-template-columns: 60px 1fr;
   max-width: 300px;
   margin: auto;
   row-gap: 10px;
+}
+
+input[type=text], input[type=number] {
+  font-family: var(--font-family);
 }
 
 #add-item-button {
@@ -220,11 +229,11 @@ html.light-theme h3 {
 }
 
 input {
-  background-color: #9a9a9a;
+  background-color: var(--input-bg-color);
 }
 
-input:focus {
-  background-color: #f4e3c4;
+input:focus, textarea:focus {
+  background-color: #f0dab4;
 }
 
 #user-count-input {
@@ -318,7 +327,7 @@ html.light-theme table td {
 
 .trash-icon {
   object-fit: contain;
-  height: .8em;
+  height: 0.8em;
   width: auto;
 }
 
@@ -338,6 +347,33 @@ html.light-theme table td {
 
 .remove-data:active .text-button {
   top: 2px;
+}
+
+#blueprint-form {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  padding-bottom: 8px;
+}
+
+#blueprint-input {
+  padding-bottom: 240px;
+  overflow: scroll;
+  overflow-wrap: break-word;
+}
+
+#paste-import {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#import-button {
+  margin-left: auto;
+}
+
+textarea {
+  font-family: var(--font-family);
 }
 
 /* Footer */
@@ -387,7 +423,6 @@ html.light-theme .logo-link-box a {
 }
 
 html.light-theme .logo {
-
   filter: brightness(0%);
 }
 
@@ -397,9 +432,58 @@ html.light-theme .logo {
 }
 
 /* Results page */
+#results-header {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+}
+
 #summary {
   margin-top: 20px;
-  width: 20%;
+  width: 40%;
+}
+
+#blueprints {
+  margin-top: 20px;
+  margin-left: 4px;
+  padding: 12px;
+  background-color: var(--panel-bg-color);
+  border: 2px outset #251e1c;
+  width: 93%;
+}
+
+html.light-theme #blueprints {
+  background-color: var(--light-panel-bg-color);
+}
+
+#blueprints h4 {
+  margin-top: -8px;
+  margin-bottom: -4px;
+}
+
+.blueprint-box {
+  font-size: small;
+  padding: 2px 4px;
+  overflow: scroll;
+  overflow-wrap: break-word;
+  background-color: var(--input-bg-color);
+  color: black;
+  border-radius: 4px;
+  border: 2px inset #2f2a29;
+  max-height: 100px;
+}
+
+#copy-button, #paste-button, #import-button {
+  width: 100px;
+  height: 30px;
+}
+
+html.light-theme #copy-button {
+  border-color: black;
+}
+
+::selection {
+  background-color: #f1be64;
 }
 
 #per-distributions {
@@ -514,7 +598,8 @@ html.light-theme .info-div a {
   width: 40%;
 }
 
-html.light-theme .info-panel, html.light-theme .info-panel-short {
+html.light-theme .info-panel,
+html.light-theme .info-panel-short {
   background-color: var(--light-body-bg-color);
   color: black;
 }

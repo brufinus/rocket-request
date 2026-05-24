@@ -1,6 +1,7 @@
 {% extends "distribute/base.html" %}
+{% load static %}
 {% block content %}
-    <section>
+    <section id="results-header">
         <div id="summary">
             <div class="display-panel">
                 <table>
@@ -26,6 +27,13 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div id="blueprints">
+            <h4>Per-Silo Requester Chest Blueprints</h4>
+            <p class="blueprint-box">{{ blueprint }}</p>
+            <button id="copy-button" class="nav-bar-item">
+                <div class="text-button">Copy</div>
+            </button>
         </div>
     </section>
     <div id="per-distributions">
@@ -103,4 +111,5 @@
             </a>
         </div>
     </div>
+    <script src="{% static "distribute/clip.js" %}"></script>
 {% endblock content %}

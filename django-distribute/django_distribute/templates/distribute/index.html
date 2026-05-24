@@ -97,9 +97,35 @@
                 </div>
             </div>
         </aside>
+        <form id="blueprint-form"
+              action="{% url "distribute:import" %}"
+              method="post">
+            {% csrf_token %}
+            <h2 id="setup">Import Items From Blueprint</h2>
+            <textarea name="blueprint-input"
+                      id="blueprint-input"
+                      class="blueprint-box"
+                      autocapitalize="off"
+                      autocomplete="off"
+                      autocorrect="off"
+                      maxlength="20000"
+                      minlength="1"
+                      spellcheck="false"
+                      wrap="soft"></textarea>
+            <div id="paste-import">
+                <button id="paste-button" class="nav-bar-item">
+                    <div class="text-button">Paste</div>
+                </button>
+                <button id="import-button" class="nav-bar-item">
+                    <div class="text-button">Import</div>
+                </button>
+            </div>
+            <div class="error" id="import-error">{{ import_error }}</div>
+        </form>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <script src="{% static "distribute/utils.js" %}"></script>
     <script src="{% static "distribute/collection.js" %}"></script>
     <script src="{% static "distribute/remove.js" %}"></script>
+    <script src="{% static "distribute/submit.js" %}"></script>
 {% endblock content %}

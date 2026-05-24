@@ -14,7 +14,7 @@ items into silos such that the sum of each silo's weight does not exceed 1000 kg
 
 - Python>=3.12
 
-### Local Setup
+### Run Local Webapp
 
 These steps are tailored to a *Unix shell* or [*Git Bash*](https://gitforwindows.org/), but can be modified for a different CLI.
 
@@ -50,6 +50,9 @@ Next, use [run.sh](#use-runsh) or follow the [manual](#manual) steps to run the 
 
 ### Development
 
-A bash script `run.sh` is included to build, install, and run the dev server in one step.
+Follow these steps to get set up for development with an editable install.
 
-Run `./run.sh` without arguments to see usage information.
+1. [Create and activate a virtual environment](https://docs.python.org/3/library/venv.html): `python -m venv .venv && source .venv/Scripts/activate`
+2. Editable install: `pip install -r ./django-distribute/requirements-edit.txt`
+3. Make and perform migrations: `python migrate.py`
+4. Run the dev server: `python runapp.py`
