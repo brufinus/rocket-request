@@ -4,6 +4,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import tag
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,7 +15,9 @@ class SeleniumViewTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
-        cls.selenium = WebDriver()
+        options = Options()
+        options.add_argument("--headless=new")
+        cls.selenium = WebDriver(options)
         cls.selenium.implicitly_wait(10)
 
     @classmethod
