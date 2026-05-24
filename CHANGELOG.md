@@ -2,6 +2,88 @@
 
 <!-- version list -->
 
+## v1.1.0 (2026-05-24)
+
+### Bug Fixes
+
+- **api**: Handle conversion exceptions
+  ([`e2d8a18`](https://github.com/brufinus/rocket-request/commit/e2d8a18bf6b68936440b75cef13585777f8241ba))
+
+- **css**: Set bottom padding for blueprint form
+  ([`4f505fb`](https://github.com/brufinus/rocket-request/commit/4f505fbec7770eed36eca107feb4fbff205b23f8))
+
+- **css**: Set font for text input and area
+  ([`9c13ad8`](https://github.com/brufinus/rocket-request/commit/9c13ad877959311f963e1fa45d9a49cbf703ad0c))
+
+- **data**: Give cryo plant a unique id and remove cheat items
+  ([`fd089b9`](https://github.com/brufinus/rocket-request/commit/fd089b93d0049c7d90253b476fd672245f980322))
+
+- **data**: Use in-game names
+  ([`9d2fd52`](https://github.com/brufinus/rocket-request/commit/9d2fd524156246fb24d0758b9fdbe0932500d1f7))
+
+- **views**: Handle blueprint import errors
+  ([`3a0b2ae`](https://github.com/brufinus/rocket-request/commit/3a0b2ae8c72a9d1dae8ffc756deca61bd4f30e3b))
+
+### Chores
+
+- Add scripts for local development
+  ([`3727830`](https://github.com/brufinus/rocket-request/commit/37278307a0552b92a26d2c8eb4879d526bb557f4))
+
+- Add shebangs to dev scripts
+  ([`3727830`](https://github.com/brufinus/rocket-request/commit/37278307a0552b92a26d2c8eb4879d526bb557f4))
+
+- Enable parallel testing
+  ([`c08617c`](https://github.com/brufinus/rocket-request/commit/c08617c8d63e12bd4d714191d19f98a66712878c))
+
+- Settings docstring
+  ([`c08617c`](https://github.com/brufinus/rocket-request/commit/c08617c8d63e12bd4d714191d19f98a66712878c))
+
+### Continuous Integration
+
+- **quality**: Run integration tests
+  ([`684a7e9`](https://github.com/brufinus/rocket-request/commit/684a7e9a96f7edf07f1d6f828d77a0b1312bb981))
+
+- **quality**: Set permissions
+  ([`684a7e9`](https://github.com/brufinus/rocket-request/commit/684a7e9a96f7edf07f1d6f828d77a0b1312bb981))
+
+### Documentation
+
+- **api**: Add blueprint module header
+  ([`f117124`](https://github.com/brufinus/rocket-request/commit/f1171244732615533e7cf2e4167d9b8e571c8b96))
+
+- **project**: Add runtests usage
+  ([`d5b20df`](https://github.com/brufinus/rocket-request/commit/d5b20df1fdb64ed3a05af1ee7b00345050cbe4a5))
+
+- **project**: Run.sh usage
+  ([`edb7f1f`](https://github.com/brufinus/rocket-request/commit/edb7f1f7ec7871ad11e7147278f9d6b304e11d8b))
+
+### Features
+
+- **api**: Add blueprint book metadata
+  ([`f5c8530`](https://github.com/brufinus/rocket-request/commit/f5c8530cd6ab09a45e72dba66c5e0ca9691d6912))
+
+- **api**: Add blueprint string converter
+  ([`5e8c82c`](https://github.com/brufinus/rocket-request/commit/5e8c82c1a5f5a8f6b0d2db325352f302108bcec9))
+
+- **api**: Add module for generating blueprint strings
+  ([`6593730`](https://github.com/brufinus/rocket-request/commit/6593730ab04c644a30fe8dad6e5a330f418526b6))
+
+- **api**: Build a full blueprint string and pass it to results
+  ([`d204c67`](https://github.com/brufinus/rocket-request/commit/d204c67cf0877d56056c515b3250f15455c527f2))
+
+- **api**: Implement blueprint import
+  ([`2a0f409`](https://github.com/brufinus/rocket-request/commit/2a0f4099ab85a9eede9889841c9adb317b1d19b4))
+
+- **exceptions**: Add exceptions module
+  ([`a2d3b92`](https://github.com/brufinus/rocket-request/commit/a2d3b92b46bac3f39a2c4047d275baba933693a9))
+
+- **templates**: Add blueprint viewer with copy button
+  ([`e9af11f`](https://github.com/brufinus/rocket-request/commit/e9af11f16a915d1106c199f2acd88d0a348af238))
+
+- **templates**: Create form for blueprint import
+  ([`bc458e7`](https://github.com/brufinus/rocket-request/commit/bc458e7dd270963e68233c1c9a25be9233e45c05))
+
+
 ## v1.0.1 (2026-05-18)
 
 ### Bug Fixes
