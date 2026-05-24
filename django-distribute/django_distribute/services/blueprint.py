@@ -7,6 +7,7 @@ Functions:
     generate_chest: Generates requester chest JSON representation.
     generate_item: Generates item JSON representation.
     convert_blueprint: Converts blueprints to JSON representation.
+    extract_items_from_json: Extracts a list of Items from JSON.
 """
 
 import base64
