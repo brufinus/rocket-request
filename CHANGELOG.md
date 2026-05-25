@@ -2,6 +2,54 @@
 
 <!-- version list -->
 
+## v1.2.0 (2026-05-25)
+
+### Bug Fixes
+
+- **api**: Raise an exception when items exceed available chest slots
+  ([`dc82836`](https://github.com/brufinus/rocket-request/commit/dc8283659a3934782ff92c42299854df16a4f613))
+
+- **views**: Handle ChestIndexException and pass error to blueprint export
+  ([`79ebb72`](https://github.com/brufinus/rocket-request/commit/79ebb72a133ab82dcea2f2072616ea66e0afca61))
+
+- **views**: Validate int types
+  ([`500edf0`](https://github.com/brufinus/rocket-request/commit/500edf02bfa1d499070052cc51f19dca11d18702))
+
+### Chores
+
+- **project**: Remove unused editable requirements
+  ([`fa1f826`](https://github.com/brufinus/rocket-request/commit/fa1f8269bc6688765a2fa30e37317920e8d82182))
+
+### Continuous Integration
+
+- **cd**: Dynamically set displayed updated date
+  ([`05e76e3`](https://github.com/brufinus/rocket-request/commit/05e76e313c5e65f40c8563954c87cba70107aaf0))
+
+- **cd**: Get app id and set checkout token
+  ([`a81565a`](https://github.com/brufinus/rocket-request/commit/a81565aa28f55cc9733966a201181875dc2827d9))
+
+- **cd**: Use app to create deploy token
+  ([`a81565a`](https://github.com/brufinus/rocket-request/commit/a81565aa28f55cc9733966a201181875dc2827d9))
+
+### Documentation
+
+- **project**: Add security policy
+  ([`7454f91`](https://github.com/brufinus/rocket-request/commit/7454f9128a0ea2762205f50c9ad6083a53569b7b))
+
+- **views**: Verbose docstrings
+  ([`2347014`](https://github.com/brufinus/rocket-request/commit/234701467573bd2629ada60ff2c57947bd7a80ae))
+
+### Features
+
+- **static**: Implement paste functionality
+  ([`6c6f418`](https://github.com/brufinus/rocket-request/commit/6c6f418a7aaadb83660a89090f1463096ff86ed2))
+
+### Refactoring
+
+- **views**: Remove unused code
+  ([`2347014`](https://github.com/brufinus/rocket-request/commit/234701467573bd2629ada60ff2c57947bd7a80ae))
+
+
 ## v1.1.0 (2026-05-24)
 
 ### Bug Fixes
