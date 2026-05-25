@@ -8,6 +8,7 @@ Functions:
     get_consolidated_slots: Consolidates slots across cycles.
     group_items: Consolidates and groups items together.
     calculate_launch_cycles: Calculates the number of launch cycles.
+    build_consolidated_blueprint: Builds a blueprint for inventory data.
 """
 
 import math
@@ -15,6 +16,7 @@ import math
 from django_distribute.containers.rocketsilo import RocketSilo
 from django_distribute.data.constants import ITEM_ID
 from django_distribute.data.item import Item
+from django_distribute.exceptions import ChestIndexException
 from django_distribute.services.blueprint import (
     generate_book,
     generate_bp_from_json,
@@ -169,9 +171,13 @@ def build_consolidated_blueprint(invs: list[dict[str, int]]) -> str:
     :param list[dict[str, int]] invs: Consolidated inventories.
     :return: Blueprint string.
     :rtype: str
+    :raises ChestIndexException: If the chest index is larger than the
+    number of slots.
     """
     chests = []
     for silo_index, inv in enumerate(invs):
+        if len(inv) > 48:
+            raise ChestIndexException
         items = []
         for inv_index, item_name in enumerate(inv):
             item_name_slug = item_name.lower().replace(" ", "-")
