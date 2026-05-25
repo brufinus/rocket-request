@@ -3,7 +3,7 @@
 import cProfile
 import pstats
 from importlib.metadata import version as get_version
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 from django.test import tag
 from django.urls import reverse
@@ -13,7 +13,11 @@ from hypothesis.extra.django import TestCase
 
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
-from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
+from django_distribute.exceptions import (
+    ChestIndexException,
+    InvalidBlueprintException,
+    InvalidItemException,
+)
 
 
 @tag("views")
@@ -143,6 +147,14 @@ class ItemCollectionViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["itemlist"], "Invalid count")
 
+    def test_response_on_count_value_error(self):
+        response = self.client.post(
+            reverse("distribute:collection"),
+            {"user-item": "Transport belt", "user-count": "Foobar"},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["itemlist"], "Invalid count")
+
     def test_item_collection_rejects_get(self):
         response = self.client.get(reverse("distribute:collection"))
         self.assertEqual(response.status_code, 400)
@@ -254,6 +266,34 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
         self.assertContains(response, get_version("django-distribute"))
+
+    def test_redirect_on_invalid_num_silos(self):
+        """Redirects back to index if the number of silos is not an integer."""
+        session = self.client.session
+        session["num_silos"] = "Foobar"
+        session.save()
+        response = self.client.get(reverse("distribute:results"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
+
+    @patch(
+        "django_distribute.views.build_consolidated_blueprint",
+        side_effect=ChestIndexException(),
+    )
+    @patch("django_distribute.views.zip")
+    @patch("django_distribute.views.build_consolidated_load")
+    @patch("django_distribute.views.build_consolidated_invs")
+    @patch("django_distribute.views.build_distribution")
+    @patch("django_distribute.views.distribute_items")
+    def test_results_exceed_chest_slots(
+        self, mock_di, mock_bd, mock_bci, mock_bcl, mock_zip, mock_bcb
+    ):
+        """An error is passed to blueprint as items exceed available slots."""
+        session = self.client.session
+        session["num_silos"] = 1
+        session["itemlist"] = {"Transport belt": 1}
+        session.save()
+        response = self.client.get(reverse("distribute:results"))
+        self.assertContains(response, Errors.ITEMS_EXCEED_SLOTS)
 
 
 @tag("views")

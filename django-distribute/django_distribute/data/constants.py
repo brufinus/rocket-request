@@ -1,5 +1,7 @@
 """String constants"""
 
+# pylint: disable=line-too-long
+
 from enum import StrEnum
 
 # Error messages
@@ -21,3 +23,4 @@ class Errors(StrEnum):
     ADD_ITEMS_DISTRIBUTE = "Please add items to distribute."
     IMPORT_ERROR = "Import failed due to invalid blueprint string."
     INVALID_ITEM = "Blueprint contains invalid item: "
+    ITEMS_EXCEED_SLOTS = "Unable to create a valid blueprint as the number of items exceeds the number of chest slots."

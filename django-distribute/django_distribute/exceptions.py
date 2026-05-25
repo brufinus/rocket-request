@@ -18,3 +18,11 @@ class InvalidItemException(Exception):
 
     def __str__(self) -> str:
         return f"{self.message}: {self.item}"
+
+
+class ChestIndexException(Exception):
+    """Exception raised when the chest slot index is out of bounds."""
+
+    def __init__(self) -> None:
+        self.message = "Chest index is out of bounds."
+        super().__init__(self.message)

@@ -1,4 +1,17 @@
-"""Views for the distribute app."""
+"""
+Views for the distribute app.
+
+Functions:
+    index: Renders the main page of the application.
+    item_collection: API that updates the itemlist.
+    remove: API that removes an item from the itemlist.
+    distributable: API that validates the session for distribution.
+    results: Renders the Results page with distributed data.
+    contact: Renders the Contact page.
+    about: Renders the About page.
+    reset: API that resets the itemlist.
+    import_blueprint: API that imports items from a blueprint string.
+"""
 
 from importlib.metadata import version as get_version
 
@@ -8,7 +21,11 @@ from django.urls import reverse
 
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
-from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
+from django_distribute.exceptions import (
+    ChestIndexException,
+    InvalidBlueprintException,
+    InvalidItemException,
+)
 from django_distribute.services.blueprint import (
     convert_blueprint,
     extract_items_from_json,
@@ -23,14 +40,18 @@ from django_distribute.services.initialize_setup import (
 )
 from django_distribute.services.search import search_coordinator
 
-table_item_count = ("Item", "Count")
-
 
 def index(request):
-    """Main page for the application."""
+    """
+    Renders the main page of the application.
+
+    The current itemlist and potential on-load
+    errors are passed to the template.
+    """
     itemlist = request.session.get("itemlist", {})
     request.session["itemlist"] = dict(sorted(itemlist.items()))
-    table_headers = table_item_count
+
+    table_headers = ("Item", "Count")
     if not itemlist:
         table_headers = (Errors.NO_ITEMS_ADDED, "")
 
@@ -53,10 +74,10 @@ def index(request):
 
 def item_collection(request):
     """
-    Updates the item list by updating or adding items to it.
+    Updates the itemlist.
 
-    Only adds valid or similar matches for item name.
-    Updates the item count if it already exists in the list.
+    Only adds valid or similar matches to the given item name.
+    The item count is incremented if it already exists in the list.
     """
     if request.method == "POST":
         # Item validation
@@ -66,7 +87,10 @@ def item_collection(request):
         else:
             return JsonResponse({"itemlist": "Invalid item"})
 
-        item_count: int = int(request.POST.get("user-count"))
+        try:
+            item_count: int = int(request.POST.get("user-count"))
+        except ValueError:
+            return JsonResponse({"itemlist": "Invalid count"})
         if int(item_count) <= 0:
             return JsonResponse({"itemlist": "Invalid count"})
 
@@ -80,7 +104,7 @@ def item_collection(request):
 
 
 def remove(request):
-    """Removes an item from the item list."""
+    """Removes an item from the itemlist."""
     if request.method == "POST":
         item_name = request.POST.get("user-item")
         itemlist: dict[str, int] = request.session.get("itemlist", {})
@@ -92,9 +116,14 @@ def remove(request):
 
 
 def distributable(request):
-    """Checks whether the session is valid for distribution."""
+    """
+    Checks whether the session is valid for distribution.
+
+    The session is valid when the itemlist has at least one item and
+    the user has entered a valid number of silos.
+    """
     itemlist: dict = request.session.get("itemlist", {})
-    if len(itemlist) <= 0:
+    if not itemlist:
         request.session["distribute_error"] = Errors.ADD_ITEMS_DISTRIBUTE
         return HttpResponseRedirect(reverse("distribute:index"))
     try:
@@ -106,21 +135,35 @@ def distributable(request):
 
 
 def results(request):
-    """Renders the results page with the distributed data."""
-    # Pop session keys if wanting to reset values after distribution.
-    num_silos: int = int(request.session.get("num_silos", -1))
+    """
+    Renders the Results page with the distributed data.
+
+    Consolidated data is built and passed to the results template, which
+    iterates over and displays the data in a consumable way.
+    """
+    num_silos = 0
+    try:
+        num_silos: int = int(request.session.get("num_silos", -1))
+    except ValueError:
+        HttpResponseRedirect(reverse("distribute:index"))
     if num_silos <= 0:
         return HttpResponseRedirect(reverse("distribute:index"))
 
     itemlist: dict[str, int] = request.session.get("itemlist", None)
     if itemlist is None or not itemlist:
         return HttpResponseRedirect(reverse("distribute:index"))
+
     silos = distribute_items(itemlist)
     cycles = build_distribution(silos, num_silos, ITEMS)
 
     c_silo_invs = build_consolidated_invs(silos, num_silos, ITEMS)
     c_silo_loads = build_consolidated_load(silos, num_silos)
     consolidated = zip(c_silo_invs, c_silo_loads)
+
+    try:
+        blueprint = build_consolidated_blueprint(c_silo_invs)
+    except ChestIndexException:
+        blueprint = Errors.ITEMS_EXCEED_SLOTS
 
     return render(
         request,
@@ -131,8 +174,8 @@ def results(request):
             "num_cycles": len(cycles),
             "cycles": cycles,
             "consolidated": consolidated,
+            "blueprint": blueprint,
             "version": get_version("django-distribute"),
-            "blueprint": build_consolidated_blueprint(c_silo_invs),
         },
     )
 
@@ -160,7 +203,13 @@ def reset(request):
 
 
 def import_blueprint(request):
-    """Imports items from a given blueprint string."""
+    """
+    Imports items to the itemlist from a given blueprint string.
+
+    Items are extracted from the blueprint string and added to the
+    itemlist. The index page is rendered with errors set in the session
+    if the process fails.
+    """
     if request.method == "POST":
         blueprint = request.POST.get("blueprint-input")
         if blueprint:
@@ -172,11 +221,9 @@ def import_blueprint(request):
             try:
                 items = extract_items_from_json(json_rep, ITEMS)
             except InvalidItemException as e:
-                request.session["import_error"] = (
-                    f"{Errors.INVALID_ITEM}{e.item}"
-                )
+                request.session["import_error"] = f"{Errors.INVALID_ITEM}{e.item}"
                 return HttpResponseRedirect(reverse("distribute:index"))
-            itemlist = request.session.get("itemlist", {})
+
             itemlist = group_items(items, ITEMS)
             request.session["itemlist"] = dict(sorted(itemlist.items()))
         return HttpResponseRedirect(reverse("distribute:index"))

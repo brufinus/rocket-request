@@ -149,3 +149,8 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         self.selenium.find_element(By.ID, "distribute-button").click()
         self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, ".blueprint-box").text, "0eNqNUk1rwzAM/StGZ6ekpR1rYJfBDrt2xzGC42itqWOntlNWSv77ZKdpNvZBT7alp6enJ5+h0h22TplQVtbuoThPEQ/F65dnzClpzRD2amuEjjEjGoQCHB469AFdJnd0Qs9BmRo/oJj3bxzQBBUUDsXpcSpN11ToCMD/IuHQWk911sROxJXPcg6ndFKDC7x8V5pqfMR4lBE+9BkFcLgivkUvXYMTxrfWhaxCHZseOqFJIKWMdQ2NyUHaphVOBEt64SEFuugJDRfHIwq/K40N5ThCDUVwHfYxqwI2VDZZyUEL6kWxOd2PpCyNuLpbrJfr9ep+ka+Wy/lkYR5ZavTSqXZwAx6va2JbNEjSsGbViW2s3GNgm0HGjD0JuWPJTSatc0iDmtqzYJlgXmk7IwHTWidvfi44EWexBvqeX7ELfsNn+M2FLP24yYoXYmbPBBrFe0oKWucRy9GHf8zqPwGWVfPY")
         self.selenium.find_element(By.CSS_SELECTOR, "#copy-button > .text-button").click()
+    
+    def test_paste(self):
+        """Tests the paste functionality."""
+        self.selenium.get(f"{self.live_server_url}/distribute/")
+        self.selenium.find_element(By.CSS_SELECTOR, "#paste-button > .text-button").click()

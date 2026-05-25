@@ -35,6 +35,10 @@ jobs:
       - name: Setup | Force release branch to be at workflow sha
         run: |
           git reset --hard ${{ github.sha }}
+      
+      - name: Action | Update Build Date
+        run: |
+          sed -i "s|Some time ago|$(date +%F)|g" ./django-distribute/django_distribute/templates/distribute/base.html
 
       - name: Action | Semantic Version Release
         id: release
