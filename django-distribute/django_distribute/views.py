@@ -21,7 +21,11 @@ from django.urls import reverse
 
 from django_distribute.data.constants import Errors
 from django_distribute.data.items import ITEMS
-from django_distribute.exceptions import InvalidBlueprintException, InvalidItemException
+from django_distribute.exceptions import (
+    ChestIndexException,
+    InvalidBlueprintException,
+    InvalidItemException,
+)
 from django_distribute.services.blueprint import (
     convert_blueprint,
     extract_items_from_json,
@@ -156,6 +160,11 @@ def results(request):
     c_silo_loads = build_consolidated_load(silos, num_silos)
     consolidated = zip(c_silo_invs, c_silo_loads)
 
+    try:
+        blueprint = build_consolidated_blueprint(c_silo_invs)
+    except ChestIndexException:
+        blueprint = Errors.ITEMS_EXCEED_SLOTS
+
     return render(
         request,
         "distribute/results.html",
@@ -165,7 +174,7 @@ def results(request):
             "num_cycles": len(cycles),
             "cycles": cycles,
             "consolidated": consolidated,
-            "blueprint": build_consolidated_blueprint(c_silo_invs),
+            "blueprint": blueprint,
             "version": get_version("django-distribute"),
         },
     )
