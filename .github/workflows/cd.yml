@@ -75,7 +75,7 @@ jobs:
         with:
           name: distribution-artifacts
           path: ./django-distribute/dist
-          if-no-files-found: error
+          if-no-files-found: warn
 
     outputs:
       released: ${{ steps.release.outputs.released || 'false' }}
