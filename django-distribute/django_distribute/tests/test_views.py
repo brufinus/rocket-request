@@ -1,6 +1,7 @@
 """Display, request, and session tests on views."""
 
 import cProfile
+from pathlib import Path
 import pstats
 from importlib.metadata import version as get_version
 from unittest.mock import patch
@@ -95,6 +96,12 @@ class IndexViewTests(TestCase):
         """Version in the footer is set correctly."""
         response = self.client.get(reverse("distribute:index"))
         self.assertContains(response, get_version("django-distribute"))
+
+    def test_build_date(self):
+        """Build date is set by the build date context processor."""
+        expected = (Path(__file__).parent.parent / "BUILD_DATE").read_text()
+        response = self.client.get(reverse("distribute:index"))
+        self.assertContains(response, expected)
 
 
 @tag("views")

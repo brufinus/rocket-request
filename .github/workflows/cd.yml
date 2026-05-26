@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   release:
+    if: github.actor != 'rocket-request[bot]'
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-release-${{ github.ref_name }}
@@ -49,7 +50,8 @@ jobs:
       
       - name: Action | Update Build Date
         run: |
-          sed -i "s|Some time ago|$(date +%F)|g" ./django-distribute/django_distribute/templates/distribute/base.html
+          echo $(date +%F) > ./django-distribute/django_distribute/BUILD_DATE
+          git add ./django-distribute/django_distribute/BUILD_DATE
 
       - name: Action | Semantic Version Release
         id: release
