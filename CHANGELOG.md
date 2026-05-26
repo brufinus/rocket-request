@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.0 (2026-05-26)
+
+### Features
+
+- Set updated date with custom context processor
+  ([`acbe9bd`](https://github.com/brufinus/rocket-request/commit/acbe9bdccf8df148352b308485f121250db02049))
+
+
 ## v1.2.0 (2026-05-25)
 
 ### Bug Fixes
