@@ -2,6 +2,24 @@
 
 <!-- version list -->
 
+## v1.4.0 (2026-05-26)
+
+### Build System
+
+- Include build date file
+  ([`09e5c2c`](https://github.com/brufinus/rocket-request/commit/09e5c2c9202efdad374b3f89acfc3f569ecb309b))
+
+### Continuous Integration
+
+- **cd**: Warn on missing artifacts
+  ([`273f717`](https://github.com/brufinus/rocket-request/commit/273f7178674ad9ac6357aabc78b2199995b51d98))
+
+### Features
+
+- **templates**: Add tooltip warning on import
+  ([`f4bbd88`](https://github.com/brufinus/rocket-request/commit/f4bbd88b82a4d42e79311ae5953a4c2ecc7376a3))
+
+
 ## v1.3.0 (2026-05-26)
 
 ### Features
