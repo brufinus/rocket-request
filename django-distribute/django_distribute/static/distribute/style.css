@@ -372,6 +372,30 @@ html.light-theme table td {
   margin-left: auto;
 }
 
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  width: 140px;
+  background-color: var(--light-panel-bg-color);
+  border: var(--light-panel-border-color);
+  color: var(--button-text-color);
+  top: 100%;
+  left: 50%;
+  margin-left: -70px;
+  padding: 1px;
+  border-radius: 4px;
+}
+
+html.light-theme .tooltip {
+  background-color: var(--panel-bg-color);
+  color: #fde4bf;
+}
+
+#import-button:hover .tooltip {
+  visibility: visible;
+}
+
 textarea {
   font-family: var(--font-family);
 }
