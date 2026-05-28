@@ -1,3 +1,0 @@
-recursive-include django_distribute/static *
-recursive-include django_distribute/templates *
-include django_distribute/BUILD_DATE

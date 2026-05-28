@@ -5,7 +5,7 @@ from pathlib import Path
 import django
 from django.conf import settings
 
-BASE_DIR = Path(__file__).parent / "django-distribute"
+BASE_DIR = Path(__file__).parent / "django_distribute"
 sys.path.insert(0, str(BASE_DIR))
 
 
