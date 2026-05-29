@@ -3,7 +3,7 @@
 {% block head %}
 {% endblock head %}
 {% block content %}
-    <article data-remove-url="{% url "distribute:remove" %}">
+    <article data-remove-url="{% url "distribute:remove" %}" data-static-trash-url="{% static "distribute/images/trash.png" %}">
         <section>
             <h2 id="setup">Setup</h2>
             <form id="item-collection-form"
