@@ -13,8 +13,6 @@ Functions:
     import_blueprint: API that imports items from a blueprint string.
 """
 
-from importlib.metadata import version as get_version
-
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -67,7 +65,6 @@ def index(request):
             "itemlist": request.session["itemlist"],
             "suggestions": ITEMS,
             "table_headers": table_headers,
-            "version": get_version("django-distribute"),
         },
     )
 
@@ -175,25 +172,18 @@ def results(request):
             "cycles": cycles,
             "consolidated": consolidated,
             "blueprint": blueprint,
-            "version": get_version("django-distribute"),
         },
     )
 
 
 def contact(request):
     """Renders the Contact page."""
-    return render(
-        request,
-        "distribute/contact.html",
-        {"version": get_version("django-distribute")},
-    )
+    return render(request, "distribute/contact.html")
 
 
 def about(request):
     """Renders the About page."""
-    return render(
-        request, "distribute/about.html", {"version": get_version("django-distribute")}
-    )
+    return render(request, "distribute/about.html")
 
 
 def reset(request):

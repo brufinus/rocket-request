@@ -51,6 +51,7 @@ def boot_django():
                         "django.contrib.auth.context_processors.auth",
                         "django.contrib.messages.context_processors.messages",
                         "django_distribute.context_processors.build_date",
+                        "django_distribute.context_processors.build_version",
                     ],
                 },
             },

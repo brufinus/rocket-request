@@ -1,5 +1,3 @@
-from importlib.metadata import version as get_version
-
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import tag
 from selenium.webdriver.common.by import By
@@ -101,14 +99,12 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         assert (self.selenium.find_element(By.XPATH, "/html/body/main/section/h1")).text == "Contact me"
         assert (self.selenium.find_element(By.XPATH, "/html/body/main/section/div/h2[1]")).text == "Feedback"
         assert (self.selenium.find_element(By.XPATH, "/html/body/main/section/div/p[3]")).text == "Have any other inquiries or comments? Send me an email."
-        assert self.selenium.find_element(By.CSS_SELECTOR, "div.change-info:nth-child(4)").text == f"Rocket Request v{get_version("django-distribute")}"
 
     def test_about_page(self):
         """Tests elements on the about page."""
         self.selenium.get(f"{self.live_server_url}/distribute/about")
         assert (self.selenium.find_element(By.XPATH, "/html/body/main/section/h1")).text == "About"
         assert (self.selenium.find_element(By.XPATH, "/html/body/main/section/div/h2[1]")).text == "Why?"
-        assert self.selenium.find_element(By.CSS_SELECTOR, "div.change-info:nth-child(4)").text == f"Rocket Request v{get_version("django-distribute")}"
 
     def test_toggle_theme(self):
         """Tests the toggle theme button."""

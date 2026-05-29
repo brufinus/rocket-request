@@ -3,7 +3,7 @@
 import cProfile
 from pathlib import Path
 import pstats
-from importlib.metadata import version as get_version
+import tomllib
 from unittest.mock import patch
 
 from django.test import tag
@@ -94,8 +94,11 @@ class IndexViewTests(TestCase):
 
     def test_footer_version(self):
         """Version in the footer is set correctly."""
+        conf = Path(__file__).parent.parent.parent / "pyproject.toml"
+        with open(conf, "rb") as f:
+            version = tomllib.load(f)["project"]["version"]
         response = self.client.get(reverse("distribute:index"))
-        self.assertContains(response, get_version("django-distribute"))
+        self.assertContains(response, version)
 
     def test_build_date(self):
         """Build date is set by the build date context processor."""
@@ -272,7 +275,10 @@ class ResultsViewTests(TestCase):
         self.assertContains(response, '<td scope="row">Chemical plant</td>', html=True)
         self.assertContains(response, "<h3>Cycle 2 of 2</h3>", html=True)
         self.assertContains(response, "<h3>Silo 2 (1000 kg)</h3>", html=True)
-        self.assertContains(response, get_version("django-distribute"))
+        conf = Path(__file__).parent.parent.parent / "pyproject.toml"
+        with open(conf, "rb") as f:
+            version = tomllib.load(f)["project"]["version"]
+        self.assertContains(response, version)
 
     def test_redirect_on_invalid_num_silos(self):
         """Redirects back to index if the number of silos is not an integer."""
@@ -316,8 +322,11 @@ class ContactViewTests(TestCase):
 
     def test_footer_version(self):
         """Version in the footer is set correctly."""
+        conf = Path(__file__).parent.parent.parent / "pyproject.toml"
+        with open(conf, "rb") as f:
+            version = tomllib.load(f)["project"]["version"]
         response = self.client.get(reverse("distribute:contact"))
-        self.assertContains(response, get_version("django-distribute"))
+        self.assertContains(response, version)
 
 
 @tag("views")
@@ -335,8 +344,11 @@ class AboutViewTests(TestCase):
 
     def test_footer_version(self):
         """Version in the footer is set correctly."""
+        conf = Path(__file__).parent.parent.parent / "pyproject.toml"
+        with open(conf, "rb") as f:
+            version = tomllib.load(f)["project"]["version"]
         response = self.client.get(reverse("distribute:about"))
-        self.assertContains(response, get_version("django-distribute"))
+        self.assertContains(response, version)
 
 
 @tag("views")
