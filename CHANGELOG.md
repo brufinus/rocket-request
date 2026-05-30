@@ -2,6 +2,57 @@
 
 <!-- version list -->
 
+## v1.5.0 (2026-05-30)
+
+### Bug Fixes
+
+- **js**: Render image using dynamic static path
+  ([`d53849c`](https://github.com/brufinus/rocket-request/commit/d53849cc22e76ecccadd278151caaa297fb9b14a))
+
+### Build System
+
+- Add gcloud scripts and config
+  ([`c365700`](https://github.com/brufinus/rocket-request/commit/c3657006b3c8ca2a1ea9f97fe0c2520306b3e3bd))
+
+- Add gcloudignore and remove unused config
+  ([`c365700`](https://github.com/brufinus/rocket-request/commit/c3657006b3c8ca2a1ea9f97fe0c2520306b3e3bd))
+
+- Migrate with beta deploy
+  ([`c365700`](https://github.com/brufinus/rocket-request/commit/c3657006b3c8ca2a1ea9f97fe0c2520306b3e3bd))
+
+- **cd**: Remove build command
+  ([`7e06ee1`](https://github.com/brufinus/rocket-request/commit/7e06ee1cdadad22c3f31e98cd2b672ed033a4e86))
+
+### Continuous Integration
+
+- **cd**: Add gcloud build and deploy job
+  ([`c260d1d`](https://github.com/brufinus/rocket-request/commit/c260d1da4097d10008dafa15562df36ee89dd3b1))
+
+- **quality**: Update setup for structure
+  ([`34bb655`](https://github.com/brufinus/rocket-request/commit/34bb655b64baae6914cb25eeae1b84e5bb93a23e))
+
+### Documentation
+
+- **project**: Add issue templates
+  ([`e3c3d86`](https://github.com/brufinus/rocket-request/commit/e3c3d860debe4ef10906668772e73f626b12423b))
+
+- **project**: Update usage info
+  ([`34bb655`](https://github.com/brufinus/rocket-request/commit/34bb655b64baae6914cb25eeae1b84e5bb93a23e))
+
+### Features
+
+- **templates**: Add context processor to inject build version
+  ([`88503ca`](https://github.com/brufinus/rocket-request/commit/88503ca21f494f3a0684b21fa307f67ae29970e5))
+
+### Refactoring
+
+- Move js into sub dir
+  ([`6bde8be`](https://github.com/brufinus/rocket-request/commit/6bde8be0c51c3c47f21ce81cf63ee59be4e5c910))
+
+- **project**: Move app and project up to base dir
+  ([`34bb655`](https://github.com/brufinus/rocket-request/commit/34bb655b64baae6914cb25eeae1b84e5bb93a23e))
+
+
 ## v1.4.0 (2026-05-26)
 
 ### Build System
