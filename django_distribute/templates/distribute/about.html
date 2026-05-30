@@ -8,7 +8,7 @@
                 Rocket Request is a utility tool for the factory automation game,
                 <a href="https://factorio.com" target="_blank" rel="noopener noreferrer">Factorio</a>.
                 <br>
-                It shows you how to distribute items across your rocket silos, minimizing the number of required launches.
+                It shows how to distribute items across rocket silos, aiming to minimize the number of required launches.
                 <br>
                 A <a href="https://en.wikipedia.org/wiki/First-fit-decreasing_bin_packing"
     target="_blank"
@@ -16,11 +16,23 @@
             </p>
             <h2>Why?</h2>
             <p class="info-panel">
-                When auto-requesting to a space platform, silos always fill up to capacity with a single item, leading to wasteful launches.
+                When auto-requesting to a space platform, silos always fill up to max capacity on a single item, leading to wasteful launches.
                 <br>
-                Of course, this is not a concern in a game where resources are nearly unlimited; however, wasting resources bothers me.
+                Of course, this is not a concern in a game where resources are nearly unlimited; however, it could be helpful in the early game.
                 <br>
-                So instead, I wasted my time to create a program, and then I turned it into a web application for fun.
+                Thus, the intended use of this tool is to show you how to distribute a small number of items amongst
+                a small number of silos, so that you can distribute and launch those items manually in-game.
+            </p>
+            <h2>Blueprint Import/Export</h2>
+            <p class="info-panel">
+                The import functionality only allows for the import of vanilla items from a blueprint. The field also
+                has a maximum length, since it's not intended for the user to distribute an inordinate amount of items.
+                <br>
+                <br>
+                The resulting blueprint string is a book that contains blueprints of requester chests.
+                Each chest corresponds to a silo and requests the items distributed to that silo.
+                The intended use of this book is to place each chest next to its silo so that
+                its contents can be inserted into the silo automatically with an inserter.
             </p>
             <h2>Source</h2>
             <p class="info-panel">
