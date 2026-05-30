@@ -11,7 +11,7 @@ For example, `fix(view): prevent bug from appearing`
 Use runtests.py to run tests locally.
 
 ```bash
-cd django-distribute
+pip install -r requirements-dev.txt
 ./runtests.py
 ```
 
@@ -36,7 +36,6 @@ Current tools:
 You can use code-scan.sh to run scans locally:
 
 ```bash
-cd django-distribute
 pip install -r requirements-dev.txt
 ./code-scan.sh
 ```

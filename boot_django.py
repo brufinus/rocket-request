@@ -5,7 +5,7 @@ from pathlib import Path
 import django
 from django.conf import settings
 
-BASE_DIR = Path(__file__).parent / "django-distribute"
+BASE_DIR = Path(__file__).parent / "django_distribute"
 sys.path.insert(0, str(BASE_DIR))
 
 
@@ -51,6 +51,7 @@ def boot_django():
                         "django.contrib.auth.context_processors.auth",
                         "django.contrib.messages.context_processors.messages",
                         "django_distribute.context_processors.build_date",
+                        "django_distribute.context_processors.build_version",
                     ],
                 },
             },
