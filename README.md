@@ -25,7 +25,7 @@ These steps are tailored to a *Unix shell* or [*Git Bash*](https://gitforwindows
 4. Install requirements: `pip install django`
 5. Run migrations: `python migrate.py`
 6. Run the dev server: `python runapp.py`
-7. Access the web app at <http://localhost:8000/distribute>.
+7. Access the web app at <http://localhost:8000/>.
 
 ![Rocket Request main page](/.github/static/rocket-request-home.png)
 
