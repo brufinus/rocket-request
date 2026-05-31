@@ -142,7 +142,7 @@ def results(request):
     try:
         num_silos: int = int(request.session.get("num_silos", -1))
     except ValueError:
-        HttpResponseRedirect(reverse("distribute:index"))
+        return HttpResponseRedirect(reverse("distribute:index"))
     if num_silos <= 0:
         return HttpResponseRedirect(reverse("distribute:index"))
 
