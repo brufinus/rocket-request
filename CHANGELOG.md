@@ -2,6 +2,34 @@
 
 <!-- version list -->
 
+## v1.6.0 (2026-05-31)
+
+### Bug Fixes
+
+- **templates**: Increase blueprint import maxlength
+  ([`e1436e6`](https://github.com/brufinus/rocket-request/commit/e1436e6536079787f9c4025a9c7124dfcefc84da))
+
+### Continuous Integration
+
+- **cd**: Use auth service account
+  ([`5ebc241`](https://github.com/brufinus/rocket-request/commit/5ebc241f6f924b3bd7a0a3676c7d60f3fc5479ab))
+
+### Documentation
+
+- **project**: Add web app info
+  ([`43a8eb6`](https://github.com/brufinus/rocket-request/commit/43a8eb6dd2f64b4ccdce484f2a589281fcc291aa))
+
+### Features
+
+- **templates**: Add usage info to about page
+  ([`88bfdfe`](https://github.com/brufinus/rocket-request/commit/88bfdfeb45c0be36f2d83a6c74816c35397e44ca))
+
+### Refactoring
+
+- **urls**: Move app to root url
+  ([`a7750df`](https://github.com/brufinus/rocket-request/commit/a7750dfbd79ad2995b970708a061e2782902ac22))
+
+
 ## v1.5.0 (2026-05-30)
 
 ### Bug Fixes
