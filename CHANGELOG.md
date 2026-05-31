@@ -2,6 +2,24 @@
 
 <!-- version list -->
 
+## v1.6.1 (2026-05-31)
+
+### Bug Fixes
+
+- **settings**: Set name to persist cookie
+  ([`9010146`](https://github.com/brufinus/rocket-request/commit/90101462da3f3c2c01b1b8e7a0aa43eadd1320dc))
+
+### Build System
+
+- Initialize firebase
+  ([`326de5d`](https://github.com/brufinus/rocket-request/commit/326de5def69293b2349de7a2946c12133af33dd3))
+
+### Continuous Integration
+
+- **cd**: Build with service account
+  ([`0d964ad`](https://github.com/brufinus/rocket-request/commit/0d964ad5f4fa406140334611340f212f1a6714c9))
+
+
 ## v1.6.0 (2026-05-31)
 
 ### Bug Fixes
