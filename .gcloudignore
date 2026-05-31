@@ -1,8 +1,10 @@
+.firebase
 .github
 .hypothesis
 .idea
 .venv
 .vscode
+firebase
 htmlcov
 .coverage*
 .gcloudignore

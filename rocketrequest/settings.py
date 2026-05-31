@@ -158,3 +158,4 @@ STORAGES = {
 GS_DEFAULT_ACL = "publicRead"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_NAME = "__session"

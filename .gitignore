@@ -320,3 +320,5 @@ http-client.private.env.json
 *.vsix
 
 *.prof
+
+.firebase

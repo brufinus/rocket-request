@@ -92,7 +92,10 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v3
       - name: Cloud Build
-        run: gcloud builds submit --config cloud_migrate.yml
+        run: |
+          gcloud builds submit \
+            --config cloud_migrate.yml \
+            --service-account distribute-service-account@rocket-request.iam.gserviceaccount.com
       - name: Cloud Deploy
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v3
