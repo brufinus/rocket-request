@@ -202,7 +202,7 @@ def import_blueprint(request):
     """
     if request.method == "POST":
         blueprint = request.POST.get("blueprint-input")
-        if blueprint:
+        if blueprint and len(blueprint) < 50000:
             try:
                 json_rep = convert_blueprint(blueprint)
             except InvalidBlueprintException:

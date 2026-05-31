@@ -449,7 +449,7 @@ class ImportBlueprintViewTests(TestCase):
         self.assertEqual(self.client.session["import_error"], Errors.IMPORT_ERROR)
 
     def test_import_empty(self):
-        """Empty import does not affect the existing itemlist."""
+        """Empty blueprint import does not affect the existing itemlist."""
         session = self.client.session
         item = {"Transport belt": 1}
         session["itemlist"] = item
@@ -459,4 +459,18 @@ class ImportBlueprintViewTests(TestCase):
             {"blueprint-input": ""},
         )
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.client.session["itemlist"], item)
+
+    def test_import_long_blueprint(self):
+        """Importing a blueprint that is too long does not import items."""
+        longstring = "a" * 1000000
+        session = self.client.session
+        item = {"Transport belt": 1}
+        session["itemlist"] = item
+        session.save()
+        response = self.client.post(
+            reverse("distribute:import"), {"blueprint-input": longstring}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("distribute:index"))
         self.assertEqual(self.client.session["itemlist"], item)
