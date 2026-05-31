@@ -18,5 +18,5 @@ Including another URLconf
 from django.urls import include, path
 
 urlpatterns = [
-    path("distribute/", include("django_distribute.urls")),
+    path("", include("django_distribute.urls")),
 ]

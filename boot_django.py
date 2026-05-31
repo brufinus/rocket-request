@@ -56,5 +56,6 @@ def boot_django():
                 },
             },
         ],
+        SESSION_ENGINE="django.contrib.sessions.backends.signed_cookies",
     )
     django.setup()

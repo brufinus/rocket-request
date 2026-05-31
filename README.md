@@ -10,11 +10,19 @@ items into silos such that the sum of each silo's weight does not exceed 1000 kg
 
 ## Usage
 
-### Requirements
+### Web App
+
+You can access the web app online at <https://rocket-request.web.app/>.
+
+### Local
+
+Follow these steps to set up and run the web app locally.
+
+#### Requirements
 
 - Python>=3.12
 
-### Run Local Webapp
+#### Setup
 
 These steps are tailored to a *Unix shell* or [*Git Bash*](https://gitforwindows.org/), but can be modified for a different CLI.
 
@@ -25,7 +33,7 @@ These steps are tailored to a *Unix shell* or [*Git Bash*](https://gitforwindows
 4. Install requirements: `pip install django`
 5. Run migrations: `python migrate.py`
 6. Run the dev server: `python runapp.py`
-7. Access the web app at <http://localhost:8000/distribute>.
+7. Access the web app at <http://localhost:8000/>.
 
 ![Rocket Request main page](/.github/static/rocket-request-home.png)
 
