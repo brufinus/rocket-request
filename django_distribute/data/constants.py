@@ -24,3 +24,4 @@ class Errors(StrEnum):
     IMPORT_ERROR = "Import failed due to invalid blueprint string."
     INVALID_ITEM = "Blueprint contains invalid item: "
     ITEMS_EXCEED_SLOTS = "Unable to create a valid blueprint as the number of items exceeds the number of chest slots."
+    BP_ITEMS_EXCEED_MAX = "Too many items to import."

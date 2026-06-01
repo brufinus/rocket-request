@@ -4,6 +4,7 @@ Services for validating input.
 Functions:
     parse_count: Parses and validates count.
     is_insertable: Checks whether a single item can be inserted.
+    is_max_count: Returns true if count is at the maximum value.
 """
 
 from django_distribute.data.constants import (
@@ -46,5 +47,11 @@ def is_insertable(item: str, item_data: dict[str, Item]) -> bool:
     :rtype: bool
     """
     if item and item_data[item][ITEM_ROCKET_CAPACITY] > 0:
+        return True
+    return False
+
+def is_max_count(count: int) -> bool:
+    """Returns true if count is greater than the maximum."""
+    if count > 100000:
         return True
     return False

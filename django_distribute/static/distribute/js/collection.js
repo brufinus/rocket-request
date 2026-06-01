@@ -25,6 +25,10 @@ $(document).ready(function () {
           $("#count-error").append("Invalid count");
           $("#user-count-input").val("");
           $("#user-count-input").focus();
+        } else if (response.itemlist == "Max count") {
+          $("#count-error").append("The maximum number of items have been added.");
+          $("#user-count-input").val("");
+          $("#user-count-input").focus();
         } else {
           renderItemList(response.itemlist);
         }

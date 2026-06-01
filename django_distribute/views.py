@@ -37,6 +37,7 @@ from django_distribute.services.initialize_setup import (
     group_items,
 )
 from django_distribute.services.search import search_coordinator
+from django_distribute.services.validation import is_max_count
 
 
 def index(request):
@@ -91,6 +92,10 @@ def item_collection(request):
         if int(item_count) <= 0:
             return JsonResponse({"itemlist": "Invalid count"})
 
+        total_count = request.session.get("c", 0) + item_count
+        if is_max_count(total_count):
+            return JsonResponse({"itemlist": "Max count"})
+        request.session["c"] = total_count
         itemlist: dict[str, int] = request.session.get("itemlist", {})
         if item_name in itemlist:
             item_count += int(itemlist[item_name])
@@ -106,6 +111,8 @@ def remove(request):
         item_name = request.POST.get("user-item")
         itemlist: dict[str, int] = request.session.get("itemlist", {})
         if item_name in itemlist:
+            total_count = request.session.get("c", 0) - itemlist[item_name]
+            request.session["c"] = total_count
             del itemlist[item_name]
         request.session["itemlist"] = itemlist
         return JsonResponse({"itemlist": request.session["itemlist"]})
@@ -142,8 +149,8 @@ def results(request):
     try:
         num_silos: int = int(request.session.get("num_silos", -1))
     except ValueError:
-        HttpResponseRedirect(reverse("distribute:index"))
-    if num_silos <= 0:
+        return HttpResponseRedirect(reverse("distribute:index"))
+    if num_silos <= 0 or num_silos > 100:
         return HttpResponseRedirect(reverse("distribute:index"))
 
     itemlist: dict[str, int] = request.session.get("itemlist", None)
@@ -189,6 +196,7 @@ def about(request):
 def reset(request):
     """Resets the itemlist and redirects back to index."""
     request.session["itemlist"] = {}
+    request.session["c"] = 0
     return HttpResponseRedirect(reverse("distribute:index"))
 
 
@@ -202,7 +210,7 @@ def import_blueprint(request):
     """
     if request.method == "POST":
         blueprint = request.POST.get("blueprint-input")
-        if blueprint:
+        if blueprint and len(blueprint) < 50000:
             try:
                 json_rep = convert_blueprint(blueprint)
             except InvalidBlueprintException:
@@ -214,6 +222,11 @@ def import_blueprint(request):
                 request.session["import_error"] = f"{Errors.INVALID_ITEM}{e.item}"
                 return HttpResponseRedirect(reverse("distribute:index"))
 
+            total_count = len(items)
+            if is_max_count(total_count):
+                request.session["import_error"] = Errors.BP_ITEMS_EXCEED_MAX
+                return HttpResponseRedirect(reverse("distribute:index"))
+            request.session["c"] = len(items)
             itemlist = group_items(items, ITEMS)
             request.session["itemlist"] = dict(sorted(itemlist.items()))
         return HttpResponseRedirect(reverse("distribute:index"))
