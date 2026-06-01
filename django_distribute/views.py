@@ -150,7 +150,7 @@ def results(request):
         num_silos: int = int(request.session.get("num_silos", -1))
     except ValueError:
         return HttpResponseRedirect(reverse("distribute:index"))
-    if num_silos <= 0:
+    if num_silos <= 0 or num_silos > 100:
         return HttpResponseRedirect(reverse("distribute:index"))
 
     itemlist: dict[str, int] = request.session.get("itemlist", None)
