@@ -109,7 +109,7 @@ class IndexViewTests(TestCase):
 
 @tag("views")
 class ItemCollectionViewTests(TestCase):
-    @given(st.integers(min_value=1))
+    @given(st.integers(min_value=1, max_value=100000))
     def test_valid_item_collection(self, n):
         response = self.client.post(
             reverse("distribute:collection"),
@@ -118,7 +118,10 @@ class ItemCollectionViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["itemlist"]["Transport belt"], n)
 
-    @given(st.integers(min_value=1), st.integers(min_value=1))
+    @given(
+        st.integers(min_value=1, max_value=50000),
+        st.integers(min_value=1, max_value=50000),
+    )
     def test_item_collection_on_existing_item(self, n1, n2):
         """Item count is incremented on an additional add."""
         self.client.post(
@@ -474,3 +477,20 @@ class ImportBlueprintViewTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("distribute:index"))
         self.assertEqual(self.client.session["itemlist"], item)
+
+    @patch("django_distribute.views.is_max_count", return_value=True)
+    def test_import_too_many_items(self, mock):
+        """Importing a blueprint with too many items sets an import error."""
+        session = self.client.session
+        item = {"Transport belt": 1}
+        session["itemlist"] = item
+        session.save()
+        response = self.client.post(
+            reverse("distribute:import"),
+            {"blueprint-input": self.valid_bp},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            self.client.session["import_error"], Errors.BP_ITEMS_EXCEED_MAX
+        )
+        self.assertEqual(self.client.session["itemlist"], {"Transport belt": 1})
