@@ -228,6 +228,10 @@ input[type=text], input[type=number] {
   grid-column: 2;
 }
 
+#count-error {
+  grid-column: 2;
+}
+
 input {
   background-color: var(--input-bg-color);
 }
