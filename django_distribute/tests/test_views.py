@@ -291,6 +291,23 @@ class ResultsViewTests(TestCase):
         response = self.client.get(reverse("distribute:results"), follow=True)
         self.assertRedirects(response, reverse("distribute:index"))
 
+    @given(st.integers(max_value=0))
+    def test_redirect_on_non_positive_num_silos(self, n1):
+        """Redirects back to index if the number of silos is not positive."""
+        session = self.client.session
+        session["num_silos"] = n1
+        session.save()
+        response = self.client.get(reverse("distribute:results"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
+
+    def test_redirect_on_too_many_silos(self):
+        """Redirects back to index if the number of silos is over the limit."""
+        session = self.client.session
+        session["num_silos"] = "101"
+        session.save()
+        response = self.client.get(reverse("distribute:results"), follow=True)
+        self.assertRedirects(response, reverse("distribute:index"))
+
     @patch(
         "django_distribute.views.build_consolidated_blueprint",
         side_effect=ChestIndexException(),
