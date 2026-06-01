@@ -2,6 +2,36 @@
 
 <!-- version list -->
 
+## v1.7.0 (2026-06-01)
+
+### Bug Fixes
+
+- **views**: Return redirect on num_silos value error
+  ([`3cd1f79`](https://github.com/brufinus/rocket-request/commit/3cd1f7933a5ad4fc78cc713d1532422c514bb68c))
+
+### Features
+
+- **api**: Add function to validate item count
+  ([`4c7c2aa`](https://github.com/brufinus/rocket-request/commit/4c7c2aafcf023eb6c3ab286acb712c669e75a73f))
+
+- **js**: Show error on max count
+  ([`4c7c2aa`](https://github.com/brufinus/rocket-request/commit/4c7c2aafcf023eb6c3ab286acb712c669e75a73f))
+
+- **views**: Add server validation on blueprint string length
+  ([`8edc5e5`](https://github.com/brufinus/rocket-request/commit/8edc5e50c152fcce139063633ece2a6b023629a0))
+
+- **views**: Add server validation on max num_silos
+  ([`4721455`](https://github.com/brufinus/rocket-request/commit/4721455b5dff3144d9465998641d9e32bc99d6d7))
+
+- **views**: Track total item count for validation
+  ([`4c7c2aa`](https://github.com/brufinus/rocket-request/commit/4c7c2aafcf023eb6c3ab286acb712c669e75a73f))
+
+### Refactoring
+
+- **templates**: Lower item count input form validation
+  ([`49bd32b`](https://github.com/brufinus/rocket-request/commit/49bd32bdc5b814910739081d434bcdd67561c204))
+
+
 ## v1.6.1 (2026-05-31)
 
 ### Bug Fixes
