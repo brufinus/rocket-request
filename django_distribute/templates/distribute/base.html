@@ -9,11 +9,13 @@
         }
         </script>
         <meta charset="utf-8" />
-        <title>Rocket Request</title>
-        <link rel="icon" type="image/x-icon" href="{% static "distribute/images/favicon.ico" %}">
+        <title>{% block title %}{% endblock title %} - Rocket Request{% block endtitle %}{% endblock endtitle %}</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="{% static "distribute/images/favicon.ico" %}">
         <meta name="author" content="brufinus" />
         <meta name="description"
-              content="Automatic item distribution across Rocket Silos in Factorio." />
+              content="A web app tool that shows you how to best distribute items across rocket silos in Factorio." />
         <meta name="keywords" content="Factorio" />
         <script src="https://code.jquery.com/jquery-4.0.0.min.js"
                 integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
@@ -59,7 +61,7 @@
         </main>
         <footer>
             <div class="logo-link-box">
-                <a href="mailto:brufinus@duck.com"
+                <a href="mailto:cash-debit-reword@duck.com"
                    target="_blank"
                    rel="noopener noreferrer">
                     <img class="logo"
@@ -68,9 +70,9 @@
                          width="24"
                          height="24" />
                 </a>
-                <a href="mailto:brufinus@duck.com"
+                <a href="mailto:cash-debit-reword@duck.com"
                    target="_blank"
-                   rel="noopener noreferrer">brufinus@duck.com</a>
+                   rel="noopener noreferrer">Send me an email</a>
             </div>
             <div class="change-info">Updated: {{ build_date }}</div>
             <div class="logo-link-box">

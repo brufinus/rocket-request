@@ -14,6 +14,7 @@ def boot_django():
     settings.configure(
         BASE_DIR=BASE_DIR,
         DEBUG=True,
+        ALLOWED_HOSTS=("*"),
         DATABASES={
             "default": {
                 "ENGINE": "django.db.backends.sqlite3",
@@ -21,7 +22,7 @@ def boot_django():
             }
         },
         SECRET_KEY="django-insecure-$4gbgz8ea%peul=b!2d3oj3ln3j(ar$t1uccym+p@jhp))rt_8",
-        STATIC_URL="static/",
+        STATIC_URL="/static/",
         ROOT_URLCONF="django_distribute.tests.urls",
         INSTALLED_APPS=(
             "django_distribute",

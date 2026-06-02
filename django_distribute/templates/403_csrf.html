@@ -1,0 +1,14 @@
+{% extends "distribute/base.html" %}
+{% load static %}
+{% block title %}CSRF Error{% endblock title %}
+{% block content %}
+    <h1>403 - Forbidden</h1>
+    <h2>CSRF verification failed</h2>
+    <p>
+        You are seeing this message because this site requires a CSRF cookie when submitting forms.
+        This cookie is required for security reasons, to ensure that your browser is not being hijacked by third parties.
+    </p>
+    <p>
+        If you have configured your browser to disable cookies, please re-enable them, at least for this site, or for “same-origin” requests.
+    </p>
+{% endblock content %}

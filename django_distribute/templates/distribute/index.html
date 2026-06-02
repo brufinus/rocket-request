@@ -1,7 +1,7 @@
 {% extends "distribute/base.html" %}
 {% load static %}
-{% block head %}
-{% endblock head %}
+{% block title %}Home{% endblock title %}
+{% block endtitle %} - Silo item distribution{% endblock endtitle %}
 {% block content %}
     <article data-remove-url="{% url "distribute:remove" %}" data-static-trash-url="{% static "distribute/images/trash.png" %}">
         <section>
