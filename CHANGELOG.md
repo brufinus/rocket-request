@@ -2,6 +2,38 @@
 
 <!-- version list -->
 
+## v1.8.0 (2026-06-02)
+
+### Build System
+
+- Ignore local env
+  ([`85cea51`](https://github.com/brufinus/rocket-request/commit/85cea5187bf31e0951098e9b1a084dd6510ab527))
+
+### Chores
+
+- Fix local scripts to allow debug false
+  ([`7f7f541`](https://github.com/brufinus/rocket-request/commit/7f7f54119286804d07198132366630f5e5be41ab))
+
+### Features
+
+- **settings**: Enable email backend and add email config
+  ([`883f415`](https://github.com/brufinus/rocket-request/commit/883f41582c972d2839cd2b5127deb418d927d4c7))
+
+- **templates**: Add error templates
+  ([`023f352`](https://github.com/brufinus/rocket-request/commit/023f3525facd9d35bf27bf4c8254b11fc8dbfed6))
+
+- **templates**: Add title block and unique titles
+  ([`daed3d8`](https://github.com/brufinus/rocket-request/commit/daed3d8e394542d55778cfef6fa2e1fd7459e9e9))
+
+### Refactoring
+
+- **templates**: Update contact email
+  ([`869200c`](https://github.com/brufinus/rocket-request/commit/869200c71c9b0cc7a1b2ecc49dfa1e2af06c1d19))
+
+- **templates**: Update site description
+  ([`cbdef20`](https://github.com/brufinus/rocket-request/commit/cbdef200e43aa0a8e93bc77ed3c508e531a847c2))
+
+
 ## v1.7.0 (2026-06-01)
 
 ### Bug Fixes
