@@ -169,3 +169,29 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_SUBJECT_PREFIX = "[Rocket Request] "
 ADMINS = [["brufinus", "cash-debit-reword@duck.com"]]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": os.getenv("DJANGO_LOG_FORMATTER", "simple"),
+        }
+    },
+    "root": {"handlers": ["console"], "level": "INFO"},
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        }
+    },
+    "formatters": {
+        "verbose": {
+            "format": "[{asctime}] {name}:{lineno} ({module}) {levelname} - {message}",
+            "style": "{",
+        },
+        "simple": {"format": "{levelname}: {message}", "style": "{"},
+    },
+}
