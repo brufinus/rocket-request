@@ -13,6 +13,8 @@ Functions:
     import_blueprint: API that imports items from a blueprint string.
 """
 
+import logging
+
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -39,6 +41,8 @@ from django_distribute.services.initialize_setup import (
 from django_distribute.services.search import search_coordinator
 from django_distribute.services.validation import is_max_count
 
+logger = logging.getLogger(__name__)
+
 
 def index(request):
     """
@@ -55,7 +59,11 @@ def index(request):
         table_headers = (Errors.NO_ITEMS_ADDED, "")
 
     distribute_error = request.session.pop("distribute_error", "")
+    if distribute_error:
+        logger.warning("Distribute error triggered: %s", distribute_error)
     import_error = request.session.pop("import_error", "")
+    if import_error:
+        logger.warning("Import error triggered: %s", import_error)
 
     return render(
         request,
@@ -79,21 +87,28 @@ def item_collection(request):
     """
     if request.method == "POST":
         # Item validation
-        search_res = search_coordinator(request.POST.get("user-item"), ITEMS)
+        item = request.POST.get("user-item")
+        search_res = search_coordinator(item, ITEMS)
         if search_res[0]:
             item_name = search_res[0]
         else:
+            logger.warning("User attempted to add an invalid item: %s", item)
             return JsonResponse({"itemlist": "Invalid item"})
 
         try:
             item_count: int = int(request.POST.get("user-count"))
         except ValueError:
+            logger.warning(
+                "User input an invalid count: %s", request.POST.get("user-count")
+            )
             return JsonResponse({"itemlist": "Invalid count"})
         if int(item_count) <= 0:
+            logger.warning("User input an invalid count: %s", item_count)
             return JsonResponse({"itemlist": "Invalid count"})
 
         total_count = request.session.get("c", 0) + item_count
         if is_max_count(total_count):
+            logger.warning("User hit the max item count limit")
             return JsonResponse({"itemlist": "Max count"})
         request.session["c"] = total_count
         itemlist: dict[str, int] = request.session.get("itemlist", {})
@@ -101,7 +116,9 @@ def item_collection(request):
             item_count += int(itemlist[item_name])
         itemlist.update({item_name: item_count})
         request.session["itemlist"] = dict(sorted(itemlist.items()))
+        logger.info("%s added, total count: %s", item_name, total_count)
         return JsonResponse({"itemlist": request.session["itemlist"]})
+    logger.error("User submitted an invalid request: %s", request.method)
     return HttpResponseBadRequest()
 
 
@@ -114,8 +131,10 @@ def remove(request):
             total_count = request.session.get("c", 0) - itemlist[item_name]
             request.session["c"] = total_count
             del itemlist[item_name]
+            logger.info("%s removed, total count: %s", item_name, total_count)
         request.session["itemlist"] = itemlist
         return JsonResponse({"itemlist": request.session["itemlist"]})
+    logger.error("User submitted an invalid request: %s", request.method)
     return HttpResponseBadRequest()
 
 
@@ -133,6 +152,7 @@ def distributable(request):
     try:
         num_silos = request.POST["num-silos"]
     except KeyError:
+        logger.error("User attempted to distribute without num_silos")
         return HttpResponseBadRequest()
     request.session["num_silos"] = num_silos
     return HttpResponseRedirect(reverse("distribute:results"))
@@ -149,12 +169,17 @@ def results(request):
     try:
         num_silos: int = int(request.session.get("num_silos", -1))
     except ValueError:
+        logger.warning(
+            "Session contains invalid num_silos: %s", request.session.get("num_silos")
+        )
         return HttpResponseRedirect(reverse("distribute:index"))
     if num_silos <= 0 or num_silos > 100:
+        logger.warning("Session num_silos is out of bounds: %s", num_silos)
         return HttpResponseRedirect(reverse("distribute:index"))
 
     itemlist: dict[str, int] = request.session.get("itemlist", None)
     if itemlist is None or not itemlist:
+        logger.warning("Session is missing the itemlist")
         return HttpResponseRedirect(reverse("distribute:index"))
 
     silos = distribute_items(itemlist)
@@ -167,8 +192,13 @@ def results(request):
     try:
         blueprint = build_consolidated_blueprint(c_silo_invs)
     except ChestIndexException:
+        logger.warning("At least one consolidated blueprint exceeds available slots")
         blueprint = Errors.ITEMS_EXCEED_SLOTS
 
+    count = request.session.get("c", "0")
+    logger.info(
+        "%s items distributed amongst %s silos, rendering results", count, num_silos
+    )
     return render(
         request,
         "distribute/results.html",
@@ -197,6 +227,7 @@ def reset(request):
     """Resets the itemlist and redirects back to index."""
     request.session["itemlist"] = {}
     request.session["c"] = 0
+    logger.info("Session has been reset")
     return HttpResponseRedirect(reverse("distribute:index"))
 
 
@@ -226,8 +257,10 @@ def import_blueprint(request):
             if is_max_count(total_count):
                 request.session["import_error"] = Errors.BP_ITEMS_EXCEED_MAX
                 return HttpResponseRedirect(reverse("distribute:index"))
-            request.session["c"] = len(items)
+            request.session["c"] = total_count
             itemlist = group_items(items, ITEMS)
             request.session["itemlist"] = dict(sorted(itemlist.items()))
+            logger.info("Blueprint successfully imported. Total count: %s", total_count)
         return HttpResponseRedirect(reverse("distribute:index"))
+    logger.error("User submitted an invalid request: %s", request.method)
     return HttpResponseBadRequest()

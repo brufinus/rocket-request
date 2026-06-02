@@ -58,5 +58,23 @@ def boot_django():
             },
         ],
         SESSION_ENGINE="django.contrib.sessions.backends.signed_cookies",
+        LOGGING={
+            "version": 1,
+            "disable_existing_loggers": False,
+            "handlers": {
+                "console": {"class": "logging.StreamHandler", "formatter": "verbose"}
+            },
+            "root": {"handlers": ["console"], "level": "INFO"},
+            "loggers": {
+                "django": {"handlers": ["console"], "level": "INFO", "propagate": False}
+            },
+            "formatters": {
+                "verbose": {
+                    "format": "[{asctime}] {name}:{lineno} ({module}) {levelname} - {message}",
+                    "style": "{",
+                },
+                "simple": {"format": "{levelname}: {message}", "style": "{"},
+            },
+        },
     )
     django.setup()
