@@ -459,6 +459,20 @@ class ImportBlueprintViewTests(TestCase):
         "django_distribute.views.convert_blueprint",
         side_effect=InvalidBlueprintException("Foobar"),
     )
+    def test_import_invalid_redirects_to_index(self, mock):
+        """Invalid import redirects to index, setting the import error."""
+        response = self.client.post(
+            reverse("distribute:import"),
+            {"blueprint-input": self.valid_bp},
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, Errors.IMPORT_ERROR)
+
+    @patch(
+        "django_distribute.views.convert_blueprint",
+        side_effect=InvalidBlueprintException("Foobar"),
+    )
     def test_import_invalid_blueprint(self, mock):
         """Invalid import sets the import error."""
         response = self.client.post(
