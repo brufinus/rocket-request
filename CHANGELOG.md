@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.9.0 (2026-06-02)
+
+### Features
+
+- **views**: Add logging for events and errors
+  ([`04ca890`](https://github.com/brufinus/rocket-request/commit/04ca8905270cd7bb2b74f5c7c2c62cb6557afb90))
+
+
 ## v1.8.0 (2026-06-02)
 
 ### Build System
