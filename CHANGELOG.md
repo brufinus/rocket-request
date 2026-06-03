@@ -2,6 +2,30 @@
 
 <!-- version list -->
 
+## v1.9.1 (2026-06-03)
+
+### Bug Fixes
+
+- **style**: Make links more visible
+  ([`3ee33b0`](https://github.com/brufinus/rocket-request/commit/3ee33b026d42785068653589cef30f9649b22ac7))
+
+- **views**: Warn on no import
+  ([`c626734`](https://github.com/brufinus/rocket-request/commit/c626734f297a2cfba33f4bad46a777ffe7228786))
+
+### Continuous Integration
+
+- **cd**: Use federated workload identity for gcloud
+  ([`086368d`](https://github.com/brufinus/rocket-request/commit/086368db82ccbdcd0ad27085d2caf6d48ace6f41))
+
+### Refactoring
+
+- **templates**: Change about wording
+  ([`68503aa`](https://github.com/brufinus/rocket-request/commit/68503aaaec91ca591b01ffd450c7740ea3752d82))
+
+- **templates**: Remove input placeholder
+  ([`da4c947`](https://github.com/brufinus/rocket-request/commit/da4c9477be57412c51a95ebb18f7f45ecaa25be9))
+
+
 ## v1.9.0 (2026-06-02)
 
 ### Features
