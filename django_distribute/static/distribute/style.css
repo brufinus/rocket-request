@@ -430,17 +430,20 @@ html.light-theme footer {
 }
 
 html.light-theme .logo-link-box a {
-  color: #7ec8ea;
+  color: #000000;
+  font-weight: bold;
 }
 
 .logo-link-box a {
   display: flex;
   align-items: center;
   color: var(--link-color);
+  text-decoration: none;
 }
 
 .logo-link-box a:hover {
   color: var(--link-color-hover);
+  text-decoration: underline;
 }
 
 .logo {
@@ -601,15 +604,18 @@ html.light-theme .info-section {
 }
 
 html.light-theme .info-div a {
-  color: #164e68;
+  color: #1a5c7a;
+  font-weight: bold;
 }
 
 .info-div a {
   color: var(--link-color);
+  text-decoration: none;
 }
 
 .info-div a:hover {
   color: var(--link-color-hover);
+  text-decoration: underline;
 }
 
 .info-panel {
