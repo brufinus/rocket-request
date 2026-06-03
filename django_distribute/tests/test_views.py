@@ -359,7 +359,7 @@ class AboutViewTests(TestCase):
         self.assertContains(response, "Source")
         self.assertContains(
             response,
-            "If you would like to check out or contribute to the source code, it is available on GitHub",
+            "If you would like to check out the source code, it is available on GitHub",
         )
 
     def test_footer_version(self):
