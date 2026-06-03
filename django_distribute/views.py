@@ -261,6 +261,8 @@ def import_blueprint(request):
             itemlist = group_items(items, ITEMS)
             request.session["itemlist"] = dict(sorted(itemlist.items()))
             logger.info("Blueprint successfully imported. Total count: %s", total_count)
+        else:
+            logger.warning("User imported nothing or blueprint was too long")
         return HttpResponseRedirect(reverse("distribute:index"))
     logger.error("User submitted an invalid request: %s", request.method)
     return HttpResponseBadRequest()

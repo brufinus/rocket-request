@@ -14,17 +14,15 @@ steps:
         gcloud beta run jobs deploy migrate \
           --region $_REGION \
           --image "$_IMAGE_NAME" \
-          --service-account ${_SERVICE_NAME}-account@${_PROJECT_ID}.iam.gserviceaccount.com \
+          --service-account 724115144699-compute@developer.gserviceaccount.com \
           --set-env-vars SETTINGS_NAME=$_SECRET_SETTINGS_NAME \
           --command migrate \
           --execute-now
 options:
   dynamicSubstitutions: true
 substitutions:
-  _PROJECT_ID: rocket-request
   _REGION: us-central1
   _SECRET_SETTINGS_NAME: django_settings
-  _SERVICE_NAME: distribute-service
-  _IMAGE_NAME: ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/cloud-run-source-deploy/${_SERVICE_NAME}
+  _IMAGE_NAME: ${_REGION}-docker.pkg.dev/rocket-request/cloud-run-source-deploy/distribute-service
 images:
   - "$_IMAGE_NAME"
