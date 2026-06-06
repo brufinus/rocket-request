@@ -1,10 +1,12 @@
 {% extends "distribute/base.html" %}
 {% load static %}
+{% load distribute_filters %}
 {% block title %}Home{% endblock title %}
 {% block endtitle %} - Silo item distribution{% endblock endtitle %}
 {% block content %}
-    <article data-remove-url="{% url "distribute:remove" %}" data-static-trash-url="{% static "distribute/images/trash.png" %}">
-        <section>
+    <article data-remove-url="{% url "distribute:remove" %}"
+             data-static-trash-url="{% static "distribute/images/trash.png" %}">
+        <section id="setup-section">
             <h2 id="setup">Setup</h2>
             <form id="item-collection-form"
                   method="post"
@@ -60,6 +62,1883 @@
                     <div class="error" id="distribute-error">{{ distribute_error }}</div>
                 </p>
             </form>
+        </section>
+        <section id="menu-container">
+            <div id="menu-header">
+                <input type="radio"
+                       name="header-items"
+                       id="header-item-1"
+                       class="menu-header-button"
+                       checked
+                       value="menu-contents-1">
+                <label class="menu-header-item" for="header-item-1">
+                    <img src="{% static "distribute/images/header_logistics.png" %}"
+                         alt="Logistics"
+                         width="64"
+                         height="64" />
+                </label>
+                <input type="radio"
+                       name="header-items"
+                       id="header-item-2"
+                       class="menu-header-button"
+                       value="menu-contents-2">
+                <label class="menu-header-item" for="header-item-2">
+                    <img src="{% static "distribute/images/header_production.png" %}"
+                         alt="Production"
+                         width="64"
+                         height="64" />
+                </label>
+                <input type="radio"
+                       name="header-items"
+                       id="header-item-3"
+                       class="menu-header-button"
+                       value="menu-contents-3">
+                <label class="menu-header-item" for="header-item-3">
+                    <img src="{% static "distribute/images/header_intermediates.png" %}"
+                         alt="Intermediates"
+                         width="64"
+                         height="64" />
+                </label>
+                <input type="radio"
+                       name="header-items"
+                       id="header-item-4"
+                       class="menu-header-button"
+                       value="menu-contents-4">
+                <label class="menu-header-item" for="header-item-4">
+                    <img src="{% static "distribute/images/header_space.png" %}"
+                         alt="space"
+                         width="64"
+                         height="64" />
+                </label>
+                <input type="radio"
+                       name="header-items"
+                       id="header-item-5"
+                       class="menu-header-button"
+                       value="menu-contents-5">
+                <label class="menu-header-item" for="header-item-5">
+                    <img src="{% static "distribute/images/header_military.png" %}"
+                         alt="Military"
+                         width="64"
+                         height="64" />
+                </label>
+            </div>
+            <div name="menu-contents" id="menu-contents-1" class="menu-contents">
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Wooden_chest.png" %}"
+                             alt="Wooden chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Iron_chest.png" %}"
+                             alt="Iron chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Steel_chest.png" %}"
+                             alt="Steel chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Storage_tank.png" %}"
+                             alt="Storage tank"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Transport_belt.png" %}"
+                             alt="Transport belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fast_transport_belt.png" %}"
+                             alt="Fast transport belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Express_transport_belt.png" %}"
+                             alt="Express transport belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Turbo_transport_belt.png" %}"
+                             alt="Turbo transport belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Underground_belt.png" %}"
+                             alt="Underground belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fast_underground_belt.png" %}"
+                             alt="Fast underground belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Express_underground_belt.png" %}"
+                             alt="Express underground belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Turbo_underground_belt.png" %}"
+                             alt="Turbo underground belt"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:2 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Splitter.png" %}"
+                             alt="Splitter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fast_splitter.png" %}"
+                             alt="Fast splitter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Express_splitter.png" %}"
+                             alt="Express splitter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Turbo_splitter.png" %}"
+                             alt="Turbo splitter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Burner_inserter.png" %}"
+                             alt="Burner inserter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Inserter.png" %}"
+                             alt="Inserter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Long-handed_inserter.png" %}"
+                             alt="Long-handed inserter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fast_inserter.png" %}"
+                             alt="Fast inserter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Bulk_inserter.png" %}"
+                             alt="Bulk inserter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Stack_inserter.png" %}"
+                             alt="Stack inserter"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:4 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Small_electric_pole.png" %}"
+                             alt="Small electric pole"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Medium_electric_pole.png" %}"
+                             alt="Medium electric pole"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Big_electric_pole.png" %}"
+                             alt="Big electric pole"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Substation.png" %}"
+                             alt="Substation"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Pipe.png" %}"
+                             alt="Pipe"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Pipe_to_ground.png" %}"
+                             alt="Pipe to ground"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Pump.png" %}"
+                             alt="Pump"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:3 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rail.png" %}"
+                             alt="Rail"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rail_ramp.png" %}"
+                             alt="Rail ramp"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rail_support.png" %}"
+                             alt="Rail support"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Train_stop.png" %}"
+                             alt="Train stop"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rail_signal.png" %}"
+                             alt="Rail signal"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rail_chain_signal.png" %}"
+                             alt="Rail chain signal"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Locomotive.png" %}"
+                             alt="Locomotive"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cargo_wagon.png" %}"
+                             alt="Cargo wagon"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fluid_wagon.png" %}"
+                             alt="Fluid wagon"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Artillery_wagon.png" %}"
+                             alt="Artillery wagon"
+                             width="32"
+                             height="32" />
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Car.png" %}"
+                             alt="Car"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tank.png" %}"
+                             alt="Tank"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Spidertron.png" %}"
+                             alt="Spidertron"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:7 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Logistic_robot.png" %}"
+                             alt="Logistic robot"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Construction_robot.png" %}"
+                             alt="Construction robot"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Active_provider_chest.png" %}"
+                             alt="Active provider chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Passive_provider_chest.png" %}"
+                             alt="Passive provider chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Storage_chest.png" %}"
+                             alt="Storage chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Buffer_chest.png" %}"
+                             alt="Buffer chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Requester_chest.png" %}"
+                             alt="Requester chest"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Roboport.png" %}"
+                             alt="Roboport"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:2 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lamp.png" %}"
+                             alt="Small lamp"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Arithmetic_combinator.png" %}"
+                             alt="Arithmetic combinator"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Decider_combinator.png" %}"
+                             alt="Decider combinator"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Selector_combinator.png" %}"
+                             alt="Selector combinator"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Constant_combinator.png" %}"
+                             alt="Constant combinator"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Power_switch.png" %}"
+                             alt="Power switch"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Programmable_speaker.png" %}"
+                             alt="Programmable speaker"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Display_panel.png" %}"
+                             alt="Display panel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:2 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Stone_brick.png" %}"
+                             alt="Stone brick"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Concrete.png" %}"
+                             alt="Concrete"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Hazard_concrete.png" %}"
+                             alt="Hazard concrete"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Refined_concrete.png" %}"
+                             alt="Refined concrete"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Refined_hazard_concrete.png" %}"
+                             alt="Refined hazard concrete"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Landfill.png" %}"
+                             alt="Landfill"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Artificial_yumako_soil.png" %}"
+                             alt="Artificial yumako soil"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Overgrowth_yumako_soil.png" %}"
+                             alt="Overgrowth yumako soil"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Artificial_jellynut_soil.png" %}"
+                             alt="Artificial jellynut soil"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Overgrowth_jellynut_soil.png" %}"
+                             alt="Overgrowth jellynut soil"
+                             width="32"
+                             height="32" />
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Ice_platform.png" %}"
+                             alt="Ice platform"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Foundation.png" %}"
+                             alt="Foundation"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cliff_explosives.png" %}"
+                             alt="Cliff explosives"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:7 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div name="menu-contents" id="menu-contents-2" class="menu-contents">
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Repair_pack.png" %}"
+                             alt="Repair pack"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:9 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Boiler.png" %}"
+                             alt="Boiler"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Steam_engine.png" %}"
+                             alt="Steam engine"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Solar_panel.png" %}"
+                             alt="Solar panel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Accumulator.png" %}"
+                             alt="Accumulator"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Nuclear_reactor.png" %}"
+                             alt="Nuclear reactor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Heat_pipe.png" %}"
+                             alt="Heat pipe"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Heat_exchanger.png" %}"
+                             alt="Heat exchanger"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Steam_turbine.png" %}"
+                             alt="Steam turbine"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fusion_reactor.png" %}"
+                             alt="Fusion reactor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fusion_generator.png" %}"
+                             alt="Fusion generator"
+                             width="32"
+                             height="32" />
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Burner_mining_drill.png" %}"
+                             alt="Burner mining drill"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Electric_mining_drill.png" %}"
+                             alt="Electric mining drill"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Big_mining_drill.png" %}"
+                             alt="Big mining drill"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Offshore_pump.png" %}"
+                             alt="Offshore pump"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Pumpjack.png" %}"
+                             alt="Pumpjack"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:5 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Stone_furnace.png" %}"
+                             alt="Stone furnace"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Steel_furnace.png" %}"
+                             alt="Steel furnace"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Electric_furnace.png" %}"
+                             alt="Electric furnace"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Foundry.png" %}"
+                             alt="Foundry"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Recycler.png" %}"
+                             alt="Recycler"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:5 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Agricultural_tower.png" %}"
+                             alt="Agricultural tower"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Biochamber.png" %}"
+                             alt="Biochamber"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Captive_biter_spawner.png" %}"
+                             alt="Captive biter spawner"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:7 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Assembling_machine_1.png" %}"
+                             alt="Assembling machine 1"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Assembling_machine_2.png" %}"
+                             alt="Assembling machine 2"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Assembling_machine_3.png" %}"
+                             alt="Assembling machine 3"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Foundry.png" %}"
+                             alt="Foundry"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Chemical_plant.png" %}"
+                             alt="Chemical plant"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Centrifuge.png" %}"
+                             alt="Centrifuge"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Electromagnetic_plant.png" %}"
+                             alt="Electromagnetic plant"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cryogenic_plant.png" %}"
+                             alt="Cryogenic plant"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lab.png" %}"
+                             alt="Lab"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Biolab.png" %}"
+                             alt="Biolab"
+                             width="32"
+                             height="32" />
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lightning_rod.png" %}"
+                             alt="Lightning rod"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lightning_collector.png" %}"
+                             alt="Lightning collector"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Heating_tower.png" %}"
+                             alt="Heating tower"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:7 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Beacon.png" %}"
+                             alt="Beacon"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Speed_module.png" %}"
+                             alt="Speed module"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Speed_module_2.png" %}"
+                             alt="Speed module 2"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Speed_module_3.png" %}"
+                             alt="Speed module 3"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Efficiency_module.png" %}"
+                             alt="Efficiency module"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Efficiency_module_2.png" %}"
+                             alt="Efficiency module 2"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Efficiency_module_3.png" %}"
+                             alt="Efficiency module 3"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Productivity_module.png" %}"
+                             alt="Productivity module"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Productivity_module_2.png" %}"
+                             alt="Productivity module 2"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Productivity_module_3.png" %}"
+                             alt="Productivity module 3"
+                             width="32"
+                             height="32" />
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Quality_module.png" %}"
+                             alt="Quality module"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Quality_module_2.png" %}"
+                             alt="Quality module 2"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Quality_module_3.png" %}"
+                             alt="Quality module 3"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:7 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div name="menu-contents" id="menu-contents-3" class="menu-contents">
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Wood.png" %}"
+                             alt="Wood"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Coal.png" %}"
+                             alt="Coal"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Stone.png" %}"
+                             alt="Stone"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Iron_ore.png" %}"
+                             alt="Iron ore"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Copper_ore.png" %}"
+                             alt="Copper ore"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Uranium_ore.png" %}"
+                             alt="Uranium ore"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Raw_fish.png" %}"
+                             alt="Raw fish"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Ice.png" %}"
+                             alt="Ice"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:2 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Iron_plate.png" %}"
+                             alt="Iron plate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Copper_plate.png" %}"
+                             alt="Copper plate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Steel_plate.png" %}"
+                             alt="Steel plate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Solid_fuel.png" %}"
+                             alt="Solid fuel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Plastic_bar.png" %}"
+                             alt="Plastic bar"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Sulfur.png" %}"
+                             alt="Sulfur"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Battery.png" %}"
+                             alt="Battery"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Explosives.png" %}"
+                             alt="Explosives"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Carbon.png" %}"
+                             alt="Carbon"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:1 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Water_barrel.png" %}"
+                             alt="Water barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Crude_oil_barrel.png" %}"
+                             alt="Crude oil barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Petroleum_gas_barrel.png" %}"
+                             alt="Petroleum gas barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Light_oil_barrel.png" %}"
+                             alt="Light oil barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Heavy_oil_barrel.png" %}"
+                             alt="Heavy oil barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lubricant_barrel.png" %}"
+                             alt="Lubricant barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Sulfuric_acid_barrel.png" %}"
+                             alt="Sulfuric acid barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fluoroketone_(hot)_barrel.png" %}"
+                             alt="Fluoroketone hot barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fluoroketone_(cold)_barrel.png" %}"
+                             alt="Fluoroketone cold barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:1 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Iron_gear_wheel.png" %}"
+                             alt="Iron gear wheel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Iron_stick.png" %}"
+                             alt="Iron stick"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Copper_cable.png" %}"
+                             alt="Copper cable"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Barrel.png" %}"
+                             alt="Barrel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Electronic_circuit.png" %}"
+                             alt="Electronic circuit"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Advanced_circuit.png" %}"
+                             alt="Advanced circuit"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Processing_unit.png" %}"
+                             alt="Processing unit"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:3 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Engine_unit.png" %}"
+                             alt="Engine unit"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Electric_engine_unit.png" %}"
+                             alt="Electric engine unit"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Flying_robot_frame.png" %}"
+                             alt="Flying robot frame"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Low_density_structure.png" %}"
+                             alt="Low density structure"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rocket_fuel.png" %}"
+                             alt="Rocket fuel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:5 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Uranium-235.png" %}"
+                             alt="Uranium-235"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Uranium-238.png" %}"
+                             alt="Uranium-238"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Uranium_fuel_cell.png" %}"
+                             alt="Uranium fuel cell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Depleted_uranium_fuel_cell.png" %}"
+                             alt="Depleted uranium fuel cell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Nuclear_fuel.png" %}"
+                             alt="Nuclear fuel"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:5 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Calcite.png" %}"
+                             alt="Calcite"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tungsten_ore.png" %}"
+                             alt="Tungsten ore"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tungsten_carbide.png" %}"
+                             alt="Tungsten carbide"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tungsten_plate.png" %}"
+                             alt="Tungsten plate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Holmium_ore.png" %}"
+                             alt="Holmium ore"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Holmium_plate.png" %}"
+                             alt="Holmium plate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Superconductor.png" %}"
+                             alt="Superconductor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Supercapacitor.png" %}"
+                             alt="Supercapacitor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Yumako_seed.png" %}"
+                             alt="Yumako seed"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Jellynut_seed.png" %}"
+                             alt="Jellynut seed"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Yumako.png" %}"
+                             alt="Yumako"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Jellynut.png" %}"
+                             alt="Jellynut"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Iron_bacteria.png" %}"
+                             alt="Iron bacteria"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Copper_bacteria.png" %}"
+                             alt="Copper bacteria"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Spoilage.png" %}"
+                             alt="Spoilage"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Nutrients.png" %}"
+                             alt="Nutrients"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:2 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Bioflux.png" %}"
+                             alt="Bioflux"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Yumako_mash.png" %}"
+                             alt="Yumako mash"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Jelly.png" %}"
+                             alt="Jelly"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Carbon_fiber.png" %}"
+                             alt="Carbon fiber"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Biter_egg.png" %}"
+                             alt="Biter egg"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Pentapod_egg.png" %}"
+                             alt="Pentapod egg"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:4 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tree_seed.png" %}"
+                             alt="Tree seed"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:9 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lithium.png" %}"
+                             alt="Lithium"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Lithium_plate.png" %}"
+                             alt="Lithium plate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Quantum_processor.png" %}"
+                             alt="Quantum processor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Fusion_power_cell.png" %}"
+                             alt="Fusion power cell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div name="menu-contents" id="menu-contents-4" class="menu-contents">
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cargo_landing_pad.png" %}"
+                             alt="Cargo landing pad"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:9 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Space_platform_foundation.png" %}"
+                             alt="Space platform foundation"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cargo_bay.png" %}"
+                             alt="Cargo bay"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Asteroid_collector.png" %}"
+                             alt="Asteroid collector"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Crusher.png" %}"
+                             alt="Crusher"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Thruster.png" %}"
+                             alt="Thruster"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:5 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Metallic_asteroid_chunk.png" %}"
+                             alt="Metallic asteroid chunk"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Carbonic_asteroid_chunk.png" %}"
+                             alt="Carbonic asteroid chunk"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Oxide_asteroid_chunk.png" %}"
+                             alt="Oxide asteroid chunk"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Promethium_asteroid_chunk.png" %}"
+                             alt="Promethium asteroid chunk"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    {% for i in 0|range:10 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    {% for i in 0|range:10 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div name="menu-contents" id="menu-contents-5" class="menu-contents">
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Pistol.png" %}"
+                             alt="Pistol"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Submachine_gun.png" %}"
+                             alt="Submachine gun"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Railgun.png" %}"
+                             alt="Railgun"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tesla_gun.png" %}"
+                             alt="Teslagun"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Shotgun.png" %}"
+                             alt="Shotgun"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Combat_shotgun.png" %}"
+                             alt="Combat shotgun"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rocket_launcher.png" %}"
+                             alt="Rocket launcher"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Flamethrower.png" %}"
+                             alt="Flamethrower"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:2 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Firearm_magazine.png" %}"
+                             alt="Firearm magazine"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Piercing_rounds_magazine.png" %}"
+                             alt="Piercing rounds magazine"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Uranium_rounds_magazine.png" %}"
+                             alt="Uranium rounds magazine"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Shotgun_shells.png" %}"
+                             alt="Shotgun shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Piercing_shotgun_shells.png" %}"
+                             alt="Piercing shotgun shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cannon_shell.png" %}"
+                             alt="Cannon shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Explosive_cannon_shell.png" %}"
+                             alt="Explosive cannon shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Uranium_cannon_shell.png" %}"
+                             alt="Uranium cannon shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Explosive_uranium_cannon_shell.png" %}"
+                             alt="Explosive uranium cannon shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Artillery_shell.png" %}"
+                             alt="Artillery shell"
+                             width="32"
+                             height="32" />
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rocket.png" %}"
+                             alt="Rocket"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Explosive_rocket.png" %}"
+                             alt="Explosive rocket"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Capture_bot_rocket.png" %}"
+                             alt="Capture robot rocket"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Flamethrower_ammo.png" %}"
+                             alt="Flamethrower ammo"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Railgun_ammo.png" %}"
+                             alt="Railgun ammo"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tesla_ammo.png" %}"
+                             alt="Tesla ammo"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:4 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Grenade.png" %}"
+                             alt="Grenade"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Cluster_grenade.png" %}"
+                             alt="Cluster grenade"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Poison_capsule.png" %}"
+                             alt="Poison capsule"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Slowdown_capsule.png" %}"
+                             alt="Slowdown capsule"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Defender_capsule.png" %}"
+                             alt="Defender capsule"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Distractor_capsule.png" %}"
+                             alt="Distractor capsule"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Destroyer_capsule.png" %}"
+                             alt="Destroyer capsule"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:3 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Light_armor.png" %}"
+                             alt="Light armor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Heavy_armor.png" %}"
+                             alt="Heavy armor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Modular_armor.png" %}"
+                             alt="Modular armor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Power_armor.png" %}"
+                             alt="Power armor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Power_armor_MK2.png" %}"
+                             alt="Power armor MK2"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Mech_armor.png" %}"
+                             alt="Mech armor"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:4 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Portable_solar_panel.png" %}"
+                             alt="Solar panel equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Portable_fission_reactor.png" %}"
+                             alt="Fission reactor equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Portable_fusion_reactor.png" %}"
+                             alt="Fusion reactor equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Personal_battery.png" %}"
+                             alt="Battery equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Personal_battery_MK2.png" %}"
+                             alt="Battery MK2 equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Personal_battery_MK3.png" %}"
+                             alt="Battery MK3 equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:4 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Belt_immunity_equipment.png" %}"
+                             alt="Belt immunity equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Exoskeleton.png" %}"
+                             alt="Exoskeleton equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Personal_roboport.png" %}"
+                             alt="Personal roboport equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Personal_roboport_MK2.png" %}"
+                             alt="Personal roboport MK2 equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Nightvision.png" %}"
+                             alt="Night vision equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Toolbelt_equipment.png" %}"
+                             alt="Toolbelt equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:4 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Energy_shield.png" %}"
+                             alt="Energy shield equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Energy_shield_MK2.png" %}"
+                             alt="Energy shield MK2 equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Personal_laser_defense.png" %}"
+                             alt="Personal laser defense equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Discharge_defense.png" %}"
+                             alt="Discharge defense equipment"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Wall.png" %}"
+                             alt="Stone wall"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Gate.png" %}"
+                             alt="Gate"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Radar.png" %}"
+                             alt="Radar"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Land_mine.png" %}"
+                             alt="Land mine"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:6 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Gun_turret.png" %}"
+                             alt="Gun turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Laser_turret.png" %}"
+                             alt="Laser turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Flamethrower_turret.png" %}"
+                             alt="Flamethrower turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Artillery_turret.png" %}"
+                             alt="Artillery turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Rocket_turret.png" %}"
+                             alt="Rocket turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Tesla_turret.png" %}"
+                             alt="Tesla turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    <div class="menu-item">
+                        <img src="{% static "distribute/images/items/Railgun_turret.png" %}"
+                             alt="Railgun turret"
+                             width="32"
+                             height="32" />
+                    </div>
+                    {% for i in 0|range:3 %}
+                        <div class="placeholder"></div>
+                    {% endfor %}
+                </div>
+            </div>
         </section>
         <aside>
             <h2 id="item-header">Added Items</h2>
@@ -130,4 +2009,33 @@
     <script src="{% static "distribute/js/remove.js" %}"></script>
     <script src="{% static "distribute/js/submit.js" %}"></script>
     <script src="{% static "distribute/js/paste.js" %}"></script>
+    <script src="{% static "distribute/js/menu.js" %}"></script>
+    <script>
+        const headerButtons = document.getElementsByName("header-items");
+        const menuContents = document.getElementsByName("menu-contents");
+        headerButtons.forEach((button) => {
+            if (button.checked) {
+                menuContents.forEach((menuContent) => {
+                    if (menuContent.id == button.value) {
+                        menuContent.style.display = "block";
+                    } else {
+                        menuContent.style.display = "none";
+                    }
+                });
+            }
+        });
+        headerButtons.forEach((button) => {
+          button.addEventListener("change", () => {
+            if (button.checked) {
+              menuContents.forEach((menuContent) => {
+                if (menuContent.id == button.value) {
+                  menuContent.style.display = "block";
+                } else {
+                  menuContent.style.display = "none";
+                }
+              });
+            }
+          });
+        });
+    </script>
 {% endblock content %}
