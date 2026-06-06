@@ -62,6 +62,33 @@
                     <div class="error" id="distribute-error">{{ distribute_error }}</div>
                 </p>
             </form>
+            <form id="blueprint-form"
+                  action="{% url "distribute:import" %}"
+                  method="post">
+                {% csrf_token %}
+                <h2 id="setup">Import Items From Blueprint</h2>
+                <textarea name="blueprint-input"
+                          id="blueprint-input"
+                          class="blueprint-box"
+                          autocapitalize="off"
+                          autocomplete="off"
+                          autocorrect="off"
+                          maxlength="50000"
+                          minlength="1"
+                          spellcheck="false"
+                          wrap="soft"></textarea>
+                <div id="paste-import">
+                    <button id="paste-button" class="nav-bar-item" type="button">
+                        <div class="text-button">Paste</div>
+                    </button>
+                    <button id="import-button" class="nav-bar-item">
+                        <div class="text-button">
+                            Import<span class="tooltip">Will reset added items.</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="error" id="import-error">{{ import_error }}</div>
+            </form>
         </section>
         <section id="menu-container">
             <div id="menu-header">
@@ -1975,33 +2002,6 @@
                 </div>
             </div>
         </aside>
-        <form id="blueprint-form"
-              action="{% url "distribute:import" %}"
-              method="post">
-            {% csrf_token %}
-            <h2 id="setup">Import Items From Blueprint</h2>
-            <textarea name="blueprint-input"
-                      id="blueprint-input"
-                      class="blueprint-box"
-                      autocapitalize="off"
-                      autocomplete="off"
-                      autocorrect="off"
-                      maxlength="50000"
-                      minlength="1"
-                      spellcheck="false"
-                      wrap="soft"></textarea>
-            <div id="paste-import">
-                <button id="paste-button" class="nav-bar-item" type="button">
-                    <div class="text-button">Paste</div>
-                </button>
-                <button id="import-button" class="nav-bar-item">
-                    <div class="text-button">
-                        Import<span class="tooltip">Will reset added items.</span>
-                    </div>
-                </button>
-            </div>
-            <div class="error" id="import-error">{{ import_error }}</div>
-        </form>
     </article>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <script src="{% static "distribute/js/utils.js" %}"></script>
