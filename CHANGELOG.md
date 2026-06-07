@@ -2,6 +2,39 @@
 
 <!-- version list -->
 
+## v1.10.0 (2026-06-07)
+
+### Bug Fixes
+
+- **data**: Add hyphen to processed uranium
+  ([`df2129a`](https://github.com/brufinus/rocket-request/commit/df2129a989cdcf5d21975141953b85f18c04d563))
+
+- **services**: Add cases for hyphenated uranium
+  ([`5bf274c`](https://github.com/brufinus/rocket-request/commit/5bf274cb490f540742c4bcc9c3a5ca1f39f56b2c))
+
+- **style**: Scale menu height to min-content
+  ([`4ffc6cc`](https://github.com/brufinus/rocket-request/commit/4ffc6cc4e8dbe6b6e51c31ac61386713779bc9d8))
+
+### Features
+
+- Implement menu for adding items
+  ([`ed0a161`](https://github.com/brufinus/rocket-request/commit/ed0a16149f92fe502b938dbde2912c3cdf764f0b))
+
+- **filters**: Add range filter for use in templates
+  ([`4832998`](https://github.com/brufinus/rocket-request/commit/4832998c04c28be9f37546d0b95eca6f9352d053))
+
+- **js**: Set item input flash animation on menu item click
+  ([`2455081`](https://github.com/brufinus/rocket-request/commit/24550811cd168918e63260b5f7dc169065065705))
+
+- **style**: Add animation class for border flashing
+  ([`3d91d7f`](https://github.com/brufinus/rocket-request/commit/3d91d7f33bcb5b7468767923c914b7fe2e7d45d5))
+
+### Refactoring
+
+- **templates**: Move blueprint form into setup section
+  ([`5fe4186`](https://github.com/brufinus/rocket-request/commit/5fe4186f6c22576916f8772ff097e5df96ebd73b))
+
+
 ## v1.9.1 (2026-06-03)
 
 ### Bug Fixes
