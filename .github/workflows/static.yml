@@ -1,0 +1,29 @@
+name: Collect Static Files
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  gcloud:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Cloud Auth
+        id: auth
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: rocket-request
+          workload_identity_provider: projects/724115144699/locations/global/workloadIdentityPools/github/providers/my-repo
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v3
+      - id: Set up Python requirements
+        uses: ./.github/actions/python-setup
+      - name: Run collectstatic
+        run: python manage.py collectstatic --noinput -v 2
