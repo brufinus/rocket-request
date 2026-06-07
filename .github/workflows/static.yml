@@ -23,7 +23,7 @@ jobs:
           workload_identity_provider: projects/724115144699/locations/global/workloadIdentityPools/github/providers/my-repo
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v3
-      - id: Set up Python requirements
+      - name: Set up Python requirements
         uses: ./.github/actions/python-setup
       - name: Run collectstatic
         run: python manage.py collectstatic --noinput -v 2
