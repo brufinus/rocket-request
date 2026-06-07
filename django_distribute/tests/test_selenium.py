@@ -1,11 +1,14 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import tag
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
+from django_distribute.data.items import ITEMS
 
 
 @tag("slow", "selenium")
@@ -135,7 +138,7 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(1) > td:nth-child(3)").text, "6")
         self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(19) > .added-item").text, "Underground belt")
         self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(19) > td:nth-child(3)").text, "18")
-    
+
     def test_blueprint_export(self):
         """Tests the blueprint export functionality."""
         self.selenium.get(f"{self.live_server_url}/")
@@ -145,8 +148,86 @@ class SeleniumViewTests(StaticLiveServerTestCase):
         self.selenium.find_element(By.ID, "distribute-button").click()
         self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, ".blueprint-box").text, "0eNqNUk1rwzAM/StGZ6ekpR1rYJfBDrt2xzGC42itqWOntlNWSv77ZKdpNvZBT7alp6enJ5+h0h22TplQVtbuoThPEQ/F65dnzClpzRD2amuEjjEjGoQCHB469AFdJnd0Qs9BmRo/oJj3bxzQBBUUDsXpcSpN11ToCMD/IuHQWk911sROxJXPcg6ndFKDC7x8V5pqfMR4lBE+9BkFcLgivkUvXYMTxrfWhaxCHZseOqFJIKWMdQ2NyUHaphVOBEt64SEFuugJDRfHIwq/K40N5ThCDUVwHfYxqwI2VDZZyUEL6kWxOd2PpCyNuLpbrJfr9ep+ka+Wy/lkYR5ZavTSqXZwAx6va2JbNEjSsGbViW2s3GNgm0HGjD0JuWPJTSatc0iDmtqzYJlgXmk7IwHTWidvfi44EWexBvqeX7ELfsNn+M2FLP24yYoXYmbPBBrFe0oKWucRy9GHf8zqPwGWVfPY")
         self.selenium.find_element(By.CSS_SELECTOR, "#copy-button > .text-button").click()
-    
+
     def test_paste(self):
         """Tests the paste functionality."""
         self.selenium.get(f"{self.live_server_url}/")
         self.selenium.find_element(By.CSS_SELECTOR, "#paste-button > .text-button").click()
+
+    def test_item_menu_flow(self):
+        """Tests the add item flow using the item menu."""
+        wait = WebDriverWait(self.selenium, 2)
+        self.selenium.get(f"{self.live_server_url}/")
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-1 > .menu-row:nth-child(2) > .menu-item:nth-child(1) > img").click()
+        self.selenium.find_element(By.ID, "user-count-input").send_keys("10")
+        self.selenium.find_element(By.ID, "user-count-input").send_keys(Keys.ENTER)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, f"tr:nth-child(1) > .added-item")))
+        self.selenium.find_element(By.CSS_SELECTOR, ".menu-header-item:nth-child(4) > img").click()
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-2 > .menu-row:nth-child(6) > .menu-item:nth-child(5) > img").click()
+        self.selenium.find_element(By.ID, "user-count-input").send_keys("6")
+        self.selenium.find_element(By.ID, "user-count-input").send_keys(Keys.ENTER)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, f"tr:nth-child(2) > .added-item")))
+        self.selenium.find_element(By.CSS_SELECTOR, ".menu-header-item:nth-child(6) > img").click()
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-3 > .menu-row:nth-child(9) > .menu-item:nth-child(4) > img").click()
+        self.selenium.find_element(By.ID, "user-count-input").send_keys("100")
+        self.selenium.find_element(By.ID, "user-count-input").send_keys(Keys.ENTER)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, f"tr:nth-child(3) > .added-item")))
+        self.selenium.find_element(By.CSS_SELECTOR, ".menu-header-item:nth-child(8) > img").click()
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-4 .menu-item:nth-child(5) > img").click()
+        self.selenium.find_element(By.ID, "user-count-input").send_keys("2")
+        self.selenium.find_element(By.ID, "user-count-input").send_keys(Keys.ENTER)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, f"tr:nth-child(4) > .added-item")))
+        self.selenium.find_element(By.CSS_SELECTOR, ".menu-header-item:nth-child(10) > img").click()
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-5 > .menu-row:nth-child(1) > .menu-item:nth-child(1) > img").click()
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-5 > .menu-row:nth-child(2) > .menu-item:nth-child(6) > img").click()
+        self.selenium.find_element(By.ID, "user-count-input").send_keys("4")
+        self.selenium.find_element(By.ID, "user-count-input").send_keys(Keys.ENTER)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, f"tr:nth-child(5) > .added-item")))
+
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(1) > .added-item").text, "Cannon shell")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(1) > td:nth-child(3)").text, "4")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > .added-item").text, "Chemical plant")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(2) > td:nth-child(3)").text, "6")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(3) > .added-item").text, "Jellynut")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(3) > td:nth-child(3)").text, "100")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(4) > .added-item").text, "Thruster")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(4) > td:nth-child(3)").text, "2")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(5) > .added-item").text, "Transport belt")
+        self.assertEqual(self.selenium.find_element(By.CSS_SELECTOR, "tr:nth-child(5) > td:nth-child(3)").text, "10")
+
+
+@tag("slow", "selenium")
+class SeleniumValidationTests(StaticLiveServerTestCase):
+    """Selenium tests for data validation. Does not implicitly wait."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+        options = Options()
+        options.add_argument("--headless=new")
+        cls.selenium = WebDriver(options)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def test_validate_item_menu(self):
+        """Validates the item menu options."""
+        self.selenium.get(f"{self.live_server_url}/")
+        self.selenium.find_element(By.CSS_SELECTOR, "#menu-contents-1 > .menu-row:nth-child(1) > .menu-item:nth-child(1) > img").click()
+        self.assertIn(self.selenium.find_element(By.ID, "user-item-input").get_attribute("value"), ITEMS)
+
+        menu = 1
+        for k in range(4, 13, 2):
+            for i in range(1, 13):
+                for j in range(1, 11):
+                    try:
+                        self.selenium.find_element(By.CSS_SELECTOR, f"#menu-contents-{menu} > .menu-row:nth-child({i}) > .menu-item:nth-child({j}) > img").click()
+                        self.assertIn(self.selenium.find_element(By.ID, "user-item-input").get_attribute("value"), ITEMS)
+                    except NoSuchElementException:
+                        pass
+            if k > 10:
+                break
+            menu += 1
+            self.selenium.find_element(By.CSS_SELECTOR, f".menu-header-item:nth-child({k}) > img").click()

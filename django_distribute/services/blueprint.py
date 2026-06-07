@@ -154,6 +154,10 @@ def extract_items_from_json(json_rep: object, item_data: dict[str, Item]) -> lis
             pass
         elif entity["name"] == "long-handed-inserter":
             itemlist.append(item_data["Long-handed inserter"])
+        elif entity["name"] == "uranium-235":
+            itemlist.append(item_data["Uranium-235"])
+        elif entity["name"] == "uranium-238":
+            itemlist.append(item_data["Uranium-238"])
         else:
             key = entity["name"].replace("-", " ").capitalize()
             item = item_data.get(key)

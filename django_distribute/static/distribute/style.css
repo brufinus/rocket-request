@@ -19,6 +19,7 @@
   --light-panel-bg-color: #6e6e6e;
   --light-panel-border-color: #666666;
   --input-bg-color: #828282;
+  --button-hover-color: #e39827;
 }
 
 /* Common */
@@ -86,7 +87,7 @@ html.light-theme .nav-bar {
 
 .nav-bar-item:hover,
 html.light-theme #theme-toggle:hover {
-  background-color: #e39827;
+  background-color: var(--button-hover-color);
   border: 2px outset #db9225;
 }
 
@@ -133,11 +134,12 @@ html.light-theme #theme-toggle {
 
 /* Main article */
 article {
-  display: flex;
+  display: grid;
   background-color: var(--panel-bg-color);
   border: var(--panel-border);
   margin: 40px;
   width: fit-content;
+  grid-template-columns: 1fr auto 1fr;
 }
 
 html.light-theme article {
@@ -145,7 +147,7 @@ html.light-theme article {
 }
 
 /* Setup section */
-section {
+#setup-section {
   margin-left: 10px;
   min-width: 350px;
 }
@@ -185,7 +187,8 @@ html.light-theme h3 {
   row-gap: 10px;
 }
 
-input[type=text], input[type=number] {
+input[type="text"],
+input[type="number"] {
   font-family: var(--font-family);
 }
 
@@ -236,8 +239,29 @@ input {
   background-color: var(--input-bg-color);
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   background-color: #f0dab4;
+}
+
+@keyframes flash {
+  from {
+    outline: none;
+    border: 2px solid var(--button-hover-color);
+    box-shadow: 0 0 10px var(--button-hover-color);
+    border-radius: 2px;
+  }
+  to {
+  }
+}
+
+.animation-flash {
+  animation-name: flash;
+  animation-duration: 750ms;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: flash;
+  -webkit-animation-duration: 750ms;
+  -webkit-animation-iteration-count: infinite;
 }
 
 #user-count-input {
@@ -249,6 +273,97 @@ input:focus, textarea:focus {
   font-weight: 700;
   font-style: normal;
   width: 100px;
+}
+
+/* Item menu */
+#menu-container {
+  margin-top: 8px;
+  margin-left: 16px;
+  padding: 8px;
+  display: grid;
+  grid-template-rows: 80px min-content;
+  gap: 8px;
+  background-color: var(--active-color);
+  border: 2px outset #262322;
+}
+
+#menu-header {
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px 80px;
+}
+
+#menu-header label {
+  text-align: center;
+}
+
+.menu-header-button {
+  display: none;
+}
+
+.menu-header-item {
+  width: 76px;
+  height: 72px;
+  padding-top: 4px;
+  background-color: #8e8e8e;
+  border: 2px outset #656565;
+}
+
+.menu-header-item:hover {
+  background-color: var(--button-hover-color);
+  border: 2px outset #e99f2f;
+}
+
+.menu-header-item:active {
+  background-color: var(--active-color);
+  border: 2px solid var(--active-color);
+}
+
+.menu-header-button:checked + .menu-header-item {
+  background-color: var(--active-color);
+  border: 2px solid var(--active-color);
+}
+
+.menu-contents {
+  background-color: var(--header-bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-row {
+  display: flex;
+}
+
+.menu-item {
+  background-color: #2e2e2e;
+  width: 36px;
+  height: 34px;
+  padding-top: 2px;
+  text-align: center;
+  margin: 1px;
+  border-radius: 4px;
+  border: 1px outset #1b1b1b;
+}
+
+.menu-item:hover {
+  background-color: #ffa500;
+  outline: none;
+  border: 1px solid #ec9008;
+  box-shadow: 0 0 2px 2px #97733d;
+  outline: none;
+}
+
+.menu-item:active {
+  background-color: #e69a39;
+  box-shadow: none;
+}
+
+.placeholder {
+  height: 22px;
+  width: 22px;
+  margin: 8px 9px;
+  background-color: var(--header-bg-color);
+  border-top: 1px outset #383634;
+  box-shadow: 0 1px 1px 1px #161414;
 }
 
 /* Side bar - Itemlist */
@@ -504,7 +619,9 @@ html.light-theme #blueprints {
   max-height: 100px;
 }
 
-#copy-button, #paste-button, #import-button {
+#copy-button,
+#paste-button,
+#import-button {
   width: 100px;
   height: 30px;
 }
