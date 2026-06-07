@@ -285,6 +285,7 @@ textarea:focus {
   gap: 8px;
   background-color: var(--active-color);
   border: 2px outset #262322;
+  height: fit-content;
 }
 
 #menu-header {
