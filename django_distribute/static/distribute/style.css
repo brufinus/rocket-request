@@ -285,6 +285,11 @@ textarea:focus {
   gap: 8px;
   background-color: var(--active-color);
   border: 2px outset #262322;
+  height: fit-content;
+}
+
+html.light-theme #menu-container {
+  background-color: #767576;
 }
 
 #menu-header {
@@ -323,10 +328,19 @@ textarea:focus {
   border: 2px solid var(--active-color);
 }
 
+html.light-theme .menu-header-button:checked + .menu-header-item {
+  background-color: #767576;
+  border: 2px solid #767576;
+}
+
 .menu-contents {
   background-color: var(--header-bg-color);
   display: flex;
   flex-direction: column;
+}
+
+html.light-theme .menu-contents {
+  background-color: var(--light-body-bg-color);
 }
 
 .menu-row {
@@ -342,6 +356,10 @@ textarea:focus {
   margin: 1px;
   border-radius: 4px;
   border: 1px outset #1b1b1b;
+}
+
+html.light-theme .menu-item {
+  background-color: #636363;
 }
 
 .menu-item:hover {
@@ -364,6 +382,10 @@ textarea:focus {
   background-color: var(--header-bg-color);
   border-top: 1px outset #383634;
   box-shadow: 0 1px 1px 1px #161414;
+}
+
+html.light-theme .placeholder {
+  background-color: #636363;
 }
 
 /* Side bar - Itemlist */
