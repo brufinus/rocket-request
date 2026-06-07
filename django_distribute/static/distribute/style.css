@@ -19,6 +19,7 @@
   --light-panel-bg-color: #6e6e6e;
   --light-panel-border-color: #666666;
   --input-bg-color: #828282;
+  --button-hover-color: #e39827;
 }
 
 /* Common */
@@ -86,7 +87,7 @@ html.light-theme .nav-bar {
 
 .nav-bar-item:hover,
 html.light-theme #theme-toggle:hover {
-  background-color: #e39827;
+  background-color: var(--button-hover-color);
   border: 2px outset #db9225;
 }
 
@@ -186,7 +187,8 @@ html.light-theme h3 {
   row-gap: 10px;
 }
 
-input[type=text], input[type=number] {
+input[type="text"],
+input[type="number"] {
   font-family: var(--font-family);
 }
 
@@ -237,8 +239,29 @@ input {
   background-color: var(--input-bg-color);
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   background-color: #f0dab4;
+}
+
+@keyframes flash {
+  from {
+    outline: none;
+    border: 2px solid var(--button-hover-color);
+    box-shadow: 0 0 10px var(--button-hover-color);
+    border-radius: 2px;
+  }
+  to {
+  }
+}
+
+.animation-flash {
+  animation-name: flash;
+  animation-duration: 750ms;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: flash;
+  -webkit-animation-duration: 750ms;
+  -webkit-animation-iteration-count: infinite;
 }
 
 #user-count-input {
@@ -286,7 +309,7 @@ input:focus, textarea:focus {
 }
 
 .menu-header-item:hover {
-  background-color: #e39827;
+  background-color: var(--button-hover-color);
   border: 2px outset #e99f2f;
 }
 
@@ -596,7 +619,9 @@ html.light-theme #blueprints {
   max-height: 100px;
 }
 
-#copy-button, #paste-button, #import-button {
+#copy-button,
+#paste-button,
+#import-button {
   width: 100px;
   height: 30px;
 }
