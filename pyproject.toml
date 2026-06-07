@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-distribute"
-version = "1.10.0"
+version = "1.10.1"
 dependencies = ["django>=6.0"]
 description = "A Django app to show you how to distribute items amongst rocket silos in Factorio."
 readme = "README.rst"

@@ -2,6 +2,22 @@
 
 <!-- version list -->
 
+## v1.10.1 (2026-06-07)
+
+### Bug Fixes
+
+- **style**: Add menu light theme style
+  ([`c6ff53f`](https://github.com/brufinus/rocket-request/commit/c6ff53f51e40785804b30325b5fd332182e5a5de))
+
+- **style**: Set menu container height to fit content
+  ([`6afd105`](https://github.com/brufinus/rocket-request/commit/6afd1057fea10605d4fba5cd66bf6e0b03683a60))
+
+### Build System
+
+- Clear static files
+  ([`1eeddcb`](https://github.com/brufinus/rocket-request/commit/1eeddcb56da9cba837554c86faf5e99e7bb439b3))
+
+
 ## v1.10.0 (2026-06-07)
 
 ### Bug Fixes
